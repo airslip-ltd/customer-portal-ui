@@ -24,6 +24,7 @@ locals {
   location = var.location
   app_tier = var.web_tier
   app_size = var.web_size
+  health_check_path = ""
   admin_group_id = var.admin_group_id
   certificate_name = var.certificate_name
   certificate_path = var.certificate_path
