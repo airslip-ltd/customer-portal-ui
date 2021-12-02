@@ -9,19 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: Development
     env:
-      TESTIM_TEST_PLAN: Development - Match Portal - Smoke Tests
+      TESTIM_TEST_PLAN: Development - Customer Portal - Smoke Tests
     steps:
     - uses: actions/checkout@v2
-    - uses: cschleiden/replace-tokens@v1
-      with:
-        files: '["tests/parameters.json"]'
-      env:
-        TESTIM_QR_CODE_URL: ${{ secrets.TESTIM_QR_CODE_URL }}
-        TESTIM_HOSTNAME: ${{ secrets.TESTIM_HOSTNAME }}
-        TESTIM_API_KEY: ${{ secrets.TESTIM_API_KEY }}
-        TESTIM_INTEGRATION_URL: ${{ secrets.TESTIM_INTEGRATION_URL }}
 
     - name: Run automation tests
       run: |
         npm i -g @testim/testim-cli
-        testim --token "${{ secrets.TESTIM_TOKEN }}" --project "${{ secrets.TESTIM_PROJECT }}" --grid "Testim-Grid" --params-file "tests/parameters.json" --test-plan "${{ env.TESTIM_TEST_PLAN }}"
+        testim --token "${{ secrets.TESTIM_TOKEN }}" --project "${{ secrets.TESTIM_PROJECT }}" --grid "Testim-Grid" --test-plan "${{ env.TESTIM_TEST_PLAN }}"
