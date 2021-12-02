@@ -15,6 +15,7 @@ import useAuth from '../../hooks/useAuth';
 import useIsMountedRef from '../../hooks/useIsMountedRef';
 // components
 import { MIconButton } from '../../components/@material-extend';
+import MyAvatar from '../../components/MyAvatar';
 import MenuPopover from '../../components/MenuPopover';
 // utils
 import { shouldRefresh } from '../../utils/jwt';
@@ -108,12 +109,14 @@ export default function AccountPopover() {
             }
           })
         }}
-      />
+      >
+        <MyAvatar />
+      </MIconButton>
 
       <MenuPopover open={open} onClose={handleClose} anchorEl={anchorRef.current} sx={{ width: 220 }}>
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {user.firstName} {user.lastName}
+            {user.displayName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {user.email}
