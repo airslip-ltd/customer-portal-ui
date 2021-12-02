@@ -1,0 +1,103 @@
+name: Dev - Deploy React App
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-nodejs-app-dev:
+    name: Build and Deploy Development
+    runs-on: ubuntu-latest
+    environment: Development
+    env:
+      ENV_PATH: 'dev'
+      PUBLISH_PATH: './src'
+      NODE_VERSION: '14.x'
+      TERRAFORM_MODULE_VERSION: 1.1.1
+      REACT_APP_PROMOTION_URL: https://dev-app.airslip.com/smart_receipts/v1/promotions/
+      REACT_APP_SMART_RECEIPT_URL: https://dev-app.airslip.com/smart_receipts/v1/matching/
+      REACT_APP_SMART_RECEIPT_BLOG_URL: https://dev-app.airslip.com/smart_receipts/v1/blogs/
+      TESTIM_TEST_PLAN: Development - Match Portal - Smoke Tests
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_wrapper: false
+
+    - name: Add nuget feed
+      run: |
+        dotnet nuget add source --username ${{ secrets.PACKAGE_USER }} --password ${{ secrets.PACKAGE_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/airslip-ltd/index.json"
+        nuget sources add -name "github" -Source "https://nuget.pkg.github.com/airslip-ltd/index.json" -UserName ${{ secrets.PACKAGE_USER }} -Password ${{ secrets.PACKAGE_TOKEN }} -StorePasswordInClearTex
+
+    - name: Install Terraform Modules
+      run: nuget install Airslip.Terraform.Modules -Version ${{ env.TERRAFORM_MODULE_VERSION }} -OutputDirectory ./env/tf_modules -x
+
+    - name: Terraform Update
+      id: "terraform_update"
+      env:
+        ARM_CLIENT_ID: ${{ secrets.NON_PROD_ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.NON_PROD_ARM_CLIENT_SECRET }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.NON_PROD_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.NON_PROD_ARM_TENANT_ID }}
+      run: |
+        terraform init -backend-config=variables/${{ env.ENV_PATH }}/backend.tfvars
+        terraform plan -var-file=variables/${{ env.ENV_PATH }}/variables.tfvars -var="certificate_thumbprint=${{ secrets.AIRSLIP_CERT_THUMPRINT }}" -var="certificate_password=${{ secrets.AIRSLIP_CERTIFICATE_PASSWORD }}" -out=terraform.tfplan
+        terraform apply terraform.tfplan
+        resource_group_name_raw=$(terraform output resource_group_name)
+        resource_group_name=$(echo "${resource_group_name_raw}" | sed 's/"//g')
+        app_service_name_raw=$(terraform output app_service_name)
+        app_service_name=$(echo "${app_service_name_raw}" | sed 's/"//g')
+        echo "::set-output name=resource_group_name::${resource_group_name}"
+        echo "::set-output name=app_service_name::${app_service_name}"
+      working-directory: ./env
+
+    - name: npm install, build, and test
+      env:
+        REACT_APP_PROMOTION_URL: ${{ env.REACT_APP_PROMOTION_URL }}
+        REACT_APP_SMART_RECEIPT_URL: ${{ env.REACT_APP_SMART_RECEIPT_URL }}
+        REACT_APP_SMART_RECEIPT_BLOG_URL: ${{ env.REACT_APP_SMART_RECEIPT_BLOG_URL }}
+      run: |
+        cd ${{ env.PUBLISH_PATH }}
+        npm install
+        npm run build
+
+    - name: add process.json
+      run: |
+        cd ${{ env.PUBLISH_PATH }}
+        echo '{ script: "serve", env: { PM2_SERVE_SPA: "true", PM2_SERVE_HOMEPAGE: "/index.html" } }' >> build/process.json
+
+    - name: Get AppService publish profile
+      id: publishprofile
+      uses: aliencube/publish-profile-actions@v1
+      env:
+        AZURE_CREDENTIALS: ${{ secrets.AZURE_PROD_DEPLOY }}
+      with:
+        resourceGroupName: ${{ steps.terraform_update.outputs.resource_group_name }}
+        appName: ${{ steps.terraform_update.outputs.app_service_name }}
+
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ steps.terraform_update.outputs.app_service_name }}
+        publish-profile: ${{ steps.publishprofile.outputs.profile }}
+        package: ${{ env.PUBLISH_PATH }}/build
+
+    - uses: cschleiden/replace-tokens@v1
+      with:
+        files: '["tests/parameters.json"]'
+      env:
+        TESTIM_QR_CODE_URL: ${{ secrets.TESTIM_QR_CODE_URL }}
+        TESTIM_HOSTNAME: ${{ secrets.TESTIM_HOSTNAME }}
+        TESTIM_API_KEY: ${{ secrets.TESTIM_API_KEY }}
+        TESTIM_INTEGRATION_URL: ${{ secrets.TESTIM_INTEGRATION_URL }}
+
+    - name: Run automation tests
+      run: |
+        npm i -g @testim/testim-cli && testim --token "${{ secrets.TESTIM_TOKEN }}" --project "${{ secrets.TESTIM_PROJECT }}" --grid "Testim-Grid" --params-file "tests/parameters.json" --test-plan "${{ env.TESTIM_TEST_PLAN }}"
