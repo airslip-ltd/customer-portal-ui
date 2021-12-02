@@ -18,7 +18,7 @@ locals {
   tags = {
     Environment = "${var.environment}"
   }
-  app_id = "cuatomer-portal-ui"
+  app_id = "customer-portal-ui"
   app_id_short = "cprtl"
   short_environment = var.short_environment
   location = var.location
