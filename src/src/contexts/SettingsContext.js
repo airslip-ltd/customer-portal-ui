@@ -103,7 +103,7 @@ function SetColor(themeColor) {
 const initialState = {
   themeMode: 'light',
   themeDirection: 'ltr',
-  themeColor: 'default',
+  themeColor: 'blue',
   themeStretch: false,
   onChangeMode: () => {},
   onChangeDirection: () => {},
