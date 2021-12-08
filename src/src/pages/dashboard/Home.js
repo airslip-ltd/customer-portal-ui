@@ -1,5 +1,5 @@
 // material
-import { Container, Grid, Stack } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 // hooks
 import useAuth from '../../hooks/useAuth';
 import useSettings from '../../hooks/useSettings';
@@ -7,8 +7,6 @@ import useSettings from '../../hooks/useSettings';
 import Page from '../../components/Page';
 import {
   AppWelcome,
-  AppWidgets1,
-  AppWidgets2,
   AppNewInvoice,
   AppAreaInstalled,
   AppTotalDownloads,
@@ -53,13 +51,6 @@ export default function GeneralApp() {
 
           <Grid item xs={12}>
             <AppNewInvoice />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-            <Stack spacing={3}>
-              <AppWidgets1 />
-              <AppWidgets2 />
-            </Stack>
           </Grid>
         </Grid>
       </Container>

@@ -144,7 +144,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
                   {user.displayName}
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  role - TBD
+                  {user.userRole}
                 </Typography>
               </Box>
             </AccountStyle>

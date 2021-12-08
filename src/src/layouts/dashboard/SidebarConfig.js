@@ -22,7 +22,19 @@ const sidebarConfig = [
   // ----------------------------------------------------------------------
   {
     subheader: 'general',
-    items: [{ title: 'Home', path: PATH_DASHBOARD.general.home, icon: ICONS.dashboard }]
+    items: [
+      {
+        title: 'Home',
+        path: PATH_DASHBOARD.general.home,
+        icon: ICONS.dashboard
+      },
+      {
+        title: 'merchants',
+        path: PATH_DASHBOARD.merchants.root,
+        icon: ICONS.user,
+        children: [{ title: 'List', path: PATH_DASHBOARD.merchants.list }]
+      }
+    ]
   },
 
   // MANAGEMENT

@@ -90,6 +90,14 @@ export default function Router() {
             { element: <Navigate to="/dashboard/accounts/list" replace /> },
             { path: 'list', element: <AccountsList /> }
           ]
+        },
+        {
+          path: 'merchants',
+          children: [
+            { element: <Navigate to="/dashboard/merchants/list" replace /> },
+            { path: 'list', element: <MerchantList /> },
+            { path: ':id/view', element: <MerchantView /> }
+          ]
         }
       ]
     },
@@ -122,3 +130,6 @@ const PageFour = Loadable(lazy(() => import('../pages/PageFour')));
 const PageFive = Loadable(lazy(() => import('../pages/PageFive')));
 const PageSix = Loadable(lazy(() => import('../pages/PageSix')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
+// Merchants
+const MerchantView = Loadable(lazy(() => import('../pages/partner/MerchantView')));
+const MerchantList = Loadable(lazy(() => import('../pages/partner/MerchantList')));
