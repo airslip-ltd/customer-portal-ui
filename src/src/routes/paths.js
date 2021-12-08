@@ -40,5 +40,9 @@ export const PATH_DASHBOARD = {
     root: path(ROOTS_DASHBOARD, '/accounts'),
     link: path(ROOTS_DASHBOARD, '/accounts/link'),
     list: path(ROOTS_DASHBOARD, '/accounts/list')
+  },
+  merchants: {
+    root: path(ROOTS_DASHBOARD, '/merchants'),
+    list: path(ROOTS_DASHBOARD, '/merchants/list')
   }
 };

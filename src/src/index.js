@@ -1,14 +1,23 @@
 // scroll bar
 import 'simplebar/src/simplebar.css';
 
+// mock api
+import './_apis_';
+
 import ReactDOM from 'react-dom';
 import { StrictMode } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { Provider as ReduxProvider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
 // contexts
 import { SettingsProvider } from './contexts/SettingsContext';
 import { CollapseDrawerProvider } from './contexts/CollapseDrawerContext';
 import { AuthProvider } from './contexts/JWTContext';
+// redux
+import { store, persistor } from './redux/store';
+// components
+import LoadingScreen from './components/LoadingScreen';
 //
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
@@ -19,15 +28,19 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <StrictMode>
     <HelmetProvider>
-      <SettingsProvider>
-        <CollapseDrawerProvider>
-          <BrowserRouter>
-            <AuthProvider>
-              <App />
-            </AuthProvider>
-          </BrowserRouter>
-        </CollapseDrawerProvider>
-      </SettingsProvider>
+      <ReduxProvider store={store}>
+        <PersistGate loading={<LoadingScreen />} persistor={persistor}>
+          <SettingsProvider>
+            <CollapseDrawerProvider>
+              <BrowserRouter>
+                <AuthProvider>
+                  <App />
+                </AuthProvider>
+              </BrowserRouter>
+            </CollapseDrawerProvider>
+          </SettingsProvider>
+        </PersistGate>
+      </ReduxProvider>
     </HelmetProvider>
   </StrictMode>,
   document.getElementById('root')

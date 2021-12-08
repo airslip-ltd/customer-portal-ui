@@ -69,7 +69,7 @@ export default function AppTotalDownloads() {
           </Typography>
         </Stack>
 
-        <Typography variant="h3">{fNumber(TOTAL_DOWNLOAD)}</Typography>
+        <Typography variant="h3">&pound;{fNumber(TOTAL_DOWNLOAD)}</Typography>
       </Box>
 
       <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} width={60} height={36} />
