@@ -13,7 +13,8 @@ const ICONS = {
   user: getIcon('ic_user'),
   ecommerce: getIcon('ic_ecommerce'),
   analytics: getIcon('ic_analytics'),
-  dashboard: getIcon('ic_dashboard')
+  dashboard: getIcon('ic_dashboard'),
+  banking: getIcon('ic_banking')
 };
 
 const sidebarConfig = [
@@ -21,11 +22,7 @@ const sidebarConfig = [
   // ----------------------------------------------------------------------
   {
     subheader: 'general',
-    items: [
-      { title: 'One', path: PATH_DASHBOARD.general.pageOne, icon: ICONS.dashboard },
-      { title: 'Two', path: PATH_DASHBOARD.general.pageTwo, icon: ICONS.ecommerce },
-      { title: 'Three', path: PATH_DASHBOARD.general.pageThree, icon: ICONS.analytics }
-    ]
+    items: [{ title: 'Home', path: PATH_DASHBOARD.general.home, icon: ICONS.dashboard }]
   },
 
   // MANAGEMENT
@@ -35,12 +32,21 @@ const sidebarConfig = [
     items: [
       {
         title: 'user',
-        path: PATH_DASHBOARD.app.root,
+        path: PATH_DASHBOARD.user.root,
         icon: ICONS.user,
         children: [
-          { title: 'Four', path: PATH_DASHBOARD.app.pageFour },
-          { title: 'Five', path: PATH_DASHBOARD.app.pageFive },
-          { title: 'Six', path: PATH_DASHBOARD.app.pageSix }
+          { title: 'Four', path: PATH_DASHBOARD.user.pageFour },
+          { title: 'Five', path: PATH_DASHBOARD.user.pageFive },
+          { title: 'Six', path: PATH_DASHBOARD.user.pageSix }
+        ]
+      },
+      {
+        title: 'accounts',
+        path: PATH_DASHBOARD.accounts.root,
+        icon: ICONS.banking,
+        children: [
+          { title: 'List', path: PATH_DASHBOARD.accounts.list },
+          { title: 'Link', path: PATH_DASHBOARD.accounts.link }
         ]
       }
     ]

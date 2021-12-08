@@ -21,11 +21,7 @@ export const PATH_AUTH = {
 
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
-  general: {
-    pageOne: path(ROOTS_DASHBOARD, '/one'),
-    pageTwo: path(ROOTS_DASHBOARD, '/two'),
-    pageThree: path(ROOTS_DASHBOARD, '/three')
-  },
+  general: { home: path(ROOTS_DASHBOARD, '/home') },
   app: {
     root: path(ROOTS_DASHBOARD, '/app'),
     pageFour: path(ROOTS_DASHBOARD, '/app/four'),
@@ -35,10 +31,14 @@ export const PATH_DASHBOARD = {
   user: {
     root: path(ROOTS_DASHBOARD, '/user'),
     profile: path(ROOTS_DASHBOARD, '/user/profile'),
-    cards: path(ROOTS_DASHBOARD, '/user/cards'),
     list: path(ROOTS_DASHBOARD, '/user/list'),
     newUser: path(ROOTS_DASHBOARD, '/user/new'),
     editById: path(ROOTS_DASHBOARD, `/user/reece-chung/edit`),
     account: path(ROOTS_DASHBOARD, '/user/account')
+  },
+  accounts: {
+    root: path(ROOTS_DASHBOARD, '/accounts'),
+    link: path(ROOTS_DASHBOARD, '/accounts/link'),
+    list: path(ROOTS_DASHBOARD, '/accounts/list')
   }
 };

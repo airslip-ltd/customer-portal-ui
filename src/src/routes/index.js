@@ -73,10 +73,8 @@ export default function Router() {
         </AuthGuard>
       ),
       children: [
-        { element: <Navigate to="/dashboard/one" replace /> },
-        { path: 'one', element: <PageOne /> },
-        { path: 'two', element: <PageTwo /> },
-        { path: 'three', element: <PageThree /> },
+        { element: <Navigate to="/dashboard/home" replace /> },
+        { path: 'home', element: <Home /> },
         {
           path: 'app',
           children: [
@@ -84,6 +82,13 @@ export default function Router() {
             { path: 'four', element: <PageFour /> },
             { path: 'five', element: <PageFive /> },
             { path: 'six', element: <PageSix /> }
+          ]
+        },
+        {
+          path: 'accounts',
+          children: [
+            { element: <Navigate to="/dashboard/accounts/list" replace /> },
+            { path: 'list', element: <AccountsList /> }
           ]
         }
       ]
@@ -111,9 +116,8 @@ const Register = Loadable(lazy(() => import('../pages/authentication/Register'))
 const ResetPassword = Loadable(lazy(() => import('../pages/authentication/ResetPassword')));
 const VerifyCode = Loadable(lazy(() => import('../pages/authentication/VerifyCode')));
 // Dashboard
-const PageOne = Loadable(lazy(() => import('../pages/PageOne')));
-const PageTwo = Loadable(lazy(() => import('../pages/PageTwo')));
-const PageThree = Loadable(lazy(() => import('../pages/PageThree')));
+const Home = Loadable(lazy(() => import('../pages/dashboard/Home')));
+const AccountsList = Loadable(lazy(() => import('../pages/accounts/List')));
 const PageFour = Loadable(lazy(() => import('../pages/PageFour')));
 const PageFive = Loadable(lazy(() => import('../pages/PageFive')));
 const PageSix = Loadable(lazy(() => import('../pages/PageSix')));
