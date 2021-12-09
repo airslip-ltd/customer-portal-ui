@@ -10,18 +10,40 @@ const getIcon = (name) => (
 );
 
 const ICONS = {
+  blog: getIcon('ic_blog'),
+  cart: getIcon('ic_cart'),
+  chat: getIcon('ic_chat'),
+  mail: getIcon('ic_mail'),
   user: getIcon('ic_user'),
+  kanban: getIcon('ic_kanban'),
+  banking: getIcon('ic_banking'),
+  calendar: getIcon('ic_calendar'),
   ecommerce: getIcon('ic_ecommerce'),
   analytics: getIcon('ic_analytics'),
   dashboard: getIcon('ic_dashboard'),
-  banking: getIcon('ic_banking')
+  booking: getIcon('ic_booking')
 };
 
 const sidebarConfig = [
-  // GENERAL
+  // GENERAL - Merchant
   // ----------------------------------------------------------------------
   {
     subheader: 'general',
+    userTypes: ['Merchant'],
+    items: [
+      {
+        title: 'Home',
+        path: PATH_DASHBOARD.general.home,
+        icon: ICONS.dashboard
+      }
+    ]
+  },
+
+  // GENERAL - Partner
+  // ----------------------------------------------------------------------
+  {
+    subheader: 'general',
+    userTypes: ['Partner'],
     items: [
       {
         title: 'Home',
@@ -30,28 +52,19 @@ const sidebarConfig = [
       },
       {
         title: 'merchants',
-        path: PATH_DASHBOARD.merchants.root,
-        icon: ICONS.user,
-        children: [{ title: 'List', path: PATH_DASHBOARD.merchants.list }]
+        path: PATH_DASHBOARD.partner.merchants.root,
+        icon: ICONS.ecommerce,
+        children: [{ title: 'List', path: PATH_DASHBOARD.partner.merchants.list }]
       }
     ]
   },
 
-  // MANAGEMENT
+  // SERVICES
   // ----------------------------------------------------------------------
   {
-    subheader: 'management',
+    subheader: 'services',
+    userTypes: ['Merchant'],
     items: [
-      {
-        title: 'user',
-        path: PATH_DASHBOARD.user.root,
-        icon: ICONS.user,
-        children: [
-          { title: 'Four', path: PATH_DASHBOARD.user.pageFour },
-          { title: 'Five', path: PATH_DASHBOARD.user.pageFive },
-          { title: 'Six', path: PATH_DASHBOARD.user.pageSix }
-        ]
-      },
       {
         title: 'accounts',
         path: PATH_DASHBOARD.accounts.root,
@@ -62,7 +75,30 @@ const sidebarConfig = [
         ]
       }
     ]
+  },
+
+  // SETTINGS
+  // ----------------------------------------------------------------------
+  {
+    subheader: 'settings',
+    userTypes: ['Merchant', 'Partner'],
+    items: [
+      {
+        title: 'user',
+        path: PATH_DASHBOARD.user.root,
+        icon: ICONS.user,
+        children: []
+      }
+    ]
   }
 ];
 
-export default sidebarConfig;
+const userSidebar = (userType) => {
+  const sidebar = sidebarConfig.filter((_config) => _config.userTypes.includes(userType));
+
+  console.log(sidebar);
+
+  return sidebar;
+};
+
+export { sidebarConfig, userSidebar };

@@ -21,7 +21,9 @@ export const PATH_AUTH = {
 
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
-  general: { home: path(ROOTS_DASHBOARD, '/home') },
+  general: {
+    home: path(ROOTS_DASHBOARD, '/home')
+  },
   app: {
     root: path(ROOTS_DASHBOARD, '/app'),
     pageFour: path(ROOTS_DASHBOARD, '/app/four'),
@@ -41,8 +43,10 @@ export const PATH_DASHBOARD = {
     link: path(ROOTS_DASHBOARD, '/accounts/link'),
     list: path(ROOTS_DASHBOARD, '/accounts/list')
   },
-  merchants: {
-    root: path(ROOTS_DASHBOARD, '/merchants'),
-    list: path(ROOTS_DASHBOARD, '/merchants/list')
+  partner: {
+    merchants: {
+      root: path(ROOTS_DASHBOARD, '/merchants'),
+      list: path(ROOTS_DASHBOARD, '/merchants/list')
+    }
   }
 };

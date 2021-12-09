@@ -19,6 +19,27 @@ const users = [
     lastName: 'Whitehouse',
     displayName: 'Graham Whitehouse',
     userRole: 'Administrator',
+    airslipUserType: 'Merchant',
+    entityId: 'e99f09a7-dd88-49d5-b1c8-1daf80c2d7b10',
+    createdDate: 1635238628393,
+    biometricOn: false,
+    dataConsent: {
+      essential: true,
+      performance: true,
+      personalisation: true,
+      createdOn: 1636627203702
+    }
+  },
+  {
+    id: '14ab7f6f34e04b7085a87a6bd73fd0fg',
+    email: 'dev-testing-2@airslip.com',
+    password: 'Test1234!',
+    firstName: 'Tom',
+    lastName: 'McDonough',
+    displayName: 'Tom McDonough',
+    userRole: 'Administrator',
+    airslipUserType: 'Partner',
+    entityId: 'some-entity',
     createdDate: 1635238628393,
     biometricOn: false,
     dataConsent: {

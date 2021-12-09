@@ -10,7 +10,6 @@ import {
   MerchantPaymentMethods,
   MerchantSalesAndRefunds,
   MerchantRecentTransactions,
-  MerchantTitle,
   MerchantRiskScore
 } from '.';
 
@@ -25,10 +24,6 @@ export default function MerchantSummary({ currentMerchant }) {
     <Container>
       {!isUndefined(currentMerchant) && (
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <MerchantTitle displayName={currentMerchant.name} />
-          </Grid>
-
           <Grid item xs={12} md={4}>
             <MerchantRevenue />
           </Grid>

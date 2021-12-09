@@ -12,7 +12,7 @@ import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
 //
 import { MHidden } from '../../components/@material-extend';
-import sidebarConfig from './SidebarConfig';
+import { userSidebar } from './SidebarConfig';
 import useAuth from '../../hooks/useAuth';
 
 // ----------------------------------------------------------------------
@@ -90,9 +90,9 @@ DashboardSidebar.propTypes = {
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
   const { user } = useAuth();
+  const sidebarConfig = userSidebar(user.airslipUserType);
 
-  const { isCollapse, collapseClick, collapseHover, onToggleCollapse, onHoverEnter, onHoverLeave } =
-    useCollapseDrawer();
+  const { isCollapse, collapseClick, collapseHover, onHoverEnter, onHoverLeave } = useCollapseDrawer();
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -127,10 +127,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
             <Logo />
           </Box>
-
-          <MHidden width="lgDown">
-            {!isCollapse && <IconCollapse onToggleCollapse={onToggleCollapse} collapseClick={collapseClick} />}
-          </MHidden>
         </Stack>
 
         {isCollapse ? (

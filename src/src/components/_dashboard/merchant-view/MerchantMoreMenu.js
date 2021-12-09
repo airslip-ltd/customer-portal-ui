@@ -37,13 +37,13 @@ export default function UserMoreMenu({ id }) {
       >
         <MenuItem
           component={RouterLink}
-          to={`${PATH_DASHBOARD.merchants.root}/${id}/view`}
+          to={`${PATH_DASHBOARD.partner.merchants.root}/${id}/view`}
           sx={{ color: 'text.secondary' }}
         >
           <ListItemIcon>
             <Icon icon={editFill} width={24} height={24} />
           </ListItemIcon>
-          <ListItemText primary="Edit" primaryTypographyProps={{ variant: 'body2' }} />
+          <ListItemText primary="More" primaryTypographyProps={{ variant: 'body2' }} />
         </MenuItem>
       </Menu>
     </>
