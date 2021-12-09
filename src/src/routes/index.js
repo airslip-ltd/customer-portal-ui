@@ -116,7 +116,7 @@ const ResetPassword = Loadable(lazy(() => import('../pages/authentication/ResetP
 const VerifyCode = Loadable(lazy(() => import('../pages/authentication/VerifyCode')));
 // Dashboard
 const Home = Loadable(lazy(() => import('../pages/dashboard/Home')));
-const AccountsList = Loadable(lazy(() => import('../pages/accounts/List')));
+const AccountsList = Loadable(lazy(() => import('../pages/accounts/AccountList')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 // Merchants
 const MerchantView = Loadable(lazy(() => import('../pages/partner/MerchantView')));

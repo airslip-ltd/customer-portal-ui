@@ -10,6 +10,7 @@ import { firstName, lastName, fullName } from './name';
 import { title, sentence, description } from './text';
 import { price, rating, age, percent } from './number';
 import { scores } from './ratings';
+import { bankId, bankName, accountStatus, accountNumber, sortCode } from './banks';
 
 // ----------------------------------------------------------------------
 
@@ -22,6 +23,11 @@ const mockData = {
   role: (index) => role[index],
   company: (index) => company[index],
   scores: (index) => scores[index],
+  bankId: (index) => bankId[index],
+  bankName: (index) => bankName[index],
+  accountStatus: (index) => accountStatus[index],
+  accountNumber: (index) => accountNumber[index],
+  sortCode: (index) => sortCode[index],
   address: {
     fullAddress: (index) => fullAddress[index],
     country: (index) => country[index]
