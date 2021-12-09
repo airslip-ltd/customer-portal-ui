@@ -118,7 +118,7 @@ export default function MerchantList() {
           heading="Merchant List"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Merchants', href: PATH_DASHBOARD.merchants.root },
+            { name: 'Merchants', href: PATH_DASHBOARD.partner.merchants.root },
             { name: 'List' }
           ]}
         />

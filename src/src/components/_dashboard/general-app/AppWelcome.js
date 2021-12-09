@@ -39,6 +39,10 @@ export default function AppWelcome({ displayName }) {
           Welcome back,
           <br /> {!displayName ? '...' : displayName}!
         </Typography>
+
+        <Typography variant="body2" sx={{ pb: { xs: 3, xl: 5 }, maxWidth: 480, mx: 'auto' }}>
+          Here's what you need to know today!
+        </Typography>
       </CardContent>
 
       <SeoIllustration

@@ -76,15 +76,6 @@ export default function Router() {
         { element: <Navigate to="/dashboard/home" replace /> },
         { path: 'home', element: <Home /> },
         {
-          path: 'app',
-          children: [
-            { element: <Navigate to="/dashboard/app/four" replace /> },
-            { path: 'four', element: <PageFour /> },
-            { path: 'five', element: <PageFive /> },
-            { path: 'six', element: <PageSix /> }
-          ]
-        },
-        {
           path: 'accounts',
           children: [
             { element: <Navigate to="/dashboard/accounts/list" replace /> },
@@ -126,9 +117,6 @@ const VerifyCode = Loadable(lazy(() => import('../pages/authentication/VerifyCod
 // Dashboard
 const Home = Loadable(lazy(() => import('../pages/dashboard/Home')));
 const AccountsList = Loadable(lazy(() => import('../pages/accounts/List')));
-const PageFour = Loadable(lazy(() => import('../pages/PageFour')));
-const PageFive = Loadable(lazy(() => import('../pages/PageFive')));
-const PageSix = Loadable(lazy(() => import('../pages/PageSix')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 // Merchants
 const MerchantView = Loadable(lazy(() => import('../pages/partner/MerchantView')));

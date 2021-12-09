@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 // material
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { getMerchantList } from '../../redux/slices/merchant';
@@ -12,7 +12,7 @@ import useSettings from '../../hooks/useSettings';
 // components
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import { MerchantSummary } from '../../components/_dashboard/merchant-view';
+import { MerchantSummary, MerchantTitle } from '../../components/_dashboard/merchant-view';
 
 // ----------------------------------------------------------------------
 
@@ -34,11 +34,15 @@ export default function MerchantView() {
           heading="Merchant View"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Merchants', href: PATH_DASHBOARD.merchants.root },
+            { name: 'Merchants', href: PATH_DASHBOARD.partner.merchants.root },
             { name: currentMerchant ? currentMerchant.name : id }
           ]}
         />
       </Container>
+
+      <Grid item xs={12}>
+        <MerchantTitle displayName={currentMerchant.name} />
+      </Grid>
 
       <MerchantSummary currentMerchant={currentMerchant} />
     </Page>
