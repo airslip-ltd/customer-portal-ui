@@ -66,12 +66,21 @@ const sidebarConfig = [
     userTypes: ['Merchant'],
     items: [
       {
-        title: 'accounts',
+        title: 'bank accounts',
         path: PATH_DASHBOARD.accounts.root,
         icon: ICONS.banking,
         children: [
           { title: 'List', path: PATH_DASHBOARD.accounts.list },
           { title: 'Link', path: PATH_DASHBOARD.accounts.link }
+        ]
+      },
+      {
+        title: 'integrations',
+        path: PATH_DASHBOARD.integrations.root,
+        icon: ICONS.ecommerce,
+        children: [
+          { title: 'List', path: PATH_DASHBOARD.integrations.list },
+          { title: 'Create', path: PATH_DASHBOARD.integrations.link }
         ]
       }
     ]

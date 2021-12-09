@@ -11,6 +11,7 @@ import { title, sentence, description } from './text';
 import { price, rating, age, percent } from './number';
 import { scores } from './ratings';
 import { bankId, bankName, accountStatus, accountNumber, sortCode } from './banks';
+import { provider, providerName } from './providers';
 
 // ----------------------------------------------------------------------
 
@@ -23,6 +24,8 @@ const mockData = {
   role: (index) => role[index],
   company: (index) => company[index],
   scores: (index) => scores[index],
+  provider: (index) => provider[index],
+  providerName: (index) => providerName[index],
   bankId: (index) => bankId[index],
   bankName: (index) => bankName[index],
   accountStatus: (index) => accountStatus[index],

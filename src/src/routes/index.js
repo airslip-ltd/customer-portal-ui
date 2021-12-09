@@ -85,6 +85,15 @@ export default function Router() {
           ]
         },
         {
+          path: 'integrations',
+          children: [
+            { element: <Navigate to="/dashboard/integrations/list" replace /> },
+            { path: 'list', element: <IntegrationList /> },
+            { path: 'link', element: <IntegrationLink /> },
+            { path: ':provider/link', element: <IntegrationLinked /> }
+          ]
+        },
+        {
           path: 'merchants',
           children: [
             { element: <Navigate to="/dashboard/merchants/list" replace /> },
@@ -121,6 +130,9 @@ const Home = Loadable(lazy(() => import('../pages/dashboard/Home')));
 const AccountList = Loadable(lazy(() => import('../pages/accounts/AccountList')));
 const AccountLink = Loadable(lazy(() => import('../pages/accounts/AccountLink')));
 const AccountLinked = Loadable(lazy(() => import('../pages/accounts/AccountLinked')));
+const IntegrationList = Loadable(lazy(() => import('../pages/integrations/IntegrationList')));
+const IntegrationLink = Loadable(lazy(() => import('../pages/integrations/IntegrationLink')));
+const IntegrationLinked = Loadable(lazy(() => import('../pages/integrations/IntegrationLinked')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 // Merchants
 const MerchantView = Loadable(lazy(() => import('../pages/partner/MerchantView')));

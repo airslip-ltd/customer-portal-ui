@@ -4,6 +4,8 @@ import storage from 'redux-persist/lib/storage';
 import merchantReducer from './slices/merchant';
 import accountReducer from './slices/accounts';
 import bankReducer from './slices/banks';
+import providerReducer from './slices/providers';
+import integrationReducer from './slices/integrations';
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +19,9 @@ const rootPersistConfig = {
 const rootReducer = combineReducers({
   account: accountReducer,
   merchant: merchantReducer,
-  bank: bankReducer
+  bank: bankReducer,
+  provider: providerReducer,
+  integration: integrationReducer
 });
 
 export { rootPersistConfig, rootReducer };
