@@ -12,14 +12,6 @@ import { BaseOptionChart } from '../../charts';
 
 // ----------------------------------------------------------------------
 
-const RootStyle = styled(Card)(({ theme }) => ({
-  display: 'flex',
-  position: 'relative',
-  alignItems: 'center',
-  padding: theme.spacing(3),
-  backgroundColor: theme.palette.primary.darker
-}));
-
 const IconStyle = styled(Icon)(({ theme }) => ({
   width: 120,
   height: 120,
@@ -37,6 +29,17 @@ MerchantRiskScore.propTypes = {
 
 export default function MerchantRiskScore({ rating }) {
   const theme = useTheme();
+
+  const RootStyle = styled(Card)(({ theme }) => ({
+    display: 'flex',
+    position: 'relative',
+    alignItems: 'center',
+    padding: theme.spacing(3),
+    backgroundColor:
+      (rating <= 30 && theme.palette.success.main) ||
+      (rating > 30 && rating <= 70 && theme.palette.warning.main) ||
+      theme.palette.error.main
+  }));
 
   const chartOptions = merge(BaseOptionChart(), {
     chart: { sparkline: { enabled: true } },
@@ -61,7 +64,7 @@ export default function MerchantRiskScore({ rating }) {
     <RootStyle>
       <ReactApexChart type="radialBar" series={[rating]} options={chartOptions} width={86} height={86} />
       <Box sx={{ ml: 3, color: 'common.white' }}>
-        <Typography variant="h4"> {fNumber(rating)}</Typography>
+        <Typography variant="h4"> {fNumber(rating)}% </Typography>
         <Typography variant="body2" sx={{ opacity: 0.72 }}>
           Risk Score
         </Typography>

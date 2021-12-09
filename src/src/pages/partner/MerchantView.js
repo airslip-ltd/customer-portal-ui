@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 // material
-import { Container, Grid, Stack } from '@mui/material';
+import { Container } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { getMerchantList } from '../../redux/slices/merchant';
@@ -12,25 +12,16 @@ import useSettings from '../../hooks/useSettings';
 // components
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import {
-  MerchantRevenue,
-  MerchantRefunds,
-  MerchantInterestCharges,
-  MerchantPaymentMethods,
-  MerchantSalesAndRefunds,
-  MerchantRecentTransactions,
-  MerchantTitle,
-  MerchantRiskScore
-} from '../../components/_dashboard/merchant-view';
+import { MerchantSummary } from '../../components/_dashboard/merchant-view';
 
 // ----------------------------------------------------------------------
 
-export default function UserCreate() {
+export default function MerchantView() {
   const { themeStretch } = useSettings();
   const dispatch = useDispatch();
   const { id } = useParams();
   const { merchantList } = useSelector((state) => state.merchant);
-  const { name, rating } = merchantList.find((merchant) => merchant.id === id);
+  const currentMerchant = merchantList.find((merchant) => merchant.id === id);
 
   useEffect(() => {
     dispatch(getMerchantList());
@@ -44,43 +35,12 @@ export default function UserCreate() {
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
             { name: 'Merchants', href: PATH_DASHBOARD.merchants.root },
-            { name }
+            { name: currentMerchant ? currentMerchant.name : id }
           ]}
         />
-
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <MerchantTitle displayName={name} />
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-            <MerchantRevenue />
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-            <MerchantRefunds />
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-            <MerchantInterestCharges />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-            <Stack spacing={3}>
-              <MerchantRiskScore rating={rating} />
-              <MerchantPaymentMethods />
-            </Stack>
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={8}>
-            <MerchantSalesAndRefunds />
-          </Grid>
-
-          <Grid item xs={12}>
-            <MerchantRecentTransactions />
-          </Grid>
-        </Grid>
       </Container>
+
+      <MerchantSummary currentMerchant={currentMerchant} />
     </Page>
   );
 }

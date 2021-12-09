@@ -1,7 +1,6 @@
 import { filter } from 'lodash';
 import { useState, useEffect } from 'react';
 // material
-import { useTheme } from '@mui/material/styles';
 import {
   Card,
   Table,
@@ -24,11 +23,15 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 import useSettings from '../../hooks/useSettings';
 // components
 import Page from '../../components/Page';
-import Label from '../../components/Label';
 import Scrollbar from '../../components/Scrollbar';
 import SearchNotFound from '../../components/SearchNotFound';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import { MerchantListHead, MerchantListToolbar, MerchantMoreMenu } from '../../components/_dashboard/merchant-view';
+import {
+  MerchantListHead,
+  MerchantListToolbar,
+  MerchantMoreMenu,
+  MerchantRating
+} from '../../components/_dashboard/merchant-view';
 
 // ----------------------------------------------------------------------
 
@@ -71,7 +74,6 @@ function applySortFilter(array, comparator, query) {
 
 export default function MerchantList() {
   const { themeStretch } = useSettings();
-  const theme = useTheme();
   const dispatch = useDispatch();
   const { merchantList } = useSelector((state) => state.merchant);
   const [page, setPage] = useState(0);
@@ -149,14 +151,7 @@ export default function MerchantList() {
                           </Stack>
                         </TableCell>
                         <TableCell align="left">
-                          <Label
-                            variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                            color={
-                              (rating <= 150 && 'success') || (rating > 150 && rating <= 300 && 'warning') || 'error'
-                            }
-                          >
-                            {rating}
-                          </Label>
+                          <MerchantRating score={rating} />
                         </TableCell>
                         <TableCell align="right">
                           <MerchantMoreMenu id={id} />
