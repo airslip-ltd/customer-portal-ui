@@ -5,7 +5,6 @@ import {
   Card,
   Table,
   Stack,
-  Avatar,
   TableRow,
   TableBody,
   TableCell,
@@ -120,7 +119,7 @@ export default function AccountList() {
           heading="Account List"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Accounts', href: PATH_DASHBOARD.partner.merchants.root },
+            { name: 'Accounts', href: PATH_DASHBOARD.accounts.root },
             { name: 'List' }
           ]}
         />
