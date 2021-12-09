@@ -11,11 +11,11 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 
 // ----------------------------------------------------------------------
 
-AccountMoreMenu.propTypes = {
+IntegrationMoreMenu.propTypes = {
   id: PropTypes.string
 };
 
-export default function AccountMoreMenu({ id }) {
+export default function IntegrationMoreMenu({ id }) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
