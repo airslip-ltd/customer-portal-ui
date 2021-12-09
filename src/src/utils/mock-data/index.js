@@ -9,6 +9,7 @@ import { fullAddress, country } from './address';
 import { firstName, lastName, fullName } from './name';
 import { title, sentence, description } from './text';
 import { price, rating, age, percent } from './number';
+import { scores } from './ratings';
 
 // ----------------------------------------------------------------------
 
@@ -20,6 +21,7 @@ const mockData = {
   boolean: (index) => boolean[index],
   role: (index) => role[index],
   company: (index) => company[index],
+  scores: (index) => scores[index],
   address: {
     fullAddress: (index) => fullAddress[index],
     country: (index) => country[index]

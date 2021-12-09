@@ -9,3 +9,5 @@ export { default as MerchantPaymentMethods } from './MerchantPaymentMethods';
 export { default as MerchantSalesAndRefunds } from './MerchantSalesAndRefunds';
 export { default as MerchantRecentTransactions } from './MerchantRecentTransactions';
 export { default as MerchantRiskScore } from './MerchantRiskScore';
+export { default as MerchantRating } from './MerchantRating';
+export { default as MerchantSummary } from './MerchantSummary';
