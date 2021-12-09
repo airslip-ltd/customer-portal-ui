@@ -29,7 +29,7 @@ export default function MerchantView() {
 
   return (
     <Page title="Merchant | View | Airslip">
-      <Container maxWidth={themeStretch ? false : 'lg'}>
+      <Container maxWidth={themeStretch ? false : 'xl'}>
         <HeaderBreadcrumbs
           heading="Merchant View"
           links={[
@@ -39,12 +39,16 @@ export default function MerchantView() {
           ]}
         />
       </Container>
-
-      <Grid item xs={12}>
-        <MerchantTitle displayName={currentMerchant.name} />
-      </Grid>
-
-      <MerchantSummary currentMerchant={currentMerchant} />
+      <Container maxWidth={themeStretch ? false : 'xl'}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <MerchantTitle displayName={currentMerchant ? currentMerchant.name : ''} />
+          </Grid>
+          <Grid item xs={12}>
+            <MerchantSummary currentMerchant={currentMerchant} />
+          </Grid>
+        </Grid>
+      </Container>
     </Page>
   );
 }

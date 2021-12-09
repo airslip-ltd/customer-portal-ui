@@ -113,7 +113,7 @@ export default function MerchantList() {
 
   return (
     <Page title="Merchant | List | Airslip">
-      <Container maxWidth={themeStretch ? false : 'lg'}>
+      <Container maxWidth={themeStretch ? false : 'xl'}>
         <HeaderBreadcrumbs
           heading="Merchant List"
           links={[
