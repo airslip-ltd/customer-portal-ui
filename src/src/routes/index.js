@@ -79,7 +79,9 @@ export default function Router() {
           path: 'accounts',
           children: [
             { element: <Navigate to="/dashboard/accounts/list" replace /> },
-            { path: 'list', element: <AccountsList /> }
+            { path: 'list', element: <AccountList /> },
+            { path: 'link', element: <AccountLink /> },
+            { path: ':bankId/link', element: <AccountLinked /> }
           ]
         },
         {
@@ -116,7 +118,9 @@ const ResetPassword = Loadable(lazy(() => import('../pages/authentication/ResetP
 const VerifyCode = Loadable(lazy(() => import('../pages/authentication/VerifyCode')));
 // Dashboard
 const Home = Loadable(lazy(() => import('../pages/dashboard/Home')));
-const AccountsList = Loadable(lazy(() => import('../pages/accounts/AccountList')));
+const AccountList = Loadable(lazy(() => import('../pages/accounts/AccountList')));
+const AccountLink = Loadable(lazy(() => import('../pages/accounts/AccountLink')));
+const AccountLinked = Loadable(lazy(() => import('../pages/accounts/AccountLinked')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 // Merchants
 const MerchantView = Loadable(lazy(() => import('../pages/partner/MerchantView')));
