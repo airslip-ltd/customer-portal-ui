@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: Demo
     env:
-      ENV_PATH: 'dev'
+      ENV_PATH: 'demo'
       PUBLISH_PATH: './src'
       NODE_VERSION: '14.x'
       TERRAFORM_MODULE_VERSION: 1.2.2
