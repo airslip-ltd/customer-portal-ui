@@ -1,24 +1,21 @@
-name: Dev - Deploy React App
+name: Demo - Deploy React App
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 jobs:
   deploy-nodejs-app-dev:
-    name: Build and Deploy Development
+    name: Build and Deploy Demo
     runs-on: ubuntu-latest
-    environment: Development
+    environment: Demo
     env:
       ENV_PATH: 'dev'
       PUBLISH_PATH: './src'
       NODE_VERSION: '14.x'
       TERRAFORM_MODULE_VERSION: 1.2.2
-      REACT_APP_API_URL: https://dev-app.airslip.com/customer_portal/v1/
-      REACT_APP_AUTH_URL: https://dev-auth.airslip.com/v1/
-      TESTIM_TEST_PLAN: Development - Customer Portal - Smoke Tests
+      REACT_APP_API_URL: https://demo-app.airslip.com/customer_portal/v1/
+      REACT_APP_AUTH_URL: https://demo-auth.airslip.com/v1/
+      TESTIM_TEST_PLAN: Demo - Customer Portal - Smoke Tests
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ env.NODE_VERSION }}
@@ -46,7 +43,7 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ secrets.NON_PROD_SUBSCRIPTION_ID }}
         ARM_TENANT_ID: ${{ secrets.NON_PROD_ARM_TENANT_ID }}
       run: |
-        terraform init -backend-config=variables/${{ env.ENV_PATH }}/backend.tfvars
+        terraform init -backend-config=variables/demo/backend.tfvars
         terraform plan -var-file=variables/${{ env.ENV_PATH }}/variables.tfvars -var="certificate_thumbprint=${{ secrets.AIRSLIP_CERT_THUMPRINT }}" -var="certificate_password=${{ secrets.AIRSLIP_CERTIFICATE_PASSWORD }}" -out=terraform.tfplan
         terraform apply terraform.tfplan
         resource_group_name_raw=$(terraform output resource_group_name)
