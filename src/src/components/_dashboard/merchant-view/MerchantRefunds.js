@@ -24,14 +24,14 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 const PERCENT = 0.15;
-const TOTAL_INSTALLED = 4876;
+const TOTAL_INSTALLED = 100876;
 const CHART_DATA = [{ data: [5, 18, 12, 51, 68, 11, 39, 37, 27, 20] }];
 
 export default function MerchantRefunds() {
   const theme = useTheme();
 
   const chartOptions = {
-    colors: [theme.palette.chart.blue[0]],
+    colors: [theme.palette.common.white],
     chart: { sparkline: { enabled: true } },
     plotOptions: { bar: { columnWidth: '68%', borderRadius: 2 } },
     labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
@@ -50,7 +50,7 @@ export default function MerchantRefunds() {
   return (
     <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
       <Box sx={{ flexGrow: 1 }}>
-        <Typography variant="subtitle2">Refunds</Typography>
+        <Typography variant="subtitle2">Refunds (Last 30 Days)</Typography>
 
         <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2, mb: 1 }}>
           <IconWrapperStyle

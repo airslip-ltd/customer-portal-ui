@@ -10,17 +10,29 @@ import { BaseOptionChart } from '../../charts';
 
 const CHART_DATA = [
   {
-    year: 2019,
+    year: 2021,
     data: [
-      { name: 'Sales', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] },
-      { name: 'Refunds', data: [10, 34, 13, 56, 77, 88, 99, 77, 45] }
+      {
+        name: 'Revenue',
+        data: [45789, 54678, 56753, 78998, 78967, 79877, 84546, 86388, 87890, 86777, 90124, 105678]
+      },
+      {
+        name: 'Refunds',
+        data: [4121.01, 5467.8, 4540.24, 5529.86, 8686.37, 6390.16, 5918.22, 7774.92, 8789, 9545.47, 8111.16, 7397.46]
+      }
     ]
   },
   {
-    year: 2020,
+    year: 2022,
     data: [
-      { name: 'Sales', data: [148, 91, 69, 62, 49, 51, 35, 41, 10] },
-      { name: 'Refunds', data: [45, 77, 99, 88, 77, 56, 13, 34, 10] }
+      {
+        name: 'Revenue',
+        data: [35789, 44678, 46753, 48998, 48967, 49877, 44546, 46388, 47890, 46777, 40124, 55678]
+      },
+      {
+        name: 'Refunds',
+        data: [3121.01, 4467.8, 3540.24, 5529.86, 4686.37, 3390.16, 4918.22, 5774.92, 3789, 6545.47, 7111.16, 6397.46]
+      }
     ]
   }
 ];
@@ -34,14 +46,14 @@ export default function AppAreaInstalled() {
 
   const chartOptions = merge(BaseOptionChart(), {
     xaxis: {
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     }
   });
 
   return (
     <Card>
       <CardHeader
-        title="Sales and Refunds"
+        title="Revenue and Refunds"
         subheader="(+43%) than last year"
         action={
           <TextField

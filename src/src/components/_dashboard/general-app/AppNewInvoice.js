@@ -134,7 +134,7 @@ export default function AppNewInvoice() {
             <TableBody>
               {MOCK_INVOICES.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell>{`TRN-${row.id}`}</TableCell>
+                  <TableCell>{row.id}</TableCell>
                   <TableCell>{row.category}</TableCell>
                   <TableCell>{fCurrency(row.price)}</TableCell>
                   <TableCell>
