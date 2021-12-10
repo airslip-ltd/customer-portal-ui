@@ -44,6 +44,7 @@ export default function MerchantRiskScore({ rating }) {
   const chartOptions = merge(BaseOptionChart(), {
     chart: { sparkline: { enabled: true } },
     legend: { show: false },
+    colors: [theme.palette.common.white],
     plotOptions: {
       radialBar: {
         hollow: { size: '78%' },
