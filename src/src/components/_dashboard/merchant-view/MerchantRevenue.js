@@ -24,7 +24,7 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 const PERCENT = 2.6;
-const TOTAL_USER = 18765;
+const TOTAL_USER = 1876505;
 const CHART_DATA = [{ data: [20, 41, 63, 33, 28, 35, 50, 46, 11, 26] }];
 
 export default function MerchantRevenue() {
@@ -50,7 +50,7 @@ export default function MerchantRevenue() {
   return (
     <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
       <Box sx={{ flexGrow: 1 }}>
-        <Typography variant="subtitle2">Revenue</Typography>
+        <Typography variant="subtitle2">Revenue (Last 30 days)</Typography>
         <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2, mb: 1 }}>
           <IconWrapperStyle
             sx={{

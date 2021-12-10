@@ -39,7 +39,8 @@ import { MIconButton } from '../../@material-extend';
 
 const MOCK_INVOICES = [...Array(5)].map((_, index) => ({
   id: mockData.id(index),
-  price: mockData.number.price(index),
+  description: mockData.product(index),
+  price: fCurrency(mockData.number.price(index)),
   category: (index === 0 && 'Sale') || (index === 2 && 'Refund') || 'Sale',
   status: (index === 0 && 'unmatched') || (index === 2 && 'queried') || 'matched'
 }));
@@ -124,7 +125,7 @@ export default function MerchantRecentTransactions() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Transaction ID</TableCell>
+                <TableCell>Descriptipn</TableCell>
                 <TableCell>Type</TableCell>
                 <TableCell>Price</TableCell>
                 <TableCell>Status</TableCell>
@@ -134,7 +135,7 @@ export default function MerchantRecentTransactions() {
             <TableBody>
               {MOCK_INVOICES.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell>{`TRN-${row.id}`}</TableCell>
+                  <TableCell>{row.description}</TableCell>
                   <TableCell>{row.category}</TableCell>
                   <TableCell>{fCurrency(row.price)}</TableCell>
                   <TableCell>

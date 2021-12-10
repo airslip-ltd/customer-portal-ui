@@ -12,12 +12,14 @@ import { price, rating, age, percent } from './number';
 import { scores } from './ratings';
 import { bankId, bankName, accountStatus, accountNumber, sortCode } from './banks';
 import { provider, providerName } from './providers';
+import { merchants } from './merchants';
 
 // ----------------------------------------------------------------------
 
 const mockData = {
   id: (index) => `e99f09a7-dd88-49d5-b1c8-1daf80c2d7b${index + 1}`,
   email: (index) => email[index],
+  product: (index) => merchants[index],
   phoneNumber: (index) => phoneNumber[index],
   time: (index) => sub(new Date(), { days: index, hours: index }),
   boolean: (index) => boolean[index],
