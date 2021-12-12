@@ -15,12 +15,12 @@ const CHART_DATA = [
     year: 2021,
     data: [
       {
-        name: 'Revenue',
+        name: 'Receivables',
         data: [35789, 44678, 46753, 48998, 48967, 49877, 44546, 46388, 47890, 46777, 40124, 55678]
       },
       {
-        name: 'Refunds',
-        data: [3121.01, 4467.8, 3540.24, 5529.86, 4686.37, 3390.16, 4918.22, 5774.92, 3789, 6545.47, 7111.16, 6397.46]
+        name: 'Payables',
+        data: [34789, 34678, 41753, 42998, 42967, 41877, 47546, 48388, 49890, 44777, 41124, 54678]
       }
     ]
   },
@@ -28,12 +28,12 @@ const CHART_DATA = [
     year: 2022,
     data: [
       {
-        name: 'Revenue',
+        name: 'Receivables',
         data: [45789, 54678, 56753, 78998, 78967, 79877, 84546, 86388, 87890, 86777, 90124, 105678]
       },
       {
-        name: 'Refunds',
-        data: [4121.01, 5467.8, 4540.24, 5529.86, 8686.37, 6390.16, 5918.22, 7774.92, 8789, 9545.47, 8111.16, 7397.46]
+        name: 'Payables',
+        data: [42789, 51678, 52753, 72998, 79967, 78877, 81546, 83388, 89890, 88777, 91124, 115678]
       }
     ]
   }
@@ -53,9 +53,9 @@ export default function AppAreaInstalled() {
       categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     },
     colors: [
+      theme.palette.primary.main,
       theme.palette.chart.green[0],
       theme.palette.chart.red[0],
-      theme.palette.primary.main,
       theme.palette.chart.yellow[0]
     ]
   });
@@ -63,8 +63,8 @@ export default function AppAreaInstalled() {
   return (
     <Card>
       <CardHeader
-        title="Revenue and Refunds"
-        subheader="(+43%) than last year"
+        title="Cashflow"
+        subheader="(+13%) than last year"
         action={
           <TextField
             select

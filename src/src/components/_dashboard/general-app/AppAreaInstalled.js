@@ -10,16 +10,16 @@ import { BaseOptionChart } from '../../charts';
 
 const CHART_DATA = [
   {
-    year: 2019,
+    year: 2021,
     data: [
-      { name: 'Sales', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] },
+      { name: 'Revenue', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] },
       { name: 'Refunds', data: [10, 34, 13, 56, 77, 88, 99, 77, 45] }
     ]
   },
   {
-    year: 2020,
+    year: 2022,
     data: [
-      { name: 'Sales', data: [148, 91, 69, 62, 49, 51, 35, 41, 10] },
+      { name: 'Revenue', data: [148, 91, 69, 62, 49, 51, 35, 41, 10] },
       { name: 'Refunds', data: [45, 77, 99, 88, 77, 56, 13, 34, 10] }
     ]
   }
