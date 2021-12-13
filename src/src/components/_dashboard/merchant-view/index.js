@@ -7,7 +7,7 @@ export { default as MerchantInterestCharges } from './MerchantInterestCharges';
 export { default as MerchantRefunds } from './MerchantRefunds';
 export { default as MerchantPaymentMethods } from './MerchantPaymentMethods';
 export { default as MerchantSalesAndRefunds } from './MerchantSalesAndRefunds';
-export { default as MerchantReceivablesPayables } from './MerchantReceivablesPayables';
+export { default as MerchantCashflow } from './MerchantCashflow';
 export { default as MerchantRecentTransactions } from './MerchantRecentTransactions';
 export { default as MerchantRiskScore } from './MerchantRiskScore';
 export { default as MerchantRating } from './MerchantRating';

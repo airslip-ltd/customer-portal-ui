@@ -4,7 +4,7 @@ import ReactApexChart from 'react-apexcharts';
 // material
 import { Card, CardHeader, Box, TextField } from '@mui/material';
 //
-import { useTheme, styled } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 
 import { BaseOptionChart } from '../../charts';
 
@@ -39,7 +39,7 @@ const CHART_DATA = [
   }
 ];
 
-export default function AppAreaInstalled() {
+export default function MerchantCashflow() {
   const [seriesData, setSeriesData] = useState(2021);
 
   const handleChangeSeriesData = (event) => {
