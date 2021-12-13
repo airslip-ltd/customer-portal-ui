@@ -2,6 +2,9 @@ name: Demo - Deploy React App
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - demo
 
 jobs:
   deploy-nodejs-app-dev:

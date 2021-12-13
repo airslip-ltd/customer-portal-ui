@@ -29,6 +29,7 @@ const mockData = {
   provider: (index) => provider[index],
   providerName: (index) => providerName[index],
   banks: (index) => banks[index],
+  allBanks: banks,
   accountStatus: (index) => accountStatus[index],
   accountNumber: (index) => accountNumber[index],
   sortCode: (index) => sortCode[index],
