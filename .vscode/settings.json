@@ -1,0 +1,17 @@
+{
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "eslint.options": {
+      "parser": "@babel/eslint-parser"
+    },
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+    ],
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true,
+    },
+  }
