@@ -14,7 +14,7 @@ import { BankIcon } from '../../components/_dashboard/account-list';
 
 export default function AccountLinked() {
   const { themeStretch } = useSettings();
-  const { bankId } = useParams();
+  const { banks } = useParams();
 
   return (
     <Page title="Accounts | List | Airslip">
@@ -31,7 +31,7 @@ export default function AccountLinked() {
         <Grid container spacing={3} justify="center">
           <Grid item xs={12}>
             <Stack direction="row" alignItems="center" spacing={2}>
-              <BankIcon icon={bankId} />
+              <BankIcon icon={banks.bankId} />
               <Typography variant="subtitle2" noWrap>
                 Great work! You have successfully linked your bank account.
               </Typography>

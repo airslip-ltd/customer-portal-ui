@@ -7,6 +7,11 @@ const icons = {
     width: 50,
     height: 50
   },
+  aibgb: {
+    url: '/static/bank_logos/ABN_Amro.svg',
+    width: 50,
+    height: 50
+  },
   bankofscotland: {
     url: '/static/bank_logos/Bank_of_Scotland.svg',
     width: 200,

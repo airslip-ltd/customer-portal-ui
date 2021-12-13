@@ -10,7 +10,7 @@ import { firstName, lastName, fullName } from './name';
 import { title, sentence, description } from './text';
 import { price, rating, age, percent } from './number';
 import { scores } from './ratings';
-import { bankId, bankName, accountStatus, accountNumber, sortCode } from './banks';
+import { banks, accountStatus, accountNumber, sortCode } from './banks';
 import { provider, providerName } from './providers';
 import { merchants } from './merchants';
 
@@ -28,8 +28,7 @@ const mockData = {
   scores: (index) => scores[index],
   provider: (index) => provider[index],
   providerName: (index) => providerName[index],
-  bankId: (index) => bankId[index],
-  bankName: (index) => bankName[index],
+  banks: (index) => banks[index],
   accountStatus: (index) => accountStatus[index],
   accountNumber: (index) => accountNumber[index],
   sortCode: (index) => sortCode[index],

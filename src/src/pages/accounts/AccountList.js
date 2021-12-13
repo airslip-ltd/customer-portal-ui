@@ -139,15 +139,15 @@ export default function AccountList() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, status, bankId, accountNumber, sortCode } = row;
+                    const { id, status, banks, accountNumber, sortCode } = row;
 
                     return (
                       <TableRow hover key={id} tabIndex={-1}>
                         <TableCell component="th" scope="row" padding="none">
                           <Stack direction="row" alignItems="center" spacing={2}>
-                            <BankIcon icon={bankId} />
+                            <BankIcon icon={banks.bankId} />
                             <Typography variant="subtitle2" noWrap>
-                              {name}
+                              {banks.bankName}
                             </Typography>
                           </Stack>
                         </TableCell>
