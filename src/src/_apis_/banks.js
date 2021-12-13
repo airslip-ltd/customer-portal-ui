@@ -5,9 +5,9 @@ import mockData from '../utils/mock-data';
 // ----------------------------------------------------------------------
 
 mock.onGet('/banks').reply(() => {
-  const banks = [...Array(10)].map((_, index) => ({
-    bankId: mockData.bankId(index),
-    name: mockData.bankName(index)
+  const banks = [...Array(25)].map((_, index) => ({
+    bankId: mockData.banks.bankId(index),
+    bankName: mockData.banks.bankName(index)
   }));
 
   return [200, { banks }];
