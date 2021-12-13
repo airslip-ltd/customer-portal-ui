@@ -24,7 +24,7 @@ import { getMerchantList } from '../../../redux/slices/merchant';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // components
-import { MerchantMoreMenu, MerchantRating } from '../merchant-view';
+import { MerchantRating } from '../merchant-view';
 //
 import Scrollbar from '../../Scrollbar';
 
@@ -76,20 +76,21 @@ export default function PartnerRiskFocus() {
               <TableRow>
                 <TableCell>Merchant Name</TableCell>
                 <TableCell>Risk Score</TableCell>
-                <TableCell />
               </TableRow>
             </TableHead>
             <TableBody>
               {filteredList.map((row) => {
                 const { id, name, rating } = row;
                 return (
-                  <TableRow key={id}>
+                  <TableRow
+                    hover
+                    key={id}
+                    component={RouterLink}
+                    to={`${PATH_DASHBOARD.partner.merchants.root}/${id}/view`}
+                  >
                     <TableCell>{name}</TableCell>
                     <TableCell>
                       <MerchantRating score={rating} />
-                    </TableCell>
-                    <TableCell align="right">
-                      <MerchantMoreMenu id={id} />
                     </TableCell>
                   </TableRow>
                 );
