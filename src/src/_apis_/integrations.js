@@ -5,7 +5,7 @@ import mockData from '../utils/mock-data';
 // ----------------------------------------------------------------------
 
 mock.onGet('/integrations').reply(() => {
-  const integrations = [...Array(1)].map((_, index) => ({
+  const integrations = [...Array(18)].map((_, index) => ({
     id: mockData.id(index),
     provider: mockData.provider(index),
     name: mockData.providerName(index),

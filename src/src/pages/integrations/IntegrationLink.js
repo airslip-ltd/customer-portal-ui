@@ -45,7 +45,7 @@ export default function IntegrationLink() {
           </Grid>
 
           {providerList.map((row) => {
-            const { provider, name } = row;
+            const { provider } = row;
 
             return (
               <Grid key={provider} item xs={6} md={4} align="center">
@@ -54,9 +54,6 @@ export default function IntegrationLink() {
                     <CardContent align="center">
                       <Stack style={{ margin: 'auto' }} spacing={2}>
                         <ProviderImage icon={provider} />
-                        <Typography noWrap variant="h6" sx={{ color: 'text.secondary' }}>
-                          {name}
-                        </Typography>
                       </Stack>
                     </CardContent>
                   </CardActionArea>

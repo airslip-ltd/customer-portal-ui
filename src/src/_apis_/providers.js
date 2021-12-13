@@ -5,7 +5,7 @@ import mockData from '../utils/mock-data';
 // ----------------------------------------------------------------------
 
 mock.onGet('/providers').reply(() => {
-  const providers = [...Array(1)].map((_, index) => ({
+  const providers = [...Array(18)].map((_, index) => ({
     provider: mockData.provider(index),
     name: mockData.providerName(index)
   }));
