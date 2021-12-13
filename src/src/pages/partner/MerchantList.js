@@ -1,5 +1,6 @@
 import { filter } from 'lodash';
 import { useState, useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
   Card,
@@ -26,12 +27,7 @@ import Page from '../../components/Page';
 import Scrollbar from '../../components/Scrollbar';
 import SearchNotFound from '../../components/SearchNotFound';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import {
-  MerchantListHead,
-  MerchantListToolbar,
-  MerchantMoreMenu,
-  MerchantRating
-} from '../../components/_dashboard/merchant-view';
+import { MerchantListHead, MerchantListToolbar, MerchantRating } from '../../components/_dashboard/merchant-view';
 
 // ----------------------------------------------------------------------
 
@@ -141,7 +137,13 @@ export default function MerchantList() {
                     const { id, name, rating } = row;
 
                     return (
-                      <TableRow hover key={id} tabIndex={-1}>
+                      <TableRow
+                        hover
+                        key={id}
+                        tabIndex={-1}
+                        component={RouterLink}
+                        to={`${PATH_DASHBOARD.partner.merchants.root}/${id}/view`}
+                      >
                         <TableCell component="th" scope="row" padding="none">
                           <Stack direction="row" alignItems="center" spacing={2}>
                             <Avatar alt={name} />
@@ -152,9 +154,6 @@ export default function MerchantList() {
                         </TableCell>
                         <TableCell align="left">
                           <MerchantRating score={rating} />
-                        </TableCell>
-                        <TableCell align="right">
-                          <MerchantMoreMenu id={id} />
                         </TableCell>
                       </TableRow>
                     );
