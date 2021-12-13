@@ -16,6 +16,11 @@
     "react-hooks"
   ],
   "parser": "@babel/eslint-parser",
+  "settings": {
+    "react": {
+        "version": "detect"
+    }
+  },
   "parserOptions": {
     "ecmaVersion": 8,
     "requireConfigFile": false,

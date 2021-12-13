@@ -9,6 +9,7 @@ import {
   MerchantInterestCharges,
   MerchantPaymentMethods,
   MerchantSalesAndRefunds,
+  MerchantCashflow,
   MerchantRecentTransactions,
   MerchantRiskScore
 } from '.';
@@ -35,6 +36,10 @@ export default function MerchantSummary({ currentMerchant }) {
           <MerchantInterestCharges />
         </Grid>
 
+        <Grid item xs={12} md={6} lg={8}>
+          <MerchantSalesAndRefunds />
+        </Grid>
+
         <Grid item xs={12} md={6} lg={4}>
           <Stack spacing={3}>
             <MerchantRiskScore rating={currentMerchant.rating} />
@@ -43,7 +48,14 @@ export default function MerchantSummary({ currentMerchant }) {
         </Grid>
 
         <Grid item xs={12} md={6} lg={8}>
-          <MerchantSalesAndRefunds />
+          <MerchantCashflow />
+        </Grid>
+
+        <Grid item xs={12} md={6} lg={4}>
+          <Stack spacing={3}>
+            <MerchantRiskScore rating={currentMerchant.rating} />
+            <MerchantPaymentMethods />
+          </Stack>
         </Grid>
 
         <Grid item xs={12}>
