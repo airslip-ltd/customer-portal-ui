@@ -11,7 +11,9 @@ import {
   MerchantSalesAndRefunds,
   MerchantCashflow,
   MerchantRecentTransactions,
-  MerchantRiskScore
+  MerchantRiskScore,
+  MerchantAverageDebtorDays,
+  MerchantAverageCreditorDays
 } from '.';
 
 // ----------------------------------------------------------------------
@@ -53,8 +55,8 @@ export default function MerchantSummary({ currentMerchant }) {
 
         <Grid item xs={12} md={6} lg={4}>
           <Stack spacing={3}>
-            <MerchantRiskScore rating={currentMerchant.rating} />
-            <MerchantPaymentMethods />
+            <MerchantAverageDebtorDays />
+            <MerchantAverageCreditorDays />
           </Stack>
         </Grid>
 

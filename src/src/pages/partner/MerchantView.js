@@ -31,7 +31,7 @@ export default function MerchantView() {
     <Page title="Merchant | View | Airslip">
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <HeaderBreadcrumbs
-          heading="Merchant View"
+          heading={currentMerchant ? currentMerchant.name : ''}
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
             { name: 'Merchants', href: PATH_DASHBOARD.partner.merchants.root },

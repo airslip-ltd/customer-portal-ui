@@ -12,3 +12,5 @@ export { default as MerchantRecentTransactions } from './MerchantRecentTransacti
 export { default as MerchantRiskScore } from './MerchantRiskScore';
 export { default as MerchantRating } from './MerchantRating';
 export { default as MerchantSummary } from './MerchantSummary';
+export { default as MerchantAverageDebtorDays } from './MerchantAverageDebtorDays';
+export { default as MerchantAverageCreditorDays } from './MerchantAverageCreditorDays';
