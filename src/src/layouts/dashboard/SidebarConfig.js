@@ -105,8 +105,6 @@ const sidebarConfig = [
 const userSidebar = (userType) => {
   const sidebar = sidebarConfig.filter((_config) => _config.userTypes.includes(userType));
 
-  console.log(sidebar);
-
   return sidebar;
 };
 
