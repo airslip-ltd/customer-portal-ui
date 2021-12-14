@@ -33,6 +33,7 @@ import { MerchantListHead, MerchantListToolbar, MerchantRating } from '../../com
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
+  { id: 'status', label: 'Status', alignRight: false },
   { id: 'riskScore', label: 'Risk Score', alignRight: false },
   { id: '' }
 ];
@@ -134,7 +135,7 @@ export default function MerchantList() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, rating } = row;
+                    const { id, name, status, rating } = row;
 
                     return (
                       <TableRow
@@ -152,6 +153,7 @@ export default function MerchantList() {
                             </Typography>
                           </Stack>
                         </TableCell>
+                        <TableCell align="left">{status}</TableCell>
                         <TableCell align="left">
                           <MerchantRating score={rating} />
                         </TableCell>

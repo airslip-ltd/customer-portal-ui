@@ -51,7 +51,8 @@ export const PATH_DASHBOARD = {
   partner: {
     merchants: {
       root: path(ROOTS_DASHBOARD, '/merchants'),
-      list: path(ROOTS_DASHBOARD, '/merchants/list')
+      list: path(ROOTS_DASHBOARD, '/merchants/list'),
+      link: path(ROOTS_DASHBOARD, '/merchants/link')
     }
   }
 };
