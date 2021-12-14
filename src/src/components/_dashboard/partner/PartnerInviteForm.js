@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Form, FormikProvider, useFormik } from 'formik';
 // material
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, Switch, TextField, Typography, FormControlLabel } from '@mui/material';
+import { Box, Card, Grid, Stack, TextField, Typography } from '@mui/material';
 // utils
 import fakeRequest from '../../../utils/fakeRequest';
 // routes
