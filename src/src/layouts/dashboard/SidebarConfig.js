@@ -54,7 +54,10 @@ const sidebarConfig = [
         title: 'merchants',
         path: PATH_DASHBOARD.partner.merchants.root,
         icon: ICONS.ecommerce,
-        children: [{ title: 'List', path: PATH_DASHBOARD.partner.merchants.list }]
+        children: [
+          { title: 'List', path: PATH_DASHBOARD.partner.merchants.list },
+          { title: 'Invite', path: PATH_DASHBOARD.partner.merchants.link }
+        ]
       }
     ]
   },

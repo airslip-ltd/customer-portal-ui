@@ -9,12 +9,10 @@ const imageDefaults = {
 
 const overrides = {
   amex: {
-    url: '/static/bank_logos/Amex.svg',
     width: 50,
     height: 50
   },
   aibgb: {
-    url: '/static/bank_logos/ABN_Amro.svg',
     width: 50,
     height: 50
   }

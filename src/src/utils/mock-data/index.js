@@ -3,7 +3,7 @@ import { sub } from 'date-fns';
 import { role } from './role';
 import { email } from './email';
 import { boolean } from './boolean';
-import { company } from './company';
+import { company, companyStatus } from './company';
 import { phoneNumber } from './phoneNumber';
 import { fullAddress, country } from './address';
 import { firstName, lastName, fullName } from './name';
@@ -25,6 +25,7 @@ const mockData = {
   boolean: (index) => boolean[index],
   role: (index) => role[index],
   company: (index) => company[index],
+  companyStatus: (index) => companyStatus[index],
   scores: (index) => scores[index],
   provider: (index) => provider[index],
   providerName: (index) => providerName[index],

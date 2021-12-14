@@ -98,6 +98,7 @@ export default function Router() {
           children: [
             { element: <Navigate to="/dashboard/merchants/list" replace /> },
             { path: 'list', element: <MerchantList /> },
+            { path: 'link', element: <MerchantLink /> },
             { path: ':id/view', element: <MerchantView /> }
           ]
         }
@@ -137,3 +138,4 @@ const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 // Merchants
 const MerchantView = Loadable(lazy(() => import('../pages/partner/MerchantView')));
 const MerchantList = Loadable(lazy(() => import('../pages/partner/MerchantList')));
+const MerchantLink = Loadable(lazy(() => import('../pages/partner/MerchantLink')));
