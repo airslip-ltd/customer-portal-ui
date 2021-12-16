@@ -64,6 +64,20 @@ export default function Router() {
       ]
     },
 
+    {
+      path: 'linking',
+      children: [
+        {
+          path: 'bank',
+          element: (
+            <AuthGuard>
+              <BankAccount />
+            </AuthGuard>
+          )
+        }
+      ]
+    },
+
     // Dashboard Routes
     {
       path: 'dashboard',
@@ -81,7 +95,7 @@ export default function Router() {
             { element: <Navigate to="/dashboard/accounts/list" replace /> },
             { path: 'list', element: <AccountList /> },
             { path: 'link', element: <AccountLink /> },
-            { path: ':bankId/link', element: <AccountLinked /> }
+            { path: ':institutionId/link', element: <AccountLinking /> }
           ]
         },
         {
@@ -126,11 +140,13 @@ const Login = Loadable(lazy(() => import('../pages/authentication/Login')));
 const Register = Loadable(lazy(() => import('../pages/authentication/Register')));
 const ResetPassword = Loadable(lazy(() => import('../pages/authentication/ResetPassword')));
 const VerifyCode = Loadable(lazy(() => import('../pages/authentication/VerifyCode')));
+// Linking
+const BankAccount = Loadable(lazy(() => import('../pages/linking/BankAccount')));
 // Dashboard
 const Home = Loadable(lazy(() => import('../pages/dashboard/Home')));
 const AccountList = Loadable(lazy(() => import('../pages/accounts/AccountList')));
 const AccountLink = Loadable(lazy(() => import('../pages/accounts/AccountLink')));
-const AccountLinked = Loadable(lazy(() => import('../pages/accounts/AccountLinked')));
+const AccountLinking = Loadable(lazy(() => import('../pages/accounts/AccountLinking')));
 const IntegrationList = Loadable(lazy(() => import('../pages/integrations/IntegrationList')));
 const IntegrationLink = Loadable(lazy(() => import('../pages/integrations/IntegrationLink')));
 const IntegrationLinked = Loadable(lazy(() => import('../pages/integrations/IntegrationLinked')));

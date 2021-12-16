@@ -5,6 +5,7 @@ function path(root, sublink) {
 }
 
 const ROOTS_AUTH = '/auth';
+const ROOTS_LINKING = '/linking';
 const ROOTS_DASHBOARD = '/dashboard';
 
 // ----------------------------------------------------------------------
@@ -17,6 +18,11 @@ export const PATH_AUTH = {
   registerUnprotected: path(ROOTS_AUTH, '/register-unprotected'),
   resetPassword: path(ROOTS_AUTH, '/reset-password'),
   verify: path(ROOTS_AUTH, '/verify')
+};
+
+export const PATH_LINKING = {
+  root: ROOTS_LINKING,
+  accountLinked: path(ROOTS_LINKING, '/bank')
 };
 
 export const PATH_DASHBOARD = {
