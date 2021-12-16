@@ -1,18 +1,7 @@
 import { filter } from 'lodash';
 import { useState, useEffect } from 'react';
 // material
-import {
-  Card,
-  Table,
-  Stack,
-  TableRow,
-  TableBody,
-  TableCell,
-  Container,
-  Typography,
-  TableContainer,
-  TablePagination
-} from '@mui/material';
+import { Card, Table, TableRow, TableBody, TableCell, Container, TableContainer, TablePagination } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { getAccountList } from '../../redux/slices/accounts';
@@ -29,7 +18,7 @@ import {
   AccountListHead,
   AccountListToolbar,
   AccountMoreMenu,
-  BankIcon
+  BankSummary
 } from '../../components/_dashboard/account-list';
 
 // ----------------------------------------------------------------------
@@ -139,21 +128,16 @@ export default function AccountList() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, status, banks, accountNumber, sortCode } = row;
+                    const { id, accountStatus, institutionId, accountNumber, sortCode } = row;
 
                     return (
                       <TableRow hover key={id} tabIndex={-1}>
                         <TableCell component="th" scope="row" padding="none">
-                          <Stack direction="row" alignItems="center" spacing={2}>
-                            <BankIcon icon={banks.bankId} />
-                            <Typography variant="subtitle2" noWrap>
-                              {banks.bankName}
-                            </Typography>
-                          </Stack>
+                          <BankSummary institutionId={institutionId} />
                         </TableCell>
                         <TableCell>{accountNumber}</TableCell>
                         <TableCell>{sortCode}</TableCell>
-                        <TableCell>{status}</TableCell>
+                        <TableCell>{accountStatus}</TableCell>
                         <TableCell align="right">
                           <AccountMoreMenu id={id} />
                         </TableCell>

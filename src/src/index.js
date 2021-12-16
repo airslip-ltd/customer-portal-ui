@@ -2,7 +2,7 @@
 import 'simplebar/src/simplebar.css';
 
 // mock api
-import './_apis_';
+// import './_apis_';
 
 import ReactDOM from 'react-dom';
 import { StrictMode } from 'react';

@@ -89,8 +89,6 @@ function AuthProvider({ children }) {
             baseURL: process.env.REACT_APP_AUTH_URL
           });
 
-          console.log(response.data.currentVersion);
-
           const { currentVersion } = response.data;
 
           dispatch({
@@ -162,7 +160,6 @@ function AuthProvider({ children }) {
   };
 
   const refresh = async () => {
-    console.log('refresh token');
     const currentToken = window.localStorage.getItem('refreshToken');
     const response = await axios({
       url: '/identity/refresh',

@@ -43,7 +43,6 @@ export function getMerchantList() {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      console.log('Getting');
       const response = await axios.get('/merchants/all');
       dispatch(slice.actions.getMerchantListSuccess(response.data.merchants));
     } catch (error) {

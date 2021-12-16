@@ -46,17 +46,17 @@ export default function AccountLink() {
           </Grid>
 
           {bankList.map((row) => {
-            const { bankId, bankName } = row;
+            const { id, tradingName } = row;
 
             return (
-              <Grid key={bankId} item xs={6} md={4} align="center">
+              <Grid key={id} item xs={6} md={4} align="center">
                 <Card sx={{ display: 'flex', alignItems: 'center' }} align="center">
-                  <CardActionArea component={RouterLink} to={`${PATH_DASHBOARD.accounts.root}/${bankId}/link`}>
+                  <CardActionArea component={RouterLink} to={`${PATH_DASHBOARD.accounts.root}/${id}/link`}>
                     <CardContent align="center">
                       <Stack style={{ margin: 'auto' }} spacing={2}>
-                        <BankImage icon={bankId} />
+                        <BankImage icon={id} />
                         <Typography noWrap variant="h6" sx={{ color: 'text.secondary' }}>
-                          {bankName}
+                          {tradingName}
                         </Typography>
                       </Stack>
                     </CardContent>
