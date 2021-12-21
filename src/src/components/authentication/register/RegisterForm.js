@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { useSnackbar } from 'notistack';
 import { useFormik, Form, FormikProvider } from 'formik';
@@ -9,25 +9,26 @@ import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 // material
 import { Stack, TextField, IconButton, InputAdornment, Alert } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-// hooks
-import useAuth from '../../../hooks/useAuth';
-import useIsMountedRef from '../../../hooks/useIsMountedRef';
+// redux
+import { useDispatch, useSelector } from '../../../redux/store';
+import { register } from '../../../redux/slices/business';
 //
 import { MIconButton } from '../../@material-extend';
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
-  const { register } = useAuth();
-  const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+  const { registerSuccess } = useSelector((state) => state.business);
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),
     lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
+    password: Yup.string().required('Password is required'),
+    businessName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Business name required')
   });
 
   const formik = useFormik({
@@ -35,32 +36,32 @@ export default function RegisterForm() {
       firstName: '',
       lastName: '',
       email: '',
-      password: ''
+      password: '',
+      businessName: ''
     },
     validationSchema: RegisterSchema,
-    onSubmit: async (values, { setErrors, setSubmitting }) => {
-      try {
-        await register(values.email, values.password, values.firstName, values.lastName);
-        enqueueSnackbar('Register success', {
-          variant: 'success',
-          action: (key) => (
-            <MIconButton size="small" onClick={() => closeSnackbar(key)}>
-              <Icon icon={closeFill} />
-            </MIconButton>
-          )
-        });
-        if (isMountedRef.current) {
-          setSubmitting(false);
-        }
-      } catch (error) {
-        console.error(error);
-        if (isMountedRef.current) {
-          setErrors({ afterSubmit: error.message });
-          setSubmitting(false);
-        }
-      }
+    onSubmit: async (values, { setSubmitting }) => {
+      dispatch(register(values.email, values.password, values.firstName, values.lastName, values.businessName));
+      setSubmitting(false);
     }
   });
+
+  useEffect(() => {
+    if (!registerSuccess) return;
+
+    try {
+      enqueueSnackbar('Register success', {
+        variant: 'success',
+        action: (key) => (
+          <MIconButton size="small" onClick={() => closeSnackbar(key)}>
+            <Icon icon={closeFill} />
+          </MIconButton>
+        )
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }, [registerSuccess, enqueueSnackbar, closeSnackbar]);
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
 
@@ -115,6 +116,15 @@ export default function RegisterForm() {
             }}
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}
+          />
+
+          <TextField
+            fullWidth
+            type="text"
+            label="Business name"
+            {...getFieldProps('businessName')}
+            error={Boolean(touched.businessName && errors.businessName)}
+            helperText={touched.businessName && errors.businessName}
           />
 
           <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>

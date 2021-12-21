@@ -20,8 +20,7 @@ export default function AccountLinking() {
   const { themeStretch } = useSettings();
   const { institutionId } = useParams();
   const dispatch = useDispatch();
-  const { bankList } = useSelector((state) => state.bank);
-  const { consentUrl } = useSelector((state) => state.bank);
+  const { bankList, consentUrl } = useSelector((state) => state.bank);
   const institution = bankList.find((bank) => bank.id === institutionId);
 
   useEffect(() => {
