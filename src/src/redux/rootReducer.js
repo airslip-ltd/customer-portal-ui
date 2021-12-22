@@ -6,7 +6,7 @@ import accountReducer from './slices/accounts';
 import bankReducer from './slices/banks';
 import providerReducer from './slices/providers';
 import integrationReducer from './slices/integrations';
-import businessReducer from './slices/business';
+import registerReducer from './slices/register';
 
 // ----------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   bank: bankReducer,
   provider: providerReducer,
   integration: integrationReducer,
-  business: businessReducer
+  register: registerReducer
 });
 
 export { rootPersistConfig, rootReducer };

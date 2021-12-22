@@ -6,17 +6,20 @@ import axios from '../../utils/axios';
 
 const initialState = {
   isLoading: false,
-  error: false,
-  business: {},
+  error: {},
+  registration: {},
   registerSuccess: false
 };
 
 const slice = createSlice({
-  name: 'business',
+  name: 'register',
   initialState,
   reducers: {
     // START LOADING
     startLoading(state) {
+      state.error = {};
+      state.registration = {};
+      state.registerSuccess = false;
       state.isLoading = true;
     },
 
@@ -28,7 +31,7 @@ const slice = createSlice({
 
     registerBusinessSuccess(state, action) {
       state.isLoading = false;
-      state.business = action.payload;
+      state.registration = action.payload;
       state.registerSuccess = true;
     }
   }
@@ -50,7 +53,7 @@ export function register(email, password, firstName, lastName, businessName) {
         lastName,
         businessName
       });
-      dispatch(slice.actions.registerBusinessSuccess(response.data.currentModel));
+      dispatch(slice.actions.registerBusinessSuccess(response.data.currentVersion));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
