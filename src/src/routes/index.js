@@ -115,6 +115,13 @@ export default function Router() {
             { path: 'link', element: <MerchantLink /> },
             { path: ':id/view', element: <MerchantView /> }
           ]
+        },
+        {
+          path: 'admin/partners',
+          children: [
+            { element: <Navigate to="/dashboard/admin/partners/list" replace /> },
+            { path: 'register', element: <PartnerRegister /> }
+          ]
         }
       ]
     },
@@ -155,3 +162,5 @@ const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 const MerchantView = Loadable(lazy(() => import('../pages/partner/MerchantView')));
 const MerchantList = Loadable(lazy(() => import('../pages/partner/MerchantList')));
 const MerchantLink = Loadable(lazy(() => import('../pages/partner/MerchantLink')));
+// Admin
+const PartnerRegister = Loadable(lazy(() => import('../pages/admin/partner/Register')));

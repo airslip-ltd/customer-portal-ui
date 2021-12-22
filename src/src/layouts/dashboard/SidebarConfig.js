@@ -62,6 +62,26 @@ const sidebarConfig = [
     ]
   },
 
+  // GENERAL - Admin
+  // ----------------------------------------------------------------------
+  {
+    subheader: 'general',
+    userTypes: ['Administrator'],
+    items: [
+      {
+        title: 'Home',
+        path: PATH_DASHBOARD.general.home,
+        icon: ICONS.dashboard
+      },
+      {
+        title: 'partners',
+        path: PATH_DASHBOARD.partner.merchants.root,
+        icon: ICONS.ecommerce,
+        children: [{ title: 'Register', path: PATH_DASHBOARD.admin.partners.register }]
+      }
+    ]
+  },
+
   // SERVICES
   // ----------------------------------------------------------------------
   {
