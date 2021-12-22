@@ -71,7 +71,7 @@ export default function PartnerRegisterForm() {
     }
   }, [registerSuccess, registration, refresh, navigate, enqueueSnackbar, closeSnackbar]);
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+  const { errors, touched, handleSubmit, getFieldProps } = formik;
 
   return (
     <FormikProvider value={formik}>
