@@ -40,11 +40,11 @@ export default function RegisterForm() {
 
   const formik = useFormik({
     initialValues: {
-      firstName: 'Amie',
-      lastName: 'Whitehouse',
-      email: 'awhitehouse@airslip.com',
-      password: 'Test1234!',
-      businessName: 'Amies Business'
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      businessName: ''
     },
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setSubmitting }) => {
