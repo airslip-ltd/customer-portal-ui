@@ -108,12 +108,12 @@ export default function Router() {
           ]
         },
         {
-          path: 'merchants',
+          path: 'relationship',
           children: [
-            { element: <Navigate to="/dashboard/merchants/list" replace /> },
-            { path: 'list', element: <MerchantList /> },
-            { path: 'link', element: <MerchantLink /> },
-            { path: ':id/view', element: <MerchantView /> }
+            { element: <Navigate to="/dashboard/relationsip/list" replace /> },
+            { path: 'list', element: <RelationshipList /> },
+            { path: 'create', element: <RelationshipCreate /> },
+            { path: ':id/view', element: <RelationshipView /> }
           ]
         },
         {
@@ -159,8 +159,8 @@ const IntegrationLink = Loadable(lazy(() => import('../pages/integrations/Integr
 const IntegrationLinked = Loadable(lazy(() => import('../pages/integrations/IntegrationLinked')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 // Merchants
-const MerchantView = Loadable(lazy(() => import('../pages/partner/MerchantView')));
-const MerchantList = Loadable(lazy(() => import('../pages/partner/MerchantList')));
-const MerchantLink = Loadable(lazy(() => import('../pages/partner/MerchantLink')));
+const RelationshipView = Loadable(lazy(() => import('../pages/relationship/View')));
+const RelationshipList = Loadable(lazy(() => import('../pages/relationship/List')));
+const RelationshipCreate = Loadable(lazy(() => import('../pages/relationship/Create')));
 // Admin
 const PartnerRegister = Loadable(lazy(() => import('../pages/admin/partner/Register')));

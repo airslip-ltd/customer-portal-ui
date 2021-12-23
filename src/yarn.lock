@@ -5130,7 +5130,7 @@ clone@^2.1.1:
 
 clsx@^1.1.0, clsx@^1.1.1:
   version "1.1.1"
-  resolved "https://registry.npmjs.org/clsx/-/clsx-1.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
 
 co@^4.6.0:
@@ -7415,6 +7415,11 @@ format@^0.2.0:
   version "0.2.2"
   resolved "https://registry.npmjs.org/format/-/format-0.2.2.tgz"
   integrity sha1-1hcBB+nv3E7TDJ3DkBbflCtctYs=
+
+formik-material-ui@4.0.0-alpha.2:
+  version "4.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/formik-material-ui/-/formik-material-ui-4.0.0-alpha.2.tgz#d081ea65d02979e87106ee773c3f22f1d7f64c1a"
+  integrity sha512-jGKCUMpexQiU3NN+vYx1MgsgJFLaHnOVJAdKSN7IThKtrWs7t7m6Ft7AyRl/ZDEztKo/sWunlGJvaQJbQBBH9A==
 
 formik@^2.2.9:
   version "2.2.9"
@@ -12490,7 +12495,7 @@ react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
 
 react-is@^17.0.0, react-is@^17.0.1, react-is@^17.0.2:
   version "17.0.2"
-  resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
 react-lifecycles-compat@^3.0.0:
@@ -12693,7 +12698,7 @@ react-spring@^9.2.4:
 
 react-transition-group@^4.4.2:
   version "4.4.2"
-  resolved "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.2.tgz"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.2.tgz#8b59a56f09ced7b55cbd53c36768b922890d5470"
   integrity sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg==
   dependencies:
     "@babel/runtime" "^7.5.5"

@@ -78,6 +78,7 @@
     "emoji-mart": "^3.0.0",
     "firebase": "^8.10.0",
     "formik": "^2.2.9",
+    "formik-material-ui": "4.0.0-alpha.2",
     "framer-motion": "^4.1.17",
     "highlight.js": "^11.2.0",
     "history": "^5.0.1",
