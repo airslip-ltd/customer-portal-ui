@@ -20,7 +20,7 @@ import {
 } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
-import { getMerchantList } from '../../../redux/slices/merchant';
+import { getBusinessList } from '../../../redux/slices/business';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // components
@@ -52,13 +52,13 @@ function applySortFilter(array, comparator) {
 
 export default function PartnerRiskFocus() {
   const dispatch = useDispatch();
-  const { merchantList } = useSelector((state) => state.merchant);
+  const { businessList } = useSelector((state) => state.business);
 
   useEffect(() => {
-    dispatch(getMerchantList());
+    dispatch(getBusinessList());
   }, [dispatch]);
 
-  const filteredList = applySortFilter(merchantList, (a, b) => descendingComparator(a, b, 'rating')).slice(0, 10);
+  const filteredList = applySortFilter(businessList, (a, b) => descendingComparator(a, b, 'rating')).slice(0, 10);
 
   return (
     <Card>
@@ -82,12 +82,7 @@ export default function PartnerRiskFocus() {
               {filteredList.map((row) => {
                 const { id, name, rating } = row;
                 return (
-                  <TableRow
-                    hover
-                    key={id}
-                    component={RouterLink}
-                    to={`${PATH_DASHBOARD.partner.merchants.root}/${id}/view`}
-                  >
+                  <TableRow hover key={id} component={RouterLink} to={`${PATH_DASHBOARD.relationship.root}/${id}/view`}>
                     <TableCell>{name}</TableCell>
                     <TableCell>
                       <MerchantRating score={rating} />
@@ -104,7 +99,7 @@ export default function PartnerRiskFocus() {
 
       <Box sx={{ p: 2, textAlign: 'right' }}>
         <Button
-          to={PATH_DASHBOARD.partner.merchants.list}
+          to={PATH_DASHBOARD.relationship.list}
           size="small"
           color="inherit"
           component={RouterLink}

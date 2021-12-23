@@ -7,25 +7,25 @@ import useSettings from '../../hooks/useSettings';
 // components
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import PartnerInviteForm from '../../components/_dashboard/partner/PartnerInviteForm';
+import { CreateForm } from '../../components/_dashboard/relationship';
 
 // ----------------------------------------------------------------------
 
-export default function MerchantLink() {
+export default function Create() {
   const { themeStretch } = useSettings();
 
   return (
-    <Page title="User: Create a new user | Minimal-UI">
+    <Page title="Relationship | Create | Airslip">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading="Invite a new Merchant"
+          heading="Create a New Relationship"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Merchants', href: PATH_DASHBOARD.partner.merchants.root },
-            { name: 'Invite' }
+            { name: 'Relationships', href: PATH_DASHBOARD.relationship.create },
+            { name: 'Create' }
           ]}
         />
-        <PartnerInviteForm />
+        <CreateForm />
       </Container>
     </Page>
   );

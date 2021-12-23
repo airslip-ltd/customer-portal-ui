@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getMerchantList } from '../../redux/slices/merchant';
+import { getBusinessList } from '../../redux/slices/business';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -80,7 +80,7 @@ export default function MerchantList() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
-    dispatch(getMerchantList());
+    dispatch(getBusinessList());
   }, [dispatch]);
 
   const handleRequestSort = (event, property) => {

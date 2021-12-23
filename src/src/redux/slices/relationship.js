@@ -6,19 +6,21 @@ import axios from '../../utils/axios';
 
 const initialState = {
   isLoading: false,
-  error: false,
-  merchants: [],
-  merchantList: [],
-  notifications: null
+  success: false,
+  error: {},
+  relationship: {}
 };
 
 const slice = createSlice({
-  name: 'merchant',
+  name: 'relationship',
   initialState,
   reducers: {
     // START LOADING
     startLoading(state) {
+      state.error = {};
+      state.relationship = {};
       state.isLoading = true;
+      state.success = false;
     },
 
     // HAS ERROR
@@ -27,9 +29,10 @@ const slice = createSlice({
       state.error = action.payload;
     },
 
-    getMerchantListSuccess(state, action) {
+    createSuccess(state, action) {
       state.isLoading = false;
-      state.merchantList = action.payload;
+      state.relationship = action.payload;
+      state.success = true;
     }
   }
 });
@@ -39,12 +42,19 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function getMerchantList() {
+export function create(email, phoneNumber, firstName, lastName, businessName, permission) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get('/merchants/all');
-      dispatch(slice.actions.getMerchantListSuccess(response.data.merchants));
+      const response = await axios.put('/relationship', {
+        email,
+        phoneNumber,
+        firstName,
+        lastName,
+        businessName,
+        permission
+      });
+      dispatch(slice.actions.createSuccess(response.data.currentVersion));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
