@@ -8,7 +8,8 @@ const initialState = {
   isLoading: false,
   success: false,
   error: {},
-  relationship: {}
+  relationship: {},
+  relationshipList: []
 };
 
 const slice = createSlice({
@@ -33,6 +34,12 @@ const slice = createSlice({
       state.isLoading = false;
       state.relationship = action.payload;
       state.success = true;
+    },
+
+    getRelationshipListSuccess(state, action) {
+      state.isLoading = false;
+      state.relationshipList = action.payload;
+      state.success = true;
     }
   }
 });
@@ -55,6 +62,18 @@ export function create(email, phoneNumber, firstName, lastName, businessName, pe
         permission
       });
       dispatch(slice.actions.createSuccess(response.data.currentVersion));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function getRelationshipList() {
+  return async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios.get('/relationship');
+      dispatch(slice.actions.getRelationshipListSuccess(response.data.results));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
