@@ -46,7 +46,7 @@ export function create(email, phoneNumber, firstName, lastName, businessName, pe
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.put('/relationship', {
+      const response = await axios.post('/relationship', {
         email,
         phoneNumber,
         firstName,

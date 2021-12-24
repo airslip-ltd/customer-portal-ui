@@ -8,7 +8,8 @@ const initialState = {
   isLoading: false,
   error: {},
   registration: {},
-  registerSuccess: false
+  registerSuccess: false,
+  referral: {}
 };
 
 const slice = createSlice({
@@ -33,6 +34,12 @@ const slice = createSlice({
       state.isLoading = false;
       state.registration = action.payload;
       state.registerSuccess = true;
+    },
+
+    referralSuccess(state, action) {
+      state.isLoading = false;
+      state.referral = action.payload;
+      state.success = true;
     }
   }
 });
@@ -42,18 +49,31 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function register(email, password, firstName, lastName, businessName) {
+export function register(email, password, firstName, lastName, businessName, referralId) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.put('/business', {
+      const response = await axios.post('/business', {
         email,
         password,
         firstName,
         lastName,
-        businessName
+        businessName,
+        referralId
       });
       dispatch(slice.actions.registerBusinessSuccess(response.data.currentVersion));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function loadReferral(referralId) {
+  return async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios.get(`/relationship/referral/${encodeURIComponent(referralId)}`);
+      dispatch(slice.actions.referralSuccess(response.data.currentVersion));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

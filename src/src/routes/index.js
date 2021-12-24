@@ -65,6 +65,20 @@ export default function Router() {
     },
 
     {
+      path: 'referral',
+      children: [
+        {
+          path: ':referralId',
+          element: (
+            <GuestGuard>
+              <Register />
+            </GuestGuard>
+          )
+        }
+      ]
+    },
+
+    {
       path: 'linking',
       children: [
         {

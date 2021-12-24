@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { useSnackbar } from 'notistack';
 import { useFormik, Form, FormikProvider } from 'formik';
@@ -12,7 +12,7 @@ import { Stack, TextField, IconButton, InputAdornment, Container, Grid } from '@
 import { LoadingButton } from '@mui/lab';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
-import { register } from '../../../redux/slices/register';
+import { register, loadReferral } from '../../../redux/slices/register';
 //
 import { MIconButton } from '../../@material-extend';
 import { setSession } from '../../../utils/jwt';
@@ -27,7 +27,8 @@ export default function RegisterForm() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  const { registerSuccess, error, registration } = useSelector((state) => state.register);
+  const { referralId } = useParams();
+  const { registerSuccess, error, registration, referral, isLoading } = useSelector((state) => state.register);
   const navigate = useNavigate();
 
   const RegisterSchema = Yup.object().shape({
@@ -44,14 +45,35 @@ export default function RegisterForm() {
       lastName: '',
       email: '',
       password: '',
-      businessName: ''
+      businessName: '',
+      referralId: ''
     },
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      dispatch(register(values.email, values.password, values.firstName, values.lastName, values.businessName));
+      dispatch(
+        register(values.email, values.password, values.firstName, values.lastName, values.businessName, referralId)
+      );
       setSubmitting(false);
     }
   });
+
+  const { errors, touched, handleSubmit, getFieldProps, setFieldValue } = formik;
+
+  useEffect(() => {
+    if (!referralId) return;
+    dispatch(loadReferral(referralId));
+  }, [dispatch, referralId]);
+
+  useEffect(() => {
+    if (!referral) return;
+    async function setContent() {
+      await setFieldValue('firstName', referral.firstName);
+      await setFieldValue('lastName', referral.lastName);
+      await setFieldValue('businessName', referral.businessName);
+      await setFieldValue('email', referral.email);
+    }
+    setContent();
+  }, [referral, setFieldValue]);
 
   useEffect(() => {
     if (!registerSuccess) return;
@@ -75,8 +97,6 @@ export default function RegisterForm() {
       console.error(error);
     }
   }, [registerSuccess, registration, refresh, navigate, enqueueSnackbar, closeSnackbar]);
-
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
 
   return (
     <>
@@ -153,7 +173,7 @@ export default function RegisterForm() {
                 helperText={touched.businessName && errors.businessName}
               />
 
-              <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+              <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isLoading}>
                 Register
               </LoadingButton>
             </Stack>
