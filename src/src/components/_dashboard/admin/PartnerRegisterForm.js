@@ -47,8 +47,6 @@ export default function PartnerRegisterForm() {
     },
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      console.log('1');
-
       dispatch(register(values.email, values.password, values.firstName, values.lastName, values.partnerName));
       setSubmitting(false);
     }
