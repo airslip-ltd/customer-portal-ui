@@ -37,7 +37,7 @@ export default function AccountMoreMenu({ id }) {
       >
         <MenuItem
           component={RouterLink}
-          to={`${PATH_DASHBOARD.partner.merchants.root}/${id}/view`}
+          to={`${PATH_DASHBOARD.accounts.root}/${id}/view`}
           sx={{ color: 'text.secondary' }}
         >
           <ListItemIcon>
