@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import ReactApexChart from 'react-apexcharts';
 import trendingUpFill from '@iconify/icons-eva/trending-up-fill';
@@ -5,6 +6,10 @@ import trendingDownFill from '@iconify/icons-eva/trending-down-fill';
 // material
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Card, Typography, Stack } from '@mui/material';
+// redux
+import { useDispatch, useSelector } from '../../../redux/store';
+import { getCurrentBalance } from '../../../redux/slices/analytics';
+
 // utils
 import { fNumber, fPercent } from '../../../utils/formatNumber';
 
@@ -23,12 +28,27 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const PERCENT = -0.06;
-const TOTAL_DOWNLOAD = 678560;
-const CHART_DATA = [{ data: [8, 9, 31, 8, 16, 37, 8, 33, 46, 31] }];
-
 export default function MerchantInterestCharges() {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const { currentBalance } = useSelector((state) => state.analytics);
+  const [chartData, setChartData] = useState([5, 5, 5, 5, 5, 5, 5, 5, 5, 5]);
+  const CHART_DATA = [
+    {
+      data: chartData
+    }
+  ];
+
+  useEffect(() => {
+    dispatch(getCurrentBalance());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!currentBalance.metrics) return;
+    const newData = currentBalance.metrics.map((metric) => metric.balance);
+    console.log(newData);
+    setChartData(newData);
+  }, [currentBalance, setChartData]);
 
   const chartOptions = {
     colors: [theme.palette.chart.red[0]],
@@ -55,24 +75,24 @@ export default function MerchantInterestCharges() {
         <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2, mb: 1 }}>
           <IconWrapperStyle
             sx={{
-              ...(PERCENT < 0 && {
+              ...(currentBalance.movement < 0 && {
                 color: 'error.main',
                 bgcolor: alpha(theme.palette.error.main, 0.16)
               })
             }}
           >
-            <Icon width={16} height={16} icon={PERCENT >= 0 ? trendingUpFill : trendingDownFill} />
+            <Icon width={16} height={16} icon={currentBalance.movement >= 0 ? trendingUpFill : trendingDownFill} />
           </IconWrapperStyle>
           <Typography component="span" variant="subtitle2">
-            {PERCENT > 0 && '+'}
-            {fPercent(PERCENT)}
+            {currentBalance.movement > 0 && '+'}
+            {fPercent(currentBalance.movement)}
           </Typography>
         </Stack>
 
-        <Typography variant="h3">&pound;{fNumber(TOTAL_DOWNLOAD)}</Typography>
+        <Typography variant="h3">&pound;{fNumber(currentBalance.balance)}</Typography>
       </Box>
 
-      <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} width={60} height={36} />
+      {chartData && <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} width={60} height={36} />}
     </Card>
   );
 }
