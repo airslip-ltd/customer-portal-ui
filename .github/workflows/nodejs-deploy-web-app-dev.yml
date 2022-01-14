@@ -17,6 +17,7 @@ jobs:
       NODE_VERSION: '14.x'
       TERRAFORM_MODULE_VERSION: 1.2.2
       REACT_APP_API_URL: https://dev-app.airslip.com/customer_portal/v1/
+      REACT_APP_ANALYTICS_URL: https://dev-app.airslip.com/analytics/v1/
       REACT_APP_AUTH_URL: https://dev-auth.airslip.com/v1/
       TESTIM_TEST_PLAN: Development - Customer Portal - Smoke Tests
     steps:
@@ -60,6 +61,7 @@ jobs:
     - name: npm install, build, and test
       env:
         REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
+        REACT_APP_ANALYTICS_URL: ${{ env.REACT_APP_ANALYTICS_URL }}
         REACT_APP_AUTH_URL: ${{ env.REACT_APP_AUTH_URL }}
       run: |
         cd ${{ env.PUBLISH_PATH }}

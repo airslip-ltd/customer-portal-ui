@@ -9,6 +9,7 @@ import integrationReducer from './slices/integrations';
 import registerReducer from './slices/register';
 import partnerReducer from './slices/partner';
 import relationshipReducer from './slices/relationship';
+import analyticsReducer from './slices/analytics';
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
   integration: integrationReducer,
   register: registerReducer,
   partner: partnerReducer,
-  relationship: relationshipReducer
+  relationship: relationshipReducer,
+  analytics: analyticsReducer
 });
 
 export { rootPersistConfig, rootReducer };
