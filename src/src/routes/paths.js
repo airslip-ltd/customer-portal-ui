@@ -27,7 +27,8 @@ export const PATH_LINKING = {
 
 export const PATH_INTEGRATE = {
   root: ROOTS_INTEGRATE,
-  complete: path(ROOTS_INTEGRATE, '/complete')
+  complete: path(ROOTS_INTEGRATE, '/complete'),
+  authorise: path(ROOTS_INTEGRATE, '/authorise')
 };
 
 export const PATH_DASHBOARD = {

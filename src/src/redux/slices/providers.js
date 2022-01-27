@@ -85,8 +85,9 @@ export function requestProvider(provider, integration, search) {
     dispatch(slice.actions.startLoading());
     try {
       const callbackUrl = `${window.location.protocol}//${window.location.hostname}${PATH_INTEGRATE.complete}/${provider}/${integration}`;
+      console.log(callbackUrl);
       const response = await axios.get(
-        `/providers/${provider}/${integration}/authorise${search}&callbackUrl=${callbackUrl}`
+        `/providers/${provider}/${integration}/authorise${search || '?'}&callbackUrl=${callbackUrl}`
       );
       dispatch(slice.actions.requestProviderSuccess(response.data.authorisationUrl));
     } catch (error) {
