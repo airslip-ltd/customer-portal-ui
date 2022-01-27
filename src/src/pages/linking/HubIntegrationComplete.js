@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import queryString from 'query-string';
 // material
 import { Container, Grid } from '@mui/material';
 // hooks
@@ -8,7 +7,7 @@ import useAuth from '../../hooks/useAuth';
 import useSettings from '../../hooks/useSettings';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getBankList, authoriseProvider } from '../../redux/slices/providers';
+import { getProviderList, authoriseProvider } from '../../redux/slices/providers';
 // components
 import Page from '../../components/Page';
 import { AppWelcome } from '../../components/_dashboard/general-app';
@@ -16,22 +15,21 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 
 // ----------------------------------------------------------------------
 
-export default function GeneralApp() {
+export default function HubIntegrationComplete() {
   const { themeStretch } = useSettings();
   const { user } = useAuth();
   const { search } = useLocation();
   const dispatch = useDispatch();
   const { authoriseSuccess } = useSelector((state) => state.provider);
   const navigate = useNavigate();
-  const { provider } = useParams();
-  const { institution } = queryString.parse(search);
+  const { provider, integration } = useParams();
 
   useEffect(() => {
-    if (!institution) return;
+    if (!integration) return;
     if (!provider) return;
-    dispatch(getBankList());
-    dispatch(authoriseProvider(provider, institution, search));
-  }, [dispatch, search, provider, institution]);
+    dispatch(getProviderList());
+    dispatch(authoriseProvider(provider, integration, search));
+  }, [dispatch, search, provider, integration]);
 
   useEffect(() => {
     if (authoriseSuccess) {
