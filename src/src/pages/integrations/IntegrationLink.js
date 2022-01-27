@@ -45,15 +45,15 @@ export default function IntegrationLink() {
           </Grid>
 
           {providerList.map((row) => {
-            const { provider } = row;
+            const { posProvider } = row;
 
             return (
-              <Grid key={provider} item xs={6} md={4} align="center">
+              <Grid key={posProvider} item xs={6} md={4} align="center">
                 <Card sx={{ display: 'flex', alignItems: 'center' }} align="center">
-                  <CardActionArea component={RouterLink} to={`${PATH_DASHBOARD.integrations.root}/${provider}/link`}>
+                  <CardActionArea component={RouterLink} to={`${PATH_DASHBOARD.integrations.root}/${posProvider}/link`}>
                     <CardContent align="center">
                       <Stack style={{ margin: 'auto' }} spacing={2}>
-                        <ProviderImage icon={provider} />
+                        <ProviderImage icon={posProvider} />
                       </Stack>
                     </CardContent>
                   </CardActionArea>

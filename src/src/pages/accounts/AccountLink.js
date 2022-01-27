@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Card, Container, Grid, Stack, Typography, CardActionArea, CardContent } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getBankList } from '../../redux/slices/banks';
+import { getBankList } from '../../redux/slices/providers';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -19,7 +19,7 @@ import { BankImage } from '../../components/_dashboard/account-list';
 export default function AccountLink() {
   const { themeStretch } = useSettings();
   const dispatch = useDispatch();
-  const { bankList } = useSelector((state) => state.bank);
+  const { bankList } = useSelector((state) => state.provider);
 
   useEffect(() => {
     dispatch(getBankList());

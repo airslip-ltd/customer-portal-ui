@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Stack, Typography } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
-import { getBankList } from '../../../redux/slices/banks';
+import { getBankList } from '../../../redux/slices/providers';
 // components
 import BankIcon from './BankIcon';
 
@@ -14,7 +14,7 @@ BankSummary.propTypes = {
 
 export default function BankSummary({ institutionId }) {
   const dispatch = useDispatch();
-  const { bankList } = useSelector((state) => state.bank);
+  const { bankList } = useSelector((state) => state.provider);
   const institution = bankList.find((bank) => bank.id === institutionId);
 
   useEffect(() => {

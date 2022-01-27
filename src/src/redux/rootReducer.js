@@ -3,7 +3,6 @@ import storage from 'redux-persist/lib/storage';
 // slices
 import businessReducer from './slices/business';
 import accountReducer from './slices/accounts';
-import bankReducer from './slices/banks';
 import providerReducer from './slices/providers';
 import integrationReducer from './slices/integrations';
 import registerReducer from './slices/register';
@@ -23,7 +22,6 @@ const rootPersistConfig = {
 const rootReducer = combineReducers({
   account: accountReducer,
   business: businessReducer,
-  bank: bankReducer,
   provider: providerReducer,
   integration: integrationReducer,
   register: registerReducer,

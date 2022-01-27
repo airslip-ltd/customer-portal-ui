@@ -82,10 +82,36 @@ export default function Router() {
       path: 'linking',
       children: [
         {
-          path: 'bank',
+          path: 'provider/:provider',
           element: (
             <AuthGuard>
               <BankAccount />
+            </AuthGuard>
+          )
+        }
+      ]
+    },
+    {
+      path: 'integrate',
+      children: [
+        {
+          path: 'authorise/:provider/:integration',
+          element: (
+            <AuthGuard>
+              <HubIntegrationAuthorise />
+            </AuthGuard>
+          )
+        }
+      ]
+    },
+    {
+      path: 'integrate',
+      children: [
+        {
+          path: 'complete/:provider/:integration',
+          element: (
+            <AuthGuard>
+              <HubIntegrationComplete />
             </AuthGuard>
           )
         }
@@ -163,6 +189,8 @@ const ResetPassword = Loadable(lazy(() => import('../pages/authentication/ResetP
 const VerifyCode = Loadable(lazy(() => import('../pages/authentication/VerifyCode')));
 // Linking
 const BankAccount = Loadable(lazy(() => import('../pages/linking/BankAccount')));
+const HubIntegrationAuthorise = Loadable(lazy(() => import('../pages/linking/HubIntegrationAuthorise')));
+const HubIntegrationComplete = Loadable(lazy(() => import('../pages/linking/HubIntegrationComplete')));
 // Dashboard
 const Home = Loadable(lazy(() => import('../pages/dashboard/Home')));
 const AccountList = Loadable(lazy(() => import('../pages/accounts/AccountList')));

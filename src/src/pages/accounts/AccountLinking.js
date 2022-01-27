@@ -8,7 +8,7 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 import useSettings from '../../hooks/useSettings';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getBankList, requestConsent } from '../../redux/slices/banks';
+import { getBankList, requestProvider } from '../../redux/slices/providers';
 // components
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
@@ -20,12 +20,12 @@ export default function AccountLinking() {
   const { themeStretch } = useSettings();
   const { institutionId } = useParams();
   const dispatch = useDispatch();
-  const { bankList, consentUrl } = useSelector((state) => state.bank);
+  const { bankList, authUrl } = useSelector((state) => state.provider);
   const institution = bankList.find((bank) => bank.id === institutionId);
 
   useEffect(() => {
     dispatch(getBankList());
-    dispatch(requestConsent('Yapily', institutionId));
+    dispatch(requestProvider('yapily', institutionId));
   }, [dispatch, institutionId]);
 
   return (
@@ -49,7 +49,7 @@ export default function AccountLinking() {
                 <Typography variant="subtitle2" noWrap>
                   Select the option below to link your account.
                 </Typography>
-                <Link href={consentUrl} underline="none" rel="noopener">
+                <Link href={authUrl} underline="none" rel="noopener">
                   Authorise
                 </Link>
               </Stack>

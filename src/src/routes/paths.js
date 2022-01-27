@@ -6,6 +6,7 @@ function path(root, sublink) {
 
 const ROOTS_AUTH = '/auth';
 const ROOTS_LINKING = '/linking';
+const ROOTS_INTEGRATE = '/integrate';
 const ROOTS_DASHBOARD = '/dashboard';
 
 // ----------------------------------------------------------------------
@@ -21,8 +22,12 @@ export const PATH_AUTH = {
 };
 
 export const PATH_LINKING = {
-  root: ROOTS_LINKING,
-  accountLinked: path(ROOTS_LINKING, '/bank')
+  root: ROOTS_LINKING
+};
+
+export const PATH_INTEGRATE = {
+  root: ROOTS_INTEGRATE,
+  complete: path(ROOTS_INTEGRATE, '/complete')
 };
 
 export const PATH_DASHBOARD = {
