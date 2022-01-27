@@ -6,7 +6,7 @@ import { Card, Container, Grid, Stack, Typography, CardActionArea, CardContent }
 import { useDispatch, useSelector } from '../../redux/store';
 import { getBankList } from '../../redux/slices/providers';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD, PATH_INTEGRATE } from '../../routes/paths';
 // hooks
 import useSettings from '../../hooks/useSettings';
 // components
@@ -47,11 +47,10 @@ export default function AccountLink() {
 
           {bankList.map((row) => {
             const { id, tradingName } = row;
-
             return (
               <Grid key={id} item xs={6} md={4} align="center">
                 <Card sx={{ display: 'flex', alignItems: 'center' }} align="center">
-                  <CardActionArea component={RouterLink} to={`${PATH_DASHBOARD.accounts.root}/${id}/link`}>
+                  <CardActionArea component={RouterLink} to={`${PATH_INTEGRATE.authorise}/yapily/${id}`}>
                     <CardContent align="center">
                       <Stack style={{ margin: 'auto' }} spacing={2}>
                         <BankImage icon={id} />

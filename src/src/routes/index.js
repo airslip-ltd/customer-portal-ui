@@ -134,8 +134,7 @@ export default function Router() {
           children: [
             { element: <Navigate to="/dashboard/accounts/list" replace /> },
             { path: 'list', element: <AccountList /> },
-            { path: 'link', element: <AccountLink /> },
-            { path: ':institutionId/link', element: <AccountLinking /> }
+            { path: 'link', element: <AccountLink /> }
           ]
         },
         {
@@ -195,7 +194,6 @@ const HubIntegrationComplete = Loadable(lazy(() => import('../pages/linking/HubI
 const Home = Loadable(lazy(() => import('../pages/dashboard/Home')));
 const AccountList = Loadable(lazy(() => import('../pages/accounts/AccountList')));
 const AccountLink = Loadable(lazy(() => import('../pages/accounts/AccountLink')));
-const AccountLinking = Loadable(lazy(() => import('../pages/accounts/AccountLinking')));
 const IntegrationList = Loadable(lazy(() => import('../pages/integrations/IntegrationList')));
 const IntegrationLink = Loadable(lazy(() => import('../pages/integrations/IntegrationLink')));
 const IntegrationLinked = Loadable(lazy(() => import('../pages/integrations/IntegrationLinked')));

@@ -26,6 +26,7 @@ export default function HubIntegrationAuthorise() {
   useEffect(() => {
     if (authUrl) {
       setTimeout(() => {
+        console.log(authUrl);
         window.location.href = authUrl;
       }, 2000);
     }
