@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import ReactApexChart from 'react-apexcharts';
 import trendingUpFill from '@iconify/icons-eva/trending-up-fill';
@@ -5,6 +6,9 @@ import trendingDownFill from '@iconify/icons-eva/trending-down-fill';
 // material
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Card, Typography, Stack } from '@mui/material';
+// redux
+import { useDispatch, useSelector } from '../../../redux/store';
+import { getSalesShapshot } from '../../../redux/slices/analytics';
 // utils
 import { fNumber, fPercent } from '../../../utils/formatNumber';
 
@@ -23,12 +27,27 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const PERCENT = 2.6;
-const TOTAL_USER = 1876505;
-const CHART_DATA = [{ data: [20, 41, 63, 33, 28, 35, 50, 46, 11, 26] }];
-
 export default function MerchantRevenue() {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const { salesStats } = useSelector((state) => state.analytics);
+  const [chartData, setChartData] = useState([5, 5, 5, 5, 5, 5, 5, 5, 5, 5]);
+  const CHART_DATA = [
+    {
+      data: chartData
+    }
+  ];
+
+  useEffect(() => {
+    dispatch(getSalesShapshot());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!salesStats.metrics) return;
+    const newData = salesStats.metrics.map((metric) => metric.balance);
+    console.log(newData);
+    setChartData(newData);
+  }, [salesStats, setChartData]);
 
   const chartOptions = {
     colors: [theme.palette.primary.main],
@@ -50,25 +69,25 @@ export default function MerchantRevenue() {
   return (
     <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
       <Box sx={{ flexGrow: 1 }}>
-        <Typography variant="subtitle2">Revenue (Last 30 days)</Typography>
+        <Typography variant="subtitle2">Revenue (Last {salesStats.dayRange} days)</Typography>
         <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2, mb: 1 }}>
           <IconWrapperStyle
             sx={{
-              ...(PERCENT < 0 && {
+              ...(salesStats.movement < 0 && {
                 color: 'error.main',
                 bgcolor: alpha(theme.palette.error.main, 0.16)
               })
             }}
           >
-            <Icon width={16} height={16} icon={PERCENT >= 0 ? trendingUpFill : trendingDownFill} />
+            <Icon width={16} height={16} icon={salesStats.movement >= 0 ? trendingUpFill : trendingDownFill} />
           </IconWrapperStyle>
           <Typography component="span" variant="subtitle2">
-            {PERCENT > 0 && '+'}
-            {fPercent(PERCENT)}
+            {salesStats.movement > 0 && '+'}
+            {fPercent(salesStats.movement)}
           </Typography>
         </Stack>
 
-        <Typography variant="h3">&pound;{fNumber(TOTAL_USER)}</Typography>
+        <Typography variant="h3">&pound;{fNumber(salesStats.balance)}</Typography>
       </Box>
 
       <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} width={60} height={36} />
