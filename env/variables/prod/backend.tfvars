@@ -1,4 +1,4 @@
-resource_group_name  = "prod-tf-states"
+resource_group_name  = "airslip-states-production"
 storage_account_name = "airslipprodtfstates"
-container_name       = "matching-states"
-key                  = "customer-portal-ui-prod.terraform.tfstate"
+container_name       = "core-apps"
+key                  = "prod-customer-portal-ui.terraform.tfstate"
