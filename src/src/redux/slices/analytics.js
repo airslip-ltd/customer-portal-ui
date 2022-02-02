@@ -9,7 +9,8 @@ const initialState = {
   error: false,
   currentBalance: {},
   salesStats: {},
-  refundStats: {}
+  refundStats: {},
+  revenueStats: {}
 };
 
 const slice = createSlice({
@@ -40,6 +41,11 @@ const slice = createSlice({
     storeRefundSnapshot(state, action) {
       state.isLoading = false;
       state.refundStats = action.payload;
+    },
+
+    storeRevenue(state, action) {
+      state.isLoading = false;
+      state.revenueStats = action.payload;
     }
   }
 });
@@ -91,6 +97,22 @@ export function getRefundShapshot(withRange) {
         baseURL: process.env.REACT_APP_ANALYTICS_URL
       });
       dispatch(slice.actions.storeRefundSnapshot(response.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function getRevenueByYear(year) {
+  return async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios({
+        url: `/snapshot/revenue?year=${year}`,
+        method: 'get',
+        baseURL: process.env.REACT_APP_ANALYTICS_URL
+      });
+      dispatch(slice.actions.storeRevenue(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
