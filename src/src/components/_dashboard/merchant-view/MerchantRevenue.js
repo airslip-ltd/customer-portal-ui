@@ -5,7 +5,8 @@ import trendingUpFill from '@iconify/icons-eva/trending-up-fill';
 import trendingDownFill from '@iconify/icons-eva/trending-down-fill';
 // material
 import { alpha, useTheme, styled } from '@mui/material/styles';
-import { Box, Card, Typography, Stack } from '@mui/material';
+import { Box, Grid, Card, Typography, Stack } from '@mui/material';
+import LoadingProgress from '../../LoadingProgress';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
 import { getSalesShapshot } from '../../../redux/slices/analytics';
@@ -45,7 +46,6 @@ export default function MerchantRevenue() {
   useEffect(() => {
     if (!salesStats.metrics) return;
     const newData = salesStats.metrics.map((metric) => metric.balance);
-    console.log(newData);
     setChartData(newData);
   }, [salesStats, setChartData]);
 
@@ -65,6 +65,21 @@ export default function MerchantRevenue() {
       marker: { show: false }
     }
   };
+
+  if (!salesStats.dayRange) {
+    return (
+      <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
+        <Grid container>
+          <Grid item xs={12} md={8}>
+            <Typography variant="subtitle2">Revenue</Typography>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <LoadingProgress />
+          </Grid>
+        </Grid>
+      </Card>
+    );
+  }
 
   return (
     <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>

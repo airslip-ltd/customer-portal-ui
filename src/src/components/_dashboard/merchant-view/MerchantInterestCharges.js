@@ -5,13 +5,14 @@ import trendingUpFill from '@iconify/icons-eva/trending-up-fill';
 import trendingDownFill from '@iconify/icons-eva/trending-down-fill';
 // material
 import { alpha, useTheme, styled } from '@mui/material/styles';
-import { Box, Card, Typography, Stack } from '@mui/material';
+import { Box, Grid, Card, Typography, Stack } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
 import { getCurrentBalance } from '../../../redux/slices/analytics';
 
 // utils
 import { fNumber, fPercent } from '../../../utils/formatNumber';
+import LoadingProgress from '../../LoadingProgress';
 
 // ----------------------------------------------------------------------
 
@@ -46,7 +47,6 @@ export default function MerchantInterestCharges() {
   useEffect(() => {
     if (!currentBalance.metrics) return;
     const newData = currentBalance.metrics.map((metric) => metric.balance);
-    console.log(newData);
     setChartData(newData);
   }, [currentBalance, setChartData]);
 
@@ -66,6 +66,21 @@ export default function MerchantInterestCharges() {
       marker: { show: false }
     }
   };
+
+  if (!currentBalance.metrics) {
+    return (
+      <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
+        <Grid container>
+          <Grid item xs={12} md={8}>
+            <Typography variant="subtitle2">Cash in bank</Typography>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <LoadingProgress />
+          </Grid>
+        </Grid>
+      </Card>
+    );
+  }
 
   return (
     <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
