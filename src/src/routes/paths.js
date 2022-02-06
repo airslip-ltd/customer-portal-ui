@@ -71,5 +71,9 @@ export const PATH_DASHBOARD = {
       list: path(ROOTS_DASHBOARD, '/admin/partners/list'),
       register: path(ROOTS_DASHBOARD, '/admin/partners/register')
     }
+  },
+  analytics: {
+    root: path(ROOTS_DASHBOARD, '/analytics/balances'),
+    accountBalances: path(ROOTS_DASHBOARD, '/analytics/balances')
   }
 };

@@ -3,12 +3,15 @@ import { Icon } from '@iconify/react';
 import ReactApexChart from 'react-apexcharts';
 import trendingUpFill from '@iconify/icons-eva/trending-up-fill';
 import trendingDownFill from '@iconify/icons-eva/trending-down-fill';
+import { Link as RouterLink } from 'react-router-dom';
 // material
 import { alpha, useTheme, styled } from '@mui/material/styles';
-import { Box, Grid, Card, Typography, Stack } from '@mui/material';
+import { Box, Grid, Card, Typography, Stack, CardActionArea } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
 import { getCurrentBalance } from '../../../redux/slices/analytics';
+// routes
+import { PATH_DASHBOARD } from '../../../routes/paths';
 
 // utils
 import { fNumber, fPercent } from '../../../utils/formatNumber';
@@ -29,7 +32,7 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function MerchantInterestCharges() {
+export default function MerchantBalance() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { currentBalance } = useSelector((state) => state.analytics);
@@ -83,31 +86,37 @@ export default function MerchantInterestCharges() {
   }
 
   return (
-    <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
-      <Box sx={{ flexGrow: 1 }}>
-        <Typography variant="subtitle2">Cash in bank</Typography>
+    <Card>
+      <CardActionArea
+        component={RouterLink}
+        to={PATH_DASHBOARD.analytics.accountBalances}
+        sx={{ display: 'flex', alignItems: 'center', p: 3 }}
+      >
+        <Box sx={{ flexGrow: 1 }}>
+          <Typography variant="subtitle2">Cash in bank</Typography>
 
-        <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2, mb: 1 }}>
-          <IconWrapperStyle
-            sx={{
-              ...(currentBalance.movement < 0 && {
-                color: 'error.main',
-                bgcolor: alpha(theme.palette.error.main, 0.16)
-              })
-            }}
-          >
-            <Icon width={16} height={16} icon={currentBalance.movement >= 0 ? trendingUpFill : trendingDownFill} />
-          </IconWrapperStyle>
-          <Typography component="span" variant="subtitle2">
-            {currentBalance.movement > 0 && '+'}
-            {fPercent(currentBalance.movement)}
-          </Typography>
-        </Stack>
+          <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2, mb: 1 }}>
+            <IconWrapperStyle
+              sx={{
+                ...(currentBalance.movement < 0 && {
+                  color: 'error.main',
+                  bgcolor: alpha(theme.palette.error.main, 0.16)
+                })
+              }}
+            >
+              <Icon width={16} height={16} icon={currentBalance.movement >= 0 ? trendingUpFill : trendingDownFill} />
+            </IconWrapperStyle>
+            <Typography component="span" variant="subtitle2">
+              {currentBalance.movement > 0 && '+'}
+              {fPercent(currentBalance.movement)}
+            </Typography>
+          </Stack>
 
-        <Typography variant="h3">&pound;{fNumber(currentBalance.balance)}</Typography>
-      </Box>
+          <Typography variant="h3">&pound;{fNumber(currentBalance.balance)}</Typography>
+        </Box>
 
-      {chartData && <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} width={60} height={36} />}
+        {chartData && <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} width={60} height={36} />}
+      </CardActionArea>
     </Card>
   );
 }

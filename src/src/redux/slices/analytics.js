@@ -66,7 +66,7 @@ export function getCurrentBalance() {
     dispatch(slice.actions.startLoading());
     try {
       const response = await axios({
-        url: '/balance',
+        url: '/snapshot/CurrentBalance',
         method: 'get',
         baseURL: process.env.REACT_APP_ANALYTICS_URL
       });
