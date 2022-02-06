@@ -50,7 +50,7 @@ export default function MerchantRefunds() {
   }, [refundStats, setChartData]);
 
   const chartOptions = {
-    colors: [theme.palette.common.white],
+    colors: [theme.palette.secondary.main],
     chart: { sparkline: { enabled: true } },
     plotOptions: { bar: { columnWidth: '68%', borderRadius: 2 } },
     labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
