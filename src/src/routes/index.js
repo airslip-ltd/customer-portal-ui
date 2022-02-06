@@ -161,6 +161,13 @@ export default function Router() {
             { element: <Navigate to="/dashboard/admin/partners/list" replace /> },
             { path: 'register', element: <PartnerRegister /> }
           ]
+        },
+        {
+          path: 'analytics',
+          children: [
+            { element: <Navigate to="/dashboard/analytics/balances" replace /> },
+            { path: 'balances', element: <AccountBalances /> }
+          ]
         }
       ]
     },
@@ -204,3 +211,5 @@ const RelationshipList = Loadable(lazy(() => import('../pages/relationship/List'
 const RelationshipCreate = Loadable(lazy(() => import('../pages/relationship/Create')));
 // Admin
 const PartnerRegister = Loadable(lazy(() => import('../pages/admin/partner/Register')));
+// Analytics
+const AccountBalances = Loadable(lazy(() => import('../pages/analytics/AccountBalances')));
