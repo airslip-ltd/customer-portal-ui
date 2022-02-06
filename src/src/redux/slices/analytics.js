@@ -10,7 +10,8 @@ const initialState = {
   currentBalance: {},
   salesStats: {},
   refundStats: {},
-  revenueStats: {}
+  revenueStats: {},
+  cashflowStats: {}
 };
 
 const slice = createSlice({
@@ -46,6 +47,11 @@ const slice = createSlice({
     storeRevenue(state, action) {
       state.isLoading = false;
       state.revenueStats = action.payload;
+    },
+
+    storeCashflow(state, action) {
+      state.isLoading = false;
+      state.cashflowStats = action.payload;
     }
   }
 });
@@ -113,6 +119,22 @@ export function getRevenueByYear(year) {
         baseURL: process.env.REACT_APP_ANALYTICS_URL
       });
       dispatch(slice.actions.storeRevenue(response.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function getCashflowByYear(year) {
+  return async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios({
+        url: `/snapshot/cashflow?year=${year}`,
+        method: 'get',
+        baseURL: process.env.REACT_APP_ANALYTICS_URL
+      });
+      dispatch(slice.actions.storeCashflow(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
