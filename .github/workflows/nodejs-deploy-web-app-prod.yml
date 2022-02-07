@@ -12,7 +12,7 @@ jobs:
       ENV_PATH: 'qa'
       PUBLISH_PATH: './src'
       NODE_VERSION: '14.x'
-      TERRAFORM_MODULE_VERSION: 1.2.2
+      TERRAFORM_MODULE_VERSION: 6.0.4
       REACT_APP_API_URL: https://qa-app.airslip.com/customer_portal/v1/
       REACT_APP_ANALYTICS_URL: https://qa-app.airslip.com/analytics/v1/
       REACT_APP_AUTH_URL: https://qa-auth.airslip.com/v1/
@@ -92,7 +92,7 @@ jobs:
       ENV_PATH: 'prod'
       PUBLISH_PATH: './src'
       NODE_VERSION: '14.x'
-      TERRAFORM_MODULE_VERSION: 1.2.2
+      TERRAFORM_MODULE_VERSION: 6.0.4
       REACT_APP_API_URL: https://app.airslip.com/customer_portal/v1/
       REACT_APP_ANALYTICS_URL: https://app.airslip.com/analytics/v1/
       REACT_APP_AUTH_URL: https://auth.airslip.com/v1/
