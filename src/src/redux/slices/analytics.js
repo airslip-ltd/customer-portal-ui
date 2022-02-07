@@ -11,7 +11,7 @@ const initialState = {
   salesStats: {},
   refundStats: {},
   revenueStats: {},
-  cashflowStats: {}
+  cashflowStats: []
 };
 
 const slice = createSlice({
@@ -51,7 +51,11 @@ const slice = createSlice({
 
     storeCashflow(state, action) {
       state.isLoading = false;
-      state.cashflowStats = action.payload;
+      console.log(state.cashflowStats.length);
+      const idx = state.cashflowStats.findIndex((item) => item.accountId === action.payload.accountId);
+      if (idx >= 0) state.cashflowStats.splice(idx, 1);
+      state.cashflowStats.push(action.payload);
+      console.log(state.cashflowStats.length);
     }
   }
 });
@@ -125,16 +129,21 @@ export function getRevenueByYear(year) {
   };
 }
 
-export function getCashflowByYear(year) {
+export function getCashflowByYear(year, accountId) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const response = await axios({
-        url: `/snapshot/cashflow?year=${year}`,
+        url: `/snapshot/cashflow?year=${year}&accountId=${accountId}`,
         method: 'get',
         baseURL: process.env.REACT_APP_ANALYTICS_URL
       });
-      dispatch(slice.actions.storeCashflow(response.data));
+      dispatch(
+        slice.actions.storeCashflow({
+          data: response.data,
+          accountId
+        })
+      );
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
