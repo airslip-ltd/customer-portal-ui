@@ -7,7 +7,9 @@ import axios from '../../utils/axios';
 const initialState = {
   isLoading: false,
   error: false,
-  recentTransactions: []
+  recentBanking: {},
+  recentCommerce: {},
+  accounts: []
 };
 
 const slice = createSlice({
@@ -25,13 +27,19 @@ const slice = createSlice({
       state.error = action.payload;
     },
 
-    storeRecentTransactions(state, action) {
+    storeRecentBanking(state, action) {
       state.isLoading = false;
-      console.log(state.recentTransactions.length);
-      const idx = state.recentTransactions.findIndex((item) => item.accountId === action.payload.accountId);
-      if (idx >= 0) state.recentTransactions.splice(idx, 1);
-      state.recentTransactions.push(action.payload);
-      console.log(state.recentTransactions.length);
+      state.recentBanking[action.payload.accountId] = action.payload.data;
+    },
+
+    storeRecentCommerce(state, action) {
+      state.isLoading = false;
+      state.recentCommerce[action.payload.accountId] = action.payload.data;
+    },
+
+    storeAccounts(state, action) {
+      state.isLoading = false;
+      state.accounts = action.payload.records;
     }
   }
 });
@@ -41,21 +49,58 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function getRecentTransactions(accountId) {
+export function getRecentBanking(accountId) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const response = await axios({
-        url: `/transactions/recent?limit=10&accountId=${accountId}`,
+        url: `/transactions/banking/recent?limit=10&accountId=${accountId}`,
         method: 'get',
         baseURL: process.env.REACT_APP_ANALYTICS_URL
       });
       dispatch(
-        slice.actions.storeRecentTransactions({
+        slice.actions.storeRecentBanking({
           data: response.data,
           accountId
         })
       );
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function getRecentCommerce(accountId) {
+  return async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios({
+        url: `/transactions/commerce/recent?limit=10&accountId=${accountId}`,
+        method: 'get',
+        baseURL: process.env.REACT_APP_ANALYTICS_URL
+      });
+      dispatch(
+        slice.actions.storeRecentCommerce({
+          data: response.data,
+          accountId
+        })
+      );
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function getAccounts() {
+  return async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios({
+        url: `/transactions/commerce/accounts`,
+        method: 'get',
+        baseURL: process.env.REACT_APP_ANALYTICS_URL
+      });
+      dispatch(slice.actions.storeAccounts(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

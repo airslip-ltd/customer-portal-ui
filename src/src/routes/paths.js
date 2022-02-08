@@ -74,6 +74,7 @@ export const PATH_DASHBOARD = {
   },
   analytics: {
     root: path(ROOTS_DASHBOARD, '/analytics/balances'),
-    accountBalances: path(ROOTS_DASHBOARD, '/analytics/balances')
+    accountBalances: path(ROOTS_DASHBOARD, '/analytics/balances'),
+    commerceSummary: path(ROOTS_DASHBOARD, '/analytics/commerce')
   }
 };

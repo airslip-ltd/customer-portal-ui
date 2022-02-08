@@ -1,19 +1,15 @@
 import { isUndefined } from 'lodash-es';
 import PropTypes from 'prop-types';
 // material
-import { Grid, Stack } from '@mui/material';
+import { Grid } from '@mui/material';
 // components
 import {
   MerchantRevenue,
   MerchantRefunds,
   MerchantInterestCharges,
-  MerchantPaymentMethods,
   MerchantSalesAndRefunds,
   MerchantCashflow,
-  MerchantRecentTransactions,
-  MerchantRiskScore,
-  MerchantAverageDebtorDays,
-  MerchantAverageCreditorDays
+  BankingRecentTransactions
 } from '.';
 
 // ----------------------------------------------------------------------
@@ -38,30 +34,16 @@ export default function MerchantSummary({ currentMerchant }) {
           <MerchantInterestCharges />
         </Grid>
 
-        <Grid item xs={12} md={6} lg={8}>
+        <Grid item xs={12}>
           <MerchantSalesAndRefunds />
         </Grid>
 
-        <Grid item xs={12} md={6} lg={4}>
-          <Stack spacing={3}>
-            <MerchantRiskScore rating={currentMerchant.rating} />
-            <MerchantPaymentMethods />
-          </Stack>
-        </Grid>
-
-        <Grid item xs={12} md={6} lg={8}>
+        <Grid item xs={12}>
           <MerchantCashflow />
         </Grid>
 
-        <Grid item xs={12} md={6} lg={4}>
-          <Stack spacing={3}>
-            <MerchantAverageDebtorDays />
-            <MerchantAverageCreditorDays />
-          </Stack>
-        </Grid>
-
         <Grid item xs={12}>
-          <MerchantRecentTransactions />
+          <BankingRecentTransactions />
         </Grid>
       </Grid>
     );
