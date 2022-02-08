@@ -19,7 +19,6 @@ import {
   TableContainer
 } from '@mui/material';
 import ReactTimeAgo from 'react-time-ago';
-import { BankSummary } from '../account-list';
 // redux
 import { getRecentCommerce } from '../../../redux/slices/transactions';
 import { useDispatch, useSelector } from '../../../redux/store';
