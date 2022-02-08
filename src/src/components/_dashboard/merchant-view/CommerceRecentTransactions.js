@@ -21,35 +21,32 @@ import {
 import ReactTimeAgo from 'react-time-ago';
 import { BankSummary } from '../account-list';
 // redux
-import { getRecentTransactions } from '../../../redux/slices/transactions';
+import { getRecentCommerce } from '../../../redux/slices/transactions';
 import { useDispatch, useSelector } from '../../../redux/store';
 // utils
 import { fCurrency } from '../../../utils/formatNumber';
 import Scrollbar from '../../Scrollbar';
 
 // ----------------------------------------------------------------------
-MerchantRecentTransactions.propTypes = {
+CommerceRecentTransactions.propTypes = {
   accountId: PropTypes.string
 };
-export default function MerchantRecentTransactions({ accountId }) {
+export default function CommerceRecentTransactions({ accountId }) {
   const dispatch = useDispatch();
   const [transactions, setTransactions] = useState([]);
-  const { recentTransactions } = useSelector((state) => state.transactions);
+  const { recentCommerce } = useSelector((state) => state.transactions);
 
   accountId = accountId || '';
 
   useEffect(() => {
-    dispatch(getRecentTransactions(accountId));
+    dispatch(getRecentCommerce(accountId));
   }, [dispatch, accountId]);
 
   useEffect(() => {
-    console.log(recentTransactions);
-    const myStats = recentTransactions.filter((item) => item.accountId === accountId);
-    if (myStats.length > 0) {
-      const theStats = myStats[0];
-      setTransactions(theStats.data.transactions);
+    if (recentCommerce[accountId]) {
+      setTransactions(recentCommerce[accountId].records);
     }
-  }, [accountId, recentTransactions, setTransactions]);
+  }, [accountId, recentCommerce, setTransactions]);
 
   return (
     <Card>
@@ -59,7 +56,6 @@ export default function MerchantRecentTransactions({ accountId }) {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Institution</TableCell>
                 <TableCell>Descriptipn</TableCell>
                 <TableCell>Type</TableCell>
                 <TableCell>Amount</TableCell>
@@ -69,11 +65,8 @@ export default function MerchantRecentTransactions({ accountId }) {
             <TableBody>
               {transactions.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell>
-                    <BankSummary institutionId={row.institutionId} />
-                  </TableCell>
                   <TableCell>{row.description}</TableCell>
-                  <TableCell>{row.amount < 0 ? 'Debit' : 'Credit'}</TableCell>
+                  <TableCell>{row.amount < 0 ? 'Refund' : 'Sale'}</TableCell>
                   <TableCell>
                     {getSymbolFromCurrency(row.currencyCode)}
                     {fCurrency(row.amount)}

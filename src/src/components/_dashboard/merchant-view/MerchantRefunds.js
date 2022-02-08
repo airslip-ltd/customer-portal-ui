@@ -1,112 +1,45 @@
 import { useEffect, useState } from 'react';
-import { Icon } from '@iconify/react';
-import ReactApexChart from 'react-apexcharts';
-import trendingUpFill from '@iconify/icons-eva/trending-up-fill';
-import trendingDownFill from '@iconify/icons-eva/trending-down-fill';
-// material
-import { alpha, useTheme, styled } from '@mui/material/styles';
-import { Box, Grid, Card, Typography, Stack } from '@mui/material';
+import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
 import { getRefundShapshot } from '../../../redux/slices/analytics';
 // utils
-import { fNumber, fPercent } from '../../../utils/formatNumber';
-import LoadingProgress from '../../LoadingProgress';
+import MerchantDashboardSnapshot from './MerchantDashboardSnapshot';
+// routes
+import { PATH_DASHBOARD } from '../../../routes/paths';
 
 // ----------------------------------------------------------------------
 
-const IconWrapperStyle = styled('div')(({ theme }) => ({
-  width: 24,
-  height: 24,
-  display: 'flex',
-  borderRadius: '50%',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: theme.palette.success.main,
-  backgroundColor: alpha(theme.palette.success.main, 0.16)
-}));
-
-// ----------------------------------------------------------------------
-
-export default function MerchantRefunds() {
+MerchantRefunds.propTypes = {
+  accountId: PropTypes.string
+};
+export default function MerchantRefunds({ accountId }) {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { refundStats } = useSelector((state) => state.analytics);
-  const [chartData, setChartData] = useState([5, 5, 5, 5, 5, 5, 5, 5, 5, 5]);
-  const CHART_DATA = [
-    {
-      data: chartData
-    }
-  ];
+  const [metricData, setMetricData] = useState({});
+  const [chartData, setChartData] = useState([]);
+  accountId = accountId || '';
 
   useEffect(() => {
-    dispatch(getRefundShapshot());
-  }, [dispatch]);
+    dispatch(getRefundShapshot(30, accountId));
+  }, [dispatch, accountId]);
 
   useEffect(() => {
-    if (!refundStats.metrics) return;
-    const newData = refundStats.metrics.map((metric) => metric.balance);
+    if (!refundStats[accountId] || !refundStats[accountId].metrics) return;
+    setMetricData(refundStats[accountId]);
+    const newData = refundStats[accountId].metrics.map((metric) => metric.balance);
     setChartData(newData);
-  }, [refundStats, setChartData]);
-
-  const chartOptions = {
-    colors: [theme.palette.secondary.main],
-    chart: { sparkline: { enabled: true } },
-    plotOptions: { bar: { columnWidth: '68%', borderRadius: 2 } },
-    labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
-    tooltip: {
-      x: { show: false },
-      y: {
-        formatter: (seriesName) => fNumber(seriesName),
-        title: {
-          formatter: () => ''
-        }
-      },
-      marker: { show: false }
-    }
-  };
-
-  if (!refundStats.dayRange) {
-    return (
-      <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
-        <Grid container>
-          <Grid item xs={12} md={8}>
-            <Typography variant="subtitle2">Refunds</Typography>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <LoadingProgress />
-          </Grid>
-        </Grid>
-      </Card>
-    );
-  }
+  }, [refundStats, accountId, setChartData, setMetricData]);
 
   return (
-    <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
-      <Box sx={{ flexGrow: 1 }}>
-        <Typography variant="subtitle2">Refunds (Last {refundStats.dayRange} Days)</Typography>
-
-        <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2, mb: 1 }}>
-          <IconWrapperStyle
-            sx={{
-              ...(refundStats.movement < 0 && {
-                color: 'error.main',
-                bgcolor: alpha(theme.palette.error.main, 0.16)
-              })
-            }}
-          >
-            <Icon width={16} height={16} icon={refundStats.movement >= 0 ? trendingUpFill : trendingDownFill} />
-          </IconWrapperStyle>
-          <Typography component="span" variant="subtitle2">
-            {refundStats.movement > 0 && '+'}
-            {fPercent(refundStats.movement)}
-          </Typography>
-        </Stack>
-
-        <Typography variant="h3">&pound;{fNumber(refundStats.balance)}</Typography>
-      </Box>
-
-      <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} width={60} height={36} />
-    </Card>
+    <MerchantDashboardSnapshot
+      title="Refunds"
+      metricData={metricData}
+      chartData={chartData}
+      navigateTo={PATH_DASHBOARD.analytics.commerceSummary}
+      graphColor={theme.palette.secondary.main}
+    />
   );
 }

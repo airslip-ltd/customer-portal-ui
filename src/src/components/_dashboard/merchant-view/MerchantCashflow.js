@@ -25,11 +25,8 @@ export default function MerchantCashflow({ accountId }) {
   }, [dispatch, year, accountId]);
 
   useEffect(() => {
-    const myStats = cashflowStats.filter((item) => item.accountId === accountId);
-    if (myStats.length > 0) {
-      const theStats = myStats[0];
-      setRenderStats(theStats.data);
-    }
+    if (!cashflowStats[accountId]) return;
+    setRenderStats(cashflowStats[accountId]);
   }, [accountId, cashflowStats, setRenderStats]);
 
   const handleChangeYear = (year) => {

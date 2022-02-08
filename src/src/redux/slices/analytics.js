@@ -11,7 +11,7 @@ const initialState = {
   salesStats: {},
   refundStats: {},
   revenueStats: {},
-  cashflowStats: []
+  cashflowStats: {}
 };
 
 const slice = createSlice({
@@ -36,26 +36,22 @@ const slice = createSlice({
 
     storeSalesSnapshot(state, action) {
       state.isLoading = false;
-      state.salesStats = action.payload;
+      state.salesStats[action.payload.accountId] = action.payload.data;
     },
 
     storeRefundSnapshot(state, action) {
       state.isLoading = false;
-      state.refundStats = action.payload;
+      state.refundStats[action.payload.accountId] = action.payload.data;
     },
 
     storeRevenue(state, action) {
       state.isLoading = false;
-      state.revenueStats = action.payload;
+      state.revenueStats[action.payload.accountId] = action.payload.data;
     },
 
     storeCashflow(state, action) {
       state.isLoading = false;
-      console.log(state.cashflowStats.length);
-      const idx = state.cashflowStats.findIndex((item) => item.accountId === action.payload.accountId);
-      if (idx >= 0) state.cashflowStats.splice(idx, 1);
-      state.cashflowStats.push(action.payload);
-      console.log(state.cashflowStats.length);
+      state.cashflowStats[action.payload.accountId] = action.payload.data;
     }
   }
 });
@@ -81,48 +77,63 @@ export function getCurrentBalance() {
   };
 }
 
-export function getSalesShapshot(withRange) {
+export function getSalesShapshot(withRange, accountId) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const response = await axios({
-        url: `/snapshot/TotalSales?dayRange=${withRange || 30}`,
+        url: `/snapshot/TotalSales?dayRange=${withRange || 30}&accountId=${accountId}`,
         method: 'get',
         baseURL: process.env.REACT_APP_ANALYTICS_URL
       });
-      dispatch(slice.actions.storeSalesSnapshot(response.data));
+      dispatch(
+        slice.actions.storeSalesSnapshot({
+          data: response.data,
+          accountId
+        })
+      );
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
   };
 }
 
-export function getRefundShapshot(withRange) {
+export function getRefundShapshot(withRange, accountId) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const response = await axios({
-        url: `/snapshot/TotalRefunds?dayRange=${withRange || 30}`,
+        url: `/snapshot/TotalRefunds?dayRange=${withRange || 30}&accountId=${accountId}`,
         method: 'get',
         baseURL: process.env.REACT_APP_ANALYTICS_URL
       });
-      dispatch(slice.actions.storeRefundSnapshot(response.data));
+      dispatch(
+        slice.actions.storeRefundSnapshot({
+          data: response.data,
+          accountId
+        })
+      );
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
   };
 }
 
-export function getRevenueByYear(year) {
+export function getRevenueByYear(year, accountId) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const response = await axios({
-        url: `/snapshot/revenue?year=${year}`,
+        url: `/snapshot/revenue?year=${year}&accountId=${accountId}`,
         method: 'get',
         baseURL: process.env.REACT_APP_ANALYTICS_URL
       });
-      dispatch(slice.actions.storeRevenue(response.data));
+      dispatch(
+        slice.actions.storeRevenue({
+          data: response.data,
+          accountId
+        })
+      );
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

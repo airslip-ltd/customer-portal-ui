@@ -1,34 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Icon } from '@iconify/react';
-import ReactApexChart from 'react-apexcharts';
-import trendingUpFill from '@iconify/icons-eva/trending-up-fill';
-import trendingDownFill from '@iconify/icons-eva/trending-down-fill';
-import { Link as RouterLink } from 'react-router-dom';
+// utils
+import { useTheme } from '@mui/material/styles';
+import MerchantDashboardSnapshot from './MerchantDashboardSnapshot';
 // material
-import { alpha, useTheme, styled } from '@mui/material/styles';
-import { Box, Grid, Card, Typography, Stack, CardActionArea } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
 import { getCurrentBalance } from '../../../redux/slices/analytics';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
-
-// utils
-import { fNumber, fPercent } from '../../../utils/formatNumber';
-import LoadingProgress from '../../LoadingProgress';
-
-// ----------------------------------------------------------------------
-
-const IconWrapperStyle = styled('div')(({ theme }) => ({
-  width: 24,
-  height: 24,
-  display: 'flex',
-  borderRadius: '50%',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: theme.palette.success.main,
-  backgroundColor: alpha(theme.palette.success.main, 0.16)
-}));
 
 // ----------------------------------------------------------------------
 
@@ -36,12 +15,8 @@ export default function MerchantBalance() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { currentBalance } = useSelector((state) => state.analytics);
-  const [chartData, setChartData] = useState([5, 5, 5, 5, 5, 5, 5, 5, 5, 5]);
-  const CHART_DATA = [
-    {
-      data: chartData
-    }
-  ];
+  const [metricData, setMetricData] = useState({});
+  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     dispatch(getCurrentBalance());
@@ -49,74 +24,18 @@ export default function MerchantBalance() {
 
   useEffect(() => {
     if (!currentBalance.metrics) return;
+    setMetricData(currentBalance);
     const newData = currentBalance.metrics.map((metric) => metric.balance);
     setChartData(newData);
-  }, [currentBalance, setChartData]);
-
-  const chartOptions = {
-    colors: [theme.palette.chart.red[0]],
-    chart: { sparkline: { enabled: true } },
-    plotOptions: { bar: { columnWidth: '68%', borderRadius: 2 } },
-    labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
-    tooltip: {
-      x: { show: false },
-      y: {
-        formatter: (seriesName) => fNumber(seriesName),
-        title: {
-          formatter: () => ''
-        }
-      },
-      marker: { show: false }
-    }
-  };
-
-  if (!currentBalance.metrics) {
-    return (
-      <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
-        <Grid container>
-          <Grid item xs={12} md={8}>
-            <Typography variant="subtitle2">Cash in bank</Typography>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <LoadingProgress />
-          </Grid>
-        </Grid>
-      </Card>
-    );
-  }
+  }, [currentBalance, setChartData, setMetricData]);
 
   return (
-    <Card>
-      <CardActionArea
-        component={RouterLink}
-        to={PATH_DASHBOARD.analytics.accountBalances}
-        sx={{ display: 'flex', alignItems: 'center', p: 3 }}
-      >
-        <Box sx={{ flexGrow: 1 }}>
-          <Typography variant="subtitle2">Cash in bank</Typography>
-
-          <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2, mb: 1 }}>
-            <IconWrapperStyle
-              sx={{
-                ...(currentBalance.movement < 0 && {
-                  color: 'error.main',
-                  bgcolor: alpha(theme.palette.error.main, 0.16)
-                })
-              }}
-            >
-              <Icon width={16} height={16} icon={currentBalance.movement >= 0 ? trendingUpFill : trendingDownFill} />
-            </IconWrapperStyle>
-            <Typography component="span" variant="subtitle2">
-              {currentBalance.movement > 0 && '+'}
-              {fPercent(currentBalance.movement)}
-            </Typography>
-          </Stack>
-
-          <Typography variant="h3">&pound;{fNumber(currentBalance.balance)}</Typography>
-        </Box>
-
-        {chartData && <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} width={60} height={36} />}
-      </CardActionArea>
-    </Card>
+    <MerchantDashboardSnapshot
+      title="Cash in bank"
+      metricData={metricData}
+      navigateTo={PATH_DASHBOARD.analytics.accountBalances}
+      chartData={chartData}
+      graphColor={theme.palette.chart.red[0]}
+    />
   );
 }

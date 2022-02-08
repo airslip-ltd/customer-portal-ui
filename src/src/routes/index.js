@@ -166,7 +166,8 @@ export default function Router() {
           path: 'analytics',
           children: [
             { element: <Navigate to="/dashboard/analytics/balances" replace /> },
-            { path: 'balances', element: <AccountBalances /> }
+            { path: 'balances', element: <AccountBalances /> },
+            { path: 'commerce', element: <CommerceSummary /> }
           ]
         }
       ]
@@ -213,3 +214,4 @@ const RelationshipCreate = Loadable(lazy(() => import('../pages/relationship/Cre
 const PartnerRegister = Loadable(lazy(() => import('../pages/admin/partner/Register')));
 // Analytics
 const AccountBalances = Loadable(lazy(() => import('../pages/analytics/AccountBalances')));
+const CommerceSummary = Loadable(lazy(() => import('../pages/analytics/CommerceSummary')));
