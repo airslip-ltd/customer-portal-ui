@@ -1,14 +1,10 @@
-import { Link as RouterLink } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
 import { Box, Grid, Stack, Link, Container, Typography } from '@mui/material';
-// routes
-import { PATH_AUTH } from '../../routes/paths';
 // layouts
 import AuthLayout from '../../layouts/AuthLayout';
 // components
 import Page from '../../components/Page';
-import { MHidden } from '../../components/@material-extend';
 import { LoginForm } from '../../components/authentication/login';
 import { RegisterForm } from '../../components/authentication/register';
 
