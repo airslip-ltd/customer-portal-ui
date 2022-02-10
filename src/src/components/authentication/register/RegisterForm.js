@@ -8,7 +8,7 @@ import eyeFill from '@iconify/icons-eva/eye-fill';
 import closeFill from '@iconify/icons-eva/close-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 // material
-import { Stack, TextField, IconButton, InputAdornment, Container, Grid } from '@mui/material';
+import { Stack, TextField, IconButton, InputAdornment, Container, Grid, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
@@ -117,24 +117,6 @@ export default function RegisterForm() {
             <Stack spacing={3}>
               <ApiError error={error} />
 
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField
-                  fullWidth
-                  label="First name"
-                  {...getFieldProps('firstName')}
-                  error={Boolean(touched.firstName && errors.firstName)}
-                  helperText={touched.firstName && errors.firstName}
-                />
-
-                <TextField
-                  fullWidth
-                  label="Last name"
-                  {...getFieldProps('lastName')}
-                  error={Boolean(touched.lastName && errors.lastName)}
-                  helperText={touched.lastName && errors.lastName}
-                />
-              </Stack>
-
               <TextField
                 fullWidth
                 autoComplete="username"
@@ -164,6 +146,27 @@ export default function RegisterForm() {
                 helperText={touched.password && errors.password}
               />
 
+              <Typography variant="body" gutterBottom>
+                What should we call you?
+              </Typography>
+
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                <TextField
+                  fullWidth
+                  label="First name"
+                  {...getFieldProps('firstName')}
+                  error={Boolean(touched.firstName && errors.firstName)}
+                  helperText={touched.firstName && errors.firstName}
+                />
+
+                <TextField
+                  fullWidth
+                  label="Last name"
+                  {...getFieldProps('lastName')}
+                  error={Boolean(touched.lastName && errors.lastName)}
+                  helperText={touched.lastName && errors.lastName}
+                />
+              </Stack>
               <TextField
                 fullWidth
                 type="text"
@@ -173,7 +176,7 @@ export default function RegisterForm() {
                 helperText={touched.businessName && errors.businessName}
               />
 
-              <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isLoading}>
+              <LoadingButton fullWidth size="large" type="submit" variant="outlined" loading={isLoading}>
                 Register
               </LoadingButton>
             </Stack>

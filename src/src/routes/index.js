@@ -96,11 +96,7 @@ export default function Router() {
       children: [
         {
           path: 'authorise/:provider/:integration',
-          element: (
-            <AuthGuard>
-              <HubIntegrationAuthorise />
-            </AuthGuard>
-          )
+          element: <HubIntegrationAuthorise />
         }
       ]
     },
@@ -179,6 +175,7 @@ export default function Router() {
       element: <LogoOnlyLayout />,
       children: [
         { path: '404', element: <NotFound /> },
+        { path: '401', element: <Unauthorised /> },
         { path: '*', element: <Navigate to="/404" replace /> }
       ]
     },
@@ -206,6 +203,7 @@ const IntegrationList = Loadable(lazy(() => import('../pages/integrations/Integr
 const IntegrationLink = Loadable(lazy(() => import('../pages/integrations/IntegrationLink')));
 const IntegrationLinked = Loadable(lazy(() => import('../pages/integrations/IntegrationLinked')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
+const Unauthorised = Loadable(lazy(() => import('../pages/Page401')));
 // Merchants
 const RelationshipView = Loadable(lazy(() => import('../pages/relationship/View')));
 const RelationshipList = Loadable(lazy(() => import('../pages/relationship/List')));
