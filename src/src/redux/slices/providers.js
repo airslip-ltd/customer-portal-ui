@@ -66,7 +66,15 @@ export function getProviderList() {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get('/providers');
+      const response = await axios.post('/providers', {
+        page: 0,
+        recordsPerPage: 25,
+        sort: [{ field: 'id', sort: 'asc' }],
+        search: {
+          items: [],
+          linkOperator: 'and'
+        }
+      });
       dispatch(slice.actions.getProviderListSuccess(response.data.results));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
