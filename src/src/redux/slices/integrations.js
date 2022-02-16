@@ -7,7 +7,7 @@ import axios from '../../utils/axios';
 const initialState = {
   isLoading: false,
   error: false,
-  integrationList: []
+  integrationList: {}
 };
 
 const slice = createSlice({
@@ -37,12 +37,12 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function getIntegrationList() {
+export function getIntegrationList(query) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get('/integrations');
-      dispatch(slice.actions.getIntegrationListSuccess(response.data.integrations));
+      const response = await axios.post('/integrations', query);
+      dispatch(slice.actions.getIntegrationListSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

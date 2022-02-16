@@ -1,4 +1,3 @@
-import { filter } from 'lodash';
 import { useState, useEffect } from 'react';
 // material
 import {
@@ -35,80 +34,49 @@ import {
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name', alignRight: false },
-  { id: 'status', label: 'Status', alignRight: false },
+  { id: 'dataSource', label: 'Data Source', alignRight: false },
+  { id: 'id', label: 'Id', alignRight: false },
   { id: '' }
 ];
 
+const DEFAULT_QUERY = { page: 0, recordsPerPage: 25, sortColumn: 'id', sortOrder: 'asc', filters: [] };
+
 // ----------------------------------------------------------------------
-
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  if (query) {
-    return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
-  }
-  return stabilizedThis.map((el) => el[0]);
-}
 
 export default function IntegrationList() {
   const { themeStretch } = useSettings();
   const dispatch = useDispatch();
   const { integrationList } = useSelector((state) => state.integration);
-  const [page, setPage] = useState(0);
-  const [order, setOrder] = useState('asc');
-  const [orderBy, setOrderBy] = useState('name');
   const [filterName, setFilterName] = useState('');
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [query, setQuery] = useState(DEFAULT_QUERY);
 
   useEffect(() => {
-    dispatch(getIntegrationList());
-  }, [dispatch]);
+    dispatch(getIntegrationList(query));
+  }, [dispatch, query]);
+
+  useEffect(() => {
+    console.log(integrationList);
+  }, [integrationList]);
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
+    console.log('handleRequestSort', property);
+
+    const isAsc = query.sortColumn === property && query.sortOrder === 'asc';
+
+    setQuery({ ...query, ...{ page: 0, sortColumn: property, sortOrder: isAsc ? 'desc' : 'asc' } });
   };
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+    setQuery({ ...query, ...{ page: newPage } });
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    setQuery({ ...query, ...{ page: 0, recordsPerPage: parseInt(event.target.value, 10) } });
   };
 
   const handleFilterByName = (event) => {
     setFilterName(event.target.value);
   };
-
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - integrationList.length) : 0;
-
-  const filteredUsers = applySortFilter(integrationList, getComparator(order, orderBy), filterName);
-
-  const isUserNotFound = filteredUsers.length === 0;
 
   return (
     <Page title="Accounts | List | Airslip">
@@ -122,69 +90,66 @@ export default function IntegrationList() {
           ]}
         />
 
-        <Card>
-          <IntegrationListToolbar filterName={filterName} onFilterName={handleFilterByName} />
+        {integrationList.results && (
+          <Card>
+            <IntegrationListToolbar filterName={filterName} onFilterName={handleFilterByName} />
 
-          <Scrollbar>
-            <TableContainer sx={{ minWidth: 800 }}>
-              <Table>
-                <IntegrationListHead
-                  order={order}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={integrationList.length}
-                  onRequestSort={handleRequestSort}
-                />
-                <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, status, provider } = row;
+            <Scrollbar>
+              <TableContainer sx={{ minWidth: 800 }}>
+                <Table>
+                  <IntegrationListHead
+                    order={query.sortOrder}
+                    orderBy={query.sortColumn}
+                    headLabel={TABLE_HEAD}
+                    rowCount={integrationList.length}
+                    onRequestSort={handleRequestSort}
+                  />
+                  <TableBody>
+                    {integrationList.results.map((row) => {
+                      const { id, dataSource, provider } = row;
 
-                    return (
-                      <TableRow hover key={id} tabIndex={-1}>
-                        <TableCell component="th" scope="row" padding="none">
-                          <Stack direction="row" alignItems="center" spacing={2}>
-                            <ProviderIcon icon={provider} />
-                            <Typography variant="subtitle2" noWrap>
-                              {name}
-                            </Typography>
-                          </Stack>
-                        </TableCell>
-                        <TableCell>{status}</TableCell>
-                        <TableCell align="right">
-                          <IntegrationMoreMenu id={id} />
+                      return (
+                        <TableRow hover key={id} tabIndex={-1}>
+                          <TableCell component="th" scope="row" padding="none">
+                            <Stack direction="row" alignItems="center" spacing={2}>
+                              <ProviderIcon icon={provider} />
+                              <Typography variant="subtitle2" noWrap>
+                                {dataSource}
+                              </Typography>
+                            </Stack>
+                          </TableCell>
+                          <TableCell>{id}</TableCell>
+                          <TableCell align="right">
+                            <IntegrationMoreMenu id={id} />
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                  {integrationList.paging.totalRecords === 0 && (
+                    <TableBody>
+                      <TableRow>
+                        <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                          <SearchNotFound searchQuery={filterName} />
                         </TableCell>
                       </TableRow>
-                    );
-                  })}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={6} />
-                    </TableRow>
+                    </TableBody>
                   )}
-                </TableBody>
-                {isUserNotFound && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        <SearchNotFound searchQuery={filterName} />
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                )}
-              </Table>
-            </TableContainer>
-          </Scrollbar>
+                </Table>
+              </TableContainer>
+            </Scrollbar>
 
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={integrationList.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Card>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={integrationList.paging.totalRecords}
+              rowsPerPage={query.recordsPerPage}
+              page={integrationList.paging.page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Card>
+        )}
       </Container>
     </Page>
   );
