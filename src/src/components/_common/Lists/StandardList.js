@@ -8,14 +8,13 @@ import { Card } from '@mui/material';
 
 StandardList.propTypes = {
   details: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired,
   columns: PropTypes.array.isRequired,
   onChangeQuery: PropTypes.func.isRequired,
   onRowSelected: PropTypes.func,
   recordsPerPage: PropTypes.number
 };
 
-export default function StandardList({ details, loading, columns, onChangeQuery, onRowSelected, recordsPerPage }) {
+export default function StandardList({ details, columns, onChangeQuery, onRowSelected, recordsPerPage }) {
   const [query, setQuery] = useState({
     page: 0,
     recordsPerPage: recordsPerPage || 25,
@@ -29,6 +28,10 @@ export default function StandardList({ details, loading, columns, onChangeQuery,
   useEffect(() => {
     onChangeQuery(query);
   }, [onChangeQuery, query]);
+
+  useEffect(() => {
+    console.log(details);
+  }, [details]);
 
   const handleSortModelChange = (newModel) => {
     setQuery({ ...query, ...{ page: 0, sort: newModel } });
@@ -53,33 +56,31 @@ export default function StandardList({ details, loading, columns, onChangeQuery,
 
   return (
     <>
-      {details.results && (
-        <Card>
-          <DataGrid
-            autoHeight
-            columns={columns}
-            rows={details.results}
-            components={{
-              Toolbar: GridToolbar
-            }}
-            disableSelectionOnClick
-            filterMode="server"
-            onFilterModelChange={onFilterChange}
-            sortingMode="server"
-            sortModel={query.sort}
-            onSortModelChange={handleSortModelChange}
-            loading={loading}
-            pageSize={query.recordsPerPage}
-            rowCount={details.paging.totalRecords}
-            rowsPerPageOptions={[5, 10, 25]}
-            paginationMode="server"
-            onPageSizeChange={handlePageSizeChange}
-            onPageChange={handlePageChange}
-            page={details.paging.page}
-            onRowClick={handleRowClick}
-          />
-        </Card>
-      )}
+      <Card>
+        <DataGrid
+          autoHeight
+          columns={columns}
+          rows={details.response.results}
+          components={{
+            Toolbar: GridToolbar
+          }}
+          disableSelectionOnClick
+          filterMode="server"
+          onFilterModelChange={onFilterChange}
+          sortingMode="server"
+          sortModel={query.sort}
+          onSortModelChange={handleSortModelChange}
+          loading={details.loading}
+          pageSize={query.recordsPerPage}
+          rowCount={details.response.paging.totalRecords}
+          rowsPerPageOptions={[5, 10, 25]}
+          paginationMode="server"
+          onPageSizeChange={handlePageSizeChange}
+          onPageChange={handlePageChange}
+          page={details.response.paging.page}
+          onRowClick={handleRowClick}
+        />
+      </Card>
     </>
   );
 }

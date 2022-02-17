@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Container } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getIntegrationList } from '../../redux/slices/integrations';
+import { getIntegrations } from '../../redux/slices/integrations';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -12,18 +12,18 @@ import useSettings from '../../hooks/useSettings';
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 import { columns } from '../../lists/integration-list';
-import StandardList from './StandardList';
+import StandardList from '../../components/_common/Lists/StandardList';
 
 // ----------------------------------------------------------------------
 
 export default function IntegrationList() {
   const { themeStretch } = useSettings();
   const dispatch = useDispatch();
-  const { integrationList, isLoading } = useSelector((state) => state.integration);
+  const { integrations } = useSelector((state) => state.integration);
   const [query, setQuery] = useState(null);
 
   useEffect(() => {
-    if (query) dispatch(getIntegrationList(query));
+    if (query) dispatch(getIntegrations(query));
   }, [dispatch, query]);
 
   const handleRowClick = useCallback((params) => {
@@ -44,10 +44,9 @@ export default function IntegrationList() {
           />
           <StandardList
             columns={columns}
-            details={integrationList}
+            details={integrations}
             onChangeQuery={setQuery}
             onRowSelected={handleRowClick}
-            loading={isLoading}
             recordsPerPage={10}
           />
         </Container>

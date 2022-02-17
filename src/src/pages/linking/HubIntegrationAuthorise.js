@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getProviderList, requestProvider, validateInitiation } from '../../redux/slices/providers';
+import { getProviders, requestProvider, validateInitiation } from '../../redux/slices/providers';
 // components
 import Page from '../../components/Page';
 import LoadingScreen from '../../components/LoadingScreen';
-import { PATH_DASHBOARD } from '../../routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -20,10 +19,8 @@ export default function HubIntegrationAuthorise() {
   useEffect(() => {
     if (!integration) return;
     if (!provider) return;
-
-    if (!search) navigate(PATH_DASHBOARD.root);
-
-    dispatch(getProviderList());
+    // if (!search) navigate(PATH_DASHBOARD.root);
+    dispatch(getProviders());
     dispatch(validateInitiation(provider, integration, search));
   }, [dispatch, navigate, search, provider, integration]);
 
@@ -42,7 +39,7 @@ export default function HubIntegrationAuthorise() {
         dispatch(requestProvider(provider, integration, search));
         break;
       case 'invalid':
-        navigate('/401');
+        // navigate('/401');
         break;
       default:
         break;

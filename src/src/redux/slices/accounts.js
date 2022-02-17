@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 // utils
 import axios from '../../utils/axios';
+import { API_DEFAULTS } from '../common/constants';
 
 // ----------------------------------------------------------------------
 
 const initialState = {
   isLoading: false,
   error: false,
-  accountList: []
+  accounts: { ...API_DEFAULTS }
 };
 
 const slice = createSlice({
@@ -15,8 +16,15 @@ const slice = createSlice({
   initialState,
   reducers: {
     // START LOADING
-    startLoading(state) {
+    startLoading(state, action) {
       state.isLoading = true;
+      console.log(action.payload);
+      if (action.payload) state[action.payload].loading = true;
+    },
+
+    finishedLoading(state, action) {
+      state.isLoading = false;
+      if (action.payload) state[action.payload].loading = false;
     },
 
     // HAS ERROR
@@ -25,9 +33,10 @@ const slice = createSlice({
       state.error = action.payload;
     },
 
-    getAccountListSuccess(state, action) {
-      state.isLoading = false;
-      state.accountList = action.payload;
+    getAccountsSuccess(state, action) {
+      state.accounts.loading = false;
+      state.accounts.response = action.payload;
+      state.accounts.hasData = action.payload.results.length > 0;
     }
   }
 });
@@ -37,12 +46,16 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function getAccountList() {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
+export function getAccounts(query) {
+  return async (dispatch, getState) => {
+    const { provider } = getState();
+    if (provider.providers.loading || provider.providers.hasData) return;
+
+    dispatch(slice.actions.startLoading('accounts'));
     try {
-      const response = await axios.get('/accounts');
-      dispatch(slice.actions.getAccountListSuccess(response.data.accounts));
+      const response = await axios.post('/accounts', query);
+      dispatch(slice.actions.getAccountsSuccess(response.data));
+      dispatch(slice.actions.finishedLoading());
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

@@ -7,7 +7,7 @@ import useAuth from '../../hooks/useAuth';
 import useSettings from '../../hooks/useSettings';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getProviderList, authoriseProvider } from '../../redux/slices/providers';
+import { getProviders, authoriseProvider } from '../../redux/slices/providers';
 // components
 import Page from '../../components/Page';
 import { AppWelcome } from '../../components/_dashboard/general-app';
@@ -27,7 +27,7 @@ export default function HubIntegrationComplete() {
   useEffect(() => {
     if (!integration) return;
     if (!provider) return;
-    dispatch(getProviderList());
+    dispatch(getProviders());
     dispatch(authoriseProvider(provider, integration, search));
   }, [dispatch, search, provider, integration]);
 
