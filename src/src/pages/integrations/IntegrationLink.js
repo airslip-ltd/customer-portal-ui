@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Card, Container, Grid, Stack, Typography, CardActionArea, CardContent } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getProviderList } from '../../redux/slices/providers';
+import { getProviders } from '../../redux/slices/providers';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -19,10 +19,10 @@ import { ProviderImage } from '../../components/_dashboard/integration-list';
 export default function IntegrationLink() {
   const { themeStretch } = useSettings();
   const dispatch = useDispatch();
-  const { providerList } = useSelector((state) => state.provider);
+  const { providers } = useSelector((state) => state.provider);
 
   useEffect(() => {
-    dispatch(getProviderList());
+    dispatch(getProviders());
   }, [dispatch]);
 
   return (
@@ -44,23 +44,27 @@ export default function IntegrationLink() {
             </Typography>
           </Grid>
 
-          {providerList.map((row) => {
-            const { posProvider } = row;
+          {providers.hasData &&
+            providers.response.results.map((row) => {
+              const { posProvider } = row;
 
-            return (
-              <Grid key={posProvider} item xs={6} md={4} align="center">
-                <Card sx={{ display: 'flex', alignItems: 'center' }} align="center">
-                  <CardActionArea component={RouterLink} to={`${PATH_DASHBOARD.integrations.root}/${posProvider}/link`}>
-                    <CardContent align="center">
-                      <Stack style={{ margin: 'auto' }} spacing={2}>
-                        <ProviderImage icon={posProvider} />
-                      </Stack>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-            );
-          })}
+              return (
+                <Grid key={posProvider} item xs={6} md={4} align="center">
+                  <Card sx={{ display: 'flex', alignItems: 'center' }} align="center">
+                    <CardActionArea
+                      component={RouterLink}
+                      to={`${PATH_DASHBOARD.integrations.root}/${posProvider}/link`}
+                    >
+                      <CardContent align="center">
+                        <Stack style={{ margin: 'auto' }} spacing={2}>
+                          <ProviderImage icon={posProvider} />
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              );
+            })}
         </Grid>
       </Container>
     </Page>

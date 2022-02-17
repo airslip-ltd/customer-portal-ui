@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Card, Container, Grid, Stack, Typography, CardActionArea, CardContent } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getBankList } from '../../redux/slices/providers';
+import { getBanks } from '../../redux/slices/providers';
 // routes
 import { PATH_DASHBOARD, PATH_INTEGRATE } from '../../routes/paths';
 // hooks
@@ -19,10 +19,10 @@ import { BankImage } from '../../components/_dashboard/account-list';
 export default function AccountLink() {
   const { themeStretch } = useSettings();
   const dispatch = useDispatch();
-  const { bankList } = useSelector((state) => state.provider);
+  const { banks } = useSelector((state) => state.provider);
 
   useEffect(() => {
-    dispatch(getBankList());
+    dispatch(getBanks());
   }, [dispatch]);
 
   return (
@@ -45,25 +45,26 @@ export default function AccountLink() {
             </Typography>
           </Grid>
 
-          {bankList.map((row) => {
-            const { id, tradingName } = row;
-            return (
-              <Grid key={id} item xs={6} md={4} align="center">
-                <Card sx={{ display: 'flex', alignItems: 'center' }} align="center">
-                  <CardActionArea component={RouterLink} to={`${PATH_INTEGRATE.authorise}/yapily/${id}`}>
-                    <CardContent align="center">
-                      <Stack style={{ margin: 'auto' }} spacing={2}>
-                        <BankImage icon={id} />
-                        <Typography noWrap variant="h6" sx={{ color: 'text.secondary' }}>
-                          {tradingName}
-                        </Typography>
-                      </Stack>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-            );
-          })}
+          {banks.hasData &&
+            banks.response.results.map((row) => {
+              const { id, tradingName } = row;
+              return (
+                <Grid key={id} item xs={6} md={4} align="center">
+                  <Card sx={{ display: 'flex', alignItems: 'center' }} align="center">
+                    <CardActionArea component={RouterLink} to={`${PATH_INTEGRATE.authorise}/yapily/${id}`}>
+                      <CardContent align="center">
+                        <Stack style={{ margin: 'auto' }} spacing={2}>
+                          <BankImage icon={id} />
+                          <Typography noWrap variant="h6" sx={{ color: 'text.secondary' }}>
+                            {tradingName}
+                          </Typography>
+                        </Stack>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              );
+            })}
         </Grid>
       </Container>
     </Page>

@@ -2,14 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 // utils
 import axios from '../../utils/axios';
 import { PATH_INTEGRATE } from '../../routes/paths';
+import { API_DEFAULTS } from '../common/constants';
 
 // ----------------------------------------------------------------------
 
 const initialState = {
   isLoading: false,
   error: false,
-  providerList: [],
-  bankList: [],
+  providers: { ...API_DEFAULTS },
+  banks: { ...API_DEFAULTS },
   authUrl: null,
   validation: 'InProgress'
 };
@@ -19,8 +20,13 @@ const slice = createSlice({
   initialState,
   reducers: {
     // START LOADING
-    startLoading(state) {
+    startLoading(state, action) {
       state.isLoading = true;
+      if (action.payload) state[action.payload].loading = true;
+    },
+
+    finishedLoading(state) {
+      state.isLoading = false;
     },
 
     // HAS ERROR
@@ -29,14 +35,16 @@ const slice = createSlice({
       state.error = action.payload;
     },
 
-    getBankListSuccess(state, action) {
-      state.isLoading = false;
-      state.bankList = action.payload;
+    getBanksSuccess(state, action) {
+      state.banks.loading = false;
+      state.banks.response = action.payload;
+      state.banks.hasData = action.payload.results.length > 0;
     },
 
-    getProviderListSuccess(state, action) {
-      state.isLoading = false;
-      state.providerList = action.payload;
+    getProvidersSuccess(state, action) {
+      state.providers.loading = false;
+      state.providers.response = action.payload;
+      state.providers.hasData = action.payload.results.length > 0;
     },
 
     requestProviderSuccess(state, action) {
@@ -62,32 +70,48 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function getProviderList() {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
+export function getProviders() {
+  return async (dispatch, getState) => {
+    const { provider } = getState();
+    if (provider.providers.loading || provider.providers.hasData) return;
+
+    dispatch(slice.actions.startLoading('providers'));
     try {
       const response = await axios.post('/providers', {
         page: 0,
-        recordsPerPage: 25,
+        recordsPerPage: 0,
         sort: [{ field: 'id', sort: 'asc' }],
         search: {
           items: [],
           linkOperator: 'and'
         }
       });
-      dispatch(slice.actions.getProviderListSuccess(response.data.results));
+      dispatch(slice.actions.getProvidersSuccess(response.data));
+      dispatch(slice.actions.finishedLoading('providers'));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
   };
 }
 
-export function getBankList() {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
+export function getBanks() {
+  return async (dispatch, getState) => {
+    const { provider } = getState();
+    if (provider.banks.loading || provider.banks.hasData) return;
+
+    dispatch(slice.actions.startLoading('banks'));
     try {
-      const response = await axios.get('/banks');
-      dispatch(slice.actions.getBankListSuccess(response.data.banks));
+      const response = await axios.post('/banks', {
+        page: 0,
+        recordsPerPage: 0,
+        sort: [{ field: 'id', sort: 'asc' }],
+        search: {
+          items: [],
+          linkOperator: 'and'
+        }
+      });
+      dispatch(slice.actions.getBanksSuccess(response.data));
+      dispatch(slice.actions.finishedLoading('banks'));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
@@ -99,7 +123,6 @@ export function requestProvider(provider, integration, search) {
     dispatch(slice.actions.startLoading());
     try {
       const callbackUrl = `${window.location.protocol}//${window.location.hostname}${PATH_INTEGRATE.complete}/${provider}/${integration}`;
-      console.log(callbackUrl);
       const response = await axios.get(
         `/providers/${provider}/${integration}/authorise${search || '?'}&callbackUrl=${callbackUrl}`
       );
