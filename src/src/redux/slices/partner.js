@@ -29,6 +29,11 @@ const slice = createSlice({
       state.error = action.payload;
     },
 
+    clearError(state) {
+      state.isLoading = false;
+      state.error = {};
+    },
+
     registerPartnerSuccess(state, action) {
       state.isLoading = false;
       state.registration = action.payload;
@@ -42,11 +47,17 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
+export function reset() {
+  return (dispatch) => {
+    dispatch(slice.actions.clearError());
+  };
+}
+
 export function register(email, password, firstName, lastName, partnerName) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.put('/partner', {
+      const response = await axios.post('/partner', {
         email,
         password,
         firstName,

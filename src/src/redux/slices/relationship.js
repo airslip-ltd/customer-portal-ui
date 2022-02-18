@@ -72,7 +72,7 @@ export function getRelationshipList() {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get('/relationship');
+      const response = await axios.get('/relationship/search');
       dispatch(slice.actions.getRelationshipListSuccess(response.data.results));
     } catch (error) {
       dispatch(slice.actions.hasError(error));

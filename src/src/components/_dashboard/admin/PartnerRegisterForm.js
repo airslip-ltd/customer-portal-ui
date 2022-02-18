@@ -12,7 +12,7 @@ import { Stack, TextField, IconButton, InputAdornment, Card, Grid, Typography } 
 import { LoadingButton } from '@mui/lab';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
-import { register } from '../../../redux/slices/partner';
+import { register, reset } from '../../../redux/slices/partner';
 //
 import { MIconButton } from '../../@material-extend';
 // custom
@@ -28,6 +28,8 @@ export default function PartnerRegisterForm() {
   const dispatch = useDispatch();
   const { registerSuccess, error, registration, isLoading } = useSelector((state) => state.partner);
   const navigate = useNavigate();
+
+  reset();
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),

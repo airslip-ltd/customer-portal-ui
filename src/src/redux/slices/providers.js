@@ -2,15 +2,22 @@ import { createSlice } from '@reduxjs/toolkit';
 // utils
 import axios from '../../utils/axios';
 import { PATH_INTEGRATE } from '../../routes/paths';
-import { API_DEFAULTS } from '../common/constants';
+// utils
+import {
+  SEARCH_DEFAULTS,
+  COMMON_FUNCTIONS,
+  SEARCH_FUNCTIONS,
+  STATE_DEFAULTS,
+  GET_ALL_QUERY,
+  executeSearch
+} from '../common/constants';
 
 // ----------------------------------------------------------------------
 
 const initialState = {
-  isLoading: false,
-  error: false,
-  providers: { ...API_DEFAULTS },
-  banks: { ...API_DEFAULTS },
+  ...STATE_DEFAULTS,
+  providers: { ...SEARCH_DEFAULTS },
+  banks: { ...SEARCH_DEFAULTS },
   authUrl: null,
   validation: 'InProgress'
 };
@@ -19,32 +26,13 @@ const slice = createSlice({
   name: 'provider',
   initialState,
   reducers: {
-    // START LOADING
-    startLoading(state, action) {
-      state.isLoading = true;
-      if (action.payload) state[action.payload].loading = true;
-    },
-
-    finishedLoading(state) {
-      state.isLoading = false;
-    },
+    ...COMMON_FUNCTIONS,
+    ...SEARCH_FUNCTIONS,
 
     // HAS ERROR
     hasError(state, action) {
       state.isLoading = false;
       state.error = action.payload;
-    },
-
-    getBanksSuccess(state, action) {
-      state.banks.loading = false;
-      state.banks.response = action.payload;
-      state.banks.hasData = action.payload.results.length > 0;
-    },
-
-    getProvidersSuccess(state, action) {
-      state.providers.loading = false;
-      state.providers.response = action.payload;
-      state.providers.hasData = action.payload.results.length > 0;
     },
 
     requestProviderSuccess(state, action) {
@@ -73,48 +61,16 @@ export default slice.reducer;
 export function getProviders() {
   return async (dispatch, getState) => {
     const { provider } = getState();
-    if (provider.providers.loading || provider.providers.hasData) return;
-
-    dispatch(slice.actions.startLoading('providers'));
-    try {
-      const response = await axios.post('/providers', {
-        page: 0,
-        recordsPerPage: 0,
-        sort: [{ field: 'id', sort: 'asc' }],
-        search: {
-          items: [],
-          linkOperator: 'and'
-        }
-      });
-      dispatch(slice.actions.getProvidersSuccess(response.data));
-      dispatch(slice.actions.finishedLoading('providers'));
-    } catch (error) {
-      dispatch(slice.actions.hasError(error));
-    }
+    if (provider.providers.hasData) return;
+    await executeSearch(provider, dispatch, slice, 'providers', GET_ALL_QUERY);
   };
 }
 
 export function getBanks() {
   return async (dispatch, getState) => {
     const { provider } = getState();
-    if (provider.banks.loading || provider.banks.hasData) return;
-
-    dispatch(slice.actions.startLoading('banks'));
-    try {
-      const response = await axios.post('/banks', {
-        page: 0,
-        recordsPerPage: 0,
-        sort: [{ field: 'id', sort: 'asc' }],
-        search: {
-          items: [],
-          linkOperator: 'and'
-        }
-      });
-      dispatch(slice.actions.getBanksSuccess(response.data));
-      dispatch(slice.actions.finishedLoading('banks'));
-    } catch (error) {
-      dispatch(slice.actions.hasError(error));
-    }
+    if (provider.providers.hasData) return;
+    await executeSearch(provider, dispatch, slice, 'banks', GET_ALL_QUERY);
   };
 }
 
