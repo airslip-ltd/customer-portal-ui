@@ -1,28 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 // utils
 import axios from '../../utils/axios';
+// utils
+import {
+  SEARCH_DEFAULTS,
+  COMMON_FUNCTIONS,
+  SEARCH_FUNCTIONS,
+  STATE_DEFAULTS,
+  executeSearch
+} from '../common/constants';
 
 // ----------------------------------------------------------------------
 
 const initialState = {
-  isLoading: false,
-  success: false,
-  error: {},
-  relationship: {},
-  relationshipList: []
+  ...STATE_DEFAULTS,
+  relationships: { ...SEARCH_DEFAULTS },
+  relationship: {}
 };
 
 const slice = createSlice({
   name: 'relationship',
   initialState,
   reducers: {
-    // START LOADING
-    startLoading(state) {
-      state.error = {};
-      state.relationship = {};
-      state.isLoading = true;
-      state.success = false;
-    },
+    ...COMMON_FUNCTIONS,
+    ...SEARCH_FUNCTIONS,
 
     // HAS ERROR
     hasError(state, action) {
@@ -33,12 +34,6 @@ const slice = createSlice({
     createSuccess(state, action) {
       state.isLoading = false;
       state.relationship = action.payload;
-      state.success = true;
-    },
-
-    getRelationshipListSuccess(state, action) {
-      state.isLoading = false;
-      state.relationshipList = action.payload;
       state.success = true;
     }
   }
@@ -53,7 +48,7 @@ export function create(email, phoneNumber, firstName, lastName, businessName, pe
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.post('/relationship', {
+      const response = await axios.post('/relationships', {
         email,
         phoneNumber,
         firstName,
@@ -68,14 +63,9 @@ export function create(email, phoneNumber, firstName, lastName, businessName, pe
   };
 }
 
-export function getRelationshipList() {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios.get('/relationship/search');
-      dispatch(slice.actions.getRelationshipListSuccess(response.data.results));
-    } catch (error) {
-      dispatch(slice.actions.hasError(error));
-    }
+export function getRelationships(query) {
+  return async (dispatch, getState) => {
+    const { relationship } = getState();
+    await executeSearch(relationship, dispatch, slice, 'relationships', query);
   };
 }
