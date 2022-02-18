@@ -2,6 +2,10 @@ import { isUndefined } from 'lodash-es';
 import PropTypes from 'prop-types';
 // material
 import { Grid } from '@mui/material';
+
+// utils
+import { featureEnabled } from '../../../utils/feature-switch';
+
 // components
 import {
   MerchantRevenue,
@@ -42,9 +46,11 @@ export default function MerchantSummary({ currentMerchant }) {
           <MerchantCashflow />
         </Grid>
 
-        <Grid item xs={12}>
-          <BankingRecentTransactions />
-        </Grid>
+        {featureEnabled('banking-recent-transactions') && (
+          <Grid item xs={12}>
+            <BankingRecentTransactions />
+          </Grid>
+        )}
       </Grid>
     );
   }

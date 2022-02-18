@@ -63,6 +63,7 @@ jobs:
         REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
         REACT_APP_ANALYTICS_URL: ${{ env.REACT_APP_ANALYTICS_URL }}
         REACT_APP_AUTH_URL: ${{ env.REACT_APP_AUTH_URL }}
+        REACT_APP_ENVIRONMENT: ${{ env.ENV_PATH }}
       run: |
         cd ${{ env.PUBLISH_PATH }}
         npm install
