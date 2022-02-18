@@ -72,7 +72,7 @@ export function loadReferral(referralId) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get(`/relationship/referral?referralId=${encodeURIComponent(referralId)}`);
+      const response = await axios.get(`/relationships/referral?referralId=${encodeURIComponent(referralId)}`);
       dispatch(slice.actions.referralSuccess(response.data.currentVersion));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
