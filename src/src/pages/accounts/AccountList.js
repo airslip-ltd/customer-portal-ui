@@ -16,7 +16,7 @@ import StandardList from '../../components/_common/Lists/StandardList';
 
 // ----------------------------------------------------------------------
 
-export default function IntegrationList() {
+export default function AccountList() {
   const { themeStretch } = useSettings();
   const dispatch = useDispatch();
   const { accounts } = useSelector((state) => state.account);
