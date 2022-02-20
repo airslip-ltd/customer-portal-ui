@@ -132,7 +132,7 @@ export default function Router() {
         {
           path: 'relationship',
           children: [
-            { element: <Navigate to="/dashboard/relationsip/list" replace /> },
+            { element: <Navigate to="/dashboard/relationship/list" replace /> },
             { path: 'list', element: <RelationshipList /> },
             { path: 'create', element: <RelationshipCreate /> },
             { path: ':id/view', element: <RelationshipView /> }
@@ -151,6 +151,14 @@ export default function Router() {
             { element: <Navigate to="/dashboard/analytics/balances" replace /> },
             { path: 'balances', element: <AccountBalances /> },
             { path: 'commerce', element: <CommerceSummary /> }
+          ]
+        },
+        {
+          path: 'reporting',
+          children: [
+            { element: <Navigate to="/dashboard/reporting/list" replace /> },
+            { path: 'banking-transactions', element: <BankingTransactionsReport /> },
+            { path: 'commerce-transactions', element: <CommerceTransactionsReport /> }
           ]
         }
       ]
@@ -199,3 +207,6 @@ const PartnerRegister = Loadable(lazy(() => import('../pages/admin/partner/Regis
 // Analytics
 const AccountBalances = Loadable(lazy(() => import('../pages/analytics/AccountBalances')));
 const CommerceSummary = Loadable(lazy(() => import('../pages/analytics/CommerceSummary')));
+// Reporting
+const BankingTransactionsReport = Loadable(lazy(() => import('../pages/reporting/BankingTransactionsReport')));
+const CommerceTransactionsReport = Loadable(lazy(() => import('../pages/reporting/CommerceTransactionsReport')));
