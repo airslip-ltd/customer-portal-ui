@@ -13,7 +13,28 @@ import {
   MerchantInterestCharges,
   MerchantSalesAndRefunds,
   MerchantCashflow,
-  BankingRecentTransactions
+  BankingRecentTransactions,
+  CashInflowOutflow,
+  RevenueGrowthBenchmarking,
+  NewVsReturningCustomers,
+  DebtServiceCoverageRatio,
+  LeverageRatio,
+  DebtRatio,
+  DebtToCapitalRatio,
+  TotalDebtToTotalAssetsRatio,
+  OperatingMargin,
+  GrossProfitMargin,
+  CommonOutgoings,
+  LargestCustomersByRevenue,
+  ActiveVsChurnCustomers,
+  RefundRateVsBenchmark,
+  AccountsReceivables,
+  AccountsPayables,
+  AverageDebtorDays,
+  AverageCreditorDays,
+  LateInvoicesReceived,
+  LateBillsPaid,
+  RevenueForecasts
 } from '.';
 
 // ----------------------------------------------------------------------
@@ -49,6 +70,132 @@ export default function MerchantSummary({ currentMerchant }) {
         {featureEnabled('banking-recent-transactions') && (
           <Grid item xs={12}>
             <BankingRecentTransactions />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <CashInflowOutflow />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <RevenueGrowthBenchmarking />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <NewVsReturningCustomers />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <DebtServiceCoverageRatio />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <LeverageRatio />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <DebtRatio />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <DebtToCapitalRatio />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <TotalDebtToTotalAssetsRatio />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <OperatingMargin />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <GrossProfitMargin />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <CommonOutgoings />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <LargestCustomersByRevenue />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <ActiveVsChurnCustomers />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <RefundRateVsBenchmark />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <AccountsReceivables />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <AccountsPayables />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <AverageDebtorDays />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <AverageCreditorDays />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <LateInvoicesReceived />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <LateBillsPaid />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={8}>
+            <RevenueForecasts />
           </Grid>
         )}
       </Grid>
