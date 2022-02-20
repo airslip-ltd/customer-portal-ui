@@ -4,6 +4,8 @@ export function featureEnabled(featureName) {
     switch (featureName) {
       case 'banking-recent-transactions':
         return false;
+      case 'demo':
+        return false;
       default:
         return true;
     }
