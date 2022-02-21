@@ -89,120 +89,119 @@ export default function MerchantSummary({ currentMerchant }) {
           </Grid>
         )}
 
-        {/* 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <RevenueGrowthBenchmarking />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <NewVsReturningCustomers />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <LeverageRatio />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <DebtRatio />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <DebtToCapitalRatio />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <TotalDebtToTotalAssetsRatio />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <OperatingMargin />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <GrossProfitMargin />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <CommonOutgoings />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <LargestCustomersByRevenue />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <ActiveVsChurnCustomers />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <RefundRateVsBenchmark />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <AccountsReceivables />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <AccountsPayables />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <AverageDebtorDays />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <AverageCreditorDays />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <LateInvoicesReceived />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <LateBillsPaid />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
+        {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={8}>
             <RevenueForecasts />
           </Grid>
-        )} */}
+        )}
       </Grid>
     );
   }
