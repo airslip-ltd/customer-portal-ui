@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Card, Typography, Box, CardActionArea } from '@mui/material';
