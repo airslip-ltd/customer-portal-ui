@@ -150,7 +150,8 @@ export default function Router() {
           children: [
             { element: <Navigate to="/dashboard/analytics/balances" replace /> },
             { path: 'balances', element: <AccountBalances /> },
-            { path: 'commerce', element: <CommerceSummary /> }
+            { path: 'commerce', element: <CommerceSummary /> },
+            { path: 'debt-service-coverage-ratio-detail', element: <DebtServiceCoverageRatioDetail /> }
           ]
         },
         {
@@ -207,6 +208,9 @@ const PartnerRegister = Loadable(lazy(() => import('../pages/admin/partner/Regis
 // Analytics
 const AccountBalances = Loadable(lazy(() => import('../pages/analytics/AccountBalances')));
 const CommerceSummary = Loadable(lazy(() => import('../pages/analytics/CommerceSummary')));
+const DebtServiceCoverageRatioDetail = Loadable(
+  lazy(() => import('../pages/analytics/DebtServiceCoverageRatioDetail'))
+);
 // Reporting
 const BankingTransactionsReport = Loadable(lazy(() => import('../pages/reporting/BankingTransactionsReport')));
 const CommerceTransactionsReport = Loadable(lazy(() => import('../pages/reporting/CommerceTransactionsReport')));
