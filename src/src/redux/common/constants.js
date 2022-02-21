@@ -57,12 +57,17 @@ export const GET_ALL_QUERY = {
   }
 };
 
-export async function executeSearch(state, dispatch, slice, searchType, query) {
+export async function executeSearch(state, dispatch, slice, searchType, query, endPoint, servuiceUrl) {
   if (state[searchType].loading) return;
 
   dispatch(slice.actions.startSearch(searchType));
   try {
-    const response = await axios.post(`/${searchType}/search`, query);
+    const response = await axios({
+      url: endPoint || `/${searchType}/search`,
+      method: 'post',
+      baseURL: servuiceUrl || process.env.REACT_APP_API_URL,
+      data: query
+    });
     dispatch(
       slice.actions.searchSuccess({
         searchType,
