@@ -65,6 +65,12 @@ export const PATH_DASHBOARD = {
     list: path(ROOTS_DASHBOARD, '/relationship/list'),
     create: path(ROOTS_DASHBOARD, '/relationship/create')
   },
+  reports: {
+    root: path(ROOTS_DASHBOARD, '/reporting'),
+    list: path(ROOTS_DASHBOARD, '/reporting/list'),
+    bankTransactions: path(ROOTS_DASHBOARD, '/reporting/banking-transactions'),
+    commerceTransactions: path(ROOTS_DASHBOARD, '/reporting/commerce-transactions')
+  },
   admin: {
     partners: {
       root: path(ROOTS_DASHBOARD, '/admin/partners'),
