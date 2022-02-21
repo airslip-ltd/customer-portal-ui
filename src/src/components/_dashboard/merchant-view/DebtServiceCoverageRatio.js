@@ -18,7 +18,7 @@ export default function DebtServiceCoverageRatio({ accountId }) {
   useEffect(() => {
     if (!demoData[accountId] || !demoData[accountId].metrics) return;
     setMetricData(demoData[accountId]);
-  }, [demoData, accountId, setMetricData]);
+  }, [accountId, setMetricData]);
 
   return (
     <DemoNumberSnapshot
