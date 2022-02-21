@@ -1,7 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 // material
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridToolbarContainer,
+  GridToolbarExport,
+  GridToolbarFilterButton,
+  GridToolbarColumnsButton
+} from '@mui/x-data-grid';
 import { Card } from '@mui/material';
 
 // ----------------------------------------------------------------------
@@ -13,6 +19,16 @@ StandardList.propTypes = {
   onRowSelected: PropTypes.func,
   recordsPerPage: PropTypes.number
 };
+
+function CustomToolbar() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarExport />
+      <GridToolbarFilterButton />
+      <GridToolbarColumnsButton />
+    </GridToolbarContainer>
+  );
+}
 
 export default function StandardList({ details, columns, onChangeQuery, onRowSelected, recordsPerPage }) {
   const [query, setQuery] = useState({
@@ -62,7 +78,7 @@ export default function StandardList({ details, columns, onChangeQuery, onRowSel
           columns={columns}
           rows={details.response.results}
           components={{
-            Toolbar: GridToolbar
+            Toolbar: CustomToolbar
           }}
           disableSelectionOnClick
           filterMode="server"
