@@ -35,11 +35,11 @@ export default function BankingTransactionsReport() {
       <Page title="Reports | Bank Transactions | Airslip">
         <Container maxWidth={themeStretch ? false : 'xl'}>
           <HeaderBreadcrumbs
-            heading="Bank Transactions"
+            heading="Debt Service Coverage Ratio"
             links={[
               { name: 'Dashboard', href: PATH_DASHBOARD.root },
-              { name: 'Reports', href: PATH_DASHBOARD.reports.root },
-              { name: 'Bank Transactions' }
+              { name: 'Analytics', href: PATH_DASHBOARD.analytics.root },
+              { name: 'Debt Service Coverage Ratio' }
             ]}
           />
           <StandardList
