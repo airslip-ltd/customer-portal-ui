@@ -123,7 +123,7 @@ const sidebarConfig = [
       {
         title: 'commerce transactions',
         path: PATH_DASHBOARD.reports.commerceTransactions,
-        icon: ICONS.banking
+        icon: ICONS.ecommerce
       }
     ]
   },

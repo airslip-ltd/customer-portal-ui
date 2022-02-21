@@ -17,7 +17,8 @@ StandardList.propTypes = {
   columns: PropTypes.array.isRequired,
   onChangeQuery: PropTypes.func.isRequired,
   onRowSelected: PropTypes.func,
-  recordsPerPage: PropTypes.number
+  recordsPerPage: PropTypes.number,
+  defaultSort: PropTypes.string
 };
 
 function CustomToolbar() {
@@ -30,11 +31,11 @@ function CustomToolbar() {
   );
 }
 
-export default function StandardList({ details, columns, onChangeQuery, onRowSelected, recordsPerPage }) {
+export default function StandardList({ details, columns, onChangeQuery, onRowSelected, recordsPerPage, defaultSort }) {
   const [query, setQuery] = useState({
     page: 0,
     recordsPerPage: recordsPerPage || 25,
-    sort: [{ field: 'id', sort: 'asc' }],
+    sort: [{ field: defaultSort || 'id', sort: 'desc' }],
     search: {
       items: [],
       linkOperator: 'and'

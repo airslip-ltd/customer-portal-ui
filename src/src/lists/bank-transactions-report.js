@@ -1,5 +1,7 @@
+import { Typography } from '@mui/material';
 import { fCurrencyFromLong } from '../utils/formatNumber';
 import { fDateFromLong } from '../utils/formatDate';
+import BankIcon from '../components/_dashboard/account-list/BankIcon';
 
 export const columns = [
   {
@@ -12,7 +14,15 @@ export const columns = [
   {
     field: 'bankId',
     headerName: 'Bank',
-    flex: 1
+    flex: 1,
+    renderCell: (params) => (
+      <>
+        <BankIcon icon={params.value} />
+        <Typography variant="subtitle2" noWrap sx={{ pl: 1 }}>
+          {params.row.tradingName}
+        </Typography>
+      </>
+    )
   },
   {
     dataType: 'number',

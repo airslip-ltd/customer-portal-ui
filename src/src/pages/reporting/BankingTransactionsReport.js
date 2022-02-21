@@ -48,6 +48,7 @@ export default function BankingTransactionsReport() {
             onChangeQuery={setQuery}
             onRowSelected={handleRowClick}
             recordsPerPage={10}
+            defaultSort="capturedDate"
           />
         </Container>
       </Page>

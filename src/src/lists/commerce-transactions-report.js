@@ -38,18 +38,6 @@ export const columns = [
     field: 'description',
     headerName: 'Description',
     flex: 1
-  },
-  {
-    field: 'isoFamilyCode',
-    headerName: 'Iso Family Code',
-    flex: 1,
-    hide: true
-  },
-  {
-    field: 'proprietaryCode',
-    headerName: 'Proprietary Code',
-    flex: 1,
-    hide: true
   }
 ];
 /**

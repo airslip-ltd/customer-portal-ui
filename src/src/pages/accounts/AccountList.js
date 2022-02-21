@@ -32,7 +32,7 @@ export default function AccountList() {
 
   return (
     <>
-      <Page title="Accounts | List | Airslip">
+      <Page title="Bank Accounts | List | Airslip">
         <Container maxWidth={themeStretch ? false : 'xl'}>
           <HeaderBreadcrumbs
             heading="Bank Accounts"

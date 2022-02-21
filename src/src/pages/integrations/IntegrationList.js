@@ -32,7 +32,7 @@ export default function IntegrationList() {
 
   return (
     <>
-      <Page title="Accounts | List | Airslip">
+      <Page title="Integrations | List | Airslip">
         <Container maxWidth={themeStretch ? false : 'xl'}>
           <HeaderBreadcrumbs
             heading="Integrations List"
