@@ -15,7 +15,7 @@ export function fCurrencyFromLong(number) {
 }
 
 export function fPercent(number) {
-  return numeral(number / 100).format('0.0%');
+  return numeral(number / 100).format('0.00%');
 }
 
 export function fNumber(number) {
