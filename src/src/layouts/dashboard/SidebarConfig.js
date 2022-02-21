@@ -109,6 +109,25 @@ const sidebarConfig = [
     ]
   },
 
+  // REPORTS
+  // ----------------------------------------------------------------------
+  {
+    subheader: 'reports',
+    userTypes: ['Merchant'],
+    items: [
+      {
+        title: 'bank transactions',
+        path: PATH_DASHBOARD.reports.bankTransactions,
+        icon: ICONS.banking
+      },
+      {
+        title: 'commerce transactions',
+        path: PATH_DASHBOARD.reports.commerceTransactions,
+        icon: ICONS.banking
+      }
+    ]
+  },
+
   // SETTINGS
   // ----------------------------------------------------------------------
   {
