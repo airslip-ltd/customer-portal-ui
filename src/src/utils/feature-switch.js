@@ -4,12 +4,17 @@ export function featureEnabled(featureName) {
     switch (featureName) {
       case 'banking-recent-transactions':
         return false;
-      case 'demo-to-complete':
+      case 'demo':
         return false;
       default:
         return true;
     }
   }
 
-  return true;
+  switch (featureName) {
+    case 'demo-to-complete':
+      return false;
+    default:
+      return true;
+  }
 }
