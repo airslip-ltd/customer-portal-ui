@@ -51,25 +51,27 @@ export default function MerchantSummary({ currentMerchant }) {
           <MerchantRevenue />
         </Grid>
 
-        <Grid item xs={12} md={4}>
-          <MerchantRefunds />
-        </Grid>
-
-        <Grid item xs={12} md={4}>
-          <MerchantInterestCharges />
-        </Grid>
-
-        <Grid item xs={12}>
-          <MerchantSalesAndRefunds />
-        </Grid>
-
-        <Grid item xs={12}>
-          <MerchantCashflow />
-        </Grid>
-
         {featureEnabled('demo') && (
           <Grid item xs={12} md={4}>
             <DebtServiceCoverageRatio accountId="my-account-1" />
+          </Grid>
+        )}
+
+        {featureEnabled('demo-to-complete') && (
+          <Grid item xs={12} md={4}>
+            <DebtRatio />
+          </Grid>
+        )}
+
+        {featureEnabled('demo-to-complete') && (
+          <Grid item xs={12} md={4}>
+            <DebtToCapitalRatio />
+          </Grid>
+        )}
+
+        {featureEnabled('demo-to-complete') && (
+          <Grid item xs={12} md={4}>
+            <RevenueGrowthBenchmarking />
           </Grid>
         )}
 
@@ -91,31 +93,7 @@ export default function MerchantSummary({ currentMerchant }) {
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <RevenueGrowthBenchmarking />
-          </Grid>
-        )}
-
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <NewVsReturningCustomers />
-          </Grid>
-        )}
-
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
             <LeverageRatio />
-          </Grid>
-        )}
-
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <DebtRatio />
-          </Grid>
-        )}
-
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <DebtToCapitalRatio />
           </Grid>
         )}
 
@@ -202,6 +180,22 @@ export default function MerchantSummary({ currentMerchant }) {
             <RevenueForecasts />
           </Grid>
         )}
+
+        <Grid item xs={12} md={4}>
+          <MerchantRefunds />
+        </Grid>
+
+        <Grid item xs={12} md={4}>
+          <MerchantInterestCharges />
+        </Grid>
+
+        <Grid item xs={12}>
+          <MerchantSalesAndRefunds />
+        </Grid>
+
+        <Grid item xs={12}>
+          <MerchantCashflow />
+        </Grid>
       </Grid>
     );
   }
