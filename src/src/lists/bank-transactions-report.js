@@ -52,15 +52,3 @@ export const columns = [
     hide: true
   }
 ];
-// public string BankId { get; set; } = string.Empty;
-// public string EmailAddress { get; set; } = string.Empty;
-// public long? AuthorisedDate { get; set; }
-// public long CapturedDate { get; set; }
-// public long Amount { get; set; }
-// public string? CurrencyCode { get; set; }
-// public string? AddressLine { get; set; }
-// public string? LastCardDigits { get; set; }
-// public string? TransactionIdentifier { get; set; }
-// public string? Reference { get; set; }
-// public DataSources DataSource { get; set; }
-// public long TimeStamp { get; set; }

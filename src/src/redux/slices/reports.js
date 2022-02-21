@@ -12,7 +12,8 @@ import {
 
 const initialState = {
   ...STATE_DEFAULTS,
-  bankTransactions: { ...SEARCH_DEFAULTS }
+  bankTransactions: { ...SEARCH_DEFAULTS },
+  commerceTransactions: { ...SEARCH_DEFAULTS }
 };
 
 const slice = createSlice({
@@ -39,6 +40,21 @@ export function getBankTransactions(query) {
       'bankTransactions',
       query,
       '/reports/bank-transactions',
+      process.env.REACT_APP_ANALYTICS_URL
+    );
+  };
+}
+
+export function getCommerceTransactions(query) {
+  return async (dispatch, getState) => {
+    const { reports } = getState();
+    await executeSearch(
+      reports,
+      dispatch,
+      slice,
+      'commerceTransactions',
+      query,
+      '/reports/commerce-transactions',
       process.env.REACT_APP_ANALYTICS_URL
     );
   };
