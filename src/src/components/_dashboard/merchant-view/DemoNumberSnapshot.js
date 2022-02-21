@@ -1,5 +1,5 @@
+import { useEffect } from 'react';
 import { Icon } from '@iconify/react';
-import ReactApexChart from 'react-apexcharts';
 import PropTypes from 'prop-types';
 import trendingUpFill from '@iconify/icons-eva/trending-up-fill';
 import trendingDownFill from '@iconify/icons-eva/trending-down-fill';
@@ -9,7 +9,7 @@ import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Grid, Card, Typography, Stack, CardActionArea } from '@mui/material';
 import LoadingProgress from '../../LoadingProgress';
 // utils
-import { fNumber, fPercent } from '../../../utils/formatNumber';
+import { fShortenNumber } from '../../../utils/formatNumber';
 
 // ----------------------------------------------------------------------
 
@@ -26,38 +26,18 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-MerchantDashboardSnapshot.propTypes = {
-  chartData: PropTypes.array.isRequired,
+DemoNumberSnapshot.propTypes = {
   metricData: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
-  navigateTo: PropTypes.string.isRequired,
-  graphColor: PropTypes.string
+  navigateTo: PropTypes.string.isRequired
 };
 
-export default function MerchantDashboardSnapshot({ metricData, chartData, graphColor, title, navigateTo }) {
+export default function DemoNumberSnapshot({ metricData, title, navigateTo }) {
   const theme = useTheme();
-  const CHART_DATA = [
-    {
-      data: chartData
-    }
-  ];
 
-  const chartOptions = {
-    colors: [graphColor || theme.palette.primary.main],
-    chart: { sparkline: { enabled: true } },
-    plotOptions: { bar: { columnWidth: '68%', borderRadius: 2 } },
-    labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
-    tooltip: {
-      x: { show: false },
-      y: {
-        formatter: (seriesName) => fNumber(seriesName),
-        title: {
-          formatter: () => ''
-        }
-      },
-      marker: { show: false }
-    }
-  };
+  useEffect(() => {
+    console.log(metricData);
+  }, [metricData]);
 
   if (!metricData.metrics) {
     return (
@@ -78,10 +58,7 @@ export default function MerchantDashboardSnapshot({ metricData, chartData, graph
     <Card>
       <CardActionArea component={RouterLink} to={navigateTo} sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
         <Box sx={{ flexGrow: 1 }}>
-          <Typography variant="subtitle2">
-            {title}
-            {metricData.dayRange > 0 && <> (Last {metricData.dayRange} days)</>}
-          </Typography>
+          <Typography variant="subtitle2">{title}</Typography>
           <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2, mb: 1 }}>
             <IconWrapperStyle
               sx={{
@@ -95,14 +72,12 @@ export default function MerchantDashboardSnapshot({ metricData, chartData, graph
             </IconWrapperStyle>
             <Typography component="span" variant="subtitle2">
               {metricData.movement > 0 && '+'}
-              {fPercent(metricData.movement)}
+              {fShortenNumber(metricData.movement)}
             </Typography>
           </Stack>
 
-          <Typography variant="h3">&pound;{fNumber(metricData.balance)}</Typography>
+          <Typography variant="h3">{metricData.balance}</Typography>
         </Box>
-
-        <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} width={60} height={36} />
       </CardActionArea>
     </Card>
   );

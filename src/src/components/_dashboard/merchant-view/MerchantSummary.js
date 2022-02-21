@@ -67,18 +67,29 @@ export default function MerchantSummary({ currentMerchant }) {
           <MerchantCashflow />
         </Grid>
 
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <DebtServiceCoverageRatio accountId="my-account-1" />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <NewVsReturningCustomers accountId="my-account-1" />
+          </Grid>
+        )}
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={8}>
+            <CashInflowOutflow />
+          </Grid>
+        )}
         {featureEnabled('banking-recent-transactions') && (
           <Grid item xs={12}>
             <BankingRecentTransactions />
           </Grid>
         )}
 
-        {featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <CashInflowOutflow />
-          </Grid>
-        )}
-
+        {/* 
         {featureEnabled('demo') && (
           <Grid item xs={12} md={4}>
             <RevenueGrowthBenchmarking />
@@ -88,12 +99,6 @@ export default function MerchantSummary({ currentMerchant }) {
         {featureEnabled('demo') && (
           <Grid item xs={12} md={4}>
             <NewVsReturningCustomers />
-          </Grid>
-        )}
-
-        {featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <DebtServiceCoverageRatio />
           </Grid>
         )}
 
@@ -197,7 +202,7 @@ export default function MerchantSummary({ currentMerchant }) {
           <Grid item xs={12} md={8}>
             <RevenueForecasts />
           </Grid>
-        )}
+        )} */}
       </Grid>
     );
   }
