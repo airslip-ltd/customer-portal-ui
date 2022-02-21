@@ -11,7 +11,7 @@ Logo.propTypes = {
 export default function Logo({ sx }) {
   return (
     <Box sx={{ width: 200, height: 40, ...sx }}>
-      <img alt="airslip logo" src="/static/logo_text_r.png" />
+      <img alt="airslip logo" src="/static/logo_black.svg" />
     </Box>
   );
 }
