@@ -1,7 +1,7 @@
 import { isUndefined } from 'lodash-es';
 import PropTypes from 'prop-types';
 // material
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 // utils
 import { featureEnabled } from '../../../utils/feature-switch';
@@ -45,29 +45,26 @@ export default function MerchantSummary({ currentMerchant }) {
     return (
       <Grid container spacing={3}>
         {featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <DebtServiceCoverageRatio accountId="my-account-1" />
-          </Grid>
-        )}
-        {featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <DebtRatio accountId="my-account-1" />
-          </Grid>
-        )}
-        {featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <DebtToCapitalRatio accountId="my-account-1" />
-          </Grid>
-        )}
-        {featureEnabled('demo') && (
-          <Grid item xs={12} md={8}>
-            <CashInflowOutflow accountId="my-account-1" />
-          </Grid>
-        )}
-        {featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <RevenueGrowthBenchmarking accountId="my-account-1" />
-          </Grid>
+          <>
+            <Grid item xs={12}>
+              <Typography variant="h4">Liquidity</Typography>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <DebtServiceCoverageRatio accountId="my-account-1" />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <DebtRatio accountId="my-account-1" />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <DebtToCapitalRatio accountId="my-account-1" />
+            </Grid>
+            <Grid item xs={12} md={8}>
+              <CashInflowOutflow accountId="my-account-1" />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <RevenueGrowthBenchmarking accountId="my-account-1" />
+            </Grid>
+          </>
         )}
 
         <Grid item xs={12} md={4}>
