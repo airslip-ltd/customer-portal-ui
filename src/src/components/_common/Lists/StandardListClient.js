@@ -13,7 +13,8 @@ import { Card } from '@mui/material';
 
 StandardListClient.propTypes = {
   details: PropTypes.object.isRequired,
-  columns: PropTypes.array.isRequired
+  columns: PropTypes.array.isRequired,
+  recordsPerPage: PropTypes.number.isRequired
 };
 
 function CustomToolbar() {
@@ -26,7 +27,7 @@ function CustomToolbar() {
   );
 }
 
-export default function StandardListClient({ details, columns }) {
+export default function StandardListClient({ details, columns, recordsPerPage }) {
   return (
     <>
       <Card sx={{ p: 2 }}>
@@ -39,7 +40,7 @@ export default function StandardListClient({ details, columns }) {
             Toolbar: CustomToolbar
           }}
           disableSelectionOnClick
-          pageSize={10}
+          pageSize={recordsPerPage}
           rowsPerPageOptions={[5, 10, 25]}
           hideFooter
         />
