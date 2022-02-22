@@ -203,7 +203,7 @@ const IntegrationLinked = Loadable(lazy(() => import('../pages/integrations/Inte
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 const Unauthorised = Loadable(lazy(() => import('../pages/Page401')));
 // Merchants
-const RelationshipView = Loadable(lazy(() => import('../pages/relationship/View')));
+const RelationshipView = Loadable(lazy(() => import('../pages/relationship/RelationshipView')));
 const RelationshipList = Loadable(lazy(() => import('../pages/relationship/List')));
 const RelationshipCreate = Loadable(lazy(() => import('../pages/relationship/Create')));
 // Admin

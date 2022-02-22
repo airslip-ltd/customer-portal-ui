@@ -10,7 +10,7 @@ import { featureEnabled } from '../../../utils/feature-switch';
 import {
   MerchantRevenue,
   MerchantRefunds,
-  MerchantInterestCharges,
+  MerchantBalance,
   CashInflowOutflow,
   RevenueGrowthBenchmarking,
   NewVsReturningCustomers,
@@ -31,7 +31,8 @@ import {
   AverageCreditorDays,
   LateInvoicesReceived,
   LateBillsPaid,
-  RevenueForecasts
+  RevenueForecasts,
+  BankingExpensesCategories
 } from '.';
 
 // ----------------------------------------------------------------------
@@ -58,6 +59,11 @@ export default function MerchantSummary({ currentMerchant }) {
             <Grid item xs={12} md={4}>
               <DebtToCapitalRatio accountId="my-account-1" />
             </Grid>
+
+            <Grid item xs={12}>
+              <Typography variant="h4">Profitability</Typography>
+            </Grid>
+
             <Grid item xs={12} md={8}>
               <CashInflowOutflow accountId="my-account-1" />
             </Grid>
@@ -76,18 +82,38 @@ export default function MerchantSummary({ currentMerchant }) {
         </Grid>
 
         <Grid item xs={12} md={4}>
-          <MerchantInterestCharges />
+          <MerchantBalance />
         </Grid>
 
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <OperatingMargin accountId="my-account-1" />
+          </Grid>
+        )}
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <GrossProfitMargin accountId="my-account-1" />
+          </Grid>
+        )}
         {featureEnabled('demo') && (
           <Grid item xs={12} md={4}>
             <NewVsReturningCustomers accountId="my-account-1" />
           </Grid>
         )}
+        {featureEnabled('demo') && (
+          <>
+            <Grid item xs={12}>
+              <Typography variant="h4">Growth Analytics</Typography>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <NewVsReturningCustomers accountId="my-account-1" />
+            </Grid>
+          </>
+        )}
 
         {featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <OperatingMargin accountId="my-account-1" />
+          <Grid item xs={8}>
+            <BankingExpensesCategories />
           </Grid>
         )}
         {featureEnabled('demo-to-complete') && (
@@ -101,11 +127,6 @@ export default function MerchantSummary({ currentMerchant }) {
           </Grid>
         )}
 
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <GrossProfitMargin accountId="my-account-1" />
-          </Grid>
-        )}
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <CommonOutgoings accountId="my-account-1" />

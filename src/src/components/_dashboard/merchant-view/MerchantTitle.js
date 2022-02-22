@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 // material
 import { styled } from '@mui/material/styles';
 import { Typography, Card, CardContent } from '@mui/material';
-import { SeoIllustration } from '../../../assets';
 
 // ----------------------------------------------------------------------
 
@@ -30,8 +29,7 @@ export default function MerchantTitle({ displayName }) {
     <RootStyle>
       <CardContent
         sx={{
-          p: { md: 0 },
-          pl: { md: 5 },
+          p: 3,
           color: 'grey.800'
         }}
       >
@@ -40,14 +38,6 @@ export default function MerchantTitle({ displayName }) {
           <br /> {!displayName ? '...' : displayName}!
         </Typography>
       </CardContent>
-
-      <SeoIllustration
-        sx={{
-          p: 3,
-          width: 360,
-          margin: { xs: 'auto', md: 'inherit' }
-        }}
-      />
     </RootStyle>
   );
 }

@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 // material
 import { Container, Grid } from '@mui/material';
 // redux
-import { useDispatch, useSelector } from '../../redux/store';
-import { getBusinessList } from '../../redux/slices/business';
+import { listData } from '../../utils/demo-data/PartnerRiskFocus';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -16,36 +15,30 @@ import { MerchantSummary, MerchantTitle } from '../../components/_dashboard/merc
 
 // ----------------------------------------------------------------------
 
-export default function MerchantView() {
+export default function RelationshipView() {
   const { themeStretch } = useSettings();
-  const dispatch = useDispatch();
   const { id } = useParams();
-  const { merchantList } = useSelector((state) => state.merchant);
-  const currentMerchant = merchantList.find((merchant) => merchant.id === id);
-
-  useEffect(() => {
-    dispatch(getBusinessList());
-  }, [dispatch]);
+  const currentBusiness = listData.response.results.find((merchant) => merchant.id === id);
 
   return (
     <Page title="Merchant | View | Airslip">
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <HeaderBreadcrumbs
-          heading={currentMerchant ? currentMerchant.name : ''}
+          heading={currentBusiness ? currentBusiness.name : ''}
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Merchants', href: PATH_DASHBOARD.partner.merchants.root },
-            { name: currentMerchant ? currentMerchant.name : id }
+            { name: 'Relationships', href: PATH_DASHBOARD.relationship.root },
+            { name: currentBusiness ? currentBusiness.name : id }
           ]}
         />
       </Container>
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <MerchantTitle displayName={currentMerchant ? currentMerchant.name : ''} />
+            <MerchantTitle displayName={currentBusiness ? currentBusiness.name : ''} />
           </Grid>
           <Grid item xs={12}>
-            <MerchantSummary currentMerchant={currentMerchant} />
+            <MerchantSummary currentMerchant={currentBusiness} />
           </Grid>
         </Grid>
       </Container>
