@@ -84,6 +84,7 @@ export const PATH_DASHBOARD = {
     commerceSummary: path(ROOTS_DASHBOARD, '/analytics/commerce'),
     debtServiceCoverageRatioDetail: path(ROOTS_DASHBOARD, '/analytics/debt-service-coverage-ratio-detail'),
     revenueBenchmarkingDetail: path(ROOTS_DASHBOARD, '/analytics/revenue-benchmarking-detail'),
-    debtRatioDetail: path(ROOTS_DASHBOARD, '/analytics/debt-ratio-detail')
+    debtRatioDetail: path(ROOTS_DASHBOARD, '/analytics/debt-ratio-detail'),
+    debtToCapitalRatioDetail: path(ROOTS_DASHBOARD, '/analytics/debt-to-capital-ratio-detail')
   }
 };
