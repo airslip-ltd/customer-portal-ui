@@ -42,3 +42,18 @@ export const listData = {
     ]
   }
 };
+
+export const totals = [
+  {
+    title: 'Debt total',
+    amount: 24864400
+  },
+  {
+    title: 'Operating Income Total',
+    amount: 15390100
+  },
+  {
+    title: 'Debt Service Coverag Ratio',
+    amount: 1.616
+  }
+];

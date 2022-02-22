@@ -30,28 +30,16 @@ export default function AppWelcome({ displayName }) {
     <RootStyle>
       <CardContent
         sx={{
-          p: { md: 0 },
-          pl: { md: 5 },
+          p: 3,
           color: 'grey.800'
         }}
       >
         <Typography gutterBottom variant="h4">
-          Welcome back,
-          <br /> {!displayName ? '...' : displayName}!
+          Welcome back, {!displayName ? '...' : displayName}!
         </Typography>
 
-        <Typography variant="body2" sx={{ pb: { xs: 3, xl: 5 }, maxWidth: 480, mx: 'auto' }}>
-          Here's what you need to know today!
-        </Typography>
+        <Typography variant="body2">Here's what you need to know today!</Typography>
       </CardContent>
-
-      <SeoIllustration
-        sx={{
-          p: 3,
-          width: 360,
-          margin: { xs: 'auto', md: 'inherit' }
-        }}
-      />
     </RootStyle>
   );
 }
