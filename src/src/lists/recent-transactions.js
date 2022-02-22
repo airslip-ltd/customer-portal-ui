@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material';
 import ReactTimeAgo from 'react-time-ago';
 import { fCurrency } from '../utils/formatNumber';
 
