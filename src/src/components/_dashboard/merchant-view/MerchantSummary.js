@@ -108,6 +108,9 @@ export default function MerchantSummary({ currentMerchant }) {
             <Grid item xs={12} md={4}>
               <NewVsReturningCustomers accountId="my-account-1" />
             </Grid>
+            <Grid item xs={12} md={4}>
+              <ActiveVsChurnCustomers accountId="my-account-1" />
+            </Grid>
           </>
         )}
 

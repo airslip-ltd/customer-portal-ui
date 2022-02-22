@@ -37,3 +37,5 @@ export { default as LateBillsPaid } from './LateBillsPaid';
 export { default as RevenueForecasts } from './RevenueForecasts';
 export { default as CommonOutgoings } from './CommonOutgoings';
 export { default as BankingExpensesCategories } from './BankingExpensesCategories';
+export { default as SalesAndRefundsByAccount } from './SalesAndRefundsByAccount';
+export { default as RecentTransactions } from './RecentTransactions';

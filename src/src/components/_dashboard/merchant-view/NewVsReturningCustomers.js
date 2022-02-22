@@ -27,19 +27,18 @@ export default function NewVsReturningCustomers({ accountId }) {
         sx={{ display: 'flex', alignItems: 'center', p: 3 }}
       >
         <Box sx={{ flexGrow: 1 }}>
-          <Typography variant="subtitle2">New Vs Returning Customers</Typography>
           <Grid container>
             <Grid item xs={6}>
-              <Typography variant="h3">{fShortenNumber(demoData[accountId].new)}</Typography>
               <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
-                New
+                New Customers
               </Typography>
+              <Typography variant="h3">{fShortenNumber(demoData[accountId].new)}</Typography>
             </Grid>
             <Grid item xs={6}>
-              <Typography variant="h3">{fShortenNumber(demoData[accountId].returning)}</Typography>
               <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
-                Returning
+                Returning Customers
               </Typography>
+              <Typography variant="h3">{fShortenNumber(demoData[accountId].returning)}</Typography>
             </Grid>
           </Grid>
         </Box>
