@@ -46,9 +46,7 @@ export default function StandardList({ details, columns, onChangeQuery, onRowSel
     onChangeQuery(query);
   }, [onChangeQuery, query]);
 
-  useEffect(() => {
-    console.log(details);
-  }, [details]);
+  useEffect(() => {}, [details]);
 
   const handleSortModelChange = (newModel) => {
     setQuery({ ...query, ...{ page: 0, sort: newModel } });

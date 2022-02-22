@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
 import trendingUpFill from '@iconify/icons-eva/trending-up-fill';
@@ -34,10 +33,6 @@ DemoNumberSnapshot.propTypes = {
 
 export default function DemoNumberSnapshot({ metricData, title, navigateTo }) {
   const theme = useTheme();
-
-  useEffect(() => {
-    console.log(metricData);
-  }, [metricData]);
 
   if (!metricData.metrics) {
     return (

@@ -45,14 +45,17 @@ export const listData = {
 
 export const totals = [
   {
+    id: '12347',
     title: 'Debt total',
     amount: 24864400
   },
   {
+    id: '12348',
     title: 'Operating Income Total',
     amount: 15390100
   },
   {
+    id: '12349',
     title: 'Debt Service Coverag Ratio',
     amount: 1.616
   }
