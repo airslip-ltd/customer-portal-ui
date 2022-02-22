@@ -57,21 +57,21 @@ export default function MerchantSummary({ currentMerchant }) {
           </Grid>
         )}
 
-        {featureEnabled('demo-to-complete') && (
+        {featureEnabled('demo') && (
           <Grid item xs={12} md={4}>
-            <DebtRatio />
+            <DebtRatio accountId="my-account-1" />
+          </Grid>
+        )}
+
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <DebtToCapitalRatio accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <DebtToCapitalRatio />
-          </Grid>
-        )}
-
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <RevenueGrowthBenchmarking />
+            <RevenueGrowthBenchmarking accountId="my-account-1" />
           </Grid>
         )}
 
@@ -82,7 +82,7 @@ export default function MerchantSummary({ currentMerchant }) {
         )}
         {featureEnabled('demo') && (
           <Grid item xs={12} md={8}>
-            <CashInflowOutflow />
+            <CashInflowOutflow accountId="my-account-1" />
           </Grid>
         )}
         {featureEnabled('banking-recent-transactions') && (
@@ -93,91 +93,91 @@ export default function MerchantSummary({ currentMerchant }) {
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <LeverageRatio />
+            <LeverageRatio accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <TotalDebtToTotalAssetsRatio />
+            <TotalDebtToTotalAssetsRatio accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <OperatingMargin />
+            <OperatingMargin accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <GrossProfitMargin />
+            <GrossProfitMargin accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <CommonOutgoings />
+            <CommonOutgoings accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <LargestCustomersByRevenue />
+            <LargestCustomersByRevenue accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <ActiveVsChurnCustomers />
+            <ActiveVsChurnCustomers accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <RefundRateVsBenchmark />
+            <RefundRateVsBenchmark accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <AccountsReceivables />
+            <AccountsReceivables accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <AccountsPayables />
+            <AccountsPayables accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <AverageDebtorDays />
+            <AverageDebtorDays accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <AverageCreditorDays />
+            <AverageCreditorDays accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <LateInvoicesReceived />
+            <LateInvoicesReceived accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <LateBillsPaid />
+            <LateBillsPaid accountId="my-account-1" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={8}>
-            <RevenueForecasts />
+            <RevenueForecasts accountId="my-account-1" />
           </Grid>
         )}
 

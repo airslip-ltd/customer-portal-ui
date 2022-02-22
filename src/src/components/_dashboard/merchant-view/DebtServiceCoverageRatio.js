@@ -22,7 +22,7 @@ export default function DebtServiceCoverageRatio({ accountId }) {
 
   return (
     <DemoNumberSnapshot
-      title="Debt-Service Coverage Ratio (DSCR)"
+      title="Debt-Service Coverage Ratio"
       metricData={metricData}
       navigateTo={PATH_DASHBOARD.analytics.debtServiceCoverageRatioDetail}
     />
