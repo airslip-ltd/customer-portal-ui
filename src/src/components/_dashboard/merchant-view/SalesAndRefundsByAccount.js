@@ -16,7 +16,7 @@ export default function SalesAndRefundsByAccount({ accountId }) {
 
   useEffect(() => {
     setRenderStats(revenueByAccount[accountId].find((element) => element.year === year));
-  }, [year]);
+  }, [year, accountId]);
 
   const handleChangeYear = (year) => {
     setYear(year);

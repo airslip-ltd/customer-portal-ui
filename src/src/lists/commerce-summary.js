@@ -1,6 +1,3 @@
-import { Typography } from '@mui/material';
-import { fCurrencyFromLong } from '../utils/formatNumber';
-
 export const columns = [
   {
     field: 'id',
