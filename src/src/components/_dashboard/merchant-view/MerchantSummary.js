@@ -48,7 +48,7 @@ export default function MerchantSummary({ currentMerchant }) {
         {featureEnabled('demo') && (
           <>
             <Grid item xs={12}>
-              <Typography variant="h4">Liquidity</Typography>
+              <Typography variant="h4">Leverage</Typography>
             </Grid>
             <Grid item xs={12} md={4}>
               <DebtServiceCoverageRatio accountId="my-account-1" />
@@ -61,7 +61,7 @@ export default function MerchantSummary({ currentMerchant }) {
             </Grid>
 
             <Grid item xs={12}>
-              <Typography variant="h4">Profitability</Typography>
+              <Typography variant="h4">Liquidity</Typography>
             </Grid>
 
             <Grid item xs={12} md={8}>
@@ -85,6 +85,10 @@ export default function MerchantSummary({ currentMerchant }) {
           <MerchantBalance />
         </Grid>
 
+        <Grid item xs={12}>
+          <Typography variant="h4">Profitability</Typography>
+        </Grid>
+
         {featureEnabled('demo') && (
           <Grid item xs={12} md={4}>
             <OperatingMargin accountId="my-account-1" />
@@ -95,11 +99,7 @@ export default function MerchantSummary({ currentMerchant }) {
             <GrossProfitMargin accountId="my-account-1" />
           </Grid>
         )}
-        {featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <NewVsReturningCustomers accountId="my-account-1" />
-          </Grid>
-        )}
+
         {featureEnabled('demo') && (
           <>
             <Grid item xs={12}>
