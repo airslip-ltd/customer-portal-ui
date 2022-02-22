@@ -55,9 +55,6 @@ export default function OperatingMarginPreview() {
         <Typography variant="subtitle2" paragraph>
           Operating Margin
         </Typography>
-        <Typography variant="h3" gutterBottom>
-          {fPercent(TOTAL_SALES)}
-        </Typography>
 
         <Stack direction="row" alignItems="center" flexWrap="wrap">
           <IconWrapperStyle
@@ -70,7 +67,6 @@ export default function OperatingMarginPreview() {
           >
             <Icon width={16} height={16} icon={PERCENT >= 0 ? trendingUpFill : trendingDownFill} />
           </IconWrapperStyle>
-
           <Typography variant="subtitle2" component="span">
             {PERCENT > 0 && '+'}
             {fPercent(PERCENT)}
@@ -79,6 +75,9 @@ export default function OperatingMarginPreview() {
             &nbsp;than last month
           </Typography>
         </Stack>
+        <Typography variant="h3" gutterBottom>
+          {fPercent(TOTAL_SALES)}
+        </Typography>
       </Box>
 
       <ReactApexChart type="line" series={CHART_DATA} options={chartOptions} width={120} height={80} />

@@ -112,9 +112,14 @@ export default function MerchantSummary({ currentMerchant }) {
         )}
 
         {featureEnabled('demo') && (
-          <Grid item xs={8}>
-            <BankingExpensesCategories />
-          </Grid>
+          <>
+            <Grid item xs={12}>
+              <Typography variant="h4">Outgoings</Typography>
+            </Grid>
+            <Grid item xs={8}>
+              <BankingExpensesCategories />
+            </Grid>
+          </>
         )}
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>

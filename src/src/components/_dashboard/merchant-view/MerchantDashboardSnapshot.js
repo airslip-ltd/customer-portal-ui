@@ -78,10 +78,7 @@ export default function MerchantDashboardSnapshot({ metricData, chartData, graph
     <Card>
       <CardActionArea component={RouterLink} to={navigateTo} sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
         <Box sx={{ flexGrow: 1 }}>
-          <Typography variant="subtitle2">
-            {title}
-            {metricData.dayRange > 0 && <> (Last {metricData.dayRange} days)</>}
-          </Typography>
+          <Typography variant="subtitle2">{title}</Typography>
           <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 2, mb: 1 }}>
             <IconWrapperStyle
               sx={{

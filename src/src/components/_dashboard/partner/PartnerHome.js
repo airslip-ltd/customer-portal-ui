@@ -2,7 +2,7 @@
 import { Grid } from '@mui/material';
 
 // components
-import { PartnerRiskFocus, IndustryExposure, ConnectedBusinesses, CountryExposure, ImportantAlerts } from '.';
+import { PartnerRiskFocus, IndustryExposure, ConnectedBusinesses } from '.';
 
 // ----------------------------------------------------------------------
 

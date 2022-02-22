@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 // material
 import { Container, Grid } from '@mui/material';

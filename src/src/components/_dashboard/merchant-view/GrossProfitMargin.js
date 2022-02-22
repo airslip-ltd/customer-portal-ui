@@ -55,10 +55,6 @@ export default function GrossProfitMarginPreview() {
         <Typography variant="subtitle2" paragraph>
           Gross Profit Margin
         </Typography>
-        <Typography variant="h3" gutterBottom>
-          {fPercent(TOTAL_SALES)}
-        </Typography>
-
         <Stack direction="row" alignItems="center" flexWrap="wrap">
           <IconWrapperStyle
             sx={{
@@ -79,6 +75,9 @@ export default function GrossProfitMarginPreview() {
             &nbsp;than last month
           </Typography>
         </Stack>
+        <Typography variant="h3" gutterBottom>
+          {fPercent(TOTAL_SALES)}
+        </Typography>
       </Box>
 
       <ReactApexChart type="line" series={CHART_DATA} options={chartOptions} width={120} height={80} />
