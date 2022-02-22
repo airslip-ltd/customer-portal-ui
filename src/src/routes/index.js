@@ -152,6 +152,7 @@ export default function Router() {
             { path: 'balances', element: <AccountBalances /> },
             { path: 'commerce', element: <CommerceSummary /> },
             { path: 'debt-service-coverage-ratio-detail', element: <DebtServiceCoverageRatioDetail /> },
+            { path: 'debt-ratio-detail', element: <DebtRatioDetail /> },
             { path: 'revenue-benchmarking-detail', element: <RevenueBenchmarkingDetail /> }
           ]
         },
@@ -212,6 +213,8 @@ const CommerceSummary = Loadable(lazy(() => import('../pages/analytics/CommerceS
 const DebtServiceCoverageRatioDetail = Loadable(
   lazy(() => import('../pages/analytics/DebtServiceCoverageRatioDetail'))
 );
+const DebtRatioDetail = Loadable(lazy(() => import('../pages/analytics/DebtRatioDetail')));
+
 const RevenueBenchmarkingDetail = Loadable(lazy(() => import('../pages/analytics/RevenueBenchmarkingDetail')));
 // Reporting
 const BankingTransactionsReport = Loadable(lazy(() => import('../pages/reporting/BankingTransactionsReport')));

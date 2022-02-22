@@ -7,8 +7,8 @@ import useSettings from '../../hooks/useSettings';
 // components
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import { columns } from '../../lists/debt-service-coverage-ratio-list';
-import { listData, totals } from '../../utils/demo-data/DebtServiceCoverageRatio';
+import { columns } from '../../lists/debt-ratio-list';
+import { listData, totals } from '../../utils/demo-data/DebtRatio';
 import { StandardListClient, TotalSummary } from '../../components/_common/Lists';
 
 // ----------------------------------------------------------------------
@@ -18,14 +18,14 @@ export default function DebtServiceCoverageRatioDetail() {
 
   return (
     <>
-      <Page title="Analytics | Debt Service Coverage Ratio | Airslip">
+      <Page title="Analytics | Debt Ratio | Airslip">
         <Container maxWidth={themeStretch ? false : 'xl'}>
           <HeaderBreadcrumbs
-            heading="Debt Service Coverage Ratio"
+            heading="Debt Ratio"
             links={[
               { name: 'Dashboard', href: PATH_DASHBOARD.root },
               { name: 'Analytics', href: PATH_DASHBOARD.analytics.root },
-              { name: 'Debt Service Coverage Ratio' }
+              { name: 'Debt Ratio' }
             ]}
           />
           <Grid container xs={12} spacing={3}>
