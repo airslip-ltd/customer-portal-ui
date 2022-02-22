@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 // utils
 import { useTheme } from '@mui/material/styles';
 import MerchantDashboardSnapshot from './MerchantDashboardSnapshot';

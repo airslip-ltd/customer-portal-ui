@@ -28,7 +28,8 @@ const chartData = {
 
 Legend.propTypes = {
   label: PropTypes.string,
-  number: PropTypes.number
+  number: PropTypes.number,
+  color: PropTypes.string
 };
 
 function Legend({ label, number, color }) {
