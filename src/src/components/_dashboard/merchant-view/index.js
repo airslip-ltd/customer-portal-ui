@@ -39,3 +39,5 @@ export { default as CommonOutgoings } from './CommonOutgoings';
 export { default as BankingExpensesCategories } from './BankingExpensesCategories';
 export { default as SalesAndRefundsByAccount } from './SalesAndRefundsByAccount';
 export { default as RecentTransactions } from './RecentTransactions';
+export { default as CashflowByAccount } from './CashflowByAccount';
+export { default as RecentBankTransactions } from './RecentBankTransactions';
