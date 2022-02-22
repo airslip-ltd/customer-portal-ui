@@ -16,7 +16,7 @@ export const chartDataSummary = {
         { period: 2, description: 'Jan', year: '2022', balance: 12687500, periodType: 'Month' },
         { period: 3, description: 'Feb', year: '2022', balance: 11687500, periodType: 'Month' }
       ],
-      data: [200875, 126875, 116875]
+      data: [20087500, 12687500, 11687500]
     }
   ]
 };
