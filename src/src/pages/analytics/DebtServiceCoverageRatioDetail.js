@@ -1,6 +1,5 @@
-import { useCallback } from 'react';
 // material
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -9,17 +8,13 @@ import useSettings from '../../hooks/useSettings';
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 import { columns } from '../../lists/debt-service-coverage-ratio-list';
-import { listData } from '../../utils/demo-data/DebtServiceCoverageRatio';
-import StandardListClient from '../../components/_common/Lists/StandardListClient';
+import { listData, totals } from '../../utils/demo-data/DebtServiceCoverageRatio';
+import { StandardListClient, TotalSummary } from '../../components/_common/Lists';
 
 // ----------------------------------------------------------------------
 
 export default function BankingTransactionsReport() {
   const { themeStretch } = useSettings();
-
-  const handleRowClick = useCallback((params) => {
-    console.log(params);
-  }, []);
 
   return (
     <>
@@ -33,7 +28,15 @@ export default function BankingTransactionsReport() {
               { name: 'Debt Service Coverage Ratio' }
             ]}
           />
-          <StandardListClient columns={columns} details={listData} onRowSelected={handleRowClick} recordsPerPage={10} />
+          <Grid container xs={12} spacing={3}>
+            <Grid item xs={12}>
+              <StandardListClient columns={columns} details={listData} recordsPerPage={10} />
+            </Grid>
+            <Grid item lg={6} md={6} sm={6} />
+            <Grid item xs={6}>
+              <TotalSummary totals={totals} />
+            </Grid>
+          </Grid>
         </Container>
       </Page>
     </>

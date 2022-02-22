@@ -29,8 +29,9 @@ function CustomToolbar() {
 export default function StandardListClient({ details, columns }) {
   return (
     <>
-      <Card>
+      <Card sx={{ p: 2 }}>
         <DataGrid
+          sx={{ border: 0 }}
           autoHeight
           columns={columns}
           rows={details.response.results}
@@ -40,6 +41,7 @@ export default function StandardListClient({ details, columns }) {
           disableSelectionOnClick
           pageSize={10}
           rowsPerPageOptions={[5, 10, 25]}
+          hideFooter
         />
       </Card>
     </>
