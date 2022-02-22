@@ -3,18 +3,18 @@ export const chartDataSummary = {
     {
       name: 'Revenue',
       metrics: [
-        { period: 1, description: 'Dec', year: '2021', balance: 80500, periodType: 'Month' },
-        { period: 2, description: 'Jan', year: '2022', balance: 9500, periodType: 'Month' },
-        { period: 3, description: 'Feb', year: '2022', balance: 50500, periodType: 'Month' }
+        { period: 1, description: 'Dec', year: '2021', balance: 8050000, periodType: 'Month' },
+        { period: 2, description: 'Jan', year: '2022', balance: 950000, periodType: 'Month' },
+        { period: 3, description: 'Feb', year: '2022', balance: 5050000, periodType: 'Month' }
       ],
-      data: [80500, 9500, 50500]
+      data: [8050000, 950000, 5050000]
     },
     {
       name: 'Benchmark',
       metrics: [
-        { period: 1, description: 'Dec', year: '2021', balance: 200875, periodType: 'Month' },
-        { period: 2, description: 'Jan', year: '2022', balance: 126875, periodType: 'Month' },
-        { period: 3, description: 'Feb', year: '2022', balance: 116875, periodType: 'Month' }
+        { period: 1, description: 'Dec', year: '2021', balance: 20087500, periodType: 'Month' },
+        { period: 2, description: 'Jan', year: '2022', balance: 12687500, periodType: 'Month' },
+        { period: 3, description: 'Feb', year: '2022', balance: 11687500, periodType: 'Month' }
       ],
       data: [200875, 126875, 116875]
     }
@@ -26,38 +26,43 @@ export const chartDataFull = {
     {
       name: 'Revenue',
       metrics: [
-        { period: 1, description: 'Mar', year: '2021', balance: 109500, periodType: 'Month' },
-        { period: 2, description: 'Apr', year: '2021', balance: 84430, periodType: 'Month' },
-        { period: 3, description: 'May', year: '2021', balance: 148600, periodType: 'Month' },
-        { period: 4, description: 'Jun', year: '2021', balance: 104000, periodType: 'Month' },
-        { period: 5, description: 'Jul', year: '2021', balance: 70500, periodType: 'Month' },
-        { period: 6, description: 'Aug', year: '2021', balance: 44100, periodType: 'Month' },
-        { period: 7, description: 'Sep', year: '2021', balance: 109100, periodType: 'Month' },
-        { period: 8, description: 'Oct', year: '2021', balance: 10500, periodType: 'Month' },
-        { period: 9, description: 'Nov', year: '2021', balance: 32500, periodType: 'Month' },
-        { period: 10, description: 'Dec', year: '2021', balance: 80500, periodType: 'Month' },
-        { period: 11, description: 'Jan', year: '2022', balance: 9500, periodType: 'Month' },
-        { period: 12, description: 'Feb', year: '2022', balance: 50500, periodType: 'Month' }
+        { period: 1, description: 'Mar', year: '2021', balance: 10950000, periodType: 'Month' },
+        { period: 2, description: 'Apr', year: '2021', balance: 8443000, periodType: 'Month' },
+        { period: 3, description: 'May', year: '2021', balance: 14860000, periodType: 'Month' },
+        { period: 4, description: 'Jun', year: '2021', balance: 10400000, periodType: 'Month' },
+        { period: 5, description: 'Jul', year: '2021', balance: 7050000, periodType: 'Month' },
+        { period: 6, description: 'Aug', year: '2021', balance: 4410000, periodType: 'Month' },
+        { period: 7, description: 'Sep', year: '2021', balance: 10910000, periodType: 'Month' },
+        { period: 8, description: 'Oct', year: '2021', balance: 1050000, periodType: 'Month' },
+        { period: 9, description: 'Nov', year: '2021', balance: 3250000, periodType: 'Month' },
+        { period: 10, description: 'Dec', year: '2021', balance: 8050000, periodType: 'Month' },
+        { period: 11, description: 'Jan', year: '2022', balance: 950000, periodType: 'Month' },
+        { period: 12, description: 'Feb', year: '2022', balance: 5050000, periodType: 'Month' }
       ],
-      data: [109500, 84430, 148600, 104000, 70500, 44100, 109100, 10500, 32500, 80500, 9500, 50500]
+      data: [
+        10950000, 8443000, 14860000, 10400000, 7050000, 4410000, 10910000, 1050000, 3250000, 8050000, 950000, 5050000
+      ]
     },
     {
       name: 'Benchmark',
       metrics: [
-        { period: 1, description: 'Mar', year: '2021', balance: 126875, periodType: 'Month' },
-        { period: 2, description: 'Apr', year: '2021', balance: 103875, periodType: 'Month' },
-        { period: 3, description: 'May', year: '2021', balance: 106875, periodType: 'Month' },
-        { period: 4, description: 'Jun', year: '2021', balance: 109875, periodType: 'Month' },
-        { period: 5, description: 'Jul', year: '2021', balance: 117875, periodType: 'Month' },
-        { period: 6, description: 'Aug', year: '2021', balance: 123875, periodType: 'Month' },
-        { period: 7, description: 'Sep', year: '2021', balance: 125875, periodType: 'Month' },
-        { period: 8, description: 'Oct', year: '2021', balance: 130875, periodType: 'Month' },
-        { period: 9, description: 'Nov', year: '2021', balance: 190875, periodType: 'Month' },
-        { period: 10, description: 'Dec', year: '2021', balance: 200875, periodType: 'Month' },
-        { period: 11, description: 'Jan', year: '2022', balance: 126875, periodType: 'Month' },
-        { period: 12, description: 'Feb', year: '2022', balance: 116875, periodType: 'Month' }
+        { period: 1, description: 'Mar', year: '2021', balance: 12687500, periodType: 'Month' },
+        { period: 2, description: 'Apr', year: '2021', balance: 10387500, periodType: 'Month' },
+        { period: 3, description: 'May', year: '2021', balance: 10687500, periodType: 'Month' },
+        { period: 4, description: 'Jun', year: '2021', balance: 10987500, periodType: 'Month' },
+        { period: 5, description: 'Jul', year: '2021', balance: 11787500, periodType: 'Month' },
+        { period: 6, description: 'Aug', year: '2021', balance: 12387500, periodType: 'Month' },
+        { period: 7, description: 'Sep', year: '2021', balance: 12587500, periodType: 'Month' },
+        { period: 8, description: 'Oct', year: '2021', balance: 13087500, periodType: 'Month' },
+        { period: 9, description: 'Nov', year: '2021', balance: 19087500, periodType: 'Month' },
+        { period: 10, description: 'Dec', year: '2021', balance: 20087500, periodType: 'Month' },
+        { period: 11, description: 'Jan', year: '2022', balance: 12687500, periodType: 'Month' },
+        { period: 12, description: 'Feb', year: '2022', balance: 11687500, periodType: 'Month' }
       ],
-      data: [116875, 126875, 200875, 190875, 130875, 125875, 123875, 117875, 109875, 106875, 103875, 126875]
+      data: [
+        11687500, 12687500, 20087500, 19087500, 13087500, 12587500, 12387500, 11787500, 10987500, 10687500, 10387500,
+        12687500
+      ]
     }
   ]
 };
