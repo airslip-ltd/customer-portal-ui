@@ -26,13 +26,13 @@ export default function AccountLink() {
   }, [dispatch]);
 
   return (
-    <Page title="Accounts | List | Airslip">
+    <Page title="Banking | Link | Airslip">
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <HeaderBreadcrumbs
-          heading="Account Link"
+          heading="Connect Bank"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Accounts', href: PATH_DASHBOARD.accounts.root },
+            { name: 'Banking', href: PATH_DASHBOARD.accounts.root },
             { name: 'Link' }
           ]}
         />
@@ -40,8 +40,8 @@ export default function AccountLink() {
         <Grid container spacing={3} justify="center">
           <Grid item xs={12}>
             <Typography noWrap variant="body" sx={{ color: 'text.secondary' }}>
-              Let's get started with linking your bank account to Airslip! Start by selecting your bank from the options
-              below.
+              Let's connect your bank. Banking data lets you visualise your banking data to help you access more
+              financial products.
             </Typography>
           </Grid>
 

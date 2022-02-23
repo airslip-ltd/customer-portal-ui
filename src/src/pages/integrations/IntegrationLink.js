@@ -26,13 +26,13 @@ export default function IntegrationLink() {
   }, [dispatch]);
 
   return (
-    <Page title="Accounts | List | Airslip">
+    <Page title="Commerce | Link | Airslip">
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <HeaderBreadcrumbs
-          heading="Integrations Link"
+          heading="Connect Commerce"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Integrations', href: PATH_DASHBOARD.integrations.root },
+            { name: 'Commerce', href: PATH_DASHBOARD.integrations.root },
             { name: 'Link' }
           ]}
         />
@@ -40,7 +40,8 @@ export default function IntegrationLink() {
         <Grid container spacing={3} justify="center">
           <Grid item xs={12}>
             <Typography noWrap variant="body" sx={{ color: 'text.secondary' }}>
-              Let's add an integration. Integrations help you get the most out of Airslip!
+              Let's connect a commerce provider. Commerce data lets you visualise your sales data to help you access
+              more financial products.
             </Typography>
           </Grid>
 
