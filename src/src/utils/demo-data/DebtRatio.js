@@ -15,11 +15,11 @@ export const listData = {
     results: [
       {
         id: '12345',
-        business: 'XXXXXXXXX',
-        debtType: 'XXCXXXX',
+        business: 'Loan Company Limited',
+        debtType: 'Loans',
         amount: 23901000,
         missedPayments: 0,
-        dataSource: 'XXXXXX',
+        dataSource: 'Accounting',
         comments: ''
       },
       {
