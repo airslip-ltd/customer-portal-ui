@@ -64,7 +64,7 @@ export default function IntegrationLink() {
           <Grid item xs={12}>
             <Typography noWrap variant="body" sx={{ color: 'text.secondary' }}>
               Let's connect a commerce and accounting provider. By connecting your commerce and accounting providers,
-              you can visualise your data to make improved decisions and helps you access more financial products.
+              you can visualise your data to make improved decisions and get access to more financial products.
             </Typography>
           </Grid>
           {providers.hasData && (
