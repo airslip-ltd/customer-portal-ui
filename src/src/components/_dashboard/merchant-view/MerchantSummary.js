@@ -32,7 +32,9 @@ import {
   LateInvoicesReceived,
   LateBillsPaid,
   RevenueForecasts,
-  BankingExpensesCategories
+  BankingExpensesCategories,
+  MerchantSalesAndRefunds,
+  MerchantCashflow
 } from '.';
 
 // ----------------------------------------------------------------------
@@ -87,6 +89,13 @@ export default function MerchantSummary({ currentMerchant }) {
 
         <Grid item xs={12}>
           <Typography variant="h4">Profitability</Typography>
+        </Grid>
+
+        <Grid item xs={12}>
+          <MerchantSalesAndRefunds />
+        </Grid>
+        <Grid item xs={12}>
+          <MerchantCashflow />
         </Grid>
 
         {featureEnabled('demo') && (
@@ -190,13 +199,6 @@ export default function MerchantSummary({ currentMerchant }) {
             <RevenueForecasts accountId="my-account-1" />
           </Grid>
         )}
-
-        {/* <Grid item xs={12}>
-          <MerchantSalesAndRefunds />
-        </Grid>
-        <Grid item xs={12}>
-          <MerchantCashflow />
-        </Grid> */}
 
         {/* BankingRecentTransactions */}
       </Grid>
