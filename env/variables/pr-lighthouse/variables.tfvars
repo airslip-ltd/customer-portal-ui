@@ -1,4 +1,4 @@
-short_environment         = "pr-lighthouse"
+short_environment         = "prlh"
 location                  = "UK South"
 environment               = "PR Lighthouse"
 web_size                  = "B1"

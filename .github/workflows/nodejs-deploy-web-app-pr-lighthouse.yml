@@ -1,4 +1,4 @@
-name: Dev - Deploy React App
+name: PR Lighthouse - Deploy and Analyse React App
 
 on:
   workflow_dispatch:
