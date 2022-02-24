@@ -90,3 +90,10 @@ jobs:
         app-name: ${{ steps.terraform_update.outputs.app_service_name }}
         publish-profile: ${{ steps.publishprofile.outputs.profile }}
         package: ${{ env.PUBLISH_PATH }}/build
+
+    - name: Verify security headers
+      uses: marcuslindblom/security-headers@main
+      with:
+        url: ${{ secrets.SECURITY_HEADERS_URL }}
+        followRedirects: true
+        grade: A
