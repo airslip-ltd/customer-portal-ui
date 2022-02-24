@@ -12,7 +12,7 @@ jobs:
       ENV_PATH: 'demo'
       PUBLISH_PATH: './src'
       NODE_VERSION: '14.x'
-      TERRAFORM_MODULE_VERSION: 6.0.4
+      TERRAFORM_MODULE_VERSION: 6.1.0
       REACT_APP_API_URL: https://dev-app.airslip.com/customer_portal/v1/
       REACT_APP_ANALYTICS_URL: https://dev-app.airslip.com/analytics/v1/
       REACT_APP_AUTH_URL: https://dev-auth.airslip.com/v1/
@@ -44,7 +44,7 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.NON_PROD_ARM_TENANT_ID }}
       run: |
         terraform init -backend-config=variables/${{ env.ENV_PATH }}/backend.tfvars
-        terraform plan -var-file=variables/${{ env.ENV_PATH }}/variables.tfvars -var="certificate_thumbprint=${{ secrets.AIRSLIP_CERT_THUMPRINT }}" -var="certificate_password=${{ secrets.AIRSLIP_CERTIFICATE_PASSWORD }}" -out=terraform.tfplan
+        terraform plan -var-file=variables/${{ env.ENV_PATH }}/variables.tfvars -var="certificate_password=${{ secrets.AIRSLIP_CERTIFICATE_PASSWORD }}" -out=terraform.tfplan
         terraform apply terraform.tfplan
         resource_group_name_raw=$(terraform output resource_group_name)
         resource_group_name=$(echo "${resource_group_name_raw}" | sed 's/"//g')
