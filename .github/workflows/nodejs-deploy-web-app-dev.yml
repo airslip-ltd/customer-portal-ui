@@ -39,6 +39,10 @@ jobs:
     - name: Install Terraform Modules
       run: nuget install Airslip.Terraform.Modules -Version ${{ env.TERRAFORM_MODULE_VERSION }} -OutputDirectory ./env/tf_modules -x
 
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_PROD_DEPLOY }}
+      
     - name: Terraform Update
       id: "terraform_update"
       env:
