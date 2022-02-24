@@ -120,6 +120,7 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.NON_PROD_ARM_TENANT_ID }}
       run: |
         az config set extension.use_dynamic_install=yes_without_prompt
+        az network front-door routing-rule update --front-door-name airslip-prlh-customer-portal-ui-frontdoor --name airslip-prlh-customer-portal-ui-rule-1 --resource-group airslip-prlh-customer-portal-ui-resources --remove rulesEngine
         terraform init -backend-config=variables/${{ env.ENV_PATH }}/backend.tfvars
-        terraform destroy -backend-config=variables/${{ env.ENV_PATH }}/backend.tfvars
+        terraform destroy -var-file=variables/${{ env.ENV_PATH }}/variables.tfvars -var="certificate_password=${{ secrets.AIRSLIP_CERTIFICATE_PASSWORD }}" -auto-approve
       working-directory: ./env
