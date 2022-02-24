@@ -43,6 +43,7 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ secrets.NON_PROD_SUBSCRIPTION_ID }}
         ARM_TENANT_ID: ${{ secrets.NON_PROD_ARM_TENANT_ID }}
       run: |
+        az config set extension.use_dynamic_install=yes_without_prompt
         terraform init -backend-config=variables/${{ env.ENV_PATH }}/backend.tfvars
         terraform plan -var-file=variables/${{ env.ENV_PATH }}/variables.tfvars -var="certificate_password=${{ secrets.AIRSLIP_CERTIFICATE_PASSWORD }}" -out=terraform.tfplan
         terraform apply terraform.tfplan
@@ -125,6 +126,7 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ secrets.PROD_SUBSCRIPTION_ID }}
         ARM_TENANT_ID: ${{ secrets.PROD_ARM_TENANT_ID }}
       run: |
+        az config set extension.use_dynamic_install=yes_without_prompt
         terraform init -backend-config=variables/${{ env.ENV_PATH }}/backend.tfvars
         terraform plan -var-file=variables/${{ env.ENV_PATH }}/variables.tfvars -var="certificate_password=${{ secrets.AIRSLIP_CERTIFICATE_PASSWORD }}" -out=terraform.tfplan
         terraform apply terraform.tfplan
