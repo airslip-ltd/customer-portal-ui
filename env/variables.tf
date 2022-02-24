@@ -9,11 +9,11 @@ variable "environment" {
 }
 variable "web_tier" {
   description = "The tier used for the app service plan"
-  default = "PremiumV2"
+  default     = "PremiumV2"
 }
 variable "web_size" {
   description = "The size used for the app service plan"
-  default = "P1v2"
+  default     = "P1v2"
 }
 variable "admin_group_id" {}
 variable "certificate_path" {
@@ -25,4 +25,3 @@ variable "certificate_name" {
 }
 variable "deployment_agent_group_id" {}
 variable "hostname" {}
-variable "certificate_thumbprint" {}
