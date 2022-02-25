@@ -4,11 +4,10 @@ import { Link as RouterLink } from 'react-router-dom';
 // material
 import { Card, Container, Grid, Stack, Typography, CardActionArea, CardContent } from '@mui/material';
 // redux
-import { isUndefined } from 'lodash';
 import { useDispatch, useSelector } from '../../redux/store';
 import { getProviders } from '../../redux/slices/providers';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_INTEGRATE, PATH_DASHBOARD } from '../../routes/paths';
 // hooks
 import useSettings from '../../hooks/useSettings';
 // components
@@ -29,22 +28,53 @@ export default function IntegrationLink() {
 
   ProviderSelector.propTypes = {
     provider: PropTypes.string.isRequired,
-    iconType: PropTypes.string
+    integration: PropTypes.string.isRequired,
+    integrationType: PropTypes.string.isRequired,
+    imageType: PropTypes.string
   };
 
-  function ProviderSelector({ provider, iconType }) {
+  function ProviderSelector({ provider, integration, integrationType, imageType }) {
     return (
       <Grid item xs={6} md={4} align="center">
         <Card sx={{ display: 'flex', alignItems: 'center' }} align="center">
-          <CardActionArea component={RouterLink} to={`${PATH_DASHBOARD.integrations.root}/${provider}/link`}>
+          <CardActionArea component={RouterLink} to={`${PATH_INTEGRATE.authorise}/${provider}/${integration}`}>
             <CardContent align="center">
               <Stack style={{ margin: 'auto' }} spacing={2}>
-                <ProviderImage icon={provider} iconType={iconType} />
+                <ProviderImage icon={integration} integrationType={integrationType} imageType={imageType} />
               </Stack>
             </CardContent>
           </CardActionArea>
         </Card>
       </Grid>
+    );
+  }
+
+  ProviderList.propTypes = {
+    integrationType: PropTypes.string.isRequired,
+    imageType: PropTypes.string
+  };
+
+  function ProviderList({ integrationType, imageType }) {
+    return (
+      <>
+        <Grid item xs={12}>
+          <Typography variant="h4">{integrationType}</Typography>
+        </Grid>
+        {providers.response.results
+          .filter((row) => row.integrationType === integrationType)
+          .map((row) => {
+            const { id, integrationType, provider } = row;
+            return (
+              <ProviderSelector
+                key={id}
+                provider={provider}
+                integration={id}
+                integrationType={integrationType}
+                imageType={imageType}
+              />
+            );
+          })}
+      </>
     );
   }
 
@@ -69,31 +99,9 @@ export default function IntegrationLink() {
           </Grid>
           {providers.hasData && (
             <>
-              <Grid item xs={12}>
-                <Typography variant="h4">Commerce</Typography>
-              </Grid>
-              {providers.response.results
-                .filter((row) => !isUndefined(row.posProvider) && row.posProvider != null)
-                .map((row) => {
-                  const { posProvider } = row;
-                  return <ProviderSelector key={posProvider} provider={posProvider} />;
-                })}
-
-              <Grid item xs={12}>
-                <Typography variant="h4">Accounting</Typography>
-              </Grid>
-              {providers.response.results
-                .filter((row) => !isUndefined(row.accountingProvider) && row.accountingProvider != null)
-                .map((row) => {
-                  const { accountingProvider } = row;
-                  return (
-                    <ProviderSelector
-                      key={accountingProvider}
-                      provider={accountingProvider}
-                      iconType="accounting_logos"
-                    />
-                  );
-                })}
+              <ProviderList integrationType="Banking" imageType="svg" />
+              <ProviderList integrationType="Commerce" />
+              <ProviderList integrationType="Accounting" />
             </>
           )}
         </Grid>
