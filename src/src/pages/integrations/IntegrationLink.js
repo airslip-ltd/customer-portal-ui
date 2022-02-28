@@ -37,6 +37,8 @@ export default function IntegrationLink() {
     provider: PropTypes.string.isRequired,
     integration: PropTypes.string.isRequired,
     integrationType: PropTypes.string.isRequired,
+    friendlyName: PropTypes.string.isRequired,
+    installationCount: PropTypes.number.isRequired,
     imageType: PropTypes.string
   };
 
