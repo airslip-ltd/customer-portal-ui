@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { Card, Container, Grid, Stack, Typography, CardActionArea, CardContent } from '@mui/material';
+import SearchBox from '../../components/_common/SearchBox';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { getProviders } from '../../redux/slices/providers';
@@ -21,10 +22,16 @@ export default function IntegrationLink() {
   const { themeStretch } = useSettings();
   const dispatch = useDispatch();
   const { providers } = useSelector((state) => state.provider);
+  const [filterBy, setFilterBy] = useState('');
 
   useEffect(() => {
     dispatch(getProviders());
   }, [dispatch]);
+
+  const onFilterChanged = (event) => {
+    const { value } = event.target;
+    setFilterBy(value);
+  };
 
   ProviderSelector.propTypes = {
     provider: PropTypes.string.isRequired,
@@ -33,7 +40,7 @@ export default function IntegrationLink() {
     imageType: PropTypes.string
   };
 
-  function ProviderSelector({ provider, integration, integrationType, imageType }) {
+  function ProviderSelector({ provider, integration, integrationType, imageType, friendlyName, installationCount }) {
     return (
       <Grid item xs={6} md={4} align="center">
         <Card sx={{ display: 'flex', alignItems: 'center' }} align="center">
@@ -41,6 +48,12 @@ export default function IntegrationLink() {
             <CardContent align="center">
               <Stack style={{ margin: 'auto' }} spacing={2}>
                 <ProviderImage icon={integration} integrationType={integrationType} imageType={imageType} />
+                <Typography variant="subtitle1">{friendlyName}</Typography>
+                {installationCount > 0 && (
+                  <>
+                    <Typography variant="body2">Installed {installationCount} times in the last 7 days</Typography>
+                  </>
+                )}
               </Stack>
             </CardContent>
           </CardActionArea>
@@ -61,9 +74,12 @@ export default function IntegrationLink() {
           <Typography variant="h4">{integrationType}</Typography>
         </Grid>
         {providers.response.results
-          .filter((row) => row.integrationType === integrationType)
+          .filter((row) => {
+            const str = `${row.name}# ${row.friendlyName}# ${row.id}`;
+            return row.integrationType === integrationType && str.match(filterBy);
+          })
           .map((row) => {
-            const { id, integrationType, provider } = row;
+            const { id, integrationType, provider, friendlyName, installationCount } = row;
             return (
               <ProviderSelector
                 key={id}
@@ -71,6 +87,8 @@ export default function IntegrationLink() {
                 integration={id}
                 integrationType={integrationType}
                 imageType={imageType}
+                friendlyName={friendlyName}
+                installationCount={installationCount}
               />
             );
           })}
@@ -97,6 +115,10 @@ export default function IntegrationLink() {
               you can visualise your data to make improved decisions and get access to more financial products.
             </Typography>
           </Grid>
+          <Grid item xs={4}>
+            <SearchBox placeholder="Find your integration" filterName={filterBy} onFilterName={onFilterChanged} />
+          </Grid>
+
           {providers.hasData && (
             <>
               <ProviderList integrationType="Banking" imageType="svg" />
