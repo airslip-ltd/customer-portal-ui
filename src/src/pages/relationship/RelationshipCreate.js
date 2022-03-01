@@ -11,7 +11,7 @@ import { CreateForm } from '../../components/_dashboard/relationship';
 
 // ----------------------------------------------------------------------
 
-export default function Create() {
+export default function RelationshipCreate() {
   const { themeStretch } = useSettings();
 
   return (

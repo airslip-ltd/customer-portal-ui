@@ -6,6 +6,7 @@ import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 // guards
 import GuestGuard from '../guards/GuestGuard';
 import AuthGuard from '../guards/AuthGuard';
+import SetupGuard from '../guards/SetupGuard';
 // components
 import LoadingScreen from '../components/LoadingScreen';
 // ----------------------------------------------------------------------
@@ -69,7 +70,11 @@ export default function Router() {
       children: [
         {
           path: ':referralId',
-          element: <AuthGuard>Consent will go here</AuthGuard>
+          element: (
+            <AuthGuard>
+              <RelationshipConsent />
+            </AuthGuard>
+          )
         }
       ]
     },
@@ -102,7 +107,9 @@ export default function Router() {
       path: 'dashboard',
       element: (
         <AuthGuard>
-          <DashboardLayout />
+          <SetupGuard>
+            <DashboardLayout />
+          </SetupGuard>
         </AuthGuard>
       ),
       children: [
@@ -198,10 +205,11 @@ const IntegrationLink = Loadable(lazy(() => import('../pages/integrations/Integr
 const IntegrationLinked = Loadable(lazy(() => import('../pages/integrations/IntegrationLinked')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 const Unauthorised = Loadable(lazy(() => import('../pages/Page401')));
-// Merchants
+// Relationships
 const RelationshipView = Loadable(lazy(() => import('../pages/relationship/RelationshipView')));
-const RelationshipList = Loadable(lazy(() => import('../pages/relationship/List')));
-const RelationshipCreate = Loadable(lazy(() => import('../pages/relationship/Create')));
+const RelationshipList = Loadable(lazy(() => import('../pages/relationship/RelationshipList')));
+const RelationshipCreate = Loadable(lazy(() => import('../pages/relationship/RelationshipCreate')));
+const RelationshipConsent = Loadable(lazy(() => import('../pages/relationship/RelationshipConsent')));
 // Admin
 const PartnerRegister = Loadable(lazy(() => import('../pages/admin/partner/Register')));
 // Analytics
