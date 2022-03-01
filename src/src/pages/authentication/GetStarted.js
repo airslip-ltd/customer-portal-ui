@@ -1,6 +1,6 @@
 // material
 import { styled } from '@mui/material/styles';
-import { Box, Grid, Stack, Link, Container, Typography } from '@mui/material';
+import { Grid, Container } from '@mui/material';
 // layouts
 import AuthLayout from '../../layouts/AuthLayout';
 // components
@@ -36,38 +36,12 @@ export default function GetStarted() {
       <Container>
         <ContentStyle>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <Stack direction="row" alignItems="center" sx={{ mb: 5 }}>
-                <Box sx={{ flexGrow: 1 }}>
-                  <Typography variant="h4" gutterBottom>
-                    Use your existing Airslip account
-                  </Typography>
-                </Box>
-              </Stack>
-
+            <Grid item xs={12} md={5}>
               <LoginForm />
             </Grid>
+            <Grid item xs={12} md={1} />
             <Grid item xs={12} md={6}>
-              <Box sx={{ mb: 5, display: 'flex', alignItems: 'center' }}>
-                <Box sx={{ flexGrow: 1 }}>
-                  <Typography variant="h4" gutterBottom>
-                    Or create one, completely free.
-                  </Typography>
-                </Box>
-              </Box>
               <RegisterForm />
-
-              <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
-                By registering, I agree to our&nbsp;
-                <Link underline="always" color="text.primary" href="#">
-                  Terms of Service
-                </Link>
-                &nbsp;and&nbsp;
-                <Link underline="always" color="text.primary" href="#">
-                  Privacy Policy
-                </Link>
-                .
-              </Typography>
             </Grid>
           </Grid>
         </ContentStyle>
