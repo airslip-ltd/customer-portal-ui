@@ -69,11 +69,7 @@ export default function Router() {
       children: [
         {
           path: ':referralId',
-          element: (
-            <GuestGuard>
-              <Register />
-            </GuestGuard>
-          )
+          element: <AuthGuard>Consent will go here</AuthGuard>
         }
       ]
     },
