@@ -14,7 +14,7 @@ import { create } from '../../../redux/slices/relationship';
 //
 import { MIconButton } from '../../@material-extend';
 // routes
-import ApiError from '../../_common/Errors';
+import ApiError from '../../_common/Errors/ApiError';
 
 // ----------------------------------------------------------------------
 
@@ -25,12 +25,16 @@ export default function CreateForm() {
 
   const permissions = [
     {
-      label: 'Transactions',
-      value: 'Transactions'
+      label: 'Banking',
+      value: 'Banking'
     },
     {
-      label: 'Balance',
-      value: 'Balance'
+      label: 'Commerce',
+      value: 'Commerce'
+    },
+    {
+      label: 'Accounting',
+      value: 'Accounting'
     }
   ];
 
@@ -45,11 +49,11 @@ export default function CreateForm() {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      businessName: 'Im a business',
-      firstName: 'Someone',
-      lastName: 'Good',
-      email: 's.good@airslip.com',
-      phoneNumber: '01234567890',
+      businessName: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
       permission: []
     },
     validationSchema: NewUserSchema,
@@ -90,6 +94,7 @@ export default function CreateForm() {
   return (
     <FormikProvider value={formik}>
       <Form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <ApiError error={error} />
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
             <Card sx={{ p: 3 }}>
@@ -98,7 +103,6 @@ export default function CreateForm() {
                 Please tell us who you would like to invite to join Airslip. They will automatically receive an
                 invitation to sign up as your customer.
               </Typography>
-              <ApiError error={error} />
 
               <Stack spacing={3} sx={{ py: 3 }}>
                 <Stack direction="column" spacing={{ xs: 3, sm: 2 }}>
@@ -111,12 +115,13 @@ export default function CreateForm() {
                   />
                 </Stack>
               </Stack>
+
               <Typography variant="subtitle2">Contact Details</Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary', pt: 0.5 }}>
                 Please enter the contact details of your main contact at the customer, this should be someone who has
                 authority to sign up to Airslip.
               </Typography>
-              <Stack spacing={3} sx={{ pt: 3 }}>
+              <Stack spacing={3} sx={{ py: 3 }}>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 3, sm: 2 }}>
                   <TextField
                     fullWidth
@@ -150,7 +155,15 @@ export default function CreateForm() {
                     helperText={touched.phoneNumber && errors.phoneNumber}
                   />
                 </Stack>
+              </Stack>
 
+              <Typography variant="subtitle2">Data Access</Typography>
+              <Typography variant="body2" sx={{ color: 'text.secondary', pt: 0.5 }}>
+                Please enter the contact details of your main contact at the customer, this should be someone who has
+                authority to sign up to Airslip.
+              </Typography>
+
+              <Stack spacing={3} sx={{ pt: 3 }}>
                 <Stack direction="column" spacing={{ xs: 3, sm: 2 }}>
                   <FormGroup>
                     {permissions.map((opt) => (

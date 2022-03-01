@@ -16,7 +16,7 @@ import { register, reset } from '../../../redux/slices/partner';
 //
 import { MIconButton } from '../../@material-extend';
 // custom
-import ApiError from '../../_common/Errors';
+import ApiError from '../../_common/Errors/ApiError';
 import useAuth from '../../../hooks/useAuth';
 
 // ----------------------------------------------------------------------

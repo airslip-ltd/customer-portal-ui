@@ -8,7 +8,13 @@ axiosInstance.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 axiosInstance.interceptors.response.use(
   (response) => response,
-  (error) => Promise.reject((error.response && error.response.data) || 'Something went wrong')
+  (error) =>
+    Promise.reject(
+      (error.response && error.response.data) || {
+        errorCode: 'NETWORK',
+        message: error.message
+      }
+    )
 );
 
 export default axiosInstance;

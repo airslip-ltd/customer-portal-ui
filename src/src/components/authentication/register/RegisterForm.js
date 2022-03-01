@@ -17,7 +17,7 @@ import { register, loadReferral } from '../../../redux/slices/register';
 import { MIconButton } from '../../@material-extend';
 import { setSession } from '../../../utils/jwt';
 // custom
-import ApiError from '../../_common/Errors';
+import ApiError from '../../_common/Errors/ApiError';
 import useAuth from '../../../hooks/useAuth';
 
 // ----------------------------------------------------------------------
