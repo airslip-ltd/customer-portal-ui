@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 
 const ProviderImage = ({ integrationType, icon, imageType }) => (
   <img
-    style={{ margin: 'auto' }}
-    height={60}
+    style={{ maxHeight: 60 }}
     src={`/static/${integrationType.toString().toLowerCase()}_logos/${icon}.${imageType || 'png'}`}
     alt={icon}
   />
