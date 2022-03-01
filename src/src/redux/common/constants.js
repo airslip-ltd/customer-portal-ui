@@ -44,7 +44,7 @@ export const SEARCH_FUNCTIONS = {
 
 export const STATE_DEFAULTS = {
   isLoading: false,
-  error: false
+  error: {}
 };
 
 export const GET_ALL_QUERY = {

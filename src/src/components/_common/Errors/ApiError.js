@@ -13,8 +13,16 @@ export default function ApiError(props) {
 
   useEffect(() => {
     const errors = decodeError(error);
-    if (errors.length > 0) setErrorDetails(errors[0].message);
+    if (errors.length > 0) setErrorDetails(`${errors[0].errorCode}: ${errors[0].message}`);
   }, [error, setErrorDetails]);
 
-  return <>{errorDetails && <Alert severity="error">{errorDetails}</Alert>}</>;
+  return (
+    <>
+      {errorDetails && (
+        <Alert severity="error" sx={{ mb: 3 }}>
+          {errorDetails}
+        </Alert>
+      )}
+    </>
+  );
 }
