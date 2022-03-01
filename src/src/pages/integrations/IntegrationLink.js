@@ -17,7 +17,6 @@ import {
   FormLabel
 } from '@mui/material';
 
-import { textAlign } from '@mui/system';
 import SearchBox from '../../components/_common/SearchBox';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
