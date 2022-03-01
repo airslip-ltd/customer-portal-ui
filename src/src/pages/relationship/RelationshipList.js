@@ -16,7 +16,7 @@ import StandardList from '../../components/_common/Lists/StandardList';
 
 // ----------------------------------------------------------------------
 
-export default function AccountList() {
+export default function RelationshipList() {
   const { themeStretch } = useSettings();
   const dispatch = useDispatch();
   const { relationships } = useSelector((state) => state.relationship);

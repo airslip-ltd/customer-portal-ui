@@ -9,7 +9,9 @@ const initialState = {
   error: {},
   registration: {},
   registerSuccess: false,
-  referral: {}
+  approvalSuccess: false,
+  referral: {},
+  approval: {}
 };
 
 const slice = createSlice({
@@ -39,6 +41,13 @@ const slice = createSlice({
     referralSuccess(state, action) {
       state.isLoading = false;
       state.referral = action.payload;
+      state.success = true;
+    },
+
+    approveSuccess(state, action) {
+      state.isLoading = false;
+      state.approval = action.payload;
+      state.approvalSuccess = true;
       state.success = true;
     }
   }
@@ -74,6 +83,18 @@ export function loadReferral(referralId) {
     try {
       const response = await axios.get(`/relationships/referral?referralId=${encodeURIComponent(referralId)}`);
       dispatch(slice.actions.referralSuccess(response.data.currentVersion));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function approveReferral(referralId) {
+  return async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios.get(`/relationships/approve?referralId=${encodeURIComponent(referralId)}`);
+      dispatch(slice.actions.approveSuccess(response.data.currentVersion));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
