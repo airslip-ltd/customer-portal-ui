@@ -9,6 +9,7 @@ import ExternalHeader from '../components/_common/ExternalHeader';
 OnboardingLayout.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
+  stageName: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
   progress: PropTypes.number.isRequired,
   action: PropTypes.node
@@ -16,10 +17,10 @@ OnboardingLayout.propTypes = {
 
 // ----------------------------------------------------------------------
 
-export default function OnboardingLayout({ children, title, message, progress, action }) {
+export default function OnboardingLayout({ children, stageName, title, message, progress, action }) {
   return (
-    <ExternalFixedLayout title={`${title} | Getting Started`}>
-      <ExternalHeader title="Getting Started" progress={progress} />
+    <ExternalFixedLayout title={`${title} | ${stageName}`}>
+      <ExternalHeader title={stageName} progress={progress} />
 
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Box sx={{ flexGrow: 1, mb: 3 }}>

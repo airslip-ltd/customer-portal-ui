@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // material
-import { Grid, Button } from '@mui/material';
+import { Grid, Button, Typography } from '@mui/material';
 // layouts
 import OnboardingLayout from '../../layouts/OnboardingLayout';
-// components
-import ProviderSelection from '../../components/integrations/ProviderSelection';
 // hooks
 import useAuth from '../../hooks/useAuth';
+import useMemberDetails from '../../hooks/useMemberDetails';
 import HelpDialogue from '../../components/_common/HelpDialogue';
 // routes
-import { PATH_ONBOARDING } from '../../routes/paths';
+import { PATH_DASHBOARD } from '../../routes/paths';
 
 // ----------------------------------------------------------------------
 
-export default function SetupIntegration() {
+export default function SetupComplete() {
   const { memberDetails } = useAuth();
+  const { onCompleteSetup } = useMemberDetails();
   const [serviceCount, setServiceCount] = useState(0);
   const navigate = useNavigate();
 
@@ -28,36 +28,40 @@ export default function SetupIntegration() {
   }, [memberDetails, setServiceCount]);
 
   const handleDoneClicked = () => {
-    navigate(PATH_ONBOARDING.complete, { replace: true });
+    onCompleteSetup();
+    navigate(PATH_DASHBOARD.general.home, { replace: true });
   };
 
   return (
     <OnboardingLayout
-      stageName="Add you integrations"
-      title={serviceCount === 0 ? 'Add your first Integration' : 'Add another integration'}
-      message={
-        serviceCount === 0
-          ? 'To make the most of Airslip you should integrate as many of your platforms as possible.'
-          : "You're off to a great start, lets see if we support anymore of your providers"
-      }
-      progress={serviceCount * 25 + 25}
+      stageName="Setup complete"
+      title="Thats it! Your Done"
+      message=""
+      progress={100}
       action={
         serviceCount === 0 ? null : (
           <Button variant="contained" size="medium" onClick={handleDoneClicked}>
-            Done for now
+            Take me home
           </Button>
         )
       }
     >
-      <HelpDialogue title="Good to know">
-        We like to make integrating as easy as possible, select your platform of choice from the list below and we'll
-        guide you through what you need to do next.
-      </HelpDialogue>
-
       <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <ProviderSelection />
-        </Grid>
+        {memberDetails.linkedServices.map((row) => {
+          const { integrationCount, integrationType } = row;
+
+          return (
+            <Grid item xs={12} key={integrationType}>
+              <Typography variant="body2">
+                You added{' '}
+                <strong>
+                  {integrationCount} {integrationType}
+                </strong>{' '}
+                integrations
+              </Typography>
+            </Grid>
+          );
+        })}
       </Grid>
     </OnboardingLayout>
   );
