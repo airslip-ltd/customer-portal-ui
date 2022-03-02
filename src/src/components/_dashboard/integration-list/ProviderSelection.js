@@ -99,14 +99,15 @@ export default function ProviderSelection() {
                   {installationCount > 0 && (
                     <>
                       <Typography variant="body2">
-                        <Typography variant="subtitle1">{installationCount} installs</Typography>
+                        <strong>{installationCount} installs</strong>
+                        <br />
                         in the last 7 days
                       </Typography>
                     </>
                   )}
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="subtitle1">{friendlyName}</Typography>
+                  <Typography variant="subtitle2">{friendlyName}</Typography>
                 </Grid>
               </Grid>
             </CardContent>
@@ -134,7 +135,7 @@ export default function ProviderSelection() {
     return (
       <>
         <Grid item xs={12}>
-          <Typography variant="h4">{integrationType}</Typography>
+          <Typography variant="h6">{integrationType}</Typography>
         </Grid>
         {list.map((row) => {
           const { id, integrationType, provider, friendlyName, installationCount } = row;

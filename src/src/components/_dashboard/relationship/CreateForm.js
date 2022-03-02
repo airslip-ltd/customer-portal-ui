@@ -159,8 +159,7 @@ export default function CreateForm() {
 
               <Typography variant="subtitle2">Data Access</Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary', pt: 0.5 }}>
-                Please enter the contact details of your main contact at the customer, this should be someone who has
-                authority to sign up to Airslip.
+                Please select which data you would like access to by using the options below.
               </Typography>
 
               <Stack spacing={3} sx={{ pt: 3 }}>
