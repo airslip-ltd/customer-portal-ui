@@ -8,7 +8,7 @@ import useSettings from '../../hooks/useSettings';
 // components
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import { ProviderIcon } from '../../components/_dashboard/integration-list';
+import { ProviderIcon } from '../../components/integrations';
 
 // ----------------------------------------------------------------------
 

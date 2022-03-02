@@ -5,7 +5,7 @@ import { Grid, Button } from '@mui/material';
 // layouts
 import OnboardingLayout from '../../layouts/OnboardingLayout';
 // components
-import ProviderSelection from '../../components/_dashboard/integration-list/ProviderSelection';
+import ProviderSelection from '../../components/integrations/ProviderSelection';
 // hooks
 import useAuth from '../../hooks/useAuth';
 import useMemberDetails from '../../hooks/useMemberDetails';

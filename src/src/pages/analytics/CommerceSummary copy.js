@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 import Page from '../../components/Page';
-import { ProviderImage } from '../../components/_dashboard/integration-list';
+import { ProviderImage } from '../../components/integrations';
 import { CommerceRecentTransactions, MerchantSalesAndRefunds } from '../../components/_dashboard/merchant-view';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
