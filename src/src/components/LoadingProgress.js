@@ -1,21 +1,12 @@
-import Lottie from 'react-lottie';
+import Lottie from 'react-lottie-player';
 import animationData from '../lotties/simple-progress.json';
 
 // ----------------------------------------------------------------------
 
 export default function LoadingProgress() {
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
-  };
-
   return (
     <>
-      <Lottie options={defaultOptions} height={80} width={80} />
+      <Lottie animationData={animationData} play loop style={{ width: 80, height: 80 }} />
     </>
   );
 }
