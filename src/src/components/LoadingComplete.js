@@ -1,11 +1,11 @@
 import Lottie from 'react-lottie';
-import animationData from '../lotties/simple-progress.json';
+import animationData from '../lotties/simple-complete.json';
 
 // ----------------------------------------------------------------------
 
-export default function LoadingProgress() {
+export default function LoadingComplete() {
   const defaultOptions = {
-    loop: true,
+    loop: false,
     autoplay: true,
     animationData,
     rendererSettings: {

@@ -28,7 +28,7 @@ function MemberProvider({ children }) {
   useEffect(() => {
     const initialize = async () => {
       try {
-        const inProgress = window.localStorage.getItem('setupInProgress');
+        const inProgress = window.localStorage.getItem('setupInProgress') === 'true';
 
         setSetupInProgress(inProgress);
       } catch (err) {
@@ -41,28 +41,30 @@ function MemberProvider({ children }) {
 
   useEffect(() => {
     if (!memberDetails) return;
+    let newSetupComplete = false;
     switch (memberDetails.airslipUserType) {
       case 'Merchant':
-        setSetupComplete(memberDetails.linkedServices.length > 0);
+        newSetupComplete = memberDetails.linkedServices.length > 0;
         break;
       case 'Partner':
-        setSetupComplete(true);
+        newSetupComplete = true;
         break;
       default:
-        setSetupComplete(false);
         break;
     }
-  }, [memberDetails]);
 
-  useEffect(() => {
-    if (setupComplete) return;
-    if (!setupInProgress) return;
-    setSetupInProgress(true);
-  }, [setupComplete, setupInProgress, setSetupInProgress]);
+    setSetupComplete(newSetupComplete);
+    if (!newSetupComplete) beginSetup();
+  }, [memberDetails]);
 
   useEffect(() => {
     window.localStorage.setItem('setupInProgress', setupInProgress);
   }, [setupInProgress]);
+
+  const beginSetup = () => {
+    console.log('beginSetup');
+    setSetupInProgress(true);
+  };
 
   const onCompleteSetup = () => {
     setSetupInProgress(false);

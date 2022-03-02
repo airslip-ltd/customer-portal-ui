@@ -216,6 +216,8 @@ function AuthProvider({ children }) {
 
     setSession(bearerToken, refreshToken);
 
+    handleRefreshMember();
+
     dispatch({
       type: 'REFRESH',
       payload: {
@@ -242,7 +244,8 @@ function AuthProvider({ children }) {
         refresh,
         logout,
         resetPassword,
-        updateProfile
+        updateProfile,
+        refreshMemberDetails: handleRefreshMember
       }}
     >
       {children}

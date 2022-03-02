@@ -9,6 +9,7 @@ import AuthGuard from '../guards/AuthGuard';
 import SetupGuard from '../guards/SetupGuard';
 // components
 import LoadingScreen from '../components/LoadingScreen';
+
 // ----------------------------------------------------------------------
 
 const Loadable = (Component) => (props) => {
@@ -101,6 +102,19 @@ export default function Router() {
         }
       ]
     },
+    {
+      path: 'onboarding',
+      children: [
+        {
+          path: 'integrate',
+          element: (
+            <AuthGuard>
+              <SetupIntegration />
+            </AuthGuard>
+          )
+        }
+      ]
+    },
 
     // Dashboard Routes
     {
@@ -115,14 +129,6 @@ export default function Router() {
       children: [
         { element: <Navigate to="/dashboard/home" replace /> },
         { path: 'home', element: <Home /> },
-        {
-          path: 'accounts',
-          children: [
-            { element: <Navigate to="/dashboard/accounts/list" replace /> },
-            { path: 'list', element: <AccountList /> },
-            { path: 'link', element: <AccountLink /> }
-          ]
-        },
         {
           path: 'integrations',
           children: [
@@ -193,13 +199,13 @@ const Login = Loadable(lazy(() => import('../pages/authentication/Login')));
 const Register = Loadable(lazy(() => import('../pages/authentication/Register')));
 const ResetPassword = Loadable(lazy(() => import('../pages/authentication/ResetPassword')));
 const VerifyCode = Loadable(lazy(() => import('../pages/authentication/VerifyCode')));
+// Onboarding
+const SetupIntegration = Loadable(lazy(() => import('../pages/setup/SetupIntegration')));
 // Linking
 const HubIntegrationAuthorise = Loadable(lazy(() => import('../pages/linking/HubIntegrationAuthorise')));
 const HubIntegrationComplete = Loadable(lazy(() => import('../pages/linking/HubIntegrationComplete')));
 // Dashboard
 const Home = Loadable(lazy(() => import('../pages/dashboard/Home')));
-const AccountList = Loadable(lazy(() => import('../pages/accounts/AccountList')));
-const AccountLink = Loadable(lazy(() => import('../pages/accounts/AccountLink')));
 const IntegrationList = Loadable(lazy(() => import('../pages/integrations/IntegrationList')));
 const IntegrationLink = Loadable(lazy(() => import('../pages/integrations/IntegrationLink')));
 const IntegrationLinked = Loadable(lazy(() => import('../pages/integrations/IntegrationLinked')));

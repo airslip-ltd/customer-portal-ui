@@ -10,7 +10,7 @@ const initialState = {
   registration: {},
   registerSuccess: false,
   approvalSuccess: false,
-  referral: {},
+  referral: null,
   approval: {}
 };
 

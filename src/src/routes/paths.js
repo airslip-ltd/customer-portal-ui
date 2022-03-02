@@ -8,6 +8,7 @@ const ROOTS_AUTH = '/auth';
 const ROOTS_LINKING = '/linking';
 const ROOTS_INTEGRATE = '/integrate';
 const ROOTS_DASHBOARD = '/dashboard';
+const ROOTS_ONBOARDING = '/onboarding';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +32,12 @@ export const PATH_INTEGRATE = {
   authorise: path(ROOTS_INTEGRATE, '/authorise')
 };
 
+export const PATH_ONBOARDING = {
+  root: ROOTS_ONBOARDING,
+  complete: path(ROOTS_ONBOARDING, '/complete'),
+  integrate: path(ROOTS_ONBOARDING, '/integrate')
+};
+
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
   general: {
@@ -49,11 +56,6 @@ export const PATH_DASHBOARD = {
     newUser: path(ROOTS_DASHBOARD, '/user/new'),
     editById: path(ROOTS_DASHBOARD, `/user/reece-chung/edit`),
     account: path(ROOTS_DASHBOARD, '/user/account')
-  },
-  accounts: {
-    root: path(ROOTS_DASHBOARD, '/accounts'),
-    link: path(ROOTS_DASHBOARD, '/accounts/link'),
-    list: path(ROOTS_DASHBOARD, '/accounts/list')
   },
   integrations: {
     root: path(ROOTS_DASHBOARD, '/integrations'),
