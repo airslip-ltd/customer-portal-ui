@@ -112,6 +112,14 @@ export default function Router() {
               <SetupIntegration />
             </AuthGuard>
           )
+        },
+        {
+          path: 'complete',
+          element: (
+            <AuthGuard>
+              <SetupComplete />
+            </AuthGuard>
+          )
         }
       ]
     },
@@ -201,6 +209,7 @@ const ResetPassword = Loadable(lazy(() => import('../pages/authentication/ResetP
 const VerifyCode = Loadable(lazy(() => import('../pages/authentication/VerifyCode')));
 // Onboarding
 const SetupIntegration = Loadable(lazy(() => import('../pages/setup/SetupIntegration')));
+const SetupComplete = Loadable(lazy(() => import('../pages/setup/SetupComplete')));
 // Linking
 const HubIntegrationAuthorise = Loadable(lazy(() => import('../pages/linking/HubIntegrationAuthorise')));
 const HubIntegrationComplete = Loadable(lazy(() => import('../pages/linking/HubIntegrationComplete')));
