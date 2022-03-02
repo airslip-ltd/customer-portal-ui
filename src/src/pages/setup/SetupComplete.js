@@ -7,7 +7,6 @@ import OnboardingLayout from '../../layouts/OnboardingLayout';
 // hooks
 import useAuth from '../../hooks/useAuth';
 import useMemberDetails from '../../hooks/useMemberDetails';
-import HelpDialogue from '../../components/_common/HelpDialogue';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 
