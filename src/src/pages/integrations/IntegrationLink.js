@@ -6,7 +6,7 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
 import useSettings from '../../hooks/useSettings';
 // components
-import ProviderSelection from '../../components/_dashboard/integration-list/ProviderSelection';
+import ProviderSelection from '../../components/integrations/ProviderSelection';
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 

@@ -16,12 +16,12 @@ import {
   FormLabel
 } from '@mui/material';
 
-import SearchBox from '../../_common/SearchBox';
+import SearchBox from '../_common/SearchBox';
 // redux
-import { useDispatch, useSelector } from '../../../redux/store';
-import { getProviders } from '../../../redux/slices/providers';
+import { useDispatch, useSelector } from '../../redux/store';
+import { getProviders } from '../../redux/slices/providers';
 // routes
-import { PATH_INTEGRATE } from '../../../routes/paths';
+import { PATH_INTEGRATE } from '../../routes/paths';
 // components
 import { ProviderImage } from '.';
 

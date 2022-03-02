@@ -7,7 +7,7 @@ import { Grid, Typography, Box, Button, Collapse } from '@mui/material';
 import ExternalFixedLayout from '../../layouts/ExternalFixedLayout';
 // components
 import ExternalHeader from '../../components/_common/ExternalHeader';
-import { ProviderImage } from '../../components/_dashboard/integration-list';
+import { ProviderImage } from '../../components/integrations';
 import LoadingProgress from '../../components/LoadingProgress';
 import LoadingComplete from '../../components/LoadingComplete';
 import { HelpDialogue, SuccessDialogue } from '../../components/_common';
