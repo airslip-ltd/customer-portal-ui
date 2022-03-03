@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 // material
 import { Card, Grid, CardActionArea, CardContent, Box, Button } from '@mui/material';
 // components
-import { ProviderImage } from '.';
+import { ProviderImage, CardOverlay } from '.';
 
 ProviderSelector.propTypes = {
   providerDetail: PropTypes.object.isRequired,
@@ -34,6 +34,7 @@ export default function ProviderSelector({ providerDetail, imageType, hasChildre
             </Box>
           </CardContent>
         </CardActionArea>
+        {providerDetail.availability === 'ComingSoon' && <CardOverlay title="Coming Soon" />}
       </Card>
     </Grid>
   );

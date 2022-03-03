@@ -11,7 +11,7 @@ import { getProviders } from '../../redux/slices/providers';
 // routes
 import { PATH_INTEGRATE } from '../../routes/paths';
 // components
-import { ProviderSelector, MultiProviderSelection, CaptureStoreName, ComingSoon } from '.';
+import { ProviderSelector, MultiProviderSelection, CaptureStoreName, ComingSoon, ManualInstall } from '.';
 // utils
 import { reduceProviders } from '../../utils/utils';
 
@@ -50,6 +50,7 @@ export default function ProviderSelection() {
     switch (providerChild.availability) {
       case 'ComingSoon':
       case 'OneClickWithStore':
+      case 'Manual':
         setModalView(providerChild.availability);
         break;
       default:
@@ -130,6 +131,7 @@ export default function ProviderSelection() {
       <MultiProviderSelection open={selectChild} onClose={handleClose} items={providerChildren} />
       <CaptureStoreName open={modalView === 'OneClickWithStore'} onClose={handleStoreName} />
       <ComingSoon open={modalView === 'ComingSoon'} onClose={handleCloseModal} />
+      <ManualInstall open={modalView === 'Manual'} onClose={handleCloseModal} />
     </>
   );
 }
