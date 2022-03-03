@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // material
 import {
   Card,
@@ -13,7 +13,14 @@ import {
   FormControlLabel,
   Checkbox,
   FormControl,
-  FormLabel
+  FormLabel,
+  Box,
+  Button,
+  Dialog,
+  DialogTitle,
+  List,
+  ListItem,
+  ListItemText
 } from '@mui/material';
 
 import SearchBox from '../_common/SearchBox';
@@ -27,20 +34,83 @@ import { ProviderImage } from '.';
 
 // ----------------------------------------------------------------------
 
+function MultiProviderSelection({ onClose, open, items }) {
+  const handleClose = () => {
+    onClose(null);
+  };
+
+  const handleListItemClick = (value) => {
+    onClose(value);
+  };
+
+  return (
+    <Dialog onClose={handleClose} open={open}>
+      <DialogTitle>Select account type</DialogTitle>
+      <List sx={{ pt: 0 }}>
+        {items.map((item) => (
+          <ListItem button onClick={() => handleListItemClick(item)} key={item.id}>
+            <ListItemText primary={item.name} />
+          </ListItem>
+        ))}
+      </List>
+    </Dialog>
+  );
+}
+
+MultiProviderSelection.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  items: PropTypes.array.isRequired
+};
+
 export default function ProviderSelection() {
   const dispatch = useDispatch();
   const { providers } = useSelector((state) => state.provider);
   const [filterBy, setFilterBy] = useState('');
+  const [renderProviders, setRenderProviders] = useState([]);
+  const [selectChild, setSelectChild] = useState(false);
+  const [providerChildren, setProviderChildren] = useState([]);
   const [integrationFilters, setIntegrationFilters] = useState({
     banking: true,
     commerce: true,
     accounting: true
   });
   const { banking, commerce, accounting } = integrationFilters;
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getProviders());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!providers.hasData) return;
+    const distinctProviders = providers.response.results.reduce((acc, curr) => {
+      const hasItem = acc.find(
+        (row) =>
+          row.friendlyName === curr.friendlyName &&
+          row.integrationType === curr.integrationType &&
+          row.provider === curr.provider
+      );
+
+      if (hasItem) {
+        hasItem.children.push(curr);
+        hasItem.installationCount += curr.installationCount;
+      } else {
+        acc.push({
+          friendlyName: curr.friendlyName,
+          id: curr.id,
+          provider: curr.provider,
+          integrationType: curr.integrationType,
+          children: [curr],
+          installationCount: curr.installationCount
+        });
+      }
+
+      return acc;
+    }, []);
+
+    setRenderProviders(distinctProviders);
+  }, [providers, setRenderProviders]);
 
   const onFilterChanged = (event) => {
     const { value } = event.target;
@@ -54,12 +124,28 @@ export default function ProviderSelection() {
     });
   };
 
+  const navigateToProvider = (providerChild) => {
+    navigate(`${PATH_INTEGRATE.authorise}/${providerChild.provider}/${providerChild.integration}`);
+  };
+
+  const handleProviderSelection = (providerDetail) => {
+    console.log(providerDetail);
+
+    if (providerDetail.children.length === 1) {
+      navigateToProvider(providerDetail.children[0]);
+    } else {
+      setProviderChildren(providerDetail.children);
+      setSelectChild(true);
+    }
+  };
+
+  const handleClose = (selectedChild) => {
+    setSelectChild(false);
+    if (selectedChild) navigateToProvider(selectedChild);
+  };
+
   ProviderSelector.propTypes = {
-    provider: PropTypes.string.isRequired,
-    integration: PropTypes.string.isRequired,
-    integrationType: PropTypes.string.isRequired,
-    friendlyName: PropTypes.string.isRequired,
-    installationCount: PropTypes.number.isRequired,
+    providerDetail: PropTypes.object.isRequired,
     imageType: PropTypes.string
   };
 
@@ -85,31 +171,19 @@ export default function ProviderSelection() {
     );
   }
 
-  function ProviderSelector({ provider, integration, integrationType, imageType, friendlyName, installationCount }) {
+  function ProviderSelector({ providerDetail, imageType }) {
     return (
-      <Grid item xs={6} md={4}>
-        <Card sx={{ display: 'flex', minHeight: 150 }}>
-          <CardActionArea component={RouterLink} to={`${PATH_INTEGRATE.authorise}/${provider}/${integration}`}>
+      <Grid item xs={6} md={3}>
+        <Card>
+          <CardActionArea component={Button} onClick={() => handleProviderSelection(providerDetail)}>
             <CardContent>
-              <Grid container spacing={1}>
-                <Grid item xs={6} sx={{ minHeight: 60 }}>
-                  <ProviderImage icon={integration} integrationType={integrationType} imageType={imageType} />
-                </Grid>
-                <Grid item xs={6} sx={{ textAlign: 'right' }}>
-                  {installationCount > 0 && (
-                    <>
-                      <Typography variant="body2">
-                        <strong>{installationCount} installs</strong>
-                        <br />
-                        in the last 7 days
-                      </Typography>
-                    </>
-                  )}
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography variant="subtitle2">{friendlyName}</Typography>
-                </Grid>
-              </Grid>
+              <Box sx={{ minHeight: 60, display: 'flex', justifyContent: 'center' }}>
+                <ProviderImage
+                  icon={providerDetail.id}
+                  integrationType={providerDetail.integrationType}
+                  imageType={imageType}
+                />
+              </Box>
             </CardContent>
           </CardActionArea>
         </Card>
@@ -125,8 +199,8 @@ export default function ProviderSelection() {
   function ProviderList({ integrationType, imageType }) {
     if (!integrationFilters[integrationType.toLowerCase()]) return <></>;
 
-    const list = providers.response.results.filter((row) => {
-      const str = `${row.name}# ${row.friendlyName}# ${row.id}`;
+    const list = renderProviders.filter((row) => {
+      const str = `${row.friendlyName}# ${row.id}`;
       return row.integrationType === integrationType && str.match(filterBy);
     });
 
@@ -138,18 +212,8 @@ export default function ProviderSelection() {
           <Typography variant="h6">{integrationType}</Typography>
         </Grid>
         {list.map((row) => {
-          const { id, integrationType, provider, friendlyName, installationCount } = row;
-          return (
-            <ProviderSelector
-              key={id}
-              provider={provider}
-              integration={id}
-              integrationType={integrationType}
-              imageType={imageType}
-              friendlyName={friendlyName}
-              installationCount={installationCount}
-            />
-          );
+          const { id } = row;
+          return <ProviderSelector key={id} providerDetail={row} imageType={imageType} />;
         })}
       </>
     );
@@ -171,6 +235,7 @@ export default function ProviderSelection() {
         <ProviderList integrationType="Commerce" />
         <ProviderList integrationType="Accounting" />
       </Grid>
+      <MultiProviderSelection open={selectChild} onClose={handleClose} items={providerChildren} />
     </>
   );
 }
