@@ -37,7 +37,8 @@ const reduceProviders = (providers) => {
         provider: curr.provider,
         integrationType: curr.integrationType,
         children: [curr],
-        installationCount: curr.installationCount
+        installationCount: curr.installationCount,
+        availability: curr.availability
       });
     }
 

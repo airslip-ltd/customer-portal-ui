@@ -6,3 +6,5 @@ export { default as CheckboxLabels } from './CheckboxLabels';
 export { default as ProviderSelector } from './ProviderSelector';
 export { default as CaptureStoreName } from './CaptureStoreName';
 export { default as ComingSoon } from './ComingSoon';
+export { default as ManualInstall } from './ManualInstall';
+export { default as CardOverlay } from './CardOverlay';
