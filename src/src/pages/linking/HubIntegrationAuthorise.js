@@ -19,17 +19,13 @@ export default function HubIntegrationAuthorise() {
   useEffect(() => {
     if (!integration) return;
     if (!provider) return;
-    // if (!search) navigate(PATH_DASHBOARD.root);
     dispatch(getProviders());
     dispatch(requestProvider(provider, integration, search));
   }, [dispatch, navigate, search, provider, integration]);
 
   useEffect(() => {
     if (authUrl) {
-      setTimeout(() => {
-        console.log(authUrl);
-        window.location.href = authUrl;
-      }, 2000);
+      window.location.href = authUrl;
     }
   }, [navigate, authUrl]);
 

@@ -2,26 +2,7 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 // material
-import {
-  Card,
-  Grid,
-  Stack,
-  Typography,
-  CardActionArea,
-  CardContent,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  FormControl,
-  FormLabel,
-  Box,
-  Button,
-  Dialog,
-  DialogTitle,
-  List,
-  ListItem,
-  ListItemText
-} from '@mui/material';
+import { Grid, Stack, Typography } from '@mui/material';
 
 import SearchBox from '../_common/SearchBox';
 // redux
@@ -30,38 +11,11 @@ import { getProviders } from '../../redux/slices/providers';
 // routes
 import { PATH_INTEGRATE } from '../../routes/paths';
 // components
-import { ProviderImage } from '.';
+import { ProviderSelector, MultiProviderSelection, CaptureStoreName, ComingSoon } from '.';
+// utils
+import { reduceProviders } from '../../utils/utils';
 
 // ----------------------------------------------------------------------
-
-function MultiProviderSelection({ onClose, open, items }) {
-  const handleClose = () => {
-    onClose(null);
-  };
-
-  const handleListItemClick = (value) => {
-    onClose(value);
-  };
-
-  return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Select account type</DialogTitle>
-      <List sx={{ pt: 0 }}>
-        {items.map((item) => (
-          <ListItem button onClick={() => handleListItemClick(item)} key={item.id}>
-            <ListItemText primary={item.name} />
-          </ListItem>
-        ))}
-      </List>
-    </Dialog>
-  );
-}
-
-MultiProviderSelection.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  items: PropTypes.array.isRequired
-};
 
 export default function ProviderSelection() {
   const dispatch = useDispatch();
@@ -70,12 +24,9 @@ export default function ProviderSelection() {
   const [renderProviders, setRenderProviders] = useState([]);
   const [selectChild, setSelectChild] = useState(false);
   const [providerChildren, setProviderChildren] = useState([]);
-  const [integrationFilters, setIntegrationFilters] = useState({
-    banking: true,
-    commerce: true,
-    accounting: true
-  });
-  const { banking, commerce, accounting } = integrationFilters;
+  const [selectedProvider, setSelectedProvider] = useState({});
+  const [modalView, setModalView] = useState('');
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -84,30 +35,7 @@ export default function ProviderSelection() {
 
   useEffect(() => {
     if (!providers.hasData) return;
-    const distinctProviders = providers.response.results.reduce((acc, curr) => {
-      const hasItem = acc.find(
-        (row) =>
-          row.friendlyName === curr.friendlyName &&
-          row.integrationType === curr.integrationType &&
-          row.provider === curr.provider
-      );
-
-      if (hasItem) {
-        hasItem.children.push(curr);
-        hasItem.installationCount += curr.installationCount;
-      } else {
-        acc.push({
-          friendlyName: curr.friendlyName,
-          id: curr.id,
-          provider: curr.provider,
-          integrationType: curr.integrationType,
-          children: [curr],
-          installationCount: curr.installationCount
-        });
-      }
-
-      return acc;
-    }, []);
+    const distinctProviders = reduceProviders(providers.response.results);
 
     setRenderProviders(distinctProviders);
   }, [providers, setRenderProviders]);
@@ -117,26 +45,22 @@ export default function ProviderSelection() {
     setFilterBy(value);
   };
 
-  const handleChange = (event) => {
-    setIntegrationFilters({
-      ...integrationFilters,
-      [event.target.name]: event.target.checked
-    });
-  };
-
   const navigateToProvider = (providerChild) => {
-    navigate(`${PATH_INTEGRATE.authorise}/${providerChild.provider}/${providerChild.integration}`);
+    setSelectedProvider(providerChild);
+    switch (providerChild.availability) {
+      case 'ComingSoon':
+      case 'OneClickWithStore':
+        setModalView(providerChild.availability);
+        break;
+      default:
+        navigate(`${PATH_INTEGRATE.authorise}/${providerChild.provider}/${providerChild.integration}`);
+        break;
+    }
   };
 
-  const handleProviderSelection = (providerDetail) => {
-    console.log(providerDetail);
-
-    if (providerDetail.children.length === 1) {
-      navigateToProvider(providerDetail.children[0]);
-    } else {
-      setProviderChildren(providerDetail.children);
-      setSelectChild(true);
-    }
+  const handleChildren = (children) => {
+    setProviderChildren(children);
+    setSelectChild(true);
   };
 
   const handleClose = (selectedChild) => {
@@ -144,52 +68,16 @@ export default function ProviderSelection() {
     if (selectedChild) navigateToProvider(selectedChild);
   };
 
-  ProviderSelector.propTypes = {
-    providerDetail: PropTypes.object.isRequired,
-    imageType: PropTypes.string
+  const handleStoreName = (values) => {
+    navigate(
+      `${PATH_INTEGRATE.authorise}/${selectedProvider.provider}/${selectedProvider.integration}?shop=${values.shop}`
+    );
+    setModalView(null);
   };
 
-  function CheckboxLabels() {
-    return (
-      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-        <FormLabel component="legend">Show Integrations</FormLabel>
-        <FormGroup aria-label="position" row>
-          <FormControlLabel
-            control={<Checkbox checked={banking} onChange={handleChange} name="banking" />}
-            label="Banking"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={commerce} onChange={handleChange} name="commerce" />}
-            label="Commerce"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={accounting} onChange={handleChange} name="accounting" />}
-            label="Accounting"
-          />
-        </FormGroup>
-      </FormControl>
-    );
-  }
-
-  function ProviderSelector({ providerDetail, imageType }) {
-    return (
-      <Grid item xs={6} md={3}>
-        <Card>
-          <CardActionArea component={Button} onClick={() => handleProviderSelection(providerDetail)}>
-            <CardContent>
-              <Box sx={{ minHeight: 60, display: 'flex', justifyContent: 'center' }}>
-                <ProviderImage
-                  icon={providerDetail.id}
-                  integrationType={providerDetail.integrationType}
-                  imageType={imageType}
-                />
-              </Box>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      </Grid>
-    );
-  }
+  const handleCloseModal = () => {
+    setModalView(null);
+  };
 
   ProviderList.propTypes = {
     integrationType: PropTypes.string.isRequired,
@@ -197,8 +85,6 @@ export default function ProviderSelection() {
   };
 
   function ProviderList({ integrationType, imageType }) {
-    if (!integrationFilters[integrationType.toLowerCase()]) return <></>;
-
     const list = renderProviders.filter((row) => {
       const str = `${row.friendlyName}# ${row.id}`;
       return row.integrationType === integrationType && str.match(filterBy);
@@ -213,7 +99,15 @@ export default function ProviderSelection() {
         </Grid>
         {list.map((row) => {
           const { id } = row;
-          return <ProviderSelector key={id} providerDetail={row} imageType={imageType} />;
+          return (
+            <ProviderSelector
+              key={id}
+              providerDetail={row}
+              imageType={imageType}
+              onSelect={navigateToProvider}
+              hasChildren={handleChildren}
+            />
+          );
         })}
       </>
     );
@@ -227,8 +121,6 @@ export default function ProviderSelection() {
         <Grid item xs={12}>
           <Stack direction="row" spacing={2}>
             <SearchBox placeholder="Find your integration" filterName={filterBy} onFilterName={onFilterChanged} />
-
-            <CheckboxLabels />
           </Stack>
         </Grid>
         <ProviderList integrationType="Banking" imageType="svg" />
@@ -236,6 +128,8 @@ export default function ProviderSelection() {
         <ProviderList integrationType="Accounting" />
       </Grid>
       <MultiProviderSelection open={selectChild} onClose={handleClose} items={providerChildren} />
+      <CaptureStoreName open={modalView === 'OneClickWithStore'} onClose={handleStoreName} />
+      <ComingSoon open={modalView === 'ComingSoon'} onClose={handleCloseModal} />
     </>
   );
 }
