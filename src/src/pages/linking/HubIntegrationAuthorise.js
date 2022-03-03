@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getProviders, requestProvider, validateInitiation } from '../../redux/slices/providers';
+import { getProviders, requestProvider } from '../../redux/slices/providers';
 // components
 import Page from '../../components/Page';
 import LoadingScreen from '../../components/LoadingScreen';
@@ -12,7 +12,7 @@ import LoadingScreen from '../../components/LoadingScreen';
 export default function HubIntegrationAuthorise() {
   const { search } = useLocation();
   const dispatch = useDispatch();
-  const { authUrl, validation } = useSelector((state) => state.provider);
+  const { authUrl } = useSelector((state) => state.provider);
   const navigate = useNavigate();
   const { provider, integration } = useParams();
 
@@ -21,7 +21,7 @@ export default function HubIntegrationAuthorise() {
     if (!provider) return;
     // if (!search) navigate(PATH_DASHBOARD.root);
     dispatch(getProviders());
-    dispatch(validateInitiation(provider, integration, search));
+    dispatch(requestProvider(provider, integration, search));
   }, [dispatch, navigate, search, provider, integration]);
 
   useEffect(() => {
@@ -32,19 +32,6 @@ export default function HubIntegrationAuthorise() {
       }, 2000);
     }
   }, [navigate, authUrl]);
-
-  useEffect(() => {
-    switch (validation) {
-      case 'valid':
-        dispatch(requestProvider(provider, integration, search));
-        break;
-      case 'invalid':
-        // navigate('/401');
-        break;
-      default:
-        break;
-    }
-  }, [navigate, dispatch, validation, search, provider, integration]);
 
   return (
     <Page title="General | App | Airslip">

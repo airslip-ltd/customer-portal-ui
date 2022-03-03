@@ -89,7 +89,7 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
-  const { user } = useAuth();
+  const { user, memberDetails } = useAuth();
   const sidebarConfig = userSidebar(user.airslipUserType);
 
   const { isCollapse, collapseClick, collapseHover, onHoverEnter, onHoverLeave } = useCollapseDrawer();
@@ -139,9 +139,11 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
                 <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
                   {user.displayName}
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  {user.userRole}
-                </Typography>
+                {memberDetails && (
+                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                    {memberDetails.memberName}
+                  </Typography>
+                )}
               </Box>
             </AccountStyle>
           </Link>
