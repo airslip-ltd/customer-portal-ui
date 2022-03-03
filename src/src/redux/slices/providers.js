@@ -18,8 +18,7 @@ const initialState = {
   ...STATE_DEFAULTS,
   providers: { ...SEARCH_DEFAULTS },
   banks: { ...SEARCH_DEFAULTS },
-  authUrl: null,
-  validation: 'InProgress'
+  authUrl: null
 };
 
 const slice = createSlice({
@@ -44,11 +43,6 @@ const slice = createSlice({
     authoriseSuccess(state) {
       state.isLoading = false;
       state.authoriseSuccess = true;
-    },
-
-    validationResult(state, action) {
-      state.isLoading = false;
-      state.validation = action.payload;
     }
   }
 });
@@ -96,19 +90,6 @@ export function authoriseProvider(provider, integration, search) {
       await axios.get(`/providers/${provider}/${integration}/authorised${search}`);
       dispatch(slice.actions.authoriseSuccess());
     } catch (error) {
-      dispatch(slice.actions.hasError(error));
-    }
-  };
-}
-
-export function validateInitiation(provider, integration, search) {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      await axios.get(`/providers/${provider}/${integration}/validate${search}`);
-      dispatch(slice.actions.validationResult('valid'));
-    } catch (error) {
-      dispatch(slice.actions.validationResult('invalid'));
       dispatch(slice.actions.hasError(error));
     }
   };

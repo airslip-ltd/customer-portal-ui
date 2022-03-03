@@ -179,7 +179,8 @@ function AuthProvider({ children }) {
 
     setSession(bearerToken, refreshToken);
 
-    await handleRefreshMember();
+    // Purposefully not awaited...
+    handleRefreshMember();
 
     dispatch({
       type: 'LOGIN',
