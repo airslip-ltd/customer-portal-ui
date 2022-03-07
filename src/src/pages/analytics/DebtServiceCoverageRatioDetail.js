@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 // material
 import { Container, Grid } from '@mui/material';
 // routes
@@ -15,6 +17,16 @@ import { StandardListClient, TotalSummary } from '../../components/_common/Lists
 
 export default function DebtServiceCoverageRatioDetail() {
   const { themeStretch } = useSettings();
+  const { accountId } = useParams();
+  const [renderList, setRenderList] = useState({
+    hasData: false
+  });
+  const [renderTotals, setRenderTotals] = useState([]);
+
+  useEffect(() => {
+    setRenderList(listData[accountId]);
+    setRenderTotals(totals[accountId]);
+  }, [setRenderList, setRenderTotals, accountId]);
 
   return (
     <>
@@ -28,15 +40,18 @@ export default function DebtServiceCoverageRatioDetail() {
               { name: 'Debt Service Coverage Ratio' }
             ]}
           />
-          <Grid container xs={12} spacing={3}>
-            <Grid item xs={12}>
-              <StandardListClient columns={columns} details={listData} recordsPerPage={10} />
+
+          {renderList.hasData && (
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <StandardListClient columns={columns} details={renderList} recordsPerPage={10} />
+              </Grid>
+              <Grid item lg={6} md={6} sm={6} />
+              <Grid item xs={6}>
+                <TotalSummary totals={renderTotals} />
+              </Grid>
             </Grid>
-            <Grid item lg={6} md={6} sm={6} />
-            <Grid item xs={6}>
-              <TotalSummary totals={totals} />
-            </Grid>
-          </Grid>
+          )}
         </Container>
       </Page>
     </>
