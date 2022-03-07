@@ -37,7 +37,7 @@ export default function RelationshipView() {
             <MerchantTitle displayName={currentBusiness ? currentBusiness.name : ''} />
           </Grid>
           <Grid item xs={12}>
-            <MerchantSummary currentMerchant={currentBusiness} />
+            <MerchantSummary currentMerchant={currentBusiness} accountId={currentBusiness.id} />
           </Grid>
         </Grid>
       </Container>

@@ -24,7 +24,7 @@ export default function DebtServiceCoverageRatio({ accountId }) {
     <DemoNumberSnapshot
       title="Debt-Service Coverage Ratio"
       metricData={metricData}
-      navigateTo={PATH_DASHBOARD.analytics.debtServiceCoverageRatioDetail}
+      navigateTo={`${PATH_DASHBOARD.analytics.debtServiceCoverageRatioDetail}/${accountId}`}
     />
   );
 }

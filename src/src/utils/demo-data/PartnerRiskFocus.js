@@ -21,7 +21,7 @@ export const listData = {
         riskScore: 1
       },
       {
-        id: '12348',
+        id: 'my-account-1',
         name: 'Vapour Air Limited',
         riskScore: 34
       }

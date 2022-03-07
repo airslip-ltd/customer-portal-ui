@@ -40,10 +40,11 @@ import {
 // ----------------------------------------------------------------------
 
 MerchantSummary.propTypes = {
-  currentMerchant: PropTypes.object
+  currentMerchant: PropTypes.object,
+  accountId: PropTypes.string.isRequired
 };
 
-export default function MerchantSummary({ currentMerchant }) {
+export default function MerchantSummary({ currentMerchant, accountId }) {
   if (!isUndefined(currentMerchant)) {
     return (
       <Grid container spacing={3}>
@@ -53,7 +54,7 @@ export default function MerchantSummary({ currentMerchant }) {
               <Typography variant="h4">Leverage</Typography>
             </Grid>
             <Grid item xs={12} md={4}>
-              <DebtServiceCoverageRatio accountId="my-account-1" />
+              <DebtServiceCoverageRatio accountId={accountId} />
             </Grid>
             <Grid item xs={12} md={4}>
               <DebtRatio accountId="my-account-1" />
