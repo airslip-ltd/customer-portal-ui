@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 // material
-import { Card, Grid, CardActionArea, CardContent, Box, Button } from '@mui/material';
+import { Card, Grid, CardActionArea, CardContent, Box, Button, Typography } from '@mui/material';
 // components
 import { ProviderImage, CardOverlay } from '.';
 
@@ -34,7 +34,13 @@ export default function ProviderSelector({ providerDetail, imageType, hasChildre
             </Box>
           </CardContent>
         </CardActionArea>
-        {providerDetail.availability === 'ComingSoon' && <CardOverlay title="Coming Soon" />}
+        {providerDetail.availability === 'ComingSoon' && (
+          <CardOverlay>
+            <Typography variant="h4" sx={{ mt: 3 }}>
+              Coming Soon
+            </Typography>
+          </CardOverlay>
+        )}
       </Card>
     </Grid>
   );
