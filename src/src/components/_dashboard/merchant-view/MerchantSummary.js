@@ -34,7 +34,8 @@ import {
   RevenueForecasts,
   BankingExpensesCategories,
   MerchantSalesAndRefunds,
-  MerchantCashflow
+  MerchantCashflow,
+  Customers
 } from '.';
 
 // ----------------------------------------------------------------------
@@ -57,10 +58,10 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
               <DebtServiceCoverageRatio accountId={accountId} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <DebtRatio accountId="my-account-1" />
+              <DebtRatio accountId={accountId} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <DebtToCapitalRatio accountId="my-account-1" />
+              <DebtToCapitalRatio accountId={accountId} />
             </Grid>
 
             <Grid item xs={12}>
@@ -70,6 +71,7 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
             <Grid item xs={12} md={8}>
               <CashInflowOutflow accountId="my-account-1" />
             </Grid>
+
             <Grid item xs={12} md={4}>
               <RevenueGrowthBenchmarking accountId="my-account-1" />
             </Grid>
@@ -91,13 +93,13 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
         <Grid item xs={12}>
           <Typography variant="h4">Profitability</Typography>
         </Grid>
-
+        {/* 
         <Grid item xs={12}>
           <MerchantSalesAndRefunds />
         </Grid>
         <Grid item xs={12}>
           <MerchantCashflow />
-        </Grid>
+        </Grid> */}
 
         {featureEnabled('demo') && (
           <Grid item xs={12} md={4}>
@@ -115,6 +117,11 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
             <Grid item xs={12}>
               <Typography variant="h4">Growth Analytics</Typography>
             </Grid>
+
+            <Grid item xs={12} md={8}>
+              <Customers />
+            </Grid>
+
             <Grid item xs={12} md={4}>
               <NewVsReturningCustomers accountId="my-account-1" />
             </Grid>

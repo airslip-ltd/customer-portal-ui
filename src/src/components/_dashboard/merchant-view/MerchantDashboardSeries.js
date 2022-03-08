@@ -18,12 +18,13 @@ MerchantDashboardSeries.propTypes = {
   onYearChange: PropTypes.func,
   years: PropTypes.array,
   currentYear: PropTypes.number,
-  colors: PropTypes.array
+  colors: PropTypes.array,
+  chartType: PropTypes.string
 };
 
 export default function MerchantDashboardSeries(props) {
   const [chartData, setChartData] = useState({});
-  const { navigateTo } = props;
+  const { navigateTo, chartType } = props;
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -100,7 +101,7 @@ export default function MerchantDashboardSeries(props) {
 
         {chartData.series && (
           <Box sx={{ mt: 3, mx: 3 }} dir="ltr">
-            <ReactApexChart type="line" series={chartData.series} options={chartOptions} height={364} />
+            <ReactApexChart type={chartType} series={chartData.series} options={chartOptions} height={364} />
           </Box>
         )}
       </IsClickable>

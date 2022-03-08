@@ -24,7 +24,7 @@ export default function DebtRatio({ accountId }) {
     <DemoNumberSnapshot
       title="Debt Ratio"
       metricData={metricData}
-      navigateTo={PATH_DASHBOARD.analytics.debtRatioDetail}
+      navigateTo={`${PATH_DASHBOARD.analytics.debtRatioDetail}/${accountId}`}
     />
   );
 }

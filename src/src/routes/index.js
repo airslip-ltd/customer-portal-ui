@@ -169,8 +169,8 @@ export default function Router() {
             { path: 'balances', element: <AccountBalances /> },
             { path: 'commerce', element: <CommerceSummary /> },
             { path: 'debt-service-coverage-ratio-detail/:accountId', element: <DebtServiceCoverageRatioDetail /> },
-            { path: 'debt-ratio-detail', element: <DebtRatioDetail /> },
-            { path: 'debt-to-capital-ratio-detail', element: <DebtToCapitalRatioDetail /> },
+            { path: 'debt-ratio-detail/:accountId', element: <DebtRatioDetail /> },
+            { path: 'debt-to-capital-ratio-detail/:accountId', element: <DebtToCapitalRatioDetail /> },
             { path: 'revenue-benchmarking-detail', element: <RevenueBenchmarkingDetail /> }
           ]
         },
