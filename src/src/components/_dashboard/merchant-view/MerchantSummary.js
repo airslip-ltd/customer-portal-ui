@@ -9,7 +9,6 @@ import { featureEnabled } from '../../../utils/feature-switch';
 // components
 import {
   MerchantRevenue,
-  MerchantRefunds,
   MerchantBalance,
   CashInflowOutflow,
   RevenueGrowthBenchmarking,
@@ -33,8 +32,6 @@ import {
   LateBillsPaid,
   RevenueForecasts,
   BankingExpensesCategories,
-  MerchantSalesAndRefunds,
-  MerchantCashflow,
   Customers
 } from '.';
 
@@ -78,23 +75,28 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
           </>
         )}
 
+        {accountId === 'my-account-1' && (
+          <Grid item xs={12} md={4}>
+            <Customers />
+          </Grid>
+        )}
+
         <Grid item xs={12} md={4}>
           <MerchantRevenue />
         </Grid>
-
-        <Grid item xs={12} md={4}>
-          <MerchantRefunds />
-        </Grid>
-
         <Grid item xs={12} md={4}>
           <MerchantBalance />
         </Grid>
 
+        {/* <Grid item xs={12} md={12}>
+          <BankingRecentTransactions accountId={accountId} />
+        </Grid> */}
+
         <Grid item xs={12}>
           <Typography variant="h4">Profitability</Typography>
         </Grid>
-        {/* 
-        <Grid item xs={12}>
+
+        {/* <Grid item xs={12}>
           <MerchantSalesAndRefunds />
         </Grid>
         <Grid item xs={12}>
@@ -118,10 +120,6 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
               <Typography variant="h4">Growth Analytics</Typography>
             </Grid>
 
-            <Grid item xs={12} md={8}>
-              <Customers />
-            </Grid>
-
             <Grid item xs={12} md={4}>
               <NewVsReturningCustomers accountId="my-account-1" />
             </Grid>
@@ -130,7 +128,6 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
             </Grid>
           </>
         )}
-
         {featureEnabled('demo') && (
           <>
             <Grid item xs={12}>
@@ -207,8 +204,6 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
             <RevenueForecasts accountId="my-account-1" />
           </Grid>
         )}
-
-        {/* BankingRecentTransactions */}
       </Grid>
     );
   }

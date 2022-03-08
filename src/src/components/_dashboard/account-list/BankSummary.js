@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Stack, Typography } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
-import { getBanks } from '../../../redux/slices/providers';
+import { getProviders } from '../../../redux/slices/providers';
 // components
 import BankIcon from './BankIcon';
 
@@ -14,20 +14,22 @@ BankSummary.propTypes = {
 
 export default function BankSummary({ institutionId }) {
   const dispatch = useDispatch();
-  const { banks } = useSelector((state) => state.provider);
-  const institution = banks.response.results ? banks.response.results.find((bank) => bank.id === institutionId) : null;
+  const { providers } = useSelector((state) => state.provider);
+  const institution = providers.response.results
+    ? providers.response.results.find((provider) => provider.id === institutionId)
+    : null;
 
   useEffect(() => {
-    dispatch(getBanks());
+    dispatch(getProviders());
   }, [dispatch]);
 
   return (
     <>
-      {!banks.loading && institution && (
+      {!providers.loading && institution && (
         <Stack direction="row" alignItems="center" spacing={2}>
           <BankIcon icon={institution.id} />
           <Typography variant="subtitle2" noWrap>
-            {institution.tradingName}
+            {institution.friendlyName}
           </Typography>
         </Stack>
       )}

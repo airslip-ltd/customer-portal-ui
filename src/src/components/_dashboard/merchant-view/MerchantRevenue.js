@@ -17,7 +17,7 @@ export default function MerchantRevenue() {
     <MerchantDashboardSnapshot
       title="Revenue"
       metricData={demoData}
-      navigateTo={PATH_DASHBOARD.analytics.commerceSummary}
+      navigateTo={PATH_DASHBOARD.analytics.bankingRecentTransactions}
       chartData={newData}
       graphColor={theme.palette.secondary.main}
     />
