@@ -18,16 +18,30 @@ export default function TotalSummary({ totals }) {
           <Grid item xs={12}>
             <Typography variant="h4">Totals</Typography>
           </Grid>
-          {totals.map((total) => (
-            <Fragment key={total.id}>
-              <Grid item xs={6}>
-                <Typography variant="subtitle2">{total.title}</Typography>
-              </Grid>
-              <Grid item xs={6} sx={{ textAlign: 'right' }}>
-                <Typography variant="subtitle2">{fCurrencyFromLong(total.amount)}</Typography>
-              </Grid>
-            </Fragment>
-          ))}
+          <Fragment key={totals[0].id}>
+            <Grid item xs={6}>
+              <Typography variant="subtitle2">{totals[0].title}</Typography>
+            </Grid>
+            <Grid item xs={6} sx={{ textAlign: 'right' }}>
+              <Typography variant="subtitle2">{fCurrencyFromLong(totals[0].amount)}</Typography>
+            </Grid>
+          </Fragment>
+          <Fragment key={totals[1].id}>
+            <Grid item xs={6}>
+              <Typography variant="subtitle2">{totals[1].title}</Typography>
+            </Grid>
+            <Grid item xs={6} sx={{ textAlign: 'right' }}>
+              <Typography variant="subtitle2">{fCurrencyFromLong(totals[1].amount)}</Typography>
+            </Grid>
+          </Fragment>
+          <Fragment key={totals[2].id}>
+            <Grid item xs={6}>
+              <Typography variant="subtitle2">{totals[2].title}</Typography>
+            </Grid>
+            <Grid item xs={6} sx={{ textAlign: 'right' }}>
+              <Typography variant="subtitle2">{totals[2].amount}</Typography>
+            </Grid>
+          </Fragment>
         </Grid>
       </Card>
     </>

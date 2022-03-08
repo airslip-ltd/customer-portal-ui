@@ -6,24 +6,24 @@ export const listData = {
   response: {
     results: [
       {
-        id: '12345',
-        name: 'Double Point Ltd',
-        riskScore: 95
+        id: 'my-account-1',
+        name: 'Vapour Air Limited',
+        riskScore: 85
       },
       {
-        id: '12346',
+        id: 'my-account-2',
+        name: 'Starlance Inc',
+        riskScore: 34
+      },
+      {
+        id: 'my-account-3',
         name: 'Flive Ltd',
         riskScore: 90
       },
       {
-        id: '12347',
-        name: 'Starlance Inc',
-        riskScore: 1
-      },
-      {
-        id: 'my-account-1',
-        name: 'Vapour Air Limited',
-        riskScore: 34
+        id: 'my-account-4',
+        name: 'Double Point Ltd',
+        riskScore: 4
       }
     ]
   }

@@ -24,7 +24,7 @@ export default function DebtToCapitalRatio({ accountId }) {
     <DemoNumberSnapshot
       title="Debt-to-Capital Ratio"
       metricData={metricData}
-      navigateTo={PATH_DASHBOARD.analytics.debtToCapitalRatioDetail}
+      navigateTo={`${PATH_DASHBOARD.analytics.debtToCapitalRatioDetail}/${accountId}`}
     />
   );
 }

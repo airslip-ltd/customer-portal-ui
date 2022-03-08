@@ -10,6 +10,7 @@ export default function RevenueGrowthBenchmarking() {
     <MerchantDashboardSeries
       title="Revenue Benchmarking"
       stats={chartDataSummary}
+      chartType="line"
       navigateTo={PATH_DASHBOARD.analytics.revenueBenchmarkingDetail}
     />
   );
