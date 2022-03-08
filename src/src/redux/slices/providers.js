@@ -64,7 +64,7 @@ export function getBanks() {
   return async (dispatch, getState) => {
     const { provider } = getState();
     if (provider.providers.hasData) return;
-    await executeSearch(provider, dispatch, slice, 'banks', GET_ALL_QUERY);
+    await executeSearch(provider, dispatch, slice, 'banks', GET_ALL_QUERY, 'integrations');
   };
 }
 

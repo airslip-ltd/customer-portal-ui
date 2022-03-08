@@ -9,7 +9,7 @@ import { BaseOptionChart } from '../../charts';
 
 // ----------------------------------------------------------------------
 
-const CHART_DATA = [{ data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380] }];
+const CHART_DATA = [{ data: [400, 430, 448, 470, 540, 580, 690, 1100, 12000, 421000] }];
 
 export default function Customers() {
   const chartOptions = merge(BaseOptionChart(), {
@@ -27,16 +27,16 @@ export default function Customers() {
     },
     xaxis: {
       categories: [
-        'Italy',
-        'Japan',
-        'China',
-        'Canada',
-        'France',
-        'Germany',
-        'South Korea',
-        'Netherlands',
-        'United States',
-        'Vapour '
+        'Taichie',
+        'Ultient',
+        'Yuka',
+        'Wemoto',
+        'Tomoyori',
+        'Genibot',
+        'Dopoping',
+        'Visujki',
+        'Nativi',
+        'Atori'
       ]
     }
   });

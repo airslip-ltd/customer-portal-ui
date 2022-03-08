@@ -1,17 +1,17 @@
 export const demoData = {
-  balance: 95679.0,
-  movement: 5.0,
+  balance: 455291.0,
+  movement: -15.0,
   metrics: [
-    { balance: 0.0 },
-    { balance: 0.0 },
-    { balance: 0.0 },
-    { balance: 0.0 },
-    { balance: 0.0 },
-    { balance: 0.0 },
-    { balance: 0.0 },
-    { balance: 0.0 },
-    { balance: 0.0 },
-    { balance: 95679.0 }
+    { balance: 37500 },
+    { balance: 37500 },
+    { balance: 37500 },
+    { balance: 37500 },
+    { balance: 37500 },
+    { balance: 37500 },
+    { balance: 37500 },
+    { balance: 37500 },
+    { balance: 37500 },
+    { balance: 37500 }
   ],
   dayRange: 30
 };

@@ -18,11 +18,13 @@ import {
   TableContainer
 } from '@mui/material';
 import ReactTimeAgo from 'react-time-ago';
-import { BankSummary } from '../account-list';
+import { BankSummary } from '../../components/_dashboard/account-list';
 
-import Scrollbar from '../../Scrollbar';
+// utils
+import { fCurrency } from '../../utils/formatNumber';
+import Scrollbar from '../../components/Scrollbar';
 
-import { demoData } from '../../../utils/demo-data/BankRecentTransactions';
+import { demoData } from '../../utils/demo-data/BankRecentTransactions';
 
 // ----------------------------------------------------------------------
 BankingRecentTransactions.propTypes = {
@@ -30,7 +32,7 @@ BankingRecentTransactions.propTypes = {
 };
 export default function BankingRecentTransactions({ accountId }) {
   const [metricData, setMetricData] = useState({});
-  accountId = accountId || '';
+  accountId = accountId || 'my-account-1';
 
   useEffect(() => {
     if (!demoData[accountId] || !demoData[accountId].transactions) return;
@@ -75,6 +77,7 @@ export default function BankingRecentTransactions({ accountId }) {
                 metricData.transactions.map((row) => (
                   <TableRow key={row.id}>
                     <TableCell>{row.customer}</TableCell>
+
                     <TableCell>{row.amount < 0 ? 'Outgoing' : 'Incoming'}</TableCell>
                     <TableCell>{fCurrency(row.amount)}</TableCell>
                     <TableCell>
