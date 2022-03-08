@@ -29,7 +29,7 @@ export const demoData = {
         id: 3,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2022-01-01T09:09:21Z'
       },
@@ -37,7 +37,7 @@ export const demoData = {
         id: 4,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2021-12-01T09:09:21Z'
       },
@@ -53,7 +53,7 @@ export const demoData = {
         id: 6,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2021-11-01T09:09:21Z'
       },
@@ -61,7 +61,7 @@ export const demoData = {
         id: 7,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2021-10-01T09:09:21Z'
       },
@@ -69,7 +69,7 @@ export const demoData = {
         id: 8,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2021-09-01T09:09:21Z'
       },
@@ -85,7 +85,7 @@ export const demoData = {
         id: 10,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2021-08-01T09:09:21Z'
       },
@@ -93,7 +93,7 @@ export const demoData = {
         id: 11,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2021-07-01T09:09:21Z'
       },
@@ -109,7 +109,7 @@ export const demoData = {
         id: 13,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2021-06-01T09:09:21Z'
       },
@@ -117,7 +117,7 @@ export const demoData = {
         id: 14,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2021-05-01T09:09:21Z'
       },
@@ -133,7 +133,7 @@ export const demoData = {
         id: 16,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2021-04-01T09:09:21Z'
       },
@@ -141,7 +141,7 @@ export const demoData = {
         id: 17,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2021-03-01T09:09:21Z'
       },
@@ -157,7 +157,7 @@ export const demoData = {
         id: 19,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2021-02-01T09:09:21Z'
       },
@@ -173,7 +173,7 @@ export const demoData = {
         id: 21,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2021-01-01T09:09:21Z'
       },
@@ -181,7 +181,7 @@ export const demoData = {
         id: 22,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2020-12-01T09:09:21Z'
       },
@@ -189,7 +189,7 @@ export const demoData = {
         id: 23,
         source: 'santander_uk',
         customer: 'Atori',
-        amount: 35000,
+        amount: 421000,
         currencyCode: 'GBP',
         capturedDate: '2020-11-01T09:09:21Z'
       }

@@ -9,18 +9,18 @@ import { BaseOptionChart } from '../../charts';
 // ----------------------------------------------------------------------
 
 const MOCK_DATA_REVENUE = {
-  january: 9500,
-  february: 50500,
-  march: 109500,
-  april: 84430,
-  may: 148600,
-  june: 104000,
-  july: 70500,
-  august: 44100,
-  september: 109100,
-  october: 10500,
-  november: 32500,
-  december: 80500
+  january: 421000,
+  february: 421000,
+  march: 421000,
+  april: 431000,
+  may: 411000,
+  june: 421000,
+  july: 421000,
+  august: 421000,
+  september: 421000,
+  october: 421000,
+  november: 9100,
+  december: 50
 };
 
 const MOCK_DATA_EXPENSE = {
