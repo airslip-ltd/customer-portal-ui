@@ -32,7 +32,7 @@ export const listData = {
           id: '2',
           business: 'Appital One',
           debtType: 'Credit cards',
-          amount: 50000,
+          amount: 5000000,
           missedPayments: 1,
           dataSource: 'Open banking',
           comments: ''
@@ -137,12 +137,12 @@ export const totals = {
     {
       id: '12347',
       title: 'Debt total',
-      amount: 50000
+      amount: 5000000
     },
     {
       id: '12348',
       title: 'Total Assets',
-      amount: 250000
+      amount: 25000000
     },
     {
       id: '12349',
