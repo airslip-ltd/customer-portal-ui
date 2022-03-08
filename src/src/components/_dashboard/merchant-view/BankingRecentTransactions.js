@@ -20,6 +20,8 @@ import {
 import ReactTimeAgo from 'react-time-ago';
 import { BankSummary } from '../account-list';
 
+// utils
+import { fCurrency } from '../../../utils/formatNumber';
 import Scrollbar from '../../Scrollbar';
 
 import { demoData } from '../../../utils/demo-data/BankRecentTransactions';
