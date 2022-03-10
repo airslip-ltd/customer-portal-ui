@@ -12,8 +12,6 @@ CheckboxLabels.propTypes = {
 export default function CheckboxLabels({ title, onChange, options }) {
   const [integrationFilters, setIntegrationFilters] = useState([]);
 
-  console.log('re-rendered');
-
   const newFilters = [];
   options.forEach((item) => {
     newFilters.push({
@@ -24,7 +22,6 @@ export default function CheckboxLabels({ title, onChange, options }) {
   setIntegrationFilters(newFilters);
 
   useEffect(() => {
-    console.log('Updated');
     const filters = {};
     integrationFilters.forEach((item) => {
       filters[item.key] = item.selected;

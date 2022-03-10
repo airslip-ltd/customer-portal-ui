@@ -62,7 +62,6 @@ function MemberProvider({ children }) {
   }, [setupInProgress]);
 
   const beginSetup = () => {
-    console.log('beginSetup');
     setSetupInProgress(true);
   };
 

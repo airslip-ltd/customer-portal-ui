@@ -81,7 +81,6 @@ export default function HubIntegrationComplete() {
   }, [integrations, intervalId, navigate, refreshMemberDetails]);
 
   useEffect(() => {
-    console.log(providers);
     if (!providers || providers.response.results.length === 0) return;
     if (!integration) return;
 
