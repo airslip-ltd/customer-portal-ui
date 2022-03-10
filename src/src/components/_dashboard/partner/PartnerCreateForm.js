@@ -1,37 +1,38 @@
 import * as Yup from 'yup';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-import { useSnackbar } from 'notistack';
-import { useFormik, Form, FormikProvider } from 'formik';
+import { Form, FormikProvider, useFormik } from 'formik';
 import eyeFill from '@iconify/icons-eva/eye-fill';
-import closeFill from '@iconify/icons-eva/close-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 // material
-import { Stack, TextField, IconButton, InputAdornment, Card, Grid, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { Box, Card, Grid, Stack, TextField, Typography, IconButton, InputAdornment } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
-import { register, reset } from '../../../redux/slices/partner';
-//
-import { MIconButton } from '../../@material-extend';
-// custom
+import { create, reset } from '../../../redux/slices/partner';
+// routes
+import { PATH_DASHBOARD } from '../../../routes/paths';
+// components
+import HelpCard from '../../_common/HelpCard';
 import ApiError from '../../_common/Errors/ApiError';
-import useAuth from '../../../hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
-export default function PartnerRegisterForm() {
-  const { refresh } = useAuth();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const [showPassword, setShowPassword] = useState(false);
+PartnerEditForm.propTypes = {
+  currentRecord: PropTypes.object
+};
+
+export default function PartnerEditForm() {
   const dispatch = useDispatch();
-  const { registerSuccess, error, registration, isLoading } = useSelector((state) => state.partner);
+  const { current } = useSelector((state) => state.partner);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+  const [showPassword, setShowPassword] = useState(false);
 
-  reset();
-
-  const RegisterSchema = Yup.object().shape({
+  const NewSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),
     lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -39,54 +40,40 @@ export default function PartnerRegisterForm() {
     partnerName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Partner name required')
   });
 
+  useEffect(() => {
+    if (current.status === 'success') {
+      // Assume success
+      dispatch(reset()).then(() => {
+        enqueueSnackbar('Create success', { variant: 'success' });
+        navigate(`${PATH_DASHBOARD.partner.view}/${current.response.currentVersion.id}`);
+      });
+    }
+  }, [current, dispatch, enqueueSnackbar, navigate]);
+
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      firstName: 'This',
-      lastName: 'Test',
-      email: 't@a.com',
-      password: 'Test1234!',
-      partnerName: 'Im a partner'
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      partnerName: ''
     },
-    validationSchema: RegisterSchema,
-    onSubmit: async (values, { setSubmitting }) => {
-      dispatch(register(values.email, values.password, values.firstName, values.lastName, values.partnerName));
-      setSubmitting(false);
+    validationSchema: NewSchema,
+    onSubmit: async (values) => {
+      dispatch(create(values));
     }
   });
-
-  useEffect(() => {
-    if (!registerSuccess) return;
-
-    try {
-      enqueueSnackbar('Register success', {
-        variant: 'success',
-        action: (key) => (
-          <MIconButton size="small" onClick={() => closeSnackbar(key)}>
-            <Icon icon={closeFill} />
-          </MIconButton>
-        )
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }, [registerSuccess, registration, refresh, navigate, enqueueSnackbar, closeSnackbar]);
 
   const { errors, touched, handleSubmit, getFieldProps } = formik;
 
   return (
     <FormikProvider value={formik}>
-      <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+      <Form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
+            <ApiError error={current.error} />
             <Card sx={{ p: 3 }}>
-              <Typography variant="subtitle2">Partner Details</Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary', pt: 0.5 }}>
-                Please provide details of the main user who will be able to login on behalf of the Partner and
-                administer the system.
-              </Typography>
-
-              <ApiError error={error} />
-
               <Stack spacing={2} sx={{ py: 3 }}>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                   <TextField
@@ -149,12 +136,17 @@ export default function PartnerRegisterForm() {
                     error={Boolean(touched.partnerName && errors.partnerName)}
                     helperText={touched.partnerName && errors.partnerName}
                   />
-                  <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isLoading}>
-                    Register
-                  </LoadingButton>
+                  <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
+                    <LoadingButton type="submit" variant="contained" loading={current.loading}>
+                      Create Partner
+                    </LoadingButton>
+                  </Box>
                 </Stack>
               </Stack>
             </Card>
+          </Grid>
+          <Grid item sx={{ display: { xs: 'none', md: 'block' } }} md={4}>
+            <HelpCard>Here is some content</HelpCard>
           </Grid>
         </Grid>
       </Form>

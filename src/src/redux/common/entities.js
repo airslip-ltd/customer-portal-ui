@@ -71,6 +71,7 @@ export async function executeGet(state, dispatch, slice, propName, entityType, i
     );
     dispatch(slice.actions.finishedLoading());
   } catch (error) {
+    console.log(error);
     dispatch(
       slice.actions.actionFailed({
         propName,

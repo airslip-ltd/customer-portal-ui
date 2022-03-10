@@ -75,9 +75,8 @@ const sidebarConfig = [
       },
       {
         title: 'partners',
-        path: PATH_DASHBOARD.admin.partners.root,
-        icon: ICONS.ecommerce,
-        children: [{ title: 'Register', path: PATH_DASHBOARD.admin.partners.register }]
+        path: PATH_DASHBOARD.partner.list,
+        icon: ICONS.ecommerce
       }
     ]
   },
@@ -123,7 +122,7 @@ const sidebarConfig = [
   // ----------------------------------------------------------------------
   {
     subheader: 'settings',
-    userTypes: ['Merchant', 'Partner'],
+    userTypes: ['Merchant', 'Partner', 'Administrator'],
     items: [
       {
         title: 'users',
