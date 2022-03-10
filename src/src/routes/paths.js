@@ -73,12 +73,12 @@ export const PATH_DASHBOARD = {
     bankTransactions: path(ROOTS_DASHBOARD, '/reporting/banking-transactions'),
     commerceTransactions: path(ROOTS_DASHBOARD, '/reporting/commerce-transactions')
   },
-  admin: {
-    partners: {
-      root: path(ROOTS_DASHBOARD, '/admin/partners'),
-      list: path(ROOTS_DASHBOARD, '/admin/partners/list'),
-      register: path(ROOTS_DASHBOARD, '/admin/partners/register')
-    }
+  partner: {
+    root: path(ROOTS_DASHBOARD, '/partners'),
+    list: path(ROOTS_DASHBOARD, '/partners/list'),
+    create: path(ROOTS_DASHBOARD, '/partners/create'),
+    edit: path(ROOTS_DASHBOARD, `/partners/edit`),
+    view: path(ROOTS_DASHBOARD, '/partners/view')
   },
   analytics: {
     root: path(ROOTS_DASHBOARD, '/analytics/balances'),

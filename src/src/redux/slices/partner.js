@@ -1,43 +1,42 @@
 import { createSlice } from '@reduxjs/toolkit';
 // utils
-import axios from '../../utils/axios';
+import {
+  SEARCH_DEFAULTS,
+  COMMON_FUNCTIONS,
+  SEARCH_FUNCTIONS,
+  STATE_DEFAULTS,
+  executeSearch
+} from '../common/constants';
+import {
+  ENTITY_DEFAULTS,
+  ACTION_FUNCTIONS,
+  executeGet,
+  executeUpdate,
+  executeCreate,
+  executeReset,
+  executeDelete
+} from '../common/entities';
 
 // ----------------------------------------------------------------------
 
 const initialState = {
-  isLoading: false,
-  error: {},
-  registration: {},
-  registerSuccess: false
+  ...STATE_DEFAULTS,
+  partner: { ...SEARCH_DEFAULTS },
+  current: { ...ENTITY_DEFAULTS }
 };
 
 const slice = createSlice({
   name: 'partner',
   initialState,
   reducers: {
-    // START LOADING
-    startLoading(state) {
-      state.error = {};
-      state.registration = {};
-      state.registerSuccess = false;
-      state.isLoading = true;
-    },
+    ...COMMON_FUNCTIONS,
+    ...SEARCH_FUNCTIONS,
+    ...ACTION_FUNCTIONS,
 
     // HAS ERROR
     hasError(state, action) {
       state.isLoading = false;
       state.error = action.payload;
-    },
-
-    clearError(state) {
-      state.isLoading = false;
-      state.error = {};
-    },
-
-    registerPartnerSuccess(state, action) {
-      state.isLoading = false;
-      state.registration = action.payload;
-      state.registerSuccess = true;
     }
   }
 });
@@ -47,26 +46,44 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function reset() {
-  return (dispatch) => {
-    dispatch(slice.actions.clearError());
+export function search(query) {
+  return async (dispatch, getState) => {
+    const { partner } = getState();
+    await executeSearch(partner, dispatch, slice, 'partner', query);
   };
 }
 
-export function register(email, password, firstName, lastName, partnerName) {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios.post('/partner', {
-        email,
-        password,
-        firstName,
-        lastName,
-        partnerName
-      });
-      dispatch(slice.actions.registerPartnerSuccess(response.data.currentVersion));
-    } catch (error) {
-      dispatch(slice.actions.hasError(error));
-    }
+export function get(id) {
+  return async (dispatch, getState) => {
+    const { partner } = getState();
+    await executeGet(partner, dispatch, slice, 'current', 'partner', id);
+  };
+}
+
+export function update(id, values) {
+  return async (dispatch, getState) => {
+    const { partner } = getState();
+    await executeUpdate(partner, dispatch, slice, 'current', 'partner', id, values);
+  };
+}
+
+export function create(values) {
+  return async (dispatch, getState) => {
+    const { partner } = getState();
+    await executeCreate(partner, dispatch, slice, 'current', 'partner', values);
+  };
+}
+
+export function reset() {
+  return async (dispatch, getState) => {
+    const { partner } = getState();
+    await executeReset(partner, dispatch, slice, 'current');
+  };
+}
+
+export function del(id) {
+  return async (dispatch, getState) => {
+    const { partner } = getState();
+    await executeDelete(partner, dispatch, slice, 'current', 'partner', id);
   };
 }

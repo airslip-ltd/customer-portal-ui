@@ -166,10 +166,13 @@ export default function Router() {
           ]
         },
         {
-          path: 'admin/partners',
+          path: 'partners',
           children: [
-            { element: <Navigate to="/dashboard/admin/partners/list" replace /> },
-            { path: 'register', element: <PartnerRegister /> }
+            { element: <Navigate to="/dashboard/partners/list" replace /> },
+            { path: 'list', element: <PartnerList /> },
+            { path: 'create', element: <PartnerCreate /> },
+            { path: 'view/:id', element: <PartnerView /> },
+            { path: 'edit/:id', element: <PartnerEdit /> }
           ]
         },
         {
@@ -242,7 +245,10 @@ const UserView = Loadable(lazy(() => import('../pages/users/UserView')));
 const UserEdit = Loadable(lazy(() => import('../pages/users/UserEdit')));
 const UserCreate = Loadable(lazy(() => import('../pages/users/UserCreate')));
 // Admin
-const PartnerRegister = Loadable(lazy(() => import('../pages/admin/partner/Register')));
+const PartnerCreate = Loadable(lazy(() => import('../pages/partners/PartnerCreate')));
+const PartnerList = Loadable(lazy(() => import('../pages/partners/PartnerList')));
+const PartnerView = Loadable(lazy(() => import('../pages/partners/PartnerView')));
+const PartnerEdit = Loadable(lazy(() => import('../pages/partners/PartnerEdit')));
 // Analytics
 const AccountBalances = Loadable(lazy(() => import('../pages/analytics/AccountBalances')));
 const CommerceSummary = Loadable(lazy(() => import('../pages/analytics/CommerceSummary')));
