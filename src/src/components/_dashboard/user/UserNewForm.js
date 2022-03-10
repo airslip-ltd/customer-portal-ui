@@ -61,10 +61,10 @@ export default function UserNewForm({ isEdit, currentUser }) {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      firstName: currentUser?.firstName || 'sadfasdf',
-      lastName: currentUser?.lastName || 'asdfasdf',
-      displayName: currentUser?.displayName || 'sadfasfd',
-      email: currentUser?.email || 'j.grober@airslip.com',
+      firstName: currentUser?.firstName || '',
+      lastName: currentUser?.lastName || '',
+      displayName: currentUser?.displayName || '',
+      email: currentUser?.email || '',
       userRole: currentUser?.userRole || USER_ROLE[2]
     },
     validationSchema: NewUserSchema,
