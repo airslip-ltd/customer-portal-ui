@@ -8,6 +8,7 @@ import { styled } from '@mui/material/styles';
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, TextField, Typography, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 // redux
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from '../../../redux/store';
 import { update, create, reset } from '../../../redux/slices/user';
 // routes
@@ -47,6 +48,16 @@ export default function UserNewForm({ isEdit, currentUser }) {
     userRole: Yup.string().required('User Role is required')
   });
 
+  useEffect(() => {
+    if (current.status === 'success') {
+      // Assume success
+      dispatch(reset()).then(() => {
+        enqueueSnackbar(!isEdit ? 'Create success' : 'Update success', { variant: 'success' });
+        navigate(`${PATH_DASHBOARD.user.view}/${current.response.currentVersion.id}`);
+      });
+    }
+  }, [current, dispatch, enqueueSnackbar, navigate, isEdit]);
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -57,29 +68,16 @@ export default function UserNewForm({ isEdit, currentUser }) {
       userRole: currentUser?.userRole || USER_ROLE[2]
     },
     validationSchema: NewUserSchema,
-    onSubmit: async (values, { setSubmitting }) => {
-      setSubmitting(true);
-
-      const handleResponse = () => {
-        if (current.hasData) {
-          // Assume success
-          dispatch(reset()).then(() => {
-            enqueueSnackbar(!isEdit ? 'Create success' : 'Update success', { variant: 'success' });
-            navigate(`${PATH_DASHBOARD.user.view}/${current.response.currentVersion.id}`);
-          });
-        }
-        setSubmitting(false);
-      };
-
+    onSubmit: async (values) => {
       if (isEdit) {
-        dispatch(update(currentUser.id, values)).then(handleResponse);
+        dispatch(update(currentUser.id, values));
       } else {
-        dispatch(create(values)).then(handleResponse);
+        dispatch(create(values));
       }
     }
   });
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+  const { errors, touched, handleSubmit, getFieldProps } = formik;
 
   return (
     <FormikProvider value={formik}>
@@ -140,7 +138,7 @@ export default function UserNewForm({ isEdit, currentUser }) {
                 </Stack>
 
                 <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
-                  <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                  <LoadingButton type="submit" variant="contained" loading={current.loading}>
                     {!isEdit ? 'Create User' : 'Save Changes'}
                   </LoadingButton>
                 </Box>

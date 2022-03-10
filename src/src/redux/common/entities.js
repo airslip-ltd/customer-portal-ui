@@ -2,7 +2,9 @@ import axios from '../../utils/axios';
 
 export const ENTITY_DEFAULTS = {
   loading: false,
+  status: 'neutral',
   hasData: false,
+  hasError: false,
   error: {},
   response: {}
 };
@@ -16,21 +18,25 @@ export const ACTION_FUNCTIONS = {
   },
 
   startAction(state, action) {
-    state[action.payload] = {
-      ...state[action.payload],
+    const { propName } = action.payload;
+    state[propName] = {
+      ...state[propName],
       loading: true,
+      status: 'inprogress',
       error: {},
-      hasData: false
+      hasError: false
     };
   },
 
   actionSuccess(state, action) {
-    const { propName, response } = action.payload;
+    const { propName, response, status } = action.payload;
     state[propName] = {
       ...state[propName],
       loading: false,
       response,
-      hasData: true
+      status: status || 'success',
+      hasData: true,
+      hasError: false
     };
   },
 
@@ -38,9 +44,9 @@ export const ACTION_FUNCTIONS = {
     const { propName, response } = action.payload;
     state[propName] = {
       ...state[propName],
+      hasError: true,
+      status: 'failed',
       loading: false,
-      response: ENTITY_DEFAULTS.response,
-      hasData: false,
       error: response
     };
   }
@@ -59,7 +65,8 @@ export async function executeGet(state, dispatch, slice, propName, entityType, i
     dispatch(
       slice.actions.actionSuccess({
         propName,
-        response: response.data
+        response: response.data,
+        status: 'neutral'
       })
     );
     dispatch(slice.actions.finishedLoading());

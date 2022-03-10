@@ -20,7 +20,6 @@ export default function SetupIntegration() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(memberDetails);
     if (!memberDetails) return;
 
     const { linkedServices } = memberDetails;
