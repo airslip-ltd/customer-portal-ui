@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useParams, Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { Button } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
