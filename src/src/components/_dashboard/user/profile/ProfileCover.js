@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 // material
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
-// hooks
-import useAuth from '../../../../hooks/useAuth';
 //
 import MyAvatar from '../../../MyAvatar';
 
@@ -38,23 +36,14 @@ const InfoStyle = styled('div')(({ theme }) => ({
   }
 }));
 
-const CoverImgStyle = styled('img')({
-  zIndex: 8,
-  width: '100%',
-  height: '100%',
-  objectFit: 'cover',
-  position: 'absolute'
-});
-
 // ----------------------------------------------------------------------
 
 ProfileCover.propTypes = {
-  myProfile: PropTypes.object
+  user: PropTypes.object
 };
 
-export default function ProfileCover({ myProfile }) {
-  const { user } = useAuth();
-  const { position, cover } = myProfile;
+export default function ProfileCover({ user }) {
+  const { userRole, displayName } = user;
 
   return (
     <RootStyle>
@@ -77,11 +66,10 @@ export default function ProfileCover({ myProfile }) {
             textAlign: { xs: 'center', md: 'left' }
           }}
         >
-          <Typography variant="h4">{user.displayName}</Typography>
-          <Typography sx={{ opacity: 0.72 }}>{position}</Typography>
+          <Typography variant="h4">{displayName}</Typography>
+          <Typography sx={{ opacity: 0.72 }}>{userRole}</Typography>
         </Box>
       </InfoStyle>
-      <CoverImgStyle alt="profile cover" src={cover} />
     </RootStyle>
   );
 }

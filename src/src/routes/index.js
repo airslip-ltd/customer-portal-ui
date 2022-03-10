@@ -156,6 +156,16 @@ export default function Router() {
           ]
         },
         {
+          path: 'user',
+          children: [
+            { element: <Navigate to="/dashboard/user/list" replace /> },
+            { path: 'list', element: <UserList /> },
+            { path: 'create', element: <UserCreate /> },
+            { path: 'view/:id', element: <UserView /> },
+            { path: 'edit/:id', element: <UserEdit /> }
+          ]
+        },
+        {
           path: 'admin/partners',
           children: [
             { element: <Navigate to="/dashboard/admin/partners/list" replace /> },
@@ -226,6 +236,11 @@ const RelationshipView = Loadable(lazy(() => import('../pages/relationship/Relat
 const RelationshipList = Loadable(lazy(() => import('../pages/relationship/RelationshipList')));
 const RelationshipCreate = Loadable(lazy(() => import('../pages/relationship/RelationshipCreate')));
 const RelationshipConsent = Loadable(lazy(() => import('../pages/relationship/RelationshipConsent')));
+// Users
+const UserList = Loadable(lazy(() => import('../pages/users/UserList')));
+const UserView = Loadable(lazy(() => import('../pages/users/UserView')));
+const UserEdit = Loadable(lazy(() => import('../pages/users/UserEdit')));
+const UserCreate = Loadable(lazy(() => import('../pages/users/UserCreate')));
 // Admin
 const PartnerRegister = Loadable(lazy(() => import('../pages/admin/partner/Register')));
 // Analytics

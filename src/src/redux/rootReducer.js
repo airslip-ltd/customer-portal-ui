@@ -12,6 +12,7 @@ import analyticsReducer from './slices/analytics';
 import balancesReducer from './slices/balances';
 import transactionsReducer from './slices/transactions';
 import reportsReducer from './slices/reports';
+import userReducer from './slices/user';
 
 // ----------------------------------------------------------------------
 
@@ -33,7 +34,8 @@ const rootReducer = combineReducers({
   analytics: analyticsReducer,
   balances: balancesReducer,
   transactions: transactionsReducer,
-  reports: reportsReducer
+  reports: reportsReducer,
+  user: userReducer
 });
 
 export { rootPersistConfig, rootReducer };
