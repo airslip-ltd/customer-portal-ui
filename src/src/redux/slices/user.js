@@ -13,7 +13,8 @@ import {
   executeGet,
   executeUpdate,
   executeCreate,
-  executeReset
+  executeReset,
+  executeDelete
 } from '../common/entities';
 
 // ----------------------------------------------------------------------
@@ -77,5 +78,12 @@ export function reset() {
   return async (dispatch, getState) => {
     const { user } = getState();
     await executeReset(user, dispatch, slice, 'current');
+  };
+}
+
+export function del(id) {
+  return async (dispatch, getState) => {
+    const { user } = getState();
+    await executeDelete(user, dispatch, slice, 'current', 'user', id, null, process.env.REACT_APP_AUTH_URL);
   };
 }

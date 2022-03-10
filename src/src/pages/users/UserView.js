@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link as RouterLink } from 'react-router-dom';
+import { useParams, useNavigate, Link as RouterLink } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { capitalCase } from 'change-case';
+import { useSnackbar } from 'notistack';
 // material
 import { styled } from '@mui/material/styles';
-import { Card, Tabs, Tab, Box, Button } from '@mui/material';
+import { Card, Tabs, Tab, Box, Button, Stack } from '@mui/material';
 // redux
 import roundAccountBox from '@iconify/icons-ic/round-account-box';
 import { useDispatch, useSelector } from '../../redux/store';
-import { get } from '../../redux/slices/user';
+import { get, del } from '../../redux/slices/user';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
 import StandardPage from '../../layouts/StandardPage';
 import { Profile, ProfileCover } from '../../components/_dashboard/user/profile';
+import Confirmation from '../../components/_common/dialog/Confirmation';
+import ApiError from '../../components/_common/Errors/ApiError';
 
 // ----------------------------------------------------------------------
 
@@ -33,13 +36,24 @@ const TabsWrapperStyle = styled('div')(({ theme }) => ({
   }
 }));
 
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(theme.palette.error.main),
+  backgroundColor: theme.palette.error.main,
+  '&:hover': {
+    backgroundColor: theme.palette.error.dark
+  }
+}));
+
 // ----------------------------------------------------------------------
 
 export default function UserView() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const { current } = useSelector((state) => state.user);
   const { id } = useParams();
   const [currentTab, setCurrentTab] = useState('profile');
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (id) dispatch(get(id));
@@ -49,24 +63,47 @@ export default function UserView() {
     setCurrentTab(newValue);
   };
 
+  const handleDelete = () => {
+    setOpen(true);
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+  };
+
+  const handleConfirm = () => {
+    setOpen(false);
+    if (id) dispatch(del(id));
+  };
+
+  useEffect(() => {
+    if (current.status === 'success') {
+      // Assume success
+      enqueueSnackbar('Delete success', { variant: 'success' });
+      navigate(PATH_DASHBOARD.user.list);
+    }
+  }, [current, dispatch, enqueueSnackbar, navigate]);
+
   const PROFILE_TABS = [
     {
       value: 'profile',
       icon: <Icon icon={roundAccountBox} width={20} height={20} />,
-      component: <Profile user={current.response.currentVersion} />
+      component: <Profile user={current.hasData ? current.response.currentVersion : {}} />
     }
   ];
 
   const ViewActions = () => (
-    <Button
-      size="medium"
-      variant="contained"
-      component={RouterLink}
-      to={`${PATH_DASHBOARD.user.edit}/${id}`}
-      sx={{ mt: 1 }}
-    >
-      Edit
-    </Button>
+    <Stack direction="row" spacing={1} sx={{ pt: 3 }}>
+      <Button size="medium" variant="contained" component={RouterLink} to={`${PATH_DASHBOARD.user.list}`}>
+        Back
+      </Button>
+      <ColorButton size="medium" variant="contained" onClick={handleDelete}>
+        Delete
+      </ColorButton>
+      <Button size="medium" variant="contained" component={RouterLink} to={`${PATH_DASHBOARD.user.edit}/${id}`}>
+        Edit
+      </Button>
+    </Stack>
   );
 
   return (
@@ -80,10 +117,11 @@ export default function UserView() {
     >
       {current.hasData && (
         <>
+          <ApiError error={current.error} />
           <Card
             sx={{
               mb: 3,
-              height: 280,
+              height: 180,
               position: 'relative'
             }}
           >
@@ -110,6 +148,9 @@ export default function UserView() {
           })}
         </>
       )}
+      <Confirmation onCancel={handleCancel} onConfirm={handleConfirm} open={open} title="Are you sure?">
+        {current.hasData ? current.response.currentVersion.displayName : id} will be deleted from Airslip.
+      </Confirmation>
     </StandardPage>
   );
 }

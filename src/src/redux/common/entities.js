@@ -35,7 +35,7 @@ export const ACTION_FUNCTIONS = {
       loading: false,
       response,
       status: status || 'success',
-      hasData: true,
+      hasData: response != null,
       hasError: false
     };
   },
@@ -150,4 +150,31 @@ export async function executeCreate(state, dispatch, slice, propName, entityType
 export async function executeReset(state, dispatch, slice, propName) {
   if (state[propName].loading) return;
   dispatch(slice.actions.resetAction({ propName }));
+}
+
+export async function executeDelete(state, dispatch, slice, propName, entityType, id, endPoint, servuiceUrl) {
+  if (state[propName].loading) return;
+
+  dispatch(slice.actions.startAction({ propName }));
+  try {
+    await axios({
+      url: endPoint || `/${entityType}/${id}`,
+      method: 'delete',
+      baseURL: servuiceUrl || process.env.REACT_APP_API_URL
+    });
+    dispatch(
+      slice.actions.actionSuccess({
+        propName,
+        response: null
+      })
+    );
+    dispatch(slice.actions.finishedLoading());
+  } catch (error) {
+    dispatch(
+      slice.actions.actionFailed({
+        propName,
+        response: error
+      })
+    );
+  }
 }
