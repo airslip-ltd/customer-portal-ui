@@ -42,3 +42,4 @@ export { default as RecentTransactions } from './RecentTransactions';
 export { default as CashflowByAccount } from './CashflowByAccount';
 export { default as RecentBankTransactions } from './RecentBankTransactions';
 export { default as Customers } from './Customers';
+export { default as MerchantRevenueDemo } from './MerchantRevenueDemo';
