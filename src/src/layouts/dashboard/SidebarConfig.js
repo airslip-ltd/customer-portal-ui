@@ -126,10 +126,9 @@ const sidebarConfig = [
     userTypes: ['Merchant', 'Partner'],
     items: [
       {
-        title: 'user',
-        path: PATH_DASHBOARD.user.root,
-        icon: ICONS.user,
-        children: []
+        title: 'users',
+        path: PATH_DASHBOARD.user.list,
+        icon: ICONS.user
       }
     ]
   }
