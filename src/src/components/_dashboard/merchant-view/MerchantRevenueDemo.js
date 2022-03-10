@@ -9,10 +9,10 @@ import MerchantDashboardSnapshot from './MerchantDashboardSnapshot';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 
 // ----------------------------------------------------------------------
-MerchantRevenue.propTypes = {
+MerchantRevenueDemo.propTypes = {
   accountId: PropTypes.string
 };
-export default function MerchantRevenue({ accountId }) {
+export default function MerchantRevenueDemo({ accountId }) {
   const dispatch = useDispatch();
   const { salesStats } = useSelector((state) => state.analytics);
   const [metricData, setMetricData] = useState({});
