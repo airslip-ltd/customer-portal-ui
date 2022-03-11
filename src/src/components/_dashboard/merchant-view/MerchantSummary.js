@@ -76,7 +76,7 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
           </>
         )}
 
-        {accountId === 'my-account-1' && (
+        {accountId === 'my-account-1' && featureEnabled('demo') && (
           <Grid item xs={12} md={4}>
             <Customers />
           </Grid>
