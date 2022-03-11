@@ -51,11 +51,15 @@ export const PATH_DASHBOARD = {
   },
   user: {
     root: path(ROOTS_DASHBOARD, '/user'),
-    profile: path(ROOTS_DASHBOARD, '/user/profile'),
     list: path(ROOTS_DASHBOARD, '/user/list'),
     create: path(ROOTS_DASHBOARD, '/user/create'),
     edit: path(ROOTS_DASHBOARD, `/user/edit`),
     view: path(ROOTS_DASHBOARD, '/user/view')
+  },
+  profile: {
+    root: path(ROOTS_DASHBOARD, '/profile'),
+    edit: path(ROOTS_DASHBOARD, `/profile/edit`),
+    view: path(ROOTS_DASHBOARD, '/profile/view')
   },
   integrations: {
     root: path(ROOTS_DASHBOARD, '/integrations'),

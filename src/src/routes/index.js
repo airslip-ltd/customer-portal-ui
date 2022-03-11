@@ -166,6 +166,14 @@ export default function Router() {
           ]
         },
         {
+          path: 'profile',
+          children: [
+            { element: <Navigate to="/dashboard/profile/view" replace /> },
+            { path: 'view', element: <ProfileView /> },
+            { path: 'edit', element: <ProfileEdit /> }
+          ]
+        },
+        {
           path: 'partners',
           children: [
             { element: <Navigate to="/dashboard/partners/list" replace /> },
@@ -249,6 +257,9 @@ const PartnerCreate = Loadable(lazy(() => import('../pages/partners/PartnerCreat
 const PartnerList = Loadable(lazy(() => import('../pages/partners/PartnerList')));
 const PartnerView = Loadable(lazy(() => import('../pages/partners/PartnerView')));
 const PartnerEdit = Loadable(lazy(() => import('../pages/partners/PartnerEdit')));
+// Profile
+const ProfileView = Loadable(lazy(() => import('../pages/users/ProfileView')));
+const ProfileEdit = Loadable(lazy(() => import('../pages/users/ProfileEdit')));
 // Analytics
 const AccountBalances = Loadable(lazy(() => import('../pages/analytics/AccountBalances')));
 const CommerceSummary = Loadable(lazy(() => import('../pages/analytics/CommerceSummary')));
