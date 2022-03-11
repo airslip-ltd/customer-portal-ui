@@ -11,11 +11,11 @@ import useIsMountedRef from '../../../hooks/useIsMountedRef';
 // ----------------------------------------------------------------------
 
 ResetPasswordForm.propTypes = {
-  onSent: PropTypes.func,
-  onGetEmail: PropTypes.func
+  onRequest: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
-export default function ResetPasswordForm({ onSent, onGetEmail }) {
+export default function ResetPasswordForm({ onRequest, isLoading }) {
   const { resetPassword } = useAuth();
   const isMountedRef = useIsMountedRef();
 
@@ -25,15 +25,14 @@ export default function ResetPasswordForm({ onSent, onGetEmail }) {
 
   const formik = useFormik({
     initialValues: {
-      email: 'demo@minimals.cc'
+      email: ''
     },
     validationSchema: ResetPasswordSchema,
     onSubmit: async (values, { setErrors, setSubmitting }) => {
       try {
         await resetPassword(values.email);
         if (isMountedRef.current) {
-          onSent();
-          onGetEmail(formik.values.email);
+          onRequest(formik.values.email);
           setSubmitting(false);
         }
       } catch (error) {
@@ -46,7 +45,7 @@ export default function ResetPasswordForm({ onSent, onGetEmail }) {
     }
   });
 
-  const { errors, touched, isSubmitting, handleSubmit, getFieldProps } = formik;
+  const { errors, touched, handleSubmit, getFieldProps } = formik;
 
   return (
     <FormikProvider value={formik}>
@@ -63,7 +62,7 @@ export default function ResetPasswordForm({ onSent, onGetEmail }) {
             helperText={touched.email && errors.email}
           />
 
-          <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+          <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isLoading}>
             Reset Password
           </LoadingButton>
         </Stack>
