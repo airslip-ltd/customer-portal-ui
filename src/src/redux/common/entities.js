@@ -179,3 +179,76 @@ export async function executeDelete(state, dispatch, slice, propName, entityType
     );
   }
 }
+
+export async function executeGetMyDetails(state, dispatch, slice, propName, entityType, endPoint, servuiceUrl) {
+  if (state[propName].loading) return;
+
+  dispatch(slice.actions.startAction({ propName }));
+  try {
+    const response = await axios({
+      url: endPoint || `/${entityType}`,
+      method: 'get',
+      baseURL: servuiceUrl || process.env.REACT_APP_API_URL
+    });
+    dispatch(
+      slice.actions.actionSuccess({
+        propName,
+        response: response.data,
+        status: 'neutral'
+      })
+    );
+    dispatch(slice.actions.finishedLoading());
+  } catch (error) {
+    console.log(error);
+    dispatch(
+      slice.actions.actionFailed({
+        propName,
+        response: error
+      })
+    );
+  }
+}
+
+export async function executeUpdateMyDetails(
+  state,
+  dispatch,
+  slice,
+  propName,
+  entityType,
+  values,
+  endPoint,
+  servuiceUrl
+) {
+  if (state[propName].loading) return;
+
+  if (state[propName].hasData && state[propName].response.currentVersion) {
+    values = {
+      ...state[propName].response.currentVersion,
+      ...values
+    };
+  }
+
+  dispatch(slice.actions.startAction({ propName }));
+  try {
+    const response = await axios({
+      url: endPoint || `/${entityType}`,
+      method: 'put',
+      baseURL: servuiceUrl || process.env.REACT_APP_API_URL,
+      data: values
+    });
+    dispatch(
+      slice.actions.actionSuccess({
+        propName,
+        response: response.data
+      })
+    );
+    dispatch(slice.actions.finishedLoading());
+  } catch (error) {
+    dispatch(
+      slice.actions.actionFailed({
+        propName,
+        response: error
+      })
+    );
+  }
+}
