@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useCallback, useState } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
 import { Box, Button, Container, Typography } from '@mui/material';
@@ -9,10 +9,10 @@ import LogoOnlyLayout from '../../layouts/LogoOnlyLayout';
 import { PATH_AUTH } from '../../routes/paths';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { forgotPassword, reset } from '../../redux/slices/auth';
+import { setPassword, reset } from '../../redux/slices/auth';
 // components
 import Page from '../../components/Page';
-import { ResetPasswordForm } from '../../components/authentication/reset-password';
+import { SetPasswordForm } from '../../components/authentication/reset-password';
 //
 import { SentIcon } from '../../assets';
 import ApiError from '../../components/_common/Errors/ApiError';
@@ -29,16 +29,22 @@ const RootStyle = styled(Page)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function ResetPassword() {
+export default function SetPassword() {
+  const [searchParams] = useSearchParams();
   const [email, setEmail] = useState('');
-  const { forgot } = useSelector((state) => state.auth);
+  const [token, setToken] = useState('');
+  const { password } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSend = (newEmail) => {
-    setEmail(newEmail);
-    dispatch(forgotPassword(newEmail));
+  const handleSend = (newPassword, confirm) => {
+    dispatch(setPassword(newPassword, confirm, email, token));
   };
+
+  useEffect(() => {
+    setEmail(searchParams.get('email'));
+    setToken(searchParams.get('token'));
+  }, [searchParams]);
 
   const handleBack = useCallback(() => {
     dispatch(reset());
@@ -51,21 +57,18 @@ export default function ResetPassword() {
 
       <Container>
         <Box sx={{ maxWidth: 480, mx: 'auto' }}>
-          {!forgot.complete ? (
+          {!password.complete ? (
             <>
               <Typography variant="h3" paragraph>
-                Forgot your password?
+                Create a password
               </Typography>
-              <Typography sx={{ color: 'text.secondary', mb: 5 }}>
-                Please enter the email address associated with your account and We will email you a link to reset your
-                password.
-              </Typography>
-              <ApiError error={forgot.error} />
+              <Typography sx={{ color: 'text.secondary', mb: 5 }}>Please enter your new password below.</Typography>
+              <ApiError error={password.error} />
 
-              <ResetPasswordForm onRequest={handleSend} isLoading={forgot.loading} />
+              <SetPasswordForm onRequest={handleSend} />
 
               <Button fullWidth size="large" onClick={handleBack} sx={{ mt: 1 }}>
-                Back
+                Return to Login
               </Button>
             </>
           ) : (
@@ -73,17 +76,15 @@ export default function ResetPassword() {
               <SentIcon sx={{ mb: 5, mx: 'auto', height: 160 }} />
 
               <Typography variant="h3" gutterBottom>
-                Request sent successfully
+                Password reset successfully
               </Typography>
               <Typography>
-                We have sent a confirmation email to &nbsp;
+                Thank you, we have reset your password for address
                 <strong>{email}</strong>
-                <br />
-                Please check your email.
               </Typography>
 
               <Button size="large" variant="contained" onClick={handleBack} sx={{ mt: 5 }}>
-                Back
+                Return to Login
               </Button>
             </Box>
           )}
