@@ -21,7 +21,8 @@ const ICONS = {
   ecommerce: getIcon('ic_ecommerce'),
   analytics: getIcon('ic_analytics'),
   dashboard: getIcon('ic_dashboard'),
-  booking: getIcon('ic_booking')
+  booking: getIcon('ic_booking'),
+  settings: getIcon('ic_settings')
 };
 
 const sidebarConfig = [
@@ -128,6 +129,11 @@ const sidebarConfig = [
         title: 'users',
         path: PATH_DASHBOARD.user.list,
         icon: ICONS.user
+      },
+      {
+        title: 'settings',
+        path: PATH_DASHBOARD.redirect.settings,
+        icon: ICONS.settings
       }
     ]
   }
