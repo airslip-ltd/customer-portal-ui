@@ -40,6 +40,9 @@ export const PATH_ONBOARDING = {
 
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
+  redirect: {
+    settings: path(ROOTS_DASHBOARD, '/redirect/settings')
+  },
   general: {
     home: path(ROOTS_DASHBOARD, '/home')
   },
@@ -82,7 +85,12 @@ export const PATH_DASHBOARD = {
     list: path(ROOTS_DASHBOARD, '/partners/list'),
     create: path(ROOTS_DASHBOARD, '/partners/create'),
     edit: path(ROOTS_DASHBOARD, `/partners/edit`),
-    view: path(ROOTS_DASHBOARD, '/partners/view')
+    view: path(ROOTS_DASHBOARD, '/partners/view'),
+    profile: {
+      root: path(ROOTS_DASHBOARD, '/partners/profile'),
+      edit: path(ROOTS_DASHBOARD, `/partners/profile/edit`),
+      view: path(ROOTS_DASHBOARD, '/partners/profile/view')
+    }
   },
   analytics: {
     root: path(ROOTS_DASHBOARD, '/analytics/balances'),

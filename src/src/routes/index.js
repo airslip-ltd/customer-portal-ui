@@ -138,6 +138,13 @@ export default function Router() {
         { element: <Navigate to="/dashboard/home" replace /> },
         { path: 'home', element: <Home /> },
         {
+          path: 'redirect',
+          children: [
+            { element: <Navigate to="/dashboard/integrations/list" replace /> },
+            { path: 'settings', element: <SettingsRedirect /> }
+          ]
+        },
+        {
           path: 'integrations',
           children: [
             { element: <Navigate to="/dashboard/integrations/list" replace /> },
@@ -180,7 +187,9 @@ export default function Router() {
             { path: 'list', element: <PartnerList /> },
             { path: 'create', element: <PartnerCreate /> },
             { path: 'view/:id', element: <PartnerView /> },
-            { path: 'edit/:id', element: <PartnerEdit /> }
+            { path: 'edit/:id', element: <PartnerEdit /> },
+            { path: 'profile/view', element: <PartnerProfileView /> },
+            { path: 'profile/edit', element: <PartnerProfileEdit /> }
           ]
         },
         {
@@ -237,6 +246,7 @@ const HubIntegrationAuthorise = Loadable(lazy(() => import('../pages/linking/Hub
 const HubIntegrationComplete = Loadable(lazy(() => import('../pages/linking/HubIntegrationComplete')));
 // Dashboard
 const Home = Loadable(lazy(() => import('../pages/dashboard/Home')));
+const SettingsRedirect = Loadable(lazy(() => import('../pages/SettingsRedirect')));
 const IntegrationList = Loadable(lazy(() => import('../pages/integrations/IntegrationList')));
 const IntegrationLink = Loadable(lazy(() => import('../pages/integrations/IntegrationLink')));
 const IntegrationLinked = Loadable(lazy(() => import('../pages/integrations/IntegrationLinked')));
@@ -257,6 +267,8 @@ const PartnerCreate = Loadable(lazy(() => import('../pages/partners/PartnerCreat
 const PartnerList = Loadable(lazy(() => import('../pages/partners/PartnerList')));
 const PartnerView = Loadable(lazy(() => import('../pages/partners/PartnerView')));
 const PartnerEdit = Loadable(lazy(() => import('../pages/partners/PartnerEdit')));
+const PartnerProfileView = Loadable(lazy(() => import('../pages/partners/PartnerProfileView')));
+const PartnerProfileEdit = Loadable(lazy(() => import('../pages/partners/PartnerProfileEdit')));
 // Profile
 const ProfileView = Loadable(lazy(() => import('../pages/users/ProfileView')));
 const ProfileEdit = Loadable(lazy(() => import('../pages/users/ProfileEdit')));
