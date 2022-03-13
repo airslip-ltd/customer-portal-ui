@@ -92,6 +92,18 @@ export const PATH_DASHBOARD = {
       view: path(ROOTS_DASHBOARD, '/partners/profile/view')
     }
   },
+  business: {
+    root: path(ROOTS_DASHBOARD, '/business'),
+    list: path(ROOTS_DASHBOARD, '/business/list'),
+    create: path(ROOTS_DASHBOARD, '/business/create'),
+    edit: path(ROOTS_DASHBOARD, `/business/edit`),
+    view: path(ROOTS_DASHBOARD, '/business/view'),
+    profile: {
+      root: path(ROOTS_DASHBOARD, '/business/profile'),
+      edit: path(ROOTS_DASHBOARD, `/business/profile/edit`),
+      view: path(ROOTS_DASHBOARD, '/business/profile/view')
+    }
+  },
   analytics: {
     root: path(ROOTS_DASHBOARD, '/analytics/balances'),
     accountBalances: path(ROOTS_DASHBOARD, '/analytics/balances'),

@@ -193,6 +193,18 @@ export default function Router() {
           ]
         },
         {
+          path: 'business',
+          children: [
+            { element: <Navigate to="/dashboard/business/list" replace /> },
+            { path: 'list', element: <BusinessList /> },
+            { path: 'create', element: <BusinessCreate /> },
+            { path: 'view/:id', element: <BusinessView /> },
+            { path: 'edit/:id', element: <BusinessEdit /> },
+            { path: 'profile/view', element: <BusinessProfileView /> },
+            { path: 'profile/edit', element: <BusinessProfileEdit /> }
+          ]
+        },
+        {
           path: 'analytics',
           children: [
             { element: <Navigate to="/dashboard/analytics/balances" replace /> },
@@ -271,6 +283,12 @@ const PartnerView = Loadable(lazy(() => import('../pages/partners/PartnerView'))
 const PartnerEdit = Loadable(lazy(() => import('../pages/partners/PartnerEdit')));
 const PartnerProfileView = Loadable(lazy(() => import('../pages/partners/PartnerProfileView')));
 const PartnerProfileEdit = Loadable(lazy(() => import('../pages/partners/PartnerProfileEdit')));
+const BusinessCreate = Loadable(lazy(() => import('../pages/business/BusinessCreate')));
+const BusinessList = Loadable(lazy(() => import('../pages/business/BusinessList')));
+const BusinessView = Loadable(lazy(() => import('../pages/business/BusinessView')));
+const BusinessEdit = Loadable(lazy(() => import('../pages/business/BusinessEdit')));
+const BusinessProfileView = Loadable(lazy(() => import('../pages/business/BusinessProfileView')));
+const BusinessProfileEdit = Loadable(lazy(() => import('../pages/business/BusinessProfileEdit')));
 // Profile
 const ProfileView = Loadable(lazy(() => import('../pages/users/ProfileView')));
 const ProfileEdit = Loadable(lazy(() => import('../pages/users/ProfileEdit')));
