@@ -65,7 +65,7 @@ export default function SetPassword() {
               <Typography sx={{ color: 'text.secondary', mb: 5 }}>Please enter your new password below.</Typography>
               <ApiError error={password.error} />
 
-              <SetPasswordForm onRequest={handleSend} />
+              <SetPasswordForm onRequest={handleSend} isLoading={password.loading} />
 
               <Button fullWidth size="large" onClick={handleBack} sx={{ mt: 1 }}>
                 Return to Login
