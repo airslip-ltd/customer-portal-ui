@@ -66,8 +66,10 @@ export const PATH_DASHBOARD = {
   },
   integrations: {
     root: path(ROOTS_DASHBOARD, '/integrations'),
-    link: path(ROOTS_DASHBOARD, '/integrations/link'),
-    list: path(ROOTS_DASHBOARD, '/integrations/list')
+    create: path(ROOTS_DASHBOARD, '/integrations/create'),
+    list: path(ROOTS_DASHBOARD, '/integrations/list'),
+    edit: path(ROOTS_DASHBOARD, `/integrations/edit`),
+    view: path(ROOTS_DASHBOARD, '/integrations/view')
   },
   relationship: {
     root: path(ROOTS_DASHBOARD, '/relationship'),

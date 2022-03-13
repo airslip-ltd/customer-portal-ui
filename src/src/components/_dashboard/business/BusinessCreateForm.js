@@ -1,14 +1,11 @@
 import * as Yup from 'yup';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-import { Icon } from '@iconify/react';
 import { Form, FormikProvider, useFormik } from 'formik';
-import eyeFill from '@iconify/icons-eva/eye-fill';
-import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 // material
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, TextField, Typography, IconButton, InputAdornment } from '@mui/material';
+import { Box, Card, Grid, Stack, TextField, Typography } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
 import { create, reset } from '../../../redux/slices/business';
@@ -25,7 +22,6 @@ export default function BusinessCreateForm() {
   const { current } = useSelector((state) => state.business);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const [showPassword, setShowPassword] = useState(false);
 
   const NewSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),

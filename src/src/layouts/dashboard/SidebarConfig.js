@@ -36,6 +36,15 @@ const sidebarConfig = [
         title: 'Home',
         path: PATH_DASHBOARD.general.home,
         icon: ICONS.dashboard
+      },
+      {
+        title: 'services',
+        path: PATH_DASHBOARD.integrations.root,
+        icon: ICONS.ecommerce,
+        children: [
+          { title: 'List', path: PATH_DASHBOARD.integrations.list },
+          { title: 'Connect', path: PATH_DASHBOARD.integrations.create }
+        ]
       }
     ]
   },
@@ -90,24 +99,6 @@ const sidebarConfig = [
         title: 'businesses',
         path: PATH_DASHBOARD.business.list,
         icon: ICONS.ecommerce
-      }
-    ]
-  },
-
-  // SERVICES
-  // ----------------------------------------------------------------------
-  {
-    subheader: 'services',
-    userTypes: ['Merchant'],
-    items: [
-      {
-        title: 'integrations',
-        path: PATH_DASHBOARD.integrations.root,
-        icon: ICONS.ecommerce,
-        children: [
-          { title: 'List', path: PATH_DASHBOARD.integrations.list },
-          { title: 'Add', path: PATH_DASHBOARD.integrations.link }
-        ]
       }
     ]
   },

@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import businessReducer from './slices/business';
 import accountReducer from './slices/accounts';
 import providerReducer from './slices/providers';
-import integrationReducer from './slices/integrations';
+import integrationReducer from './slices/integration';
 import registerReducer from './slices/register';
 import partnerReducer from './slices/partner';
 import relationshipReducer from './slices/relationship';

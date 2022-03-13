@@ -149,8 +149,8 @@ export default function Router() {
           children: [
             { element: <Navigate to="/dashboard/integrations/list" replace /> },
             { path: 'list', element: <IntegrationList /> },
-            { path: 'link', element: <IntegrationLink /> },
-            { path: ':provider/link', element: <IntegrationLinked /> }
+            { path: 'create', element: <IntegrationCreate /> },
+            { path: 'view/:id', element: <IntegrationView /> }
           ]
         },
         {
@@ -261,11 +261,12 @@ const HubIntegrationComplete = Loadable(lazy(() => import('../pages/linking/HubI
 // Dashboard
 const Home = Loadable(lazy(() => import('../pages/dashboard/Home')));
 const SettingsRedirect = Loadable(lazy(() => import('../pages/SettingsRedirect')));
-const IntegrationList = Loadable(lazy(() => import('../pages/integrations/IntegrationList')));
-const IntegrationLink = Loadable(lazy(() => import('../pages/integrations/IntegrationLink')));
-const IntegrationLinked = Loadable(lazy(() => import('../pages/integrations/IntegrationLinked')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 const Unauthorised = Loadable(lazy(() => import('../pages/Page401')));
+// Integrations
+const IntegrationList = Loadable(lazy(() => import('../pages/integrations/IntegrationList')));
+const IntegrationCreate = Loadable(lazy(() => import('../pages/integrations/IntegrationCreate')));
+const IntegrationView = Loadable(lazy(() => import('../pages/integrations/IntegrationView')));
 // Relationships
 const RelationshipView = Loadable(lazy(() => import('../pages/relationship/RelationshipView')));
 const RelationshipList = Loadable(lazy(() => import('../pages/relationship/RelationshipList')));

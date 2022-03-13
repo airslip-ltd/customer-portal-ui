@@ -12,7 +12,7 @@ import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 
 // ----------------------------------------------------------------------
 
-export default function IntegrationLink() {
+export default function IntegrationCreate() {
   const { themeStretch } = useSettings();
 
   return (
