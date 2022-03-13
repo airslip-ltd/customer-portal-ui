@@ -8,3 +8,5 @@ export { default as CaptureStoreName } from './CaptureStoreName';
 export { default as ComingSoon } from './ComingSoon';
 export { default as ManualInstall } from './ManualInstall';
 export { default as CardOverlay } from './CardOverlay';
+export { default as IntegrationCover } from './IntegrationCover';
+export { default as IntegrationProfile } from './IntegrationProfile';

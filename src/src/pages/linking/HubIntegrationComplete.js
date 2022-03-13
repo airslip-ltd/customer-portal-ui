@@ -14,7 +14,7 @@ import { HelpDialogue, SuccessDialogue } from '../../components/_common';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { getProviders, authoriseProvider } from '../../redux/slices/providers';
-import { getIntegrations } from '../../redux/slices/integrations';
+import { search as integrationSearch } from '../../redux/slices/integration';
 // hooks
 import useAuth from '../../hooks/useAuth';
 // routes
@@ -64,7 +64,7 @@ export default function HubIntegrationComplete() {
         }
       };
 
-      setIntervalId(setInterval(() => dispatch(getIntegrations(query)), 2000));
+      setIntervalId(setInterval(() => dispatch(integrationSearch(query)), 2000));
     }
   }, [dispatch, authoriseSuccess, integration]);
 

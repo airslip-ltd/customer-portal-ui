@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 // material
 import { Container } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getIntegrations } from '../../redux/slices/integrations';
+import { search as integrationSearch, reset } from '../../redux/slices/integration';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -19,16 +20,22 @@ import StandardList from '../../components/_common/Lists/StandardList';
 export default function IntegrationList() {
   const { themeStretch } = useSettings();
   const dispatch = useDispatch();
-  const { integrations } = useSelector((state) => state.integration);
+  const navigate = useNavigate();
+  const { integration } = useSelector((state) => state.integration);
   const [query, setQuery] = useState(null);
 
   useEffect(() => {
-    if (query) dispatch(getIntegrations(query));
+    if (query) dispatch(integrationSearch(query));
   }, [dispatch, query]);
 
-  const handleRowClick = useCallback((params) => {
-    console.log(params);
-  }, []);
+  const handleRowClick = useCallback(
+    (params) => {
+      dispatch(reset()).then(() => {
+        navigate(`${PATH_DASHBOARD.integrations.view}/${params.id}`);
+      });
+    },
+    [navigate, dispatch]
+  );
 
   return (
     <>
@@ -44,7 +51,7 @@ export default function IntegrationList() {
           />
           <StandardList
             columns={columns}
-            details={integrations}
+            details={integration}
             onChangeQuery={setQuery}
             onRowSelected={handleRowClick}
             recordsPerPage={10}
