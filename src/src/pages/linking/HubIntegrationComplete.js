@@ -38,7 +38,7 @@ export default function HubIntegrationComplete() {
   const { search } = useLocation();
   const dispatch = useDispatch();
   const { authoriseSuccess, providers } = useSelector((state) => state.provider);
-  const { integrations } = useSelector((state) => state.integration);
+  const { integration: integrations } = useSelector((state) => state.integration);
   const navigate = useNavigate();
   const { provider, integration } = useParams();
   const [selectedProvider, setSelectedProvider] = useState(null);
