@@ -73,10 +73,22 @@ const sidebarConfig = [
         title: 'Home',
         path: PATH_DASHBOARD.general.home,
         icon: ICONS.dashboard
-      },
+      }
+    ]
+  },
+
+  {
+    subheader: 'membership',
+    userTypes: ['Administrator'],
+    items: [
       {
         title: 'partners',
         path: PATH_DASHBOARD.partner.list,
+        icon: ICONS.ecommerce
+      },
+      {
+        title: 'businesses',
+        path: PATH_DASHBOARD.business.list,
         icon: ICONS.ecommerce
       }
     ]

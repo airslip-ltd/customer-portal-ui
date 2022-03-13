@@ -12,6 +12,8 @@ export default function SettingsRedirect() {
   switch (user.airslipUserType) {
     case 'Partner':
       return <Navigate to={PATH_DASHBOARD.partner.profile.view} />;
+    case 'Merchant':
+      return <Navigate to={PATH_DASHBOARD.business.profile.view} />;
     default:
       return <Navigate to="/401" />;
   }
