@@ -1,56 +1,67 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 // material
-import { Container } from '@mui/material';
+import { Button } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getRelationships } from '../../redux/slices/relationship';
+import { search, reset } from '../../redux/slices/relationship';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
-// hooks
-import useSettings from '../../hooks/useSettings';
 // components
-import Page from '../../components/Page';
-import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 import { columns } from '../../lists/relationship-list';
 import StandardList from '../../components/_common/Lists/StandardList';
+import StandardPage from '../../layouts/StandardPage';
 
 // ----------------------------------------------------------------------
 
 export default function RelationshipList() {
-  const { themeStretch } = useSettings();
   const dispatch = useDispatch();
-  const { relationships } = useSelector((state) => state.relationship);
+  const navigate = useNavigate();
+  const { relationship } = useSelector((state) => state.relationship);
   const [query, setQuery] = useState(null);
 
   useEffect(() => {
-    if (query) dispatch(getRelationships(query));
+    if (query) dispatch(search(query));
   }, [dispatch, query]);
 
-  const handleRowClick = useCallback((params) => {
-    console.log(params);
-  }, []);
+  const handleRowClick = useCallback(
+    (params) => {
+      dispatch(reset()).then(() => {
+        navigate(`${PATH_DASHBOARD.relationship.view}/${params.id}`);
+      });
+    },
+    [navigate, dispatch]
+  );
+
+  const handleAddClick = useCallback(() => {
+    dispatch(reset()).then(() => {
+      navigate(`${PATH_DASHBOARD.relationship.create}`);
+    });
+  }, [navigate, dispatch]);
+
+  const ViewActions = () => (
+    <Button size="medium" variant="contained" onClick={handleAddClick} sx={{ mt: 1 }}>
+      Add a Relationship
+    </Button>
+  );
 
   return (
-    <>
-      <Page title="Relationships | List | Airslip">
-        <Container maxWidth={themeStretch ? false : 'xl'}>
-          <HeaderBreadcrumbs
-            heading="Relationship List"
-            links={[
-              { name: 'Dashboard', href: PATH_DASHBOARD.root },
-              { name: 'Relationships', href: PATH_DASHBOARD.relationship.root },
-              { name: 'List' }
-            ]}
-          />
-          <StandardList
-            columns={columns}
-            details={relationships}
-            onChangeQuery={setQuery}
-            onRowSelected={handleRowClick}
-            recordsPerPage={10}
-          />
-        </Container>
-      </Page>
-    </>
+    <StandardPage
+      area="Dashboard"
+      space="Relationships"
+      spaceHref={PATH_DASHBOARD.relationship.list}
+      activity="List"
+      heading="Relationships"
+      actions={<ViewActions />}
+      fullWidth
+    >
+      <StandardList
+        columns={columns}
+        details={relationship}
+        onChangeQuery={setQuery}
+        onRowSelected={handleRowClick}
+        recordsPerPage={10}
+      />
+    </StandardPage>
   );
 }

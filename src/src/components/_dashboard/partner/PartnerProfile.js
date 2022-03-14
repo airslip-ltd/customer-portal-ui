@@ -6,11 +6,11 @@ import PartnerAbout from './PartnerAbout';
 
 // ----------------------------------------------------------------------
 
-Profile.propTypes = {
+PartnerProfile.propTypes = {
   partner: PropTypes.object
 };
 
-export default function Profile({ partner }) {
+export default function PartnerProfile({ partner }) {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={4}>

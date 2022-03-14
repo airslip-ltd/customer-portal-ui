@@ -1,32 +1,36 @@
 // material
-import { Container } from '@mui/material';
+import { Button } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
-// hooks
-import useSettings from '../../hooks/useSettings';
-// components
-import Page from '../../components/Page';
-import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import { CreateForm } from '../../components/_dashboard/relationship';
+import { RelationshipCreateForm } from '../../components/_dashboard/relationship';
+import StandardPage from '../../layouts/StandardPage';
 
 // ----------------------------------------------------------------------
 
-export default function RelationshipCreate() {
-  const { themeStretch } = useSettings();
+export default function PartnerCreate() {
+  const EditActions = () => (
+    <Button
+      size="medium"
+      variant="contained"
+      component={RouterLink}
+      to={`${PATH_DASHBOARD.relationship.list}`}
+      sx={{ mt: 1 }}
+    >
+      Cancel
+    </Button>
+  );
 
   return (
-    <Page title="Relationship | Create | Airslip">
-      <Container maxWidth={themeStretch ? false : 'lg'}>
-        <HeaderBreadcrumbs
-          heading="Create a New Relationship"
-          links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Relationships', href: PATH_DASHBOARD.relationship.create },
-            { name: 'Create' }
-          ]}
-        />
-        <CreateForm />
-      </Container>
-    </Page>
+    <StandardPage
+      area="Dashboard"
+      space="Relationships"
+      spaceHref={PATH_DASHBOARD.relationship.list}
+      activity="New Relationship"
+      heading="Create a New Relationship"
+      actions={<EditActions />}
+    >
+      <RelationshipCreateForm />
+    </StandardPage>
   );
 }

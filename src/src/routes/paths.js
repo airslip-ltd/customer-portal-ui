@@ -74,7 +74,9 @@ export const PATH_DASHBOARD = {
   relationship: {
     root: path(ROOTS_DASHBOARD, '/relationship'),
     list: path(ROOTS_DASHBOARD, '/relationship/list'),
-    create: path(ROOTS_DASHBOARD, '/relationship/create')
+    create: path(ROOTS_DASHBOARD, '/relationship/create'),
+    edit: path(ROOTS_DASHBOARD, `/relationship/edit`),
+    view: path(ROOTS_DASHBOARD, '/relationship/view')
   },
   reports: {
     root: path(ROOTS_DASHBOARD, '/reporting'),

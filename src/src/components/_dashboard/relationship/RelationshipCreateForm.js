@@ -15,10 +15,11 @@ import { create } from '../../../redux/slices/relationship';
 import { MIconButton } from '../../@material-extend';
 // routes
 import ApiError from '../../_common/Errors/ApiError';
+import HelpCard from '../../_common/HelpCard';
 
 // ----------------------------------------------------------------------
 
-export default function CreateForm() {
+export default function RelationshipCreateForm() {
   const dispatch = useDispatch();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { error, relationship, success, isLoading } = useSelector((state) => state.relationship);
@@ -58,16 +59,7 @@ export default function CreateForm() {
     },
     validationSchema: NewUserSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      dispatch(
-        create(
-          values.email,
-          values.phoneNumber,
-          values.firstName,
-          values.lastName,
-          values.businessName,
-          values.permission
-        )
-      );
+      dispatch(create(values));
       setSubmitting(false);
     }
   });
@@ -89,7 +81,7 @@ export default function CreateForm() {
     }
   }, [relationship, success, enqueueSnackbar, closeSnackbar]);
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+  const { errors, touched, handleSubmit, getFieldProps } = formik;
 
   return (
     <FormikProvider value={formik}>
@@ -186,24 +178,8 @@ export default function CreateForm() {
               </Stack>
             </Card>
           </Grid>
-
-          <Grid item xs={12} md={4}>
-            <Card sx={{ p: 3 }}>
-              <Typography variant="subtitle2">Bulk Invitie</Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                You may also send invitations by uploading a csv file containing contact details of the Merchants you
-                would like to add.
-              </Typography>
-
-              <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
-                <LoadingButton type="submit" variant="contained" loading={isSubmitting} sx={{ mr: 0.5 }}>
-                  View Format
-                </LoadingButton>
-                <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                  Select File
-                </LoadingButton>
-              </Box>
-            </Card>
+          <Grid item sx={{ display: { xs: 'none', md: 'block' } }} md={4}>
+            <HelpCard>Here is some content</HelpCard>
           </Grid>
         </Grid>
       </Form>
