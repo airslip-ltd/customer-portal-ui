@@ -1,23 +1,11 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from '@iconify/react';
 // material
-import { styled } from '@mui/material/styles';
 import { OutlinedInput, InputAdornment, IconButton, Card, Typography, CardHeader, Stack } from '@mui/material';
 // redux
 import { ContentCopy, Check } from '@mui/icons-material';
 import { useDispatch, useSelector } from '../../../redux/store';
 import { getReferralLink } from '../../../redux/slices/relationship';
-
-// ----------------------------------------------------------------------
-
-const IconStyle = styled(Icon)(({ theme }) => ({
-  width: 20,
-  height: 20,
-  marginTop: 1,
-  flexShrink: 0,
-  marginRight: theme.spacing(2)
-}));
 
 // ----------------------------------------------------------------------
 
