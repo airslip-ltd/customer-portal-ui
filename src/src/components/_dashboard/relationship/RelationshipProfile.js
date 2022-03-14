@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 // material
 import { Grid, Stack } from '@mui/material';
 //
-import { RelationshipAccess, RelationshipAbout, RelationshipReferral } from '.';
+import { RelationshipAccess, RelationshipAbout, RelationshipReferral, RelationshipReports } from '.';
 
 // ----------------------------------------------------------------------
 
@@ -26,6 +26,7 @@ export default function RelationshipProfile({ relationship }) {
       <Grid item xs={12} md={4}>
         <Stack spacing={3}>
           <RelationshipReferral relationship={relationship} />
+          <RelationshipReports relationship={relationship} />
         </Stack>
       </Grid>
     </Grid>
