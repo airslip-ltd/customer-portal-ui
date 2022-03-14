@@ -45,6 +45,11 @@ const sidebarConfig = [
           { title: 'Your Services', path: PATH_DASHBOARD.integrations.list },
           { title: 'Connect', path: PATH_DASHBOARD.integrations.create }
         ]
+      },
+      {
+        title: 'data consents',
+        path: PATH_DASHBOARD.consent.root,
+        icon: ICONS.analytics
       }
     ]
   },
