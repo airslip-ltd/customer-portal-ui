@@ -230,8 +230,16 @@ export default function Router() {
           path: 'reporting',
           children: [
             { element: <Navigate to="/dashboard/reporting/list" replace /> },
-            { path: 'banking-transactions', element: <BankingTransactionsReport /> },
-            { path: 'commerce-transactions', element: <CommerceTransactionsReport /> }
+            { path: 'banking-transactions', element: <ReportWrapper reportType="bank-transactions" /> },
+            { path: 'commerce-transactions', element: <ReportWrapper reportType="commerce-transactions" /> },
+            {
+              path: 'banking-transactions/:airslipUserType/:entityId',
+              element: <ReportWrapper reportType="bank-transactions" />
+            },
+            {
+              path: 'commerce-transactions/:airslipUserType/:entityId',
+              element: <ReportWrapper reportType="commerce-transactions" />
+            }
           ]
         }
       ]
@@ -317,5 +325,4 @@ const DebtRatioDetail = Loadable(lazy(() => import('../pages/analytics/DebtRatio
 const DebtToCapitalRatioDetail = Loadable(lazy(() => import('../pages/analytics/DebtToCapitalRatioDetail')));
 const RevenueBenchmarkingDetail = Loadable(lazy(() => import('../pages/analytics/RevenueBenchmarkingDetail')));
 // Reporting
-const BankingTransactionsReport = Loadable(lazy(() => import('../pages/reporting/BankingTransactionsReport')));
-const CommerceTransactionsReport = Loadable(lazy(() => import('../pages/reporting/CommerceTransactionsReport')));
+const ReportWrapper = Loadable(lazy(() => import('../pages/reporting/ReportWrapper')));
