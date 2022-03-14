@@ -2,16 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 // utils
 import axios from '../../utils/axios';
 // common
-import { FUNCTION_DEFAULTS } from '../common/constants';
+import { ACTION_DEFAULTS, ACTION_FUNCTIONS } from '../common/actions';
 
 // ----------------------------------------------------------------------
 
 const initialState = {
   forgot: {
-    ...FUNCTION_DEFAULTS
+    ...ACTION_DEFAULTS
   },
   password: {
-    ...FUNCTION_DEFAULTS
+    ...ACTION_DEFAULTS
   }
 };
 
@@ -19,42 +19,7 @@ const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // START LOADING
-    startLoading(state, action) {
-      const { propName } = action.payload;
-      state[propName] = {
-        loading: true,
-        complete: false,
-        error: {}
-      };
-    },
-
-    // HAS ERROR
-    hasError(state, action) {
-      const { propName, response } = action.payload;
-      state[propName] = {
-        loading: false,
-        complete: false,
-        error: response
-      };
-    },
-
-    complete(state, action) {
-      const { propName, response } = action.payload;
-      state[propName] = {
-        loading: false,
-        complete: true,
-        error: {},
-        response
-      };
-    },
-
-    reset(state, action) {
-      const { propName } = action.payload;
-      state[propName] = {
-        ...FUNCTION_DEFAULTS
-      };
-    }
+    ...ACTION_FUNCTIONS
   }
 });
 
@@ -65,7 +30,7 @@ export default slice.reducer;
 
 export function forgotPassword(email) {
   return async (dispatch) => {
-    dispatch(slice.actions.startLoading({ propName: 'forgot' }));
+    dispatch(slice.actions.startAction({ propName: 'forgot' }));
     try {
       const response = await axios({
         url: '/identity/recovery',
@@ -75,10 +40,10 @@ export function forgotPassword(email) {
           email
         }
       });
-      dispatch(slice.actions.complete({ propName: 'forgot', response: response.data }));
+      dispatch(slice.actions.completeAction({ propName: 'forgot', response: response.data }));
     } catch (error) {
       dispatch(
-        slice.actions.hasError({
+        slice.actions.errorAction({
           propName: 'forgot',
           response: error
         })
@@ -89,7 +54,7 @@ export function forgotPassword(email) {
 
 export function setPassword(password, confirmPassword, email, token) {
   return async (dispatch) => {
-    dispatch(slice.actions.startLoading({ propName: 'password' }));
+    dispatch(slice.actions.startAction({ propName: 'password' }));
     try {
       const response = await axios({
         url: '/identity/password',
@@ -102,10 +67,10 @@ export function setPassword(password, confirmPassword, email, token) {
           token: token.replace(/ /g, '+')
         }
       });
-      dispatch(slice.actions.complete({ propName: 'password', response: response.data }));
+      dispatch(slice.actions.completeAction({ propName: 'password', response: response.data }));
     } catch (error) {
       dispatch(
-        slice.actions.hasError({
+        slice.actions.errorAction({
           propName: 'password',
           response: error
         })
@@ -116,7 +81,7 @@ export function setPassword(password, confirmPassword, email, token) {
 
 export function reset() {
   return async (dispatch) => {
-    await dispatch(slice.actions.reset({ propName: 'forgot' }));
-    await dispatch(slice.actions.reset({ propName: 'password' }));
+    await dispatch(slice.actions.resetAction({ propName: 'forgot' }));
+    await dispatch(slice.actions.resetAction({ propName: 'password' }));
   };
 }

@@ -9,15 +9,15 @@ export const ENTITY_DEFAULTS = {
   response: {}
 };
 
-export const ACTION_FUNCTIONS = {
-  resetAction(state, action) {
+export const ENTITY_FUNCTIONS = {
+  resetEntity(state, action) {
     const { propName } = action.payload;
     state[propName] = {
       ...ENTITY_DEFAULTS
     };
   },
 
-  startAction(state, action) {
+  startEntityAction(state, action) {
     const { propName } = action.payload;
     state[propName] = {
       ...state[propName],
@@ -28,7 +28,7 @@ export const ACTION_FUNCTIONS = {
     };
   },
 
-  actionSuccess(state, action) {
+  entityActionSuccess(state, action) {
     const { propName, response, status } = action.payload;
     state[propName] = {
       ...state[propName],
@@ -40,7 +40,7 @@ export const ACTION_FUNCTIONS = {
     };
   },
 
-  actionFailed(state, action) {
+  entityActionFailed(state, action) {
     const { propName, response } = action.payload;
     state[propName] = {
       ...state[propName],
@@ -55,7 +55,7 @@ export const ACTION_FUNCTIONS = {
 export async function executeGet(state, dispatch, slice, propName, entityType, id, endPoint, servuiceUrl) {
   if (state[propName].loading) return;
 
-  dispatch(slice.actions.startAction({ propName }));
+  dispatch(slice.actions.startEntityAction({ propName }));
   try {
     const response = await axios({
       url: endPoint || `/${entityType}/${id}`,
@@ -63,7 +63,7 @@ export async function executeGet(state, dispatch, slice, propName, entityType, i
       baseURL: servuiceUrl || process.env.REACT_APP_API_URL
     });
     dispatch(
-      slice.actions.actionSuccess({
+      slice.actions.entityActionSuccess({
         propName,
         response: response.data,
         status: 'neutral'
@@ -73,7 +73,7 @@ export async function executeGet(state, dispatch, slice, propName, entityType, i
   } catch (error) {
     console.log(error);
     dispatch(
-      slice.actions.actionFailed({
+      slice.actions.entityActionFailed({
         propName,
         response: error
       })
@@ -95,7 +95,7 @@ export async function executeUpdate(state, dispatch, slice, propName, entityType
     };
   }
 
-  dispatch(slice.actions.startAction({ propName }));
+  dispatch(slice.actions.startEntityAction({ propName }));
   try {
     const response = await axios({
       url: endPoint || `/${entityType}/${id}`,
@@ -104,7 +104,7 @@ export async function executeUpdate(state, dispatch, slice, propName, entityType
       data: values
     });
     dispatch(
-      slice.actions.actionSuccess({
+      slice.actions.entityActionSuccess({
         propName,
         response: response.data
       })
@@ -112,7 +112,7 @@ export async function executeUpdate(state, dispatch, slice, propName, entityType
     dispatch(slice.actions.finishedLoading());
   } catch (error) {
     dispatch(
-      slice.actions.actionFailed({
+      slice.actions.entityActionFailed({
         propName,
         response: error
       })
@@ -123,7 +123,7 @@ export async function executeUpdate(state, dispatch, slice, propName, entityType
 export async function executeCreate(state, dispatch, slice, propName, entityType, values, endPoint, servuiceUrl) {
   if (state[propName].loading) return;
 
-  dispatch(slice.actions.startAction({ propName }));
+  dispatch(slice.actions.startEntityAction({ propName }));
   try {
     const response = await axios({
       url: endPoint || `/${entityType}`,
@@ -132,7 +132,7 @@ export async function executeCreate(state, dispatch, slice, propName, entityType
       data: values
     });
     dispatch(
-      slice.actions.actionSuccess({
+      slice.actions.entityActionSuccess({
         propName,
         response: response.data
       })
@@ -140,7 +140,7 @@ export async function executeCreate(state, dispatch, slice, propName, entityType
     dispatch(slice.actions.finishedLoading());
   } catch (error) {
     dispatch(
-      slice.actions.actionFailed({
+      slice.actions.entityActionFailed({
         propName,
         response: error
       })
@@ -150,13 +150,13 @@ export async function executeCreate(state, dispatch, slice, propName, entityType
 
 export async function executeReset(state, dispatch, slice, propName) {
   if (state[propName].loading) return;
-  dispatch(slice.actions.resetAction({ propName }));
+  dispatch(slice.actions.resetEntity({ propName }));
 }
 
 export async function executeDelete(state, dispatch, slice, propName, entityType, id, endPoint, servuiceUrl) {
   if (state[propName].loading) return;
 
-  dispatch(slice.actions.startAction({ propName }));
+  dispatch(slice.actions.startEntityAction({ propName }));
   try {
     await axios({
       url: endPoint || `/${entityType}/${id}`,
@@ -164,7 +164,7 @@ export async function executeDelete(state, dispatch, slice, propName, entityType
       baseURL: servuiceUrl || process.env.REACT_APP_API_URL
     });
     dispatch(
-      slice.actions.actionSuccess({
+      slice.actions.entityActionSuccess({
         propName,
         response: null
       })
@@ -172,7 +172,7 @@ export async function executeDelete(state, dispatch, slice, propName, entityType
     dispatch(slice.actions.finishedLoading());
   } catch (error) {
     dispatch(
-      slice.actions.actionFailed({
+      slice.actions.entityActionFailed({
         propName,
         response: error
       })
@@ -183,7 +183,7 @@ export async function executeDelete(state, dispatch, slice, propName, entityType
 export async function executeGetMyDetails(state, dispatch, slice, propName, entityType, endPoint, servuiceUrl) {
   if (state[propName].loading) return;
 
-  dispatch(slice.actions.startAction({ propName }));
+  dispatch(slice.actions.startEntityAction({ propName }));
   try {
     const response = await axios({
       url: endPoint || `/${entityType}`,
@@ -191,7 +191,7 @@ export async function executeGetMyDetails(state, dispatch, slice, propName, enti
       baseURL: servuiceUrl || process.env.REACT_APP_API_URL
     });
     dispatch(
-      slice.actions.actionSuccess({
+      slice.actions.entityActionSuccess({
         propName,
         response: response.data,
         status: 'neutral'
@@ -201,7 +201,7 @@ export async function executeGetMyDetails(state, dispatch, slice, propName, enti
   } catch (error) {
     console.log(error);
     dispatch(
-      slice.actions.actionFailed({
+      slice.actions.entityActionFailed({
         propName,
         response: error
       })
@@ -228,7 +228,7 @@ export async function executeUpdateMyDetails(
     };
   }
 
-  dispatch(slice.actions.startAction({ propName }));
+  dispatch(slice.actions.startEntityAction({ propName }));
   try {
     const response = await axios({
       url: endPoint || `/${entityType}`,
@@ -237,7 +237,7 @@ export async function executeUpdateMyDetails(
       data: values
     });
     dispatch(
-      slice.actions.actionSuccess({
+      slice.actions.entityActionSuccess({
         propName,
         response: response.data
       })
@@ -245,7 +245,7 @@ export async function executeUpdateMyDetails(
     dispatch(slice.actions.finishedLoading());
   } catch (error) {
     dispatch(
-      slice.actions.actionFailed({
+      slice.actions.entityActionFailed({
         propName,
         response: error
       })

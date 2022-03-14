@@ -10,13 +10,6 @@ export const SEARCH_DEFAULTS = {
   }
 };
 
-export const FUNCTION_DEFAULTS = {
-  loading: false,
-  complete: false,
-  error: {},
-  response: {}
-};
-
 export const COMMON_FUNCTIONS = {
   startLoading(state) {
     state.isLoading = true;

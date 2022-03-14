@@ -42,7 +42,7 @@ const sidebarConfig = [
         path: PATH_DASHBOARD.integrations.root,
         icon: ICONS.ecommerce,
         children: [
-          { title: 'List', path: PATH_DASHBOARD.integrations.list },
+          { title: 'Your Services', path: PATH_DASHBOARD.integrations.list },
           { title: 'Connect', path: PATH_DASHBOARD.integrations.create }
         ]
       }
@@ -65,8 +65,8 @@ const sidebarConfig = [
         path: PATH_DASHBOARD.relationship.root,
         icon: ICONS.analytics,
         children: [
-          { title: 'Create', path: PATH_DASHBOARD.relationship.create },
-          { title: 'List', path: PATH_DASHBOARD.relationship.list }
+          { title: 'Your Relationships', path: PATH_DASHBOARD.relationship.list },
+          { title: 'Invite', path: PATH_DASHBOARD.relationship.create }
         ]
       }
     ]

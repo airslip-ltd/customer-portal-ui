@@ -23,7 +23,7 @@ const slice = createSlice({
   reducers: {
     ...COMMON_FUNCTIONS,
     ...SEARCH_FUNCTIONS,
-    ...entities.ACTION_FUNCTIONS,
+    ...entities.ENTITY_FUNCTIONS,
 
     // HAS ERROR
     hasError(state, action) {
