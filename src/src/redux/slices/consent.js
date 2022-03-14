@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from '../../utils/axios';
 // utils
 import {
   SEARCH_DEFAULTS,
