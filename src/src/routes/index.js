@@ -285,7 +285,7 @@ const IntegrationList = Loadable(lazy(() => import('../pages/integrations/Integr
 const IntegrationCreate = Loadable(lazy(() => import('../pages/integrations/IntegrationCreate')));
 const IntegrationView = Loadable(lazy(() => import('../pages/integrations/IntegrationView')));
 // Relationships
-const RelationshipView = Loadable(lazy(() => import('../pages/relationship/RelationshipView')));
+// const RelationshipView = Loadable(lazy(() => import('../pages/relationship/RelationshipView')));
 const RelationshipViewDemo = Loadable(lazy(() => import('../pages/relationship/RelationshipViewDemo')));
 const RelationshipEdit = Loadable(lazy(() => import('../pages/relationship/RelationshipEdit')));
 const RelationshipList = Loadable(lazy(() => import('../pages/relationship/RelationshipList')));
