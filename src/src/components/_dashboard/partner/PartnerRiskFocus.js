@@ -13,7 +13,7 @@ export default function PartnerRiskFocus() {
 
   const handleRowClick = useCallback(
     (params) => {
-      navigate(`/dashboard/relationship/${params.id}/view`);
+      navigate(`/dashboard/relationship/view/${params.id}`);
     },
     [navigate]
   );

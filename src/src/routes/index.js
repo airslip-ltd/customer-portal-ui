@@ -159,7 +159,7 @@ export default function Router() {
             { element: <Navigate to="/dashboard/relationship/list" replace /> },
             { path: 'list', element: <RelationshipList /> },
             { path: 'create', element: <RelationshipCreate /> },
-            { path: 'view/:id', element: <RelationshipView /> },
+            { path: 'view/:id', element: <RelationshipViewDemo /> },
             { path: 'edit/:id', element: <RelationshipEdit /> }
           ]
         },
@@ -286,6 +286,7 @@ const IntegrationCreate = Loadable(lazy(() => import('../pages/integrations/Inte
 const IntegrationView = Loadable(lazy(() => import('../pages/integrations/IntegrationView')));
 // Relationships
 const RelationshipView = Loadable(lazy(() => import('../pages/relationship/RelationshipView')));
+const RelationshipViewDemo = Loadable(lazy(() => import('../pages/relationship/RelationshipViewDemo')));
 const RelationshipEdit = Loadable(lazy(() => import('../pages/relationship/RelationshipEdit')));
 const RelationshipList = Loadable(lazy(() => import('../pages/relationship/RelationshipList')));
 const RelationshipCreate = Loadable(lazy(() => import('../pages/relationship/RelationshipCreate')));
