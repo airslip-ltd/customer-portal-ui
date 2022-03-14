@@ -32,8 +32,7 @@ import {
   LateBillsPaid,
   RevenueForecasts,
   BankingExpensesCategories,
-  Customers,
-  MerchantRevenueDemo
+  Customers
 } from '.';
 
 // ----------------------------------------------------------------------
