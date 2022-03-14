@@ -164,6 +164,14 @@ export default function Router() {
           ]
         },
         {
+          path: 'consent',
+          children: [
+            { element: <Navigate to="/dashboard/consent/list" replace /> },
+            { path: 'list', element: <ConsentList /> },
+            { path: 'view/:id', element: <ConsentView /> }
+          ]
+        },
+        {
           path: 'user',
           children: [
             { element: <Navigate to="/dashboard/user/list" replace /> },
@@ -274,6 +282,9 @@ const RelationshipEdit = Loadable(lazy(() => import('../pages/relationship/Relat
 const RelationshipList = Loadable(lazy(() => import('../pages/relationship/RelationshipList')));
 const RelationshipCreate = Loadable(lazy(() => import('../pages/relationship/RelationshipCreate')));
 const RelationshipConsent = Loadable(lazy(() => import('../pages/relationship/RelationshipConsent')));
+// Consents
+const ConsentView = Loadable(lazy(() => import('../pages/consents/ConsentView')));
+const ConsentList = Loadable(lazy(() => import('../pages/consents/ConsentList')));
 // Users
 const UserList = Loadable(lazy(() => import('../pages/users/UserList')));
 const UserView = Loadable(lazy(() => import('../pages/users/UserView')));

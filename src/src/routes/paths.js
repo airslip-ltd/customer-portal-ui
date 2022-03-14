@@ -78,6 +78,11 @@ export const PATH_DASHBOARD = {
     edit: path(ROOTS_DASHBOARD, `/relationship/edit`),
     view: path(ROOTS_DASHBOARD, '/relationship/view')
   },
+  consent: {
+    root: path(ROOTS_DASHBOARD, '/consent'),
+    list: path(ROOTS_DASHBOARD, '/consent/list'),
+    view: path(ROOTS_DASHBOARD, '/consent/view')
+  },
   reports: {
     root: path(ROOTS_DASHBOARD, '/reporting'),
     list: path(ROOTS_DASHBOARD, '/reporting/list'),

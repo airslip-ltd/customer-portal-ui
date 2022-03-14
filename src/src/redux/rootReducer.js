@@ -8,6 +8,7 @@ import integrationReducer from './slices/integration';
 import registerReducer from './slices/register';
 import partnerReducer from './slices/partner';
 import relationshipReducer from './slices/relationship';
+import consentReducer from './slices/consent';
 import analyticsReducer from './slices/analytics';
 import balancesReducer from './slices/balances';
 import transactionsReducer from './slices/transactions';
@@ -37,7 +38,8 @@ const rootReducer = combineReducers({
   transactions: transactionsReducer,
   reports: reportsReducer,
   user: userReducer,
-  auth: authReducer
+  auth: authReducer,
+  consent: consentReducer
 });
 
 export { rootPersistConfig, rootReducer };
