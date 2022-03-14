@@ -84,13 +84,15 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
 
         {featureEnabled('demo') && (
           <Grid item xs={12} md={4}>
-            <MerchantRevenueDemo />
+            <MerchantRevenue />
           </Grid>
         )}
 
-        <Grid item xs={12} md={4}>
-          <MerchantRevenue />
-        </Grid>
+        {featureEnabled('demo-to-complete') && (
+          <Grid item xs={12} md={4}>
+            <MerchantRevenue />
+          </Grid>
+        )}
 
         <Grid item xs={12} md={4}>
           <MerchantBalance />
