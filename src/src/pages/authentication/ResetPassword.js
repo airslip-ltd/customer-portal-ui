@@ -76,7 +76,7 @@ export default function ResetPassword() {
                 Request sent successfully
               </Typography>
               <Typography>
-                We have sent a confirmation email to &nbsp;
+                We have sent a confirmation email to&nbsp;
                 <strong>{email}</strong>
                 <br />
                 Please check your email.
