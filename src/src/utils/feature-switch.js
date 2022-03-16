@@ -3,6 +3,8 @@ export function featureEnabled(featureName) {
   switch (featureName) {
     case 'banking-recent-transactions':
       return process.env.REACT_APP_ENVIRONMENT === 'demo';
+    case 'industry-exposure':
+      return process.env.REACT_APP_ENVIRONMENT === 'demo';
     case 'demo':
       return process.env.REACT_APP_ENVIRONMENT === 'demo';
     case 'demo-to-complete':

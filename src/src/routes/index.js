@@ -159,7 +159,10 @@ export default function Router() {
             { element: <Navigate to="/dashboard/relationship/list" replace /> },
             { path: 'list', element: <RelationshipList /> },
             { path: 'create', element: <RelationshipCreate /> },
-            { path: 'view/:id', element: <RelationshipViewDemo /> },
+            {
+              path: 'view/:id',
+              element: process.env.REACT_APP_ENVIRONMENT === 'demo' ? <RelationshipViewDemo /> : <RelationshipView />
+            },
             { path: 'edit/:id', element: <RelationshipEdit /> }
           ]
         },
@@ -284,8 +287,8 @@ const Unauthorised = Loadable(lazy(() => import('../pages/Page401')));
 const IntegrationList = Loadable(lazy(() => import('../pages/integrations/IntegrationList')));
 const IntegrationCreate = Loadable(lazy(() => import('../pages/integrations/IntegrationCreate')));
 const IntegrationView = Loadable(lazy(() => import('../pages/integrations/IntegrationView')));
-// Relationships
-// const RelationshipView = Loadable(lazy(() => import('../pages/relationship/RelationshipView')));
+// Relationships / Businesses
+const RelationshipView = Loadable(lazy(() => import('../pages/relationship/RelationshipView')));
 const RelationshipViewDemo = Loadable(lazy(() => import('../pages/relationship/RelationshipViewDemo')));
 const RelationshipEdit = Loadable(lazy(() => import('../pages/relationship/RelationshipEdit')));
 const RelationshipList = Loadable(lazy(() => import('../pages/relationship/RelationshipList')));

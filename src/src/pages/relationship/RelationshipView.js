@@ -106,7 +106,7 @@ export default function RelationshipView() {
   return (
     <StandardPage
       area="Dashboard"
-      space="Relationships"
+      space="Businesses"
       spaceHref={PATH_DASHBOARD.relationship.list}
       activity={current.hasData ? current.response.currentVersion.invitationDetails.businessName : id}
       heading={current.hasData ? current.response.currentVersion.invitationDetails.businessName : id}
