@@ -25,19 +25,19 @@ export const columns = [
     )
   },
   {
-    dataType: 'number',
-    field: 'amount',
-    headerName: 'Amount',
-    flex: 1,
-    valueFormatter: (params) => fCurrencyFromLong(params.value)
-  },
-  {
     dataType: 'dateTime',
     field: 'capturedDate',
     headerName: 'Captured Date',
     flex: 1,
     valueFormatter: (params) => fDateFromLong(params.value),
     searchable: false
+  },
+  {
+    dataType: 'number',
+    field: 'amount',
+    headerName: 'Amount',
+    flex: 1,
+    valueFormatter: (params) => fCurrencyFromLong(params.value)
   },
   {
     field: 'currencyCode',
@@ -51,14 +51,12 @@ export const columns = [
   },
   {
     field: 'isoFamilyCode',
-    headerName: 'Iso Family Code',
-    flex: 1,
-    hide: true
+    headerName: 'ISO Family Code',
+    flex: 1
   },
   {
     field: 'proprietaryCode',
     headerName: 'Proprietary Code',
-    flex: 1,
-    hide: true
+    flex: 1
   }
 ];
