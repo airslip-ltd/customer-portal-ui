@@ -25,13 +25,13 @@ export default function RelationshipReports({ relationship }) {
             component={RouterLink}
             to={`${PATH_DASHBOARD.reports.bankTransactions}/${related.airslipUserType}/${related.entityId}`}
           >
-            Banking transaction
+            Banking transactions
           </Link>
           <Link
             component={RouterLink}
             to={`${PATH_DASHBOARD.reports.commerceTransactions}/${related.airslipUserType}/${related.entityId}`}
           >
-            Commerce transaction
+            Commerce transactions
           </Link>
         </Stack>
       </Stack>

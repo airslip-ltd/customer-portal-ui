@@ -66,11 +66,11 @@ const sidebarConfig = [
         icon: ICONS.dashboard
       },
       {
-        title: 'relationships',
+        title: 'Businesses',
         path: PATH_DASHBOARD.relationship.root,
         icon: ICONS.analytics,
         children: [
-          { title: 'Your Relationships', path: PATH_DASHBOARD.relationship.list },
+          { title: 'Contacts', path: PATH_DASHBOARD.relationship.list },
           { title: 'Invite', path: PATH_DASHBOARD.relationship.create }
         ]
       }

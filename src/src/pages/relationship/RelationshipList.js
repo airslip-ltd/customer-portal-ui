@@ -41,17 +41,17 @@ export default function RelationshipList() {
 
   const ViewActions = () => (
     <Button size="medium" variant="contained" onClick={handleAddClick} sx={{ mt: 1 }}>
-      Add a Relationship
+      Add a Business
     </Button>
   );
 
   return (
     <StandardPage
       area="Dashboard"
-      space="Relationships"
+      space="Businesses"
       spaceHref={PATH_DASHBOARD.relationship.list}
       activity="List"
-      heading="Relationships"
+      heading="Contacts"
       actions={<ViewActions />}
       fullWidth
     >
