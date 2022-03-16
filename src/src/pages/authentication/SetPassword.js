@@ -79,7 +79,7 @@ export default function SetPassword() {
                 Password reset successfully
               </Typography>
               <Typography>
-                Thank you, we have reset your password for address
+                Thank you, we have reset your password for address&nbsp;
                 <strong>{email}</strong>
               </Typography>
 
