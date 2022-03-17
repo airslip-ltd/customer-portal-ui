@@ -70,7 +70,7 @@ const sidebarConfig = [
         path: PATH_DASHBOARD.relationship.root,
         icon: ICONS.analytics,
         children: [
-          { title: 'Contacts', path: PATH_DASHBOARD.relationship.list },
+          { title: 'Details', path: PATH_DASHBOARD.relationship.list },
           { title: 'Invite', path: PATH_DASHBOARD.relationship.create }
         ]
       }

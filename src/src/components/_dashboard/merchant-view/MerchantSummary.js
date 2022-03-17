@@ -101,10 +101,6 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
           <BankingRecentTransactions accountId={accountId} />
         </Grid> */}
 
-        <Grid item xs={12}>
-          <Typography variant="h4">Profitability</Typography>
-        </Grid>
-
         {/* <Grid item xs={12}>
           <MerchantSalesAndRefunds />
         </Grid>
@@ -113,9 +109,15 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
         </Grid> */}
 
         {featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <OperatingMargin accountId="my-account-1" />
-          </Grid>
+          <>
+            <Grid item xs={12}>
+              <Typography variant="h4">Profitability</Typography>
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+              <OperatingMargin accountId="my-account-1" />
+            </Grid>
+          </>
         )}
         {featureEnabled('demo') && (
           <Grid item xs={12} md={4}>

@@ -1,5 +1,7 @@
+import { Typography } from '@mui/material';
 import { fCurrencyFromLong } from '../utils/formatNumber';
 import { fFullDateTime } from '../utils/formatDate';
+import IntegrationIcon from '../components/_dashboard/account-list/IntegrationIcon';
 
 export const columns = [
   {
@@ -11,15 +13,16 @@ export const columns = [
   },
   {
     field: 'source',
-    headerName: 'Source',
-    flex: 1
-  },
-  {
-    dataType: 'number',
-    field: 'total',
-    headerName: 'Total',
+    headerName: 'Provider',
     flex: 1,
-    valueFormatter: (params) => fCurrencyFromLong(params.value)
+    renderCell: (params) => (
+      <>
+        <IntegrationIcon icon={params.value} />
+        <Typography variant="subtitle2" noWrap sx={{ pl: 1 }}>
+          {params.value}
+        </Typography>
+      </>
+    )
   },
   {
     dataType: 'dateTime',
@@ -30,9 +33,22 @@ export const columns = [
     searchable: false
   },
   {
+    dataType: 'number',
+    field: 'total',
+    headerName: 'Total',
+    flex: 1,
+    valueFormatter: (params) => fCurrencyFromLong(params.value)
+  },
+  {
     field: 'currencyCode',
     headerName: 'Currency Code',
     flex: 1
+  },
+  {
+    field: 'onlinePurchase',
+    headerName: 'Purchase Type',
+    flex: 1,
+    valueFormatter: (params) => (params.value === true ? 'Online' : 'Bricks & Mortar')
   },
   {
     field: 'description',
