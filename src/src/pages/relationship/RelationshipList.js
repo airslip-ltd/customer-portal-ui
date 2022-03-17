@@ -51,7 +51,7 @@ export default function RelationshipList() {
       space="Businesses"
       spaceHref={PATH_DASHBOARD.relationship.list}
       activity="List"
-      heading="Contacts"
+      heading="Details"
       actions={<ViewActions />}
       fullWidth
     >
