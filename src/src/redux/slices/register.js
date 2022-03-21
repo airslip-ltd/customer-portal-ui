@@ -62,7 +62,7 @@ export function register(email, password, firstName, lastName, businessName, ref
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.post('/business', {
+      const response = await axios.post('/business/register', {
         email,
         password,
         firstName,
