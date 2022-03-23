@@ -118,15 +118,16 @@ export default function MerchantDashboardSnapshot({ snapshot, graphColor, title,
   return (
     <Card sx={{ display: 'flex', p: 3 }}>
       <Box sx={{ flexGrow: 1 }}>
-        <ApiErrorTooltip error={snapshot.error}>
-          <Stack spacing={1}>
-            <Typography variant="subtitle2">{title}</Typography>
+        <Stack spacing={1}>
+          <Typography variant="subtitle2">{title}</Typography>
+          <Stack direction="row" spacing={1}>
+            <ApiErrorTooltip error={snapshot.error} />
             <Typography variant="body2">
               Something went wrong fetching your data, if this continues please contact &nbsp;
               <Link href="mailto:support@airslip.com">support@airslip.com</Link>
             </Typography>
           </Stack>
-        </ApiErrorTooltip>
+        </Stack>
       </Box>
       <Box>
         <LoadingFailed />
