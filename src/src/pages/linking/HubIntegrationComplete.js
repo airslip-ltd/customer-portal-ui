@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams, Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // material
-import { Grid, Typography, Box, Button, Collapse } from '@mui/material';
+import { Grid, Typography, Box, Button, Collapse, Stack } from '@mui/material';
 // layouts
+import { ApiErrorFriendly } from '../../components/_common/Errors';
 import ExternalFixedLayout from '../../layouts/ExternalFixedLayout';
 // components
 import ExternalHeader from '../../components/_common/ExternalHeader';
 import { ProviderImage } from '../../components/integrations';
-import { LoadingProgress, LoadingComplete } from '../../components/_common/progress';
+import { LoadingProgress, LoadingComplete, LoadingFailed } from '../../components/_common/progress';
 import { HelpDialogue, SuccessDialogue } from '../../components/_common';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
@@ -17,7 +18,7 @@ import { search as integrationSearch } from '../../redux/slices/integration';
 // hooks
 import useAuth from '../../hooks/useAuth';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD, PATH_INTEGRATE } from '../../routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -36,10 +37,10 @@ export default function HubIntegrationComplete() {
   const { refreshMemberDetails } = useAuth();
   const { search } = useLocation();
   const dispatch = useDispatch();
-  const { authoriseSuccess, providers } = useSelector((state) => state.provider);
+  const { authorise, providers } = useSelector((state) => state.provider);
   const { integration: integrations } = useSelector((state) => state.integration);
   const navigate = useNavigate();
-  const { provider, integration } = useParams();
+  const { provider, integration, shop } = useParams();
   const [selectedProvider, setSelectedProvider] = useState(null);
   const [linkVerified, setLinkVerified] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
@@ -52,7 +53,7 @@ export default function HubIntegrationComplete() {
   }, [dispatch, search, provider, integration]);
 
   useEffect(() => {
-    if (authoriseSuccess) {
+    if (authorise.complete) {
       const query = {
         page: 0,
         recordsPerPage: 1,
@@ -65,7 +66,7 @@ export default function HubIntegrationComplete() {
 
       setIntervalId(setInterval(() => dispatch(integrationSearch(query)), 2000));
     }
-  }, [dispatch, authoriseSuccess, integration]);
+  }, [dispatch, authorise, integration]);
 
   useEffect(() => {
     if (!integrations.hasData) return;
@@ -103,7 +104,9 @@ export default function HubIntegrationComplete() {
       {selectedProvider && (
         <Grid container spacing={1} sx={{ mt: 5 }}>
           <Grid item xs={12} sx={{ mb: 3 }}>
-            <Typography variant="subtitle1">Connecting to {selectedProvider.friendlyName}</Typography>
+            <Stack spacing={3}>
+              <Typography variant="subtitle1">Connecting to {selectedProvider.friendlyName}</Typography>
+            </Stack>
           </Grid>
           <Grid item xs={12} sx={{ minHeight: 60 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
@@ -119,20 +122,38 @@ export default function HubIntegrationComplete() {
 
           <Grid item xs={12} sx={{ minHeight: 60 }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Item sx={{ flexGrow: 1 }}>Registering integration</Item>
-              <Item>{authoriseSuccess ? <LoadingComplete /> : <LoadingProgress />}</Item>
+              <Item sx={{ flexGrow: 1 }}>
+                <Stack spacing={1}>
+                  <Typography variant="h6">Registering integration</Typography>
+                  <ApiErrorFriendly
+                    error={authorise.error}
+                    message={`Something went wrong registering ${selectedProvider.friendlyName}...`}
+                  />
+                </Stack>
+              </Item>
+              <Item>
+                {authorise.loading && <LoadingProgress />}
+                {authorise.complete && <LoadingComplete />}
+                {authorise.hasError && <LoadingFailed />}
+              </Item>
             </Box>
           </Grid>
 
           <Grid item xs={12} sx={{ minHeight: 60 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
-              <Item sx={{ flexGrow: 1 }}>Verifying integration</Item>
-              <Item>{linkVerified ? <LoadingComplete /> : <LoadingProgress />}</Item>
+              <Item sx={{ flexGrow: 1 }}>
+                <Typography variant="h6">Verifying integration</Typography>
+              </Item>
+              <Item>
+                {!linkVerified && !authorise.hasError && <LoadingProgress />}
+                {linkVerified && <LoadingComplete />}
+                {authorise.hasError && <LoadingFailed />}
+              </Item>
             </Box>
           </Grid>
 
           <Grid item xs={12} sx={{ minHeight: 60 }}>
-            <Collapse in={authoriseSuccess && linkVerified}>
+            <Collapse in={authorise.complete && linkVerified}>
               <SuccessDialogue
                 title="And you're done"
                 action={
@@ -150,6 +171,21 @@ export default function HubIntegrationComplete() {
                   the Done button.
                 </Typography>
               </SuccessDialogue>
+            </Collapse>
+
+            <Collapse in={authorise.hasError}>
+              <Stack direction="row" justifyContent="end">
+                <Button
+                  size="medium"
+                  variant="contained"
+                  component={RouterLink}
+                  to={`${PATH_INTEGRATE.authorise}/${selectedProvider.provider}/${selectedProvider.integration}${
+                    shop ? `?shop=${shop}` : ''
+                  }`}
+                >
+                  Try Again
+                </Button>
+              </Stack>
             </Collapse>
           </Grid>
         </Grid>

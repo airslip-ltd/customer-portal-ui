@@ -11,6 +11,8 @@ import {
   GET_ALL_QUERY,
   executeSearch
 } from '../common/constants';
+// common
+import { ACTION_DEFAULTS, ACTION_FUNCTIONS, executeGet } from '../common/actions';
 
 // ----------------------------------------------------------------------
 
@@ -18,6 +20,7 @@ const initialState = {
   ...STATE_DEFAULTS,
   providers: { ...SEARCH_DEFAULTS },
   banks: { ...SEARCH_DEFAULTS },
+  authorise: { ...ACTION_DEFAULTS },
   authUrl: null
 };
 
@@ -27,6 +30,7 @@ const slice = createSlice({
   reducers: {
     ...COMMON_FUNCTIONS,
     ...SEARCH_FUNCTIONS,
+    ...ACTION_FUNCTIONS,
 
     // HAS ERROR
     hasError(state, action) {
@@ -38,11 +42,6 @@ const slice = createSlice({
       state.isLoading = false;
       state.authUrl = action.payload;
       state.authoriseSuccess = false;
-    },
-
-    authoriseSuccess(state) {
-      state.isLoading = false;
-      state.authoriseSuccess = true;
     }
   }
 });
@@ -83,14 +82,15 @@ export function requestProvider(provider, integration, search) {
   };
 }
 
-export function authoriseProvider(provider, integration, search) {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      await axios.get(`/providers/${provider}/${integration}/authorised${search}`);
-      dispatch(slice.actions.authoriseSuccess());
-    } catch (error) {
-      dispatch(slice.actions.hasError(error));
-    }
+export function authoriseProvider(providerName, integration, search) {
+  return async (dispatch, getState) => {
+    const { provider } = getState();
+    await executeGet(
+      provider,
+      dispatch,
+      slice,
+      'authorise',
+      `/providers/${providerName}/${integration}/authorised${search}`
+    );
   };
 }
