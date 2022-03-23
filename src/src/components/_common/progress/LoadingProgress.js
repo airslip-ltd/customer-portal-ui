@@ -1,5 +1,5 @@
 import Lottie from 'react-lottie-player';
-import animationData from '../lotties/simple-progress.json';
+import animationData from '../../../lotties/loading-progress.json';
 
 // ----------------------------------------------------------------------
 
