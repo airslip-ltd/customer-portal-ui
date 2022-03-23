@@ -70,9 +70,12 @@ export default function ProviderSelection() {
   };
 
   const handleStoreName = (values) => {
-    navigate(
-      `${PATH_INTEGRATE.authorise}/${selectedProvider.provider}/${selectedProvider.integration}?shop=${values.shop}`
-    );
+    if (values != null) {
+      navigate(
+        `${PATH_INTEGRATE.authorise}/${selectedProvider.provider}/${selectedProvider.integration}?shop=${values.shop}`
+      );
+    }
+
     setModalView(null);
   };
 
