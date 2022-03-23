@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 // material
 import { styled } from '@mui/material/styles';
-import { Typography, Card, CardContent, Box } from '@mui/material';
+import { Typography, Card, CardContent, Stack } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -13,7 +13,6 @@ const RootStyle = styled(Card)(({ theme }) => ({
     height: '100%',
     display: 'flex',
     textAlign: 'left',
-    alignItems: 'center',
     justifyContent: 'space-between'
   }
 }));
@@ -33,10 +32,10 @@ export default function HelpCard({ children }) {
           color: 'grey.800'
         }}
       >
-        <Box sx={{ display: 'flex' }}>
+        <Stack spacing={2}>
           <Typography variant="h4">Help</Typography>
-        </Box>
-        <>{children}</>
+          <>{children}</>
+        </Stack>
       </CardContent>
     </RootStyle>
   );

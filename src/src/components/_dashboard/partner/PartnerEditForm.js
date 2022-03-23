@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Form, FormikProvider, useFormik } from 'formik';
 // material
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, TextField } from '@mui/material';
+import { Box, Card, CardContent, Grid, Stack, TextField, Typography } from '@mui/material';
 // redux
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from '../../../redux/store';
@@ -14,6 +14,7 @@ import { update, reset } from '../../../redux/slices/partner';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // components
 import HelpCard from '../../_common/HelpCard';
+import HelpSection from '../../_common/HelpSection';
 import ApiError from '../../_common/Errors/ApiError';
 
 // ----------------------------------------------------------------------
@@ -61,9 +62,10 @@ export default function PartnerEditForm({ currentRecord }) {
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
             <ApiError error={current.error} />
-            <Card sx={{ p: 3 }}>
-              <Stack spacing={3}>
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 3, sm: 2 }}>
+            <Card>
+              <CardContent>
+                <Stack spacing={2}>
+                  <Typography variant="h6">Partner Details</Typography>
                   <TextField
                     fullWidth
                     label="Partner Name"
@@ -71,18 +73,22 @@ export default function PartnerEditForm({ currentRecord }) {
                     error={Boolean(touched.firstName && errors.firstName)}
                     helperText={touched.firstName && errors.firstName}
                   />
-                </Stack>
 
-                <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
-                  <LoadingButton type="submit" variant="contained" loading={current.loading}>
-                    Save Changes
-                  </LoadingButton>
-                </Box>
-              </Stack>
+                  <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
+                    <LoadingButton type="submit" variant="contained" loading={current.loading}>
+                      Save Changes
+                    </LoadingButton>
+                  </Box>
+                </Stack>
+              </CardContent>
             </Card>
           </Grid>
           <Grid item sx={{ display: { xs: 'none', md: 'block' } }} md={4}>
-            <HelpCard>Here is some content</HelpCard>
+            <HelpCard>
+              <HelpSection title="Partner Details">
+                <Typography variant="body2">Provide updates as required, select Save Changes once complete.</Typography>
+              </HelpSection>
+            </HelpCard>
           </Grid>
         </Grid>
       </Form>

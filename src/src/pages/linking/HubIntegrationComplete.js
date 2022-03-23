@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams, Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // material
@@ -44,6 +44,7 @@ export default function HubIntegrationComplete() {
   const [selectedProvider, setSelectedProvider] = useState(null);
   const [linkVerified, setLinkVerified] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
+  const [timeoutId, setTimeoutId] = useState(null);
 
   useEffect(() => {
     if (!integration) return;
@@ -68,15 +69,22 @@ export default function HubIntegrationComplete() {
     }
   }, [dispatch, authorise, integration]);
 
+  const handleNavigate = useCallback(() => {
+    clearTimeout(timeoutId);
+    navigate(PATH_DASHBOARD.general.home, { replace: true });
+  }, [navigate, timeoutId]);
+
   useEffect(() => {
     if (!integrations.hasData) return;
     if (integrations.response.paging.totalRecords > 0) {
       clearInterval(intervalId);
       setLinkVerified(true);
       refreshMemberDetails();
-      setTimeout(() => {
-        navigate(PATH_DASHBOARD.general.home, { replace: true });
-      }, 6000);
+      setTimeoutId(
+        setTimeout(() => {
+          navigate(PATH_DASHBOARD.general.home, { replace: true });
+        }, 6000)
+      );
     }
   }, [integrations, intervalId, navigate, refreshMemberDetails]);
 
@@ -157,7 +165,7 @@ export default function HubIntegrationComplete() {
               <SuccessDialogue
                 title="And you're done"
                 action={
-                  <Button color="inherit" size="small" component={RouterLink} to="/">
+                  <Button color="inherit" size="small" onClick={handleNavigate}>
                     Done
                   </Button>
                 }

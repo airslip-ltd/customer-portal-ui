@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
@@ -9,7 +8,7 @@ import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 // material
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, TextField, Typography, IconButton, InputAdornment } from '@mui/material';
+import { Box, Card, Grid, Stack, TextField, Typography, IconButton, InputAdornment, CardContent } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
 import { create, reset } from '../../../redux/slices/partner';
@@ -17,15 +16,12 @@ import { create, reset } from '../../../redux/slices/partner';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // components
 import HelpCard from '../../_common/HelpCard';
+import HelpSection from '../../_common/HelpSection';
 import ApiError from '../../_common/Errors/ApiError';
 
 // ----------------------------------------------------------------------
 
-PartnerEditForm.propTypes = {
-  currentRecord: PropTypes.object
-};
-
-export default function PartnerEditForm() {
+export default function PartnerCreateForm() {
   const dispatch = useDispatch();
   const { current } = useSelector((state) => state.partner);
   const navigate = useNavigate();
@@ -73,80 +69,103 @@ export default function PartnerEditForm() {
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
             <ApiError error={current.error} />
-            <Card sx={{ p: 3 }}>
-              <Stack spacing={2} sx={{ py: 3 }}>
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                  <TextField
-                    fullWidth
-                    label="First name"
-                    {...getFieldProps('firstName')}
-                    error={Boolean(touched.firstName && errors.firstName)}
-                    helperText={touched.firstName && errors.firstName}
-                  />
+            <Stack spacing={2}>
+              <Card>
+                <CardContent>
+                  <Stack spacing={2}>
+                    <Typography variant="h6">Administrator Details</Typography>
+                    <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                      <TextField
+                        fullWidth
+                        label="First name"
+                        {...getFieldProps('firstName')}
+                        error={Boolean(touched.firstName && errors.firstName)}
+                        helperText={touched.firstName && errors.firstName}
+                      />
 
-                  <TextField
-                    fullWidth
-                    label="Last name"
-                    {...getFieldProps('lastName')}
-                    error={Boolean(touched.lastName && errors.lastName)}
-                    helperText={touched.lastName && errors.lastName}
-                  />
-                </Stack>
+                      <TextField
+                        fullWidth
+                        label="Last name"
+                        {...getFieldProps('lastName')}
+                        error={Boolean(touched.lastName && errors.lastName)}
+                        helperText={touched.lastName && errors.lastName}
+                      />
+                    </Stack>
 
-                <Stack direction="column" spacing={{ xs: 3, sm: 2 }}>
-                  <TextField
-                    fullWidth
-                    autoComplete="username"
-                    type="email"
-                    label="Email address"
-                    {...getFieldProps('email')}
-                    error={Boolean(touched.email && errors.email)}
-                    helperText={touched.email && errors.email}
-                  />
+                    <Stack direction="column" spacing={{ xs: 3, sm: 2 }}>
+                      <TextField
+                        fullWidth
+                        autoComplete="username"
+                        type="email"
+                        label="Email address"
+                        {...getFieldProps('email')}
+                        error={Boolean(touched.email && errors.email)}
+                        helperText={touched.email && errors.email}
+                      />
 
-                  <TextField
-                    fullWidth
-                    autoComplete="current-password"
-                    type={showPassword ? 'text' : 'password'}
-                    label="Password"
-                    {...getFieldProps('password')}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
-                            <Icon icon={showPassword ? eyeFill : eyeOffFill} />
-                          </IconButton>
-                        </InputAdornment>
-                      )
-                    }}
-                    error={Boolean(touched.password && errors.password)}
-                    helperText={touched.password && errors.password}
-                  />
-                </Stack>
-                <Typography variant="body2" sx={{ color: 'text.secondary', pt: 0.5 }}>
-                  Now give us some details about the partner themselves.
-                </Typography>
+                      <TextField
+                        fullWidth
+                        autoComplete="current-password"
+                        type={showPassword ? 'text' : 'password'}
+                        label="Password"
+                        {...getFieldProps('password')}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                                <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+                              </IconButton>
+                            </InputAdornment>
+                          )
+                        }}
+                        error={Boolean(touched.password && errors.password)}
+                        helperText={touched.password && errors.password}
+                      />
+                    </Stack>
+                  </Stack>
+                </CardContent>
+              </Card>
 
-                <Stack spacing={2}>
-                  <TextField
-                    fullWidth
-                    type="text"
-                    label="Partner name"
-                    {...getFieldProps('partnerName')}
-                    error={Boolean(touched.partnerName && errors.partnerName)}
-                    helperText={touched.partnerName && errors.partnerName}
-                  />
-                  <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
-                    <LoadingButton type="submit" variant="contained" loading={current.loading}>
-                      Create Partner
-                    </LoadingButton>
-                  </Box>
-                </Stack>
-              </Stack>
-            </Card>
+              <Card>
+                <CardContent>
+                  <Stack spacing={2}>
+                    <Typography variant="h6">Partner Details</Typography>
+                    <Stack spacing={2}>
+                      <TextField
+                        fullWidth
+                        type="text"
+                        label="Partner name"
+                        {...getFieldProps('partnerName')}
+                        error={Boolean(touched.partnerName && errors.partnerName)}
+                        helperText={touched.partnerName && errors.partnerName}
+                      />
+                      <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
+                        <LoadingButton type="submit" variant="contained" loading={current.loading}>
+                          Create Partner
+                        </LoadingButton>
+                      </Box>
+                    </Stack>
+                  </Stack>
+                </CardContent>
+              </Card>
+            </Stack>
           </Grid>
           <Grid item sx={{ display: { xs: 'none', md: 'block' } }} md={4}>
-            <HelpCard>Here is some content</HelpCard>
+            <HelpCard>
+              <Stack spacing={4}>
+                <HelpSection title="Administrator Details">
+                  <Typography variant="body2">
+                    Please tell us who the initial administrative user will be for your new partner. They will receive
+                    an invitation to join Airslip using the provided email address.
+                  </Typography>
+                </HelpSection>
+                <HelpSection title="Partner Details">
+                  <Typography variant="body2">
+                    Tell us as much as you can about the Partner you would like to add to Airslip.
+                  </Typography>
+                </HelpSection>
+              </Stack>
+            </HelpCard>
           </Grid>
         </Grid>
       </Form>
