@@ -15,7 +15,7 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 // components
 import StandardPage from '../../layouts/StandardPage';
 import { Profile, ProfileCover } from '../../components/_dashboard/user/profile';
-import Confirmation from '../../components/_common/dialog/Confirmation';
+import { Confirmation, PleaseWaitDialog } from '../../components/_common/dialog';
 import ApiError from '../../components/_common/Errors/ApiError';
 
 // ----------------------------------------------------------------------
@@ -54,6 +54,7 @@ export default function UserView() {
   const { id } = useParams();
   const [currentTab, setCurrentTab] = useState('profile');
   const [open, setOpen] = useState(false);
+  const [pleaseWait, setPleaseWait] = useState(false);
 
   useEffect(() => {
     if (id) dispatch(get(id));
@@ -73,12 +74,13 @@ export default function UserView() {
 
   const handleConfirm = () => {
     setOpen(false);
+    setPleaseWait(true);
     if (id) dispatch(del(id));
   };
 
   useEffect(() => {
     if (current.status === 'success') {
-      // Assume success
+      setPleaseWait(false);
       enqueueSnackbar('Delete success', { variant: 'success' });
       navigate(PATH_DASHBOARD.user.list);
     }
@@ -151,6 +153,7 @@ export default function UserView() {
       <Confirmation onCancel={handleCancel} onConfirm={handleConfirm} open={open} title="Are you sure?">
         {current.hasData ? current.response.currentVersion.displayName : id} will be deleted from Airslip.
       </Confirmation>
+      <PleaseWaitDialog open={pleaseWait} />
     </StandardPage>
   );
 }

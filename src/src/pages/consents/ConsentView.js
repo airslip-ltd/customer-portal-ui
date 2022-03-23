@@ -15,7 +15,7 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 // components
 import StandardPage from '../../layouts/StandardPage';
 import { ConsentProfile, ConsentCover } from '../../components/_dashboard/consent';
-import Confirmation from '../../components/_common/dialog/Confirmation';
+import { Confirmation, PleaseWaitDialog } from '../../components/_common/dialog';
 import ApiError from '../../components/_common/Errors/ApiError';
 
 // ----------------------------------------------------------------------
@@ -54,6 +54,7 @@ export default function ConsentView() {
   const { id } = useParams();
   const [currentTab, setCurrentTab] = useState('details');
   const [open, setOpen] = useState(false);
+  const [pleaseWait, setPleaseWait] = useState(false);
 
   useEffect(() => {
     if (id) dispatch(get(id));
@@ -73,12 +74,13 @@ export default function ConsentView() {
 
   const handleConfirm = () => {
     setOpen(false);
+    setPleaseWait(true);
     if (id) dispatch(del(id));
   };
 
   useEffect(() => {
     if (current.status === 'success') {
-      // Assume success
+      setPleaseWait(false);
       enqueueSnackbar('Delete success', { variant: 'success' });
       navigate(PATH_DASHBOARD.consent.list);
     }
@@ -150,6 +152,7 @@ export default function ConsentView() {
         {current.hasData ? current.response.currentVersion.partner.name : id} being able to see your data which could
         impact your relationship with them.
       </Confirmation>
+      <PleaseWaitDialog open={pleaseWait} />
     </StandardPage>
   );
 }
