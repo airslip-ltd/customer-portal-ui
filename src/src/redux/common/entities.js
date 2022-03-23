@@ -71,7 +71,6 @@ export async function executeGet(state, dispatch, slice, propName, entityType, i
     );
     dispatch(slice.actions.finishedLoading());
   } catch (error) {
-    console.log(error);
     dispatch(
       slice.actions.entityActionFailed({
         propName,
@@ -199,7 +198,6 @@ export async function executeGetMyDetails(state, dispatch, slice, propName, enti
     );
     dispatch(slice.actions.finishedLoading());
   } catch (error) {
-    console.log(error);
     dispatch(
       slice.actions.entityActionFailed({
         propName,

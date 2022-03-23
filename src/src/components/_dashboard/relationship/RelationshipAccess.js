@@ -42,7 +42,7 @@ export default function RelationshipAccess({ relationship }) {
               )}
               {relationship.relationshipStatus === 'Invited' && (
                 <Link variant="body2" color="text.primary">
-                  requested on {fDateFromLong(permission.approvedOn)}
+                  requested on {fDateFromLong(permission.requestedOn)}
                 </Link>
               )}
             </Typography>

@@ -39,8 +39,6 @@ export default function BankingRecentTransactions({ accountId }) {
     setMetricData(demoData[accountId]);
   }, [accountId, setMetricData]);
 
-  console.log(metricData);
-
   // const dispatch = useDispatch();
   // const [transactions, setTransactions] = useState([]);
   // const { recentBanking } = useSelector((state) => state.transactions);

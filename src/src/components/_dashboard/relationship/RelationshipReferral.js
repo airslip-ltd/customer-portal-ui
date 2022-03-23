@@ -25,10 +25,6 @@ export default function RelationshipReferral({ relationship }) {
     if (id) dispatch(getReferralLink(id));
   }, [dispatch, id]);
 
-  useEffect(() => {
-    console.log(referral);
-  }, [referral]);
-
   const copyToClipboard = () => {
     navigator.clipboard.writeText(referral.response.referralLink);
     setClipboard(true);
