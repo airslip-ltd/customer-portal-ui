@@ -1,58 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 // utils
 import axios from '../../utils/axios';
+// common
+import { ACTION_DEFAULTS, ACTION_FUNCTIONS, executeGet } from '../common/actions';
 
 // ----------------------------------------------------------------------
 
 const initialState = {
   isLoading: false,
   error: false,
-  currentBalance: {},
-  salesStats: {},
-  refundStats: {},
-  revenueStats: {},
-  cashflowStats: {}
+  currentBalance: {
+    ...ACTION_DEFAULTS
+  }
 };
 
 const slice = createSlice({
   name: 'analytics',
   initialState,
   reducers: {
-    // START LOADING
-    startLoading(state) {
-      state.isLoading = true;
-    },
-
-    // HAS ERROR
-    hasError(state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-
-    getCurrentBalanceSuccess(state, action) {
-      state.isLoading = false;
-      state.currentBalance = action.payload;
-    },
-
-    storeSalesSnapshot(state, action) {
-      state.isLoading = false;
-      state.salesStats[action.payload.accountId] = action.payload.data;
-    },
-
-    storeRefundSnapshot(state, action) {
-      state.isLoading = false;
-      state.refundStats[action.payload.accountId] = action.payload.data;
-    },
-
-    storeRevenue(state, action) {
-      state.isLoading = false;
-      state.revenueStats[action.payload.accountId] = action.payload.data;
-    },
-
-    storeCashflow(state, action) {
-      state.isLoading = false;
-      state.cashflowStats[action.payload.accountId] = action.payload.data;
-    }
+    ...ACTION_FUNCTIONS
   }
 });
 
@@ -62,18 +28,16 @@ export default slice.reducer;
 // ----------------------------------------------------------------------
 
 export function getCurrentBalance() {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios({
-        url: '/snapshot/CurrentBalance',
-        method: 'get',
-        baseURL: process.env.REACT_APP_ANALYTICS_URL
-      });
-      dispatch(slice.actions.getCurrentBalanceSuccess(response.data));
-    } catch (error) {
-      dispatch(slice.actions.hasError(error));
-    }
+  return async (dispatch, getState) => {
+    const { analytics } = getState();
+    await executeGet(
+      analytics,
+      dispatch,
+      slice,
+      'currentBalance',
+      '/snapshot/currentbalance',
+      process.env.REACT_APP_ANALYTICS_URL
+    );
   };
 }
 

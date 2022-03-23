@@ -8,8 +8,7 @@ import ExternalFixedLayout from '../../layouts/ExternalFixedLayout';
 // components
 import ExternalHeader from '../../components/_common/ExternalHeader';
 import { ProviderImage } from '../../components/integrations';
-import LoadingProgress from '../../components/LoadingProgress';
-import LoadingComplete from '../../components/LoadingComplete';
+import { LoadingProgress, LoadingComplete } from '../../components/_common/progress';
 import { HelpDialogue, SuccessDialogue } from '../../components/_common';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';

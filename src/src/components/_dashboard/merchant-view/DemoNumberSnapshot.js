@@ -6,7 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // material
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Grid, Card, Typography, Stack, CardActionArea } from '@mui/material';
-import LoadingProgress from '../../LoadingProgress';
+import LoadingProgress from '../../_common/progress/LoadingProgress';
 // utils
 import { fShortenNumber } from '../../../utils/formatNumber';
 
