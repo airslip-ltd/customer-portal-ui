@@ -16,6 +16,7 @@ StandardList.propTypes = {
   details: PropTypes.object.isRequired,
   columns: PropTypes.array.isRequired,
   onChangeQuery: PropTypes.func.isRequired,
+  showToolbar: PropTypes.bool,
   onRowSelected: PropTypes.func,
   recordsPerPage: PropTypes.number,
   defaultSort: PropTypes.string
@@ -31,7 +32,19 @@ function CustomToolbar() {
   );
 }
 
-export default function StandardList({ details, columns, onChangeQuery, onRowSelected, recordsPerPage, defaultSort }) {
+function EmptyToolbar() {
+  return <GridToolbarContainer />;
+}
+
+export default function StandardList({
+  details,
+  columns,
+  onChangeQuery,
+  onRowSelected,
+  recordsPerPage,
+  defaultSort,
+  showToolbar
+}) {
   const [query, setQuery] = useState({
     page: 0,
     recordsPerPage: recordsPerPage || 25,
@@ -77,7 +90,7 @@ export default function StandardList({ details, columns, onChangeQuery, onRowSel
           columns={columns}
           rows={details.response.results}
           components={{
-            Toolbar: CustomToolbar
+            Toolbar: showToolbar ? CustomToolbar : EmptyToolbar
           }}
           disableSelectionOnClick
           filterMode="server"

@@ -61,6 +61,7 @@ export default function UserList() {
         onChangeQuery={setQuery}
         onRowSelected={handleRowClick}
         recordsPerPage={10}
+        showToolbar={false}
       />
     </StandardPage>
   );
