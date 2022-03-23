@@ -15,7 +15,7 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 // components
 import StandardPage from '../../layouts/StandardPage';
 import { RelationshipProfile, RelationshipCover } from '../../components/_dashboard/relationship';
-import Confirmation from '../../components/_common/dialog/Confirmation';
+import { Confirmation, PleaseWaitDialog } from '../../components/_common/dialog';
 import ApiError from '../../components/_common/Errors/ApiError';
 
 // ----------------------------------------------------------------------
@@ -54,6 +54,7 @@ export default function RelationshipView() {
   const { id } = useParams();
   const [currentTab, setCurrentTab] = useState('details');
   const [open, setOpen] = useState(false);
+  const [pleaseWait, setPleaseWait] = useState(false);
 
   useEffect(() => {
     if (id) dispatch(get(id));
@@ -73,16 +74,17 @@ export default function RelationshipView() {
 
   const handleConfirm = () => {
     setOpen(false);
+    setPleaseWait(true);
     if (id) dispatch(del(id));
   };
 
   useEffect(() => {
     if (current.status === 'success') {
-      // Assume success
+      setPleaseWait(false);
       enqueueSnackbar('Delete success', { variant: 'success' });
       navigate(PATH_DASHBOARD.relationship.list);
     }
-  }, [current, dispatch, enqueueSnackbar, navigate]);
+  }, [current, navigate, enqueueSnackbar]);
 
   const PROFILE_TABS = [
     {
@@ -150,6 +152,7 @@ export default function RelationshipView() {
         {current.hasData ? current.response.currentVersion.invitationDetails.businessName : id} will be removed from
         Airslip.
       </Confirmation>
+      <PleaseWaitDialog open={pleaseWait} />
     </StandardPage>
   );
 }
