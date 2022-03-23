@@ -1,8 +1,10 @@
 import axios from '../../utils/axios';
 
 export const ACTION_DEFAULTS = {
+  status: 'idle',
   loading: false,
   complete: false,
+  hasError: false,
   error: {},
   response: {}
 };
@@ -12,8 +14,10 @@ export const ACTION_FUNCTIONS = {
   startAction(state, action) {
     const { propName } = action.payload;
     state[propName] = {
+      status: 'loading',
       loading: true,
       complete: false,
+      hasError: false,
       error: {}
     };
   },
@@ -22,8 +26,10 @@ export const ACTION_FUNCTIONS = {
   errorAction(state, action) {
     const { propName, response } = action.payload;
     state[propName] = {
+      status: 'error',
       loading: false,
       complete: false,
+      hasError: true,
       error: response
     };
   },
@@ -31,8 +37,10 @@ export const ACTION_FUNCTIONS = {
   completeAction(state, action) {
     const { propName, response } = action.payload;
     state[propName] = {
+      status: 'complete',
       loading: false,
       complete: true,
+      hasError: false,
       error: {},
       response
     };
