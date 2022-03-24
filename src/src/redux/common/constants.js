@@ -84,3 +84,37 @@ export async function executeSearch(state, dispatch, slice, searchType, query, e
     );
   }
 }
+
+export async function executeDownload(query, endPoint, servuiceUrl) {
+  try {
+    await axios({
+      url: endPoint,
+      method: 'post',
+      baseURL: servuiceUrl || process.env.REACT_APP_API_URL,
+      data: query,
+      responseType: 'blob'
+    }).then((response) => {
+      const blob = new Blob([response.data]);
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const disposition = response.headers['content-disposition'];
+      let filename = '';
+
+      if (disposition && disposition.indexOf('attachment') !== -1) {
+        const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+        const matches = filenameRegex.exec(disposition);
+
+        if (matches != null && matches[1]) {
+          filename = matches[1].replace(/['"]/g, '');
+        }
+      }
+
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -1,14 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 // material
-import {
-  DataGrid,
-  GridToolbarContainer,
-  GridToolbarExport,
-  GridToolbarFilterButton,
-  GridToolbarColumnsButton
-} from '@mui/x-data-grid';
-import { Card } from '@mui/material';
+import { DataGrid, GridToolbarContainer, GridToolbarFilterButton, GridToolbarColumnsButton } from '@mui/x-data-grid';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import { Card, Button } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -16,35 +11,25 @@ StandardList.propTypes = {
   details: PropTypes.object.isRequired,
   columns: PropTypes.array.isRequired,
   onChangeQuery: PropTypes.func.isRequired,
+  onDownload: PropTypes.func,
   showToolbar: PropTypes.bool,
   onRowSelected: PropTypes.func,
   recordsPerPage: PropTypes.number,
   defaultSort: PropTypes.string
 };
 
-function CustomToolbar() {
-  return (
-    <GridToolbarContainer>
-      <GridToolbarExport />
-      <GridToolbarFilterButton />
-      <GridToolbarColumnsButton />
-    </GridToolbarContainer>
-  );
-}
-
-function EmptyToolbar() {
-  return <GridToolbarContainer />;
-}
-
 export default function StandardList({
   details,
   columns,
   onChangeQuery,
+  onDownload,
   onRowSelected,
   recordsPerPage,
   defaultSort,
   showToolbar
 }) {
+  showToolbar = showToolbar === undefined ? true : showToolbar;
+
   const [query, setQuery] = useState({
     page: 0,
     recordsPerPage: recordsPerPage || 25,
@@ -54,6 +39,22 @@ export default function StandardList({
       linkOperator: 'and'
     }
   });
+
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarFilterButton />
+        <GridToolbarColumnsButton />
+        <Button onClick={onDownload} startIcon={<SaveAltIcon />} size="small">
+          Export
+        </Button>
+      </GridToolbarContainer>
+    );
+  }
+
+  function EmptyToolbar() {
+    return <GridToolbarContainer />;
+  }
 
   useEffect(() => {
     onChangeQuery(query);

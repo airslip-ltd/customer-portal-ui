@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getBankTransactions } from '../../redux/slices/reports';
+import { getBankTransactions, downloadBankTransactions } from '../../redux/slices/reports';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
@@ -30,6 +30,22 @@ export default function BankingTransactionsReport({ ownerEntityId, ownerAirslipU
     }
   }, [dispatch, ownerEntityId, ownerAirslipUserType, query]);
 
+  useEffect(() => {
+    if (query) {
+      query.ownerEntityId = ownerEntityId;
+      query.ownerAirslipUserType = ownerAirslipUserType;
+      dispatch(getBankTransactions(query));
+    }
+  }, [dispatch, ownerEntityId, ownerAirslipUserType, query]);
+
+  const handleDownload = () => {
+    if (query) {
+      query.ownerEntityId = ownerEntityId;
+      query.ownerAirslipUserType = ownerAirslipUserType;
+      dispatch(downloadBankTransactions(query));
+    }
+  };
+
   return (
     <StandardPage
       area="Dashboard"
@@ -43,6 +59,7 @@ export default function BankingTransactionsReport({ ownerEntityId, ownerAirslipU
         columns={columns}
         details={bankTransactions}
         onChangeQuery={setQuery}
+        onDownload={handleDownload}
         recordsPerPage={10}
         defaultSort="capturedDate"
       />

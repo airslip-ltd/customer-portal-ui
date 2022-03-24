@@ -5,7 +5,8 @@ import {
   COMMON_FUNCTIONS,
   SEARCH_FUNCTIONS,
   STATE_DEFAULTS,
-  executeSearch
+  executeSearch,
+  executeDownload
 } from '../common/constants';
 
 // ----------------------------------------------------------------------
@@ -42,6 +43,12 @@ export function getBankTransactions(query) {
       '/reports/bank-transactions',
       process.env.REACT_APP_ANALYTICS_URL
     );
+  };
+}
+
+export function downloadBankTransactions(query) {
+  return async () => {
+    await executeDownload(query, '/reports/bank-transactions/download', process.env.REACT_APP_ANALYTICS_URL);
   };
 }
 
