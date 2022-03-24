@@ -1,14 +1,11 @@
 import * as Yup from 'yup';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-import { Icon } from '@iconify/react';
 import { Form, FormikProvider, useFormik } from 'formik';
-import eyeFill from '@iconify/icons-eva/eye-fill';
-import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 // material
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, TextField, Typography, IconButton, InputAdornment, CardContent } from '@mui/material';
+import { Box, Card, Grid, Stack, TextField, Typography, CardContent } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
 import { create, reset } from '../../../redux/slices/partner';
@@ -26,13 +23,11 @@ export default function PartnerCreateForm() {
   const { current } = useSelector((state) => state.partner);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const [showPassword, setShowPassword] = useState(false);
 
   const NewSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),
     lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required'),
     partnerName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Partner name required')
   });
 
@@ -52,7 +47,6 @@ export default function PartnerCreateForm() {
       firstName: '',
       lastName: '',
       email: '',
-      password: '',
       partnerName: ''
     },
     validationSchema: NewSchema,
@@ -101,25 +95,6 @@ export default function PartnerCreateForm() {
                         {...getFieldProps('email')}
                         error={Boolean(touched.email && errors.email)}
                         helperText={touched.email && errors.email}
-                      />
-
-                      <TextField
-                        fullWidth
-                        autoComplete="current-password"
-                        type={showPassword ? 'text' : 'password'}
-                        label="Password"
-                        {...getFieldProps('password')}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
-                                <Icon icon={showPassword ? eyeFill : eyeOffFill} />
-                              </IconButton>
-                            </InputAdornment>
-                          )
-                        }}
-                        error={Boolean(touched.password && errors.password)}
-                        helperText={touched.password && errors.password}
                       />
                     </Stack>
                   </Stack>
