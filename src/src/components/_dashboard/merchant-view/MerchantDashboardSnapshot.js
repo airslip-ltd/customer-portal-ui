@@ -64,9 +64,9 @@ export default function MerchantDashboardSnapshot({ snapshot, graphColor, title,
   };
 
   useEffect(() => {
-    if (!snapshot.metrics) return;
-    setMetricData(snapshot);
-    const newData = snapshot.metrics.map((metric) => metric.balance);
+    if (!snapshot.complete) return;
+    setMetricData(snapshot.response);
+    const newData = snapshot.response.metrics.map((metric) => metric.balance);
     setChartData(newData);
   }, [snapshot]);
 

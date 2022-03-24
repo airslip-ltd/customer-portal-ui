@@ -1,1 +1,0 @@
-ngrok http -subdomain airslip-customer-portal http://localhost:3111

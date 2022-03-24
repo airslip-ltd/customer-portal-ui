@@ -39,7 +39,7 @@ import {
 
 MerchantSummary.propTypes = {
   currentMerchant: PropTypes.object,
-  accountId: PropTypes.string.isRequired
+  accountId: PropTypes.string
 };
 
 export default function MerchantSummary({ currentMerchant, accountId }) {
