@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import IntegrationIcon from '../components/_dashboard/account-list/IntegrationIcon';
+import { dateFilterOperators } from './filters';
 
 export const columns = [
   // Need to include friendly name of the provider name + icon
@@ -31,10 +32,11 @@ export const columns = [
     flex: 1
   },
   {
-    type: 'dateTime',
+    type: 'date',
     field: 'timeStamp',
     headerName: 'Time Stamp',
     flex: 1,
-    valueGetter: ({ value }) => value && new Date(value)
+    valueGetter: ({ value }) => value && new Date(value),
+    filterOperators: dateFilterOperators
   }
 ];
