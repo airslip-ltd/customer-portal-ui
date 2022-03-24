@@ -71,7 +71,6 @@ export async function executePost(state, dispatch, slice, propName, url, data, s
         response: response.data
       })
     );
-    dispatch(slice.actions.finishedLoading());
   } catch (error) {
     dispatch(
       slice.actions.errorAction({
@@ -98,7 +97,6 @@ export async function executeGet(state, dispatch, slice, propName, url, serviceU
         response: response.data
       })
     );
-    dispatch(slice.actions.finishedLoading());
   } catch (error) {
     dispatch(
       slice.actions.errorAction({
