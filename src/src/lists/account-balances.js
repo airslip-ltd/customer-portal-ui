@@ -2,6 +2,7 @@ import { Typography } from '@mui/material';
 import ReactTimeAgo from 'react-time-ago';
 import { fCurrency } from '../utils/formatNumber';
 import BankIcon from '../components/_dashboard/account-list/BankIcon';
+import { dateFilterOperators } from './filters';
 
 export const columns = [
   {
@@ -35,14 +36,14 @@ export const columns = [
     flex: 1
   },
   {
-    dataType: 'number',
+    type: 'number',
     field: 'balance',
     headerName: 'Balance',
     flex: 1,
     valueFormatter: (params) => fCurrency(params.value)
   },
   {
-    dataType: 'dateTime',
+    type: 'date',
     field: 'updatedOn',
     headerName: 'Last Updated',
     flex: 1,
@@ -50,6 +51,7 @@ export const columns = [
       <>
         <ReactTimeAgo date={params.value} locale="en-US" />
       </>
-    )
+    ),
+    filterOperators: dateFilterOperators
   }
 ];

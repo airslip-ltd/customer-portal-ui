@@ -2,6 +2,7 @@ import { Typography } from '@mui/material';
 import { fCurrencyFromLong } from '../utils/formatNumber';
 import { fDateFromLong } from '../utils/formatDate';
 import BankIcon from '../components/_dashboard/account-list/BankIcon';
+import { dateFilterOperators } from './filters';
 
 export const columns = [
   {
@@ -25,15 +26,15 @@ export const columns = [
     )
   },
   {
-    dataType: 'dateTime',
+    type: 'date',
     field: 'capturedDate',
     headerName: 'Captured Date',
     flex: 1,
     valueFormatter: (params) => fDateFromLong(params.value),
-    searchable: false
+    filterOperators: dateFilterOperators
   },
   {
-    dataType: 'number',
+    type: 'number',
     field: 'amount',
     headerName: 'Amount',
     flex: 1,

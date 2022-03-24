@@ -2,6 +2,7 @@ import ReactTimeAgo from 'react-time-ago';
 import { Typography } from '@mui/material';
 import { fCurrency } from '../utils/formatNumber';
 import BankIcon from '../components/_dashboard/account-list/BankIcon';
+import { dateFilterOperators } from './filters';
 
 export const columns = [
   {
@@ -35,7 +36,7 @@ export const columns = [
     flex: 1
   },
   {
-    type: 'dateTime',
+    type: 'date',
     field: 'capturedDate',
     headerName: 'Captured Date',
     flex: 1,
@@ -43,7 +44,8 @@ export const columns = [
       <>
         <ReactTimeAgo date={params.value} locale="en-US" />
       </>
-    )
+    ),
+    filterOperators: dateFilterOperators
   },
   {
     type: 'number',

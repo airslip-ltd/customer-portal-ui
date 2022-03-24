@@ -2,6 +2,7 @@ import { Typography } from '@mui/material';
 import { fCurrencyFromLong } from '../utils/formatNumber';
 import { fFullDateTime } from '../utils/formatDate';
 import IntegrationIcon from '../components/_dashboard/account-list/IntegrationIcon';
+import { dateFilterOperators } from './filters';
 
 export const columns = [
   {
@@ -25,15 +26,15 @@ export const columns = [
     )
   },
   {
-    dataType: 'dateTime',
+    type: 'date',
     field: 'datetime',
     headerName: 'Date',
     flex: 1,
     valueFormatter: (params) => fFullDateTime(params.value),
-    searchable: false
+    filterOperators: dateFilterOperators
   },
   {
-    dataType: 'number',
+    type: 'number',
     field: 'total',
     headerName: 'Total',
     flex: 1,
