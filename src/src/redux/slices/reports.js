@@ -66,3 +66,9 @@ export function getCommerceTransactions(query) {
     );
   };
 }
+
+export function downloadCommerceTransactions(query) {
+  return async () => {
+    await executeDownload(query, '/reports/commerce-transactions/download', process.env.REACT_APP_ANALYTICS_URL);
+  };
+}

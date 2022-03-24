@@ -30,14 +30,6 @@ export default function BankingTransactionsReport({ ownerEntityId, ownerAirslipU
     }
   }, [dispatch, ownerEntityId, ownerAirslipUserType, query]);
 
-  useEffect(() => {
-    if (query) {
-      query.ownerEntityId = ownerEntityId;
-      query.ownerAirslipUserType = ownerAirslipUserType;
-      dispatch(getBankTransactions(query));
-    }
-  }, [dispatch, ownerEntityId, ownerAirslipUserType, query]);
-
   const handleDownload = () => {
     if (query) {
       query.ownerEntityId = ownerEntityId;
