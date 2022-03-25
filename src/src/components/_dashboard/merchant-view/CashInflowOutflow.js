@@ -119,7 +119,6 @@ export default function AnalyticsWebsiteVisits() {
     colors: [theme.palette.chart.green[0], theme.palette.chart.red[0], theme.palette.chart.blue[0]],
     fill: { type: ['solid', 'solid', 'solid'] },
     labels: [
-      'Mar 21',
       'Apr 21',
       'May 21',
       'Jun 21',
@@ -130,7 +129,8 @@ export default function AnalyticsWebsiteVisits() {
       'Nov 21',
       'Dec 21',
       'Jan 22',
-      'Feb 22'
+      'Feb 22',
+      'Mar 22'
     ],
     tooltip: {
       shared: true,
