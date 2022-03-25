@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Alert } from '@mui/material';
+import { Alert, AlertTitle } from '@mui/material';
 import { decodeError } from '../../../utils/utils';
 
 ApiError.propTypes = {
-  error: PropTypes.object.isRequired
+  error: PropTypes.object.isRequired,
+  title: PropTypes.string
 };
 
 export default function ApiError(props) {
@@ -20,6 +21,7 @@ export default function ApiError(props) {
     <>
       {errorDetails && (
         <Alert severity="error" sx={{ mb: 3 }}>
+          <AlertTitle>{props.title}</AlertTitle>
           {errorDetails}
         </Alert>
       )}

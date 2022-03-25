@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, Link as RouterLink } from 'react-router-dom';
 // redux
+import { Button, Collapse, Stack } from '@mui/material';
 import { useDispatch, useSelector } from '../../redux/store';
 import { getProviders, requestProvider } from '../../redux/slices/providers';
 // components
@@ -12,7 +13,7 @@ import LoadingScreen from '../../components/LoadingScreen';
 export default function HubIntegrationAuthorise() {
   const { search } = useLocation();
   const dispatch = useDispatch();
-  const { authUrl } = useSelector((state) => state.provider);
+  const { request } = useSelector((state) => state.provider);
   const navigate = useNavigate();
   const { provider, integration } = useParams();
 
@@ -24,14 +25,13 @@ export default function HubIntegrationAuthorise() {
   }, [dispatch, navigate, search, provider, integration]);
 
   useEffect(() => {
-    if (authUrl) {
-      window.location.href = authUrl;
-    }
-  }, [navigate, authUrl]);
+    if (request.complete) window.location.href = request.response.authorisationUrl;
+  }, [navigate, request]);
 
   return (
     <Page title="General | App | Airslip">
       <LoadingScreen
+        request={request}
         sx={{
           top: 0,
           left: 0,
@@ -39,7 +39,17 @@ export default function HubIntegrationAuthorise() {
           zIndex: 9999,
           position: 'fixed'
         }}
-      />
+      >
+        {request.hasError && (
+          <Collapse in={request.hasError}>
+            <Stack direction="row" justifyContent="end">
+              <Button size="medium" variant="outlined" component={RouterLink} to="/">
+                Take me Home
+              </Button>
+            </Stack>
+          </Collapse>
+        )}
+      </LoadingScreen>
     </Page>
   );
 }

@@ -11,7 +11,7 @@ import RtlLayout from './components/RtlLayout';
 import ScrollToTop from './components/ScrollToTop';
 import NotistackProvider from './components/NotistackProvider';
 import ThemePrimaryColor from './components/ThemePrimaryColor';
-import LoadingScreen, { ProgressBarStyle } from './components/LoadingScreen';
+import LoadingScreen from './components/LoadingScreen';
 import ThemeLocalization from './components/ThemeLocalization';
 import { BaseOptionChartStyle } from './components/charts/BaseOptionChart';
 
@@ -27,7 +27,6 @@ export default function App() {
           <RtlLayout>
             <NotistackProvider>
               <GlobalStyles />
-              <ProgressBarStyle />
               <BaseOptionChartStyle />
               <Settings />
               <ScrollToTop />
