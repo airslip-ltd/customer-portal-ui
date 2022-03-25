@@ -4,7 +4,7 @@ export const demoData = {
   ...ACTION_DEFAULTS,
   complete: true,
   response: {
-    balance: 5052010,
+    balance: 160,
     movement: -15.0,
     metrics: [
       { balance: 50 },

@@ -7,7 +7,23 @@ export const demoData = {
         customer: 'Nativi',
         amount: 50,
         currencyCode: 'GBP',
+        capturedDate: '2022-03-24T09:09:21Z'
+      },
+      {
+        id: 9998,
+        source: 'santander_uk',
+        customer: 'Nativi',
+        amount: 50,
+        currencyCode: 'GBP',
         capturedDate: '2022-03-01T09:09:21Z'
+      },
+      {
+        id: 256566,
+        source: 'santander_uk',
+        customer: 'Atori',
+        amount: 421000,
+        currencyCode: 'GBP',
+        capturedDate: '2022-02-01T09:09:21Z'
       },
       {
         id: 9998,
