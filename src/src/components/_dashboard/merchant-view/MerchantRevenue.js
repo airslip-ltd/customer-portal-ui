@@ -11,14 +11,11 @@ import { demoData } from '../../../utils/demo-data/MerchantRevenue';
 export default function MerchantRevenue() {
   const theme = useTheme();
 
-  const newData = demoData.metrics.map((metric) => metric.balance);
-
   return (
     <MerchantDashboardSnapshot
       title="Revenue"
-      metricData={demoData}
+      snapshot={demoData}
       navigateTo={PATH_DASHBOARD.analytics.bankingRecentTransactions}
-      chartData={newData}
       graphColor={theme.palette.secondary.main}
     />
   );
