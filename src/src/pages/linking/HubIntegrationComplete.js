@@ -34,7 +34,7 @@ function Item(props) {
 // ----------------------------------------------------------------------
 
 export default function HubIntegrationComplete() {
-  const { refreshMemberDetails } = useAuth();
+  const { refreshMemberDetails, isAuthenticated } = useAuth();
   const { search } = useLocation();
   const dispatch = useDispatch();
   const { authorise, providers } = useSelector((state) => state.provider);
@@ -182,10 +182,10 @@ export default function HubIntegrationComplete() {
             </Collapse>
 
             <Collapse in={authorise.hasError}>
-              <Stack direction="row" justifyContent="end">
+              <Stack spacing={1} direction="row" justifyContent="end">
                 <Button
                   size="medium"
-                  variant="contained"
+                  variant="outlined"
                   component={RouterLink}
                   to={`${PATH_INTEGRATE.authorise}/${selectedProvider.provider}/${selectedProvider.integration}${
                     shop ? `?shop=${shop}` : ''
@@ -193,6 +193,11 @@ export default function HubIntegrationComplete() {
                 >
                   Try Again
                 </Button>
+                {isAuthenticated && (
+                  <Button size="medium" variant="contained" component={RouterLink} to="/">
+                    Take me Home
+                  </Button>
+                )}
               </Stack>
             </Collapse>
           </Grid>
