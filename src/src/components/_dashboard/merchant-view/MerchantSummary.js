@@ -43,6 +43,8 @@ MerchantSummary.propTypes = {
 };
 
 export default function MerchantSummary({ currentMerchant, accountId }) {
+  accountId = accountId ?? 'my-account-4';
+
   if (!isUndefined(currentMerchant)) {
     return (
       <Grid container spacing={3}>
@@ -69,17 +71,17 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
               <CashInflowOutflow accountId="my-account-1" />
             </Grid>
 
-            <Grid item xs={12} md={4}>
-              <RevenueGrowthBenchmarking accountId="my-account-1" />
-            </Grid>
+            {accountId === 'my-account-1' && featureEnabled('demo') && (
+              <Grid item xs={12} md={4}>
+                <Customers />
+              </Grid>
+            )}
           </>
         )}
 
-        {accountId === 'my-account-1' && featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <Customers />
-          </Grid>
-        )}
+        <Grid item xs={12} md={4}>
+          <RevenueGrowthBenchmarking accountId="my-account-1" />
+        </Grid>
 
         {featureEnabled('demo') && (
           <Grid item xs={12} md={4}>
