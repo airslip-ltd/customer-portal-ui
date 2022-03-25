@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 // utils
-import axios from '../../utils/axios';
 import { PATH_INTEGRATE } from '../../routes/paths';
 // utils
 import {
@@ -21,7 +20,7 @@ const initialState = {
   providers: { ...SEARCH_DEFAULTS },
   banks: { ...SEARCH_DEFAULTS },
   authorise: { ...ACTION_DEFAULTS },
-  authUrl: null
+  request: { ...ACTION_DEFAULTS }
 };
 
 const slice = createSlice({
@@ -30,19 +29,7 @@ const slice = createSlice({
   reducers: {
     ...COMMON_FUNCTIONS,
     ...SEARCH_FUNCTIONS,
-    ...ACTION_FUNCTIONS,
-
-    // HAS ERROR
-    hasError(state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-
-    requestProviderSuccess(state, action) {
-      state.isLoading = false;
-      state.authUrl = action.payload;
-      state.authoriseSuccess = false;
-    }
+    ...ACTION_FUNCTIONS
   }
 });
 
@@ -67,18 +54,17 @@ export function getBanks() {
   };
 }
 
-export function requestProvider(provider, integration, search) {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const callbackUrl = `${window.location.protocol}//${window.location.hostname}${PATH_INTEGRATE.complete}/${provider}/${integration}`;
-      const response = await axios.get(
-        `/providers/${provider}/${integration}/authorise${search || '?'}&callbackUrl=${callbackUrl}`
-      );
-      dispatch(slice.actions.requestProviderSuccess(response.data.authorisationUrl));
-    } catch (error) {
-      dispatch(slice.actions.hasError(error));
-    }
+export function requestProvider(providerName, integration, search) {
+  return async (dispatch, getState) => {
+    const { provider } = getState();
+    const callbackUrl = `${window.location.protocol}//${window.location.hostname}${PATH_INTEGRATE.complete}/${providerName}/${integration}`;
+    await executeGet(
+      provider,
+      dispatch,
+      slice,
+      'request',
+      `/providers/${providerName}/${integration}/authorise${search || '?'}&callbackUrl=${callbackUrl}`
+    );
   };
 }
 
