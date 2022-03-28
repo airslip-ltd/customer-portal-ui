@@ -6,6 +6,7 @@ import {
   COMMON_FUNCTIONS,
   SEARCH_FUNCTIONS,
   STATE_DEFAULTS,
+  GET_ALL_QUERY,
   executeSearch
 } from '../common/constants';
 import * as entities from '../common/entities';
@@ -16,6 +17,7 @@ import * as actions from '../common/actions';
 const initialState = {
   ...STATE_DEFAULTS,
   relationship: { ...SEARCH_DEFAULTS },
+  connections: { ...SEARCH_DEFAULTS },
   current: { ...entities.ENTITY_DEFAULTS },
   referral: {
     ...actions.ACTION_DEFAULTS
@@ -48,6 +50,13 @@ export function search(query) {
   return async (dispatch, getState) => {
     const { relationship } = getState();
     await executeSearch(relationship, dispatch, slice, 'relationship', query);
+  };
+}
+
+export function getConnections() {
+  return async (dispatch, getState) => {
+    const { relationship } = getState();
+    await executeSearch(relationship, dispatch, slice, 'connections', GET_ALL_QUERY, 'relationship/connections');
   };
 }
 
