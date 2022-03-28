@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 // material
@@ -32,8 +32,28 @@ export default function ProviderSelection() {
   const [renderProviders, setRenderProviders] = useState([]);
   const [selectChild, setSelectChild] = useState(false);
   const [providerChildren, setProviderChildren] = useState([]);
+  const [selected, setSelected] = useState([
+    {
+      key: 'banking',
+      label: 'Banking',
+      selected: true
+    },
+    {
+      key: 'commerce',
+      label: 'Commerce',
+      selected: true
+    }
+  ]);
   const [selectedProvider, setSelectedProvider] = useState({});
   const [modalView, setModalView] = useState('');
+
+  if (featureEnabled('accounting-integrations')) {
+    selected.push({
+      key: 'accounting',
+      label: 'Accounting'
+    });
+    setSelected(selected);
+  }
 
   const navigate = useNavigate();
 
@@ -91,6 +111,13 @@ export default function ProviderSelection() {
     setModalView(null);
   };
 
+  const handleOptionsChanged = useCallback(
+    (items) => {
+      setSelected(items);
+    },
+    [setSelected]
+  );
+
   ProviderList.propTypes = {
     integrationType: PropTypes.string.isRequired,
     imageType: PropTypes.string
@@ -133,11 +160,15 @@ export default function ProviderSelection() {
         <Grid item xs={12}>
           <Stack direction="row" spacing={2}>
             <SearchBox placeholder="Find your integration" filterName={filterBy} onFilterName={onFilterChanged} />
-            <CheckboxLabels />
+            <CheckboxLabels options={selected} title="Service Type" onChange={handleOptionsChanged} />
           </Stack>
         </Grid>
-        <ProviderList integrationType="Banking" imageType="svg" />
-        <ProviderList integrationType="Commerce" />
+        {selected.find((_item) => _item.key === 'banking' && _item.selected) && (
+          <ProviderList integrationType="Banking" imageType="svg" />
+        )}
+        {selected.find((_item) => _item.key === 'commerce' && _item.selected) && (
+          <ProviderList integrationType="Commerce" imageType="svg" />
+        )}
 
         {featureEnabled('accounting-integrations') && <ProviderList integrationType="Accounting" />}
       </Grid>
