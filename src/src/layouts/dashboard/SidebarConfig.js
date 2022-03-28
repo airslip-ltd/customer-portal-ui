@@ -141,7 +141,8 @@ const sidebarConfig = [
       {
         title: 'settings',
         path: PATH_DASHBOARD.redirect.settings,
-        icon: ICONS.settings
+        icon: ICONS.settings,
+        userTypes: ['Merchant', 'Partner']
       }
     ]
   }
@@ -149,6 +150,11 @@ const sidebarConfig = [
 
 const userSidebar = (userType) => {
   const sidebar = sidebarConfig.filter((_config) => _config.userTypes.includes(userType));
+
+  sidebar.forEach(
+    (_config) =>
+      (_config.items = _config.items.filter((_items) => !_items.userTypes || _items.userTypes.includes(userType)))
+  );
 
   return sidebar;
 };

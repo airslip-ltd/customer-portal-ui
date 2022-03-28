@@ -18,6 +18,8 @@ const decodeError = (apiError) => {
   return result;
 };
 
+const formatError = (errorDetails) => errorDetails.message;
+
 const reduceProviders = (providers) => {
   const distinctProviders = providers.reduce((acc, curr) => {
     const hasItem = acc.find(
@@ -48,4 +50,4 @@ const reduceProviders = (providers) => {
   return distinctProviders;
 };
 
-export { decodeError, reduceProviders };
+export { decodeError, reduceProviders, formatError };

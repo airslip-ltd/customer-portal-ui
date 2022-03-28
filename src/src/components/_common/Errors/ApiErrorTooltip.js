@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ErrorIcon from '@mui/icons-material/ErrorOutline';
 import Tooltip from '@mui/material/Tooltip';
-import { decodeError } from '../../../utils/utils';
+import { decodeError, formatError } from '../../../utils/utils';
 
 ApiErrorTooltip.propTypes = {
   error: PropTypes.object.isRequired
@@ -13,7 +13,7 @@ export default function ApiErrorTooltip({ error }) {
 
   useEffect(() => {
     const errors = decodeError(error);
-    if (errors.length > 0) setErrorDetails(`${errors[0].errorCode}: ${errors[0].message}`);
+    if (errors.length > 0) setErrorDetails(formatError(errors[0]));
   }, [error, setErrorDetails]);
 
   return (

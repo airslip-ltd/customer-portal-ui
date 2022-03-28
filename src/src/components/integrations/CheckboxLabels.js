@@ -21,13 +21,13 @@ export default function CheckboxLabels({ title, onChange, options }) {
   });
   setIntegrationFilters(newFilters);
 
-  useEffect(() => {
-    const filters = {};
-    integrationFilters.forEach((item) => {
-      filters[item.key] = item.selected;
-    });
-    onChange(filters);
-  }, [onChange, integrationFilters]);
+  // useEffect(() => {
+  //   const filters = {};
+  //   integrationFilters.forEach((item) => {
+  //     filters[item.key] = item.selected;
+  //   });
+  //   onChange(filters);
+  // }, [onChange, integrationFilters]);
 
   const handleChecked = (event) => {
     setIntegrationFilters({

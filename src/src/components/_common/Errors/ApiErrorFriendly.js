@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Stack, Typography } from '@mui/material';
 import { ApiErrorTooltip } from '.';
-import { decodeError } from '../../../utils/utils';
+import { decodeError, formatError } from '../../../utils/utils';
 import HelpDialogue from '../HelpDialogue';
 
 ApiErrorFriendly.propTypes = {
@@ -15,7 +15,7 @@ export default function ApiErrorFriendly({ error, message }) {
 
   useEffect(() => {
     const errors = decodeError(error);
-    if (errors.length > 0) setErrorDetails(`${errors[0].errorCode}: ${errors[0].message}`);
+    if (errors.length > 0) setErrorDetails(formatError(errors[0]));
   }, [error, setErrorDetails]);
 
   return (

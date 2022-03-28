@@ -11,9 +11,17 @@ import { getProviders } from '../../redux/slices/providers';
 // routes
 import { PATH_INTEGRATE } from '../../routes/paths';
 // components
-import { ProviderSelector, MultiProviderSelection, CaptureStoreName, ComingSoon, ManualInstall } from '.';
+import {
+  ProviderSelector,
+  MultiProviderSelection,
+  CaptureStoreName,
+  ComingSoon,
+  ManualInstall,
+  CheckboxLabels
+} from '.';
 // utils
 import { reduceProviders } from '../../utils/utils';
+import { featureEnabled } from '../../utils/feature-switch';
 
 // ----------------------------------------------------------------------
 
@@ -125,11 +133,13 @@ export default function ProviderSelection() {
         <Grid item xs={12}>
           <Stack direction="row" spacing={2}>
             <SearchBox placeholder="Find your integration" filterName={filterBy} onFilterName={onFilterChanged} />
+            <CheckboxLabels />
           </Stack>
         </Grid>
         <ProviderList integrationType="Banking" imageType="svg" />
         <ProviderList integrationType="Commerce" />
-        <ProviderList integrationType="Accounting" />
+
+        {featureEnabled('accounting-integrations') && <ProviderList integrationType="Accounting" />}
       </Grid>
       <MultiProviderSelection open={selectChild} onClose={handleClose} items={providerChildren} />
       <CaptureStoreName open={modalView === 'OneClickWithStore'} onClose={handleStoreName} />
