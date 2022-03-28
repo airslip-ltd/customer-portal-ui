@@ -16,12 +16,16 @@ export default function PartnerHome() {
           <IndustryExposure />
         </Grid>
       )}
-      <Grid item xs={8}>
-        <PartnerRiskFocus />
-      </Grid>
-      <Grid item xs={4}>
-        <ConnectedBusinesses />
-      </Grid>
+      {featureEnabled('partner-risk-focus') && (
+        <Grid item xs={8}>
+          <PartnerRiskFocus />
+        </Grid>
+      )}
+      {featureEnabled('connected-businesses') && (
+        <Grid item xs={4}>
+          <ConnectedBusinesses />
+        </Grid>
+      )}
     </Grid>
   );
 }
