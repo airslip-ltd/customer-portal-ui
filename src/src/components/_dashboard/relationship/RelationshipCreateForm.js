@@ -14,6 +14,7 @@ import { create, reset } from '../../../redux/slices/relationship';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 import ApiError from '../../_common/Errors/ApiError';
 import HelpCard from '../../_common/HelpCard';
+import { featureEnabled } from '../../../utils/feature-switch';
 
 // ----------------------------------------------------------------------
 
@@ -31,12 +32,15 @@ export default function RelationshipCreateForm() {
     {
       label: 'Commerce',
       value: 'Commerce'
-    },
-    {
-      label: 'Accounting',
-      value: 'Accounting'
     }
   ];
+
+  if (featureEnabled('accounting-integrations')) {
+    permissions.push({
+      label: 'Accounting',
+      value: 'Accounting'
+    });
+  }
 
   const NewUserSchema = Yup.object().shape({
     businessName: Yup.string().required('Company name is required'),
