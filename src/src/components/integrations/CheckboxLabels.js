@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 // material
 import { FormGroup, FormControlLabel, Checkbox, FormControl, FormLabel } from '@mui/material';
