@@ -39,7 +39,7 @@ export default function SetupIntegration() {
           ? 'To make the most of Airslip you should integrate as many of your platforms as possible.'
           : "You're off to a great start, lets see if we support anymore of your providers"
       }
-      progress={serviceCount * 25 + 25}
+      progress={100}
       action={
         serviceCount === 0 ? null : (
           <Button variant="contained" size="medium" onClick={handleDoneClicked}>

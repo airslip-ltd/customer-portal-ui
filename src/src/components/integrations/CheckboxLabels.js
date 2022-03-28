@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 // material
 import { FormGroup, FormControlLabel, Checkbox, FormControl, FormLabel } from '@mui/material';
@@ -10,42 +10,31 @@ CheckboxLabels.propTypes = {
 };
 
 export default function CheckboxLabels({ title, onChange, options }) {
-  const [integrationFilters, setIntegrationFilters] = useState([]);
+  const handleChecked = useCallback(
+    (event) => {
+      const items = [...options];
+      const itemIndex = items.findIndex((filter) => filter.key === event.target.name);
 
-  const newFilters = [];
-  options.forEach((item) => {
-    newFilters.push({
-      ...item,
-      selected: true
-    });
-  });
-  setIntegrationFilters(newFilters);
-
-  // useEffect(() => {
-  //   const filters = {};
-  //   integrationFilters.forEach((item) => {
-  //     filters[item.key] = item.selected;
-  //   });
-  //   onChange(filters);
-  // }, [onChange, integrationFilters]);
-
-  const handleChecked = (event) => {
-    setIntegrationFilters({
-      ...integrationFilters,
-      [event.target.name]: event.target.checked
-    });
-  };
+      const item = {
+        ...items[itemIndex],
+        selected: event.target.checked
+      };
+      items[itemIndex] = item;
+      onChange(items);
+    },
+    [onChange, options]
+  );
 
   return (
     <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
       <FormLabel component="legend">{title}</FormLabel>
       <FormGroup aria-label="position" row>
-        {integrationFilters.map((row) => {
+        {options.map((row) => {
           const { key, label, selected } = row;
           return (
             <FormControlLabel
               key={key}
-              control={<Checkbox checked={selected} onChange={handleChecked} name="banking" />}
+              control={<Checkbox checked={selected} onChange={handleChecked} name={key} />}
               label={label}
             />
           );

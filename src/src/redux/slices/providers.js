@@ -42,7 +42,13 @@ export function getProviders() {
   return async (dispatch, getState) => {
     const { provider } = getState();
     if (provider.providers.hasData) return;
-    await executeSearch(provider, dispatch, slice, 'providers', GET_ALL_QUERY);
+    await executeSearch(provider, dispatch, slice, 'providers', {
+      ...GET_ALL_QUERY,
+      sort: [
+        { field: 'priority', sort: 'asc' },
+        { field: 'id', sort: 'asc' }
+      ]
+    });
   };
 }
 
