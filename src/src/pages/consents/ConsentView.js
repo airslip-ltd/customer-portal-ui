@@ -90,7 +90,7 @@ export default function ConsentView() {
     {
       value: 'details',
       icon: <Icon icon={roundAccountBox} width={20} height={20} />,
-      component: <ConsentProfile consent={current.hasData ? current.response.currentVersion : {}} />
+      component: <ConsentProfile consent={current.complete ? current.response.currentVersion : {}} />
     }
   ];
 
@@ -110,11 +110,11 @@ export default function ConsentView() {
       area="Dashboard"
       space="Data Consents"
       spaceHref={PATH_DASHBOARD.consent.list}
-      activity={current.hasData ? current.response.currentVersion.partner.name : id}
-      heading={current.hasData ? current.response.currentVersion.partner.name : id}
+      activity={current.complete ? current.response.currentVersion.partner.name : id}
+      heading={current.complete ? current.response.currentVersion.partner.name : id}
       actions={<ViewActions />}
     >
-      {current.hasData && (
+      {current.complete && (
         <>
           <ApiError error={current.error} />
           <Card
@@ -149,7 +149,7 @@ export default function ConsentView() {
       )}
       <Confirmation onCancel={handleCancel} onConfirm={handleConfirm} open={open} title="Are you sure?">
         Revoking your consent will stop&nbsp;
-        {current.hasData ? current.response.currentVersion.partner.name : id} being able to see your data which could
+        {current.complete ? current.response.currentVersion.partner.name : id} being able to see your data which could
         impact your relationship with them.
       </Confirmation>
       <PleaseWaitDialog open={pleaseWait} />

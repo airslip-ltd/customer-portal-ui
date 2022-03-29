@@ -38,11 +38,11 @@ export default function BusinessEdit() {
       area="Dashboard"
       space="Businesss"
       spaceHref={PATH_DASHBOARD.business.list}
-      activity={current.hasData ? current.response.currentVersion.name : id}
-      heading={current.hasData ? current.response.currentVersion.name : id}
+      activity={current.complete ? current.response.currentVersion.name : id}
+      heading={current.complete ? current.response.currentVersion.name : id}
       actions={<EditActions />}
     >
-      {current.hasData && <BusinessEditForm isEdit currentRecord={current.response.currentVersion} />}
+      {current.complete && <BusinessEditForm isEdit currentRecord={current.response.currentVersion} />}
     </StandardPage>
   );
 }

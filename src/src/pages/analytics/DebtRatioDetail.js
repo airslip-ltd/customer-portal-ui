@@ -19,7 +19,7 @@ export default function DebtServiceCoverageRatioDetail() {
   const { themeStretch } = useSettings();
   const { accountId } = useParams();
   const [renderList, setRenderList] = useState({
-    hasData: false
+    complete: false
   });
   const [renderTotals, setRenderTotals] = useState([]);
 
@@ -40,7 +40,7 @@ export default function DebtServiceCoverageRatioDetail() {
               { name: 'Debt Ratio' }
             ]}
           />
-          {renderList.hasData && (
+          {renderList.complete && (
             <Grid container xs={12} spacing={3}>
               <Grid item xs={12}>
                 <StandardListClient columns={columns} details={renderList} recordsPerPage={10} />

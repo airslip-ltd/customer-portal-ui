@@ -2,16 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 // utils
 import { PATH_INTEGRATE } from '../../routes/paths';
 // utils
-import {
-  SEARCH_DEFAULTS,
-  COMMON_FUNCTIONS,
-  SEARCH_FUNCTIONS,
-  STATE_DEFAULTS,
-  GET_ALL_QUERY,
-  executeSearch
-} from '../common/constants';
+import { COMMON_FUNCTIONS, STATE_DEFAULTS, REQUEST_DEFAULTS } from '../common/constants';
+import { SEARCH_DEFAULTS, SEARCH_FUNCTIONS, GET_ALL_QUERY, executeSearch } from '../common/search';
 // common
-import { ACTION_DEFAULTS, ACTION_FUNCTIONS, executeGet } from '../common/actions';
+import { ACTION_FUNCTIONS, executeGet } from '../common/actions';
 
 // ----------------------------------------------------------------------
 
@@ -19,8 +13,8 @@ const initialState = {
   ...STATE_DEFAULTS,
   providers: { ...SEARCH_DEFAULTS },
   banks: { ...SEARCH_DEFAULTS },
-  authorise: { ...ACTION_DEFAULTS },
-  request: { ...ACTION_DEFAULTS }
+  authorise: { ...REQUEST_DEFAULTS },
+  request: { ...REQUEST_DEFAULTS }
 };
 
 const slice = createSlice({
@@ -41,7 +35,7 @@ export default slice.reducer;
 export function getProviders() {
   return async (dispatch, getState) => {
     const { provider } = getState();
-    if (provider.providers.hasData) return;
+    if (provider.providers.complete) return;
     await executeSearch(provider, dispatch, slice, 'providers', {
       ...GET_ALL_QUERY,
       sort: [
@@ -55,7 +49,7 @@ export function getProviders() {
 export function getBanks() {
   return async (dispatch, getState) => {
     const { provider } = getState();
-    if (provider.providers.hasData) return;
+    if (provider.providers.complete) return;
     await executeSearch(provider, dispatch, slice, 'banks', GET_ALL_QUERY, 'integrations');
   };
 }

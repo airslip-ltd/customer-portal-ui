@@ -53,7 +53,7 @@ export default function PartnerProfileView() {
     {
       value: 'details',
       icon: <Icon icon={roundAccountBox} width={20} height={20} />,
-      component: <PartnerProfile partner={profile.hasData ? profile.response.currentVersion : {}} />
+      component: <PartnerProfile partner={profile.complete ? profile.response.currentVersion : {}} />
     }
   ];
 
@@ -74,7 +74,7 @@ export default function PartnerProfileView() {
       heading="My Details"
       actions={<ViewActions />}
     >
-      {profile.hasData && (
+      {profile.complete && (
         <>
           <ApiError error={profile.error} />
           <Card

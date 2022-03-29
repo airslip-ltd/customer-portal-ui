@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 // utils
 import axios from '../../utils/axios';
 // common
-import { ACTION_DEFAULTS, ACTION_FUNCTIONS, executeGet } from '../common/actions';
+import { ACTION_FUNCTIONS, executeGet } from '../common/actions';
+import { REQUEST_DEFAULTS } from '../common/constants';
 
 // ----------------------------------------------------------------------
 
@@ -10,7 +11,7 @@ const initialState = {
   isLoading: false,
   error: false,
   currentBalance: {
-    ...ACTION_DEFAULTS
+    ...REQUEST_DEFAULTS
   }
 };
 

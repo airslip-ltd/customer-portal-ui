@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 // utils
-import {
-  SEARCH_DEFAULTS,
-  COMMON_FUNCTIONS,
-  SEARCH_FUNCTIONS,
-  STATE_DEFAULTS,
-  executeSearch
-} from '../common/constants';
+import { COMMON_FUNCTIONS, STATE_DEFAULTS } from '../common/constants';
+import { SEARCH_DEFAULTS, SEARCH_FUNCTIONS, executeSearch } from '../common/search';
 
 // ----------------------------------------------------------------------
 

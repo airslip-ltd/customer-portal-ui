@@ -53,7 +53,7 @@ export default function BusinessProfileView() {
     {
       value: 'details',
       icon: <Icon icon={roundAccountBox} width={20} height={20} />,
-      component: <BusinessProfile business={profile.hasData ? profile.response.currentVersion : {}} />
+      component: <BusinessProfile business={profile.complete ? profile.response.currentVersion : {}} />
     }
   ];
 
@@ -74,7 +74,7 @@ export default function BusinessProfileView() {
       heading="My Details"
       actions={<ViewActions />}
     >
-      {profile.hasData && (
+      {profile.complete && (
         <>
           <ApiError error={profile.error} />
           <Card

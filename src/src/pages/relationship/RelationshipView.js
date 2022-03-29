@@ -90,7 +90,7 @@ export default function RelationshipView() {
     {
       value: 'details',
       icon: <Icon icon={roundAccountBox} width={20} height={20} />,
-      component: <RelationshipProfile relationship={current.hasData ? current.response.currentVersion : {}} />
+      component: <RelationshipProfile relationship={current.complete ? current.response.currentVersion : {}} />
     }
   ];
 
@@ -110,11 +110,11 @@ export default function RelationshipView() {
       area="Dashboard"
       space="Businesses"
       spaceHref={PATH_DASHBOARD.relationship.list}
-      activity={current.hasData ? current.response.currentVersion.invitationDetails.businessName : id}
-      heading={current.hasData ? current.response.currentVersion.invitationDetails.businessName : id}
+      activity={current.complete ? current.response.currentVersion.invitationDetails.businessName : id}
+      heading={current.complete ? current.response.currentVersion.invitationDetails.businessName : id}
       actions={<ViewActions />}
     >
-      {current.hasData && (
+      {current.complete && (
         <>
           <ApiError error={current.error} />
           <Card
@@ -149,7 +149,7 @@ export default function RelationshipView() {
       )}
       <Confirmation onCancel={handleCancel} onConfirm={handleConfirm} open={open} title="Are you sure?">
         Your relationship with&nbsp;
-        {current.hasData ? current.response.currentVersion.invitationDetails.businessName : id} will be removed from
+        {current.complete ? current.response.currentVersion.invitationDetails.businessName : id} will be removed from
         Airslip.
       </Confirmation>
       <PleaseWaitDialog open={pleaseWait} />

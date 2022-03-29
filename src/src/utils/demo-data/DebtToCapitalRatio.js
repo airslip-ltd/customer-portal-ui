@@ -24,7 +24,7 @@ export const demoData = {
 export const listData = {
   'my-account-1': {
     loading: false,
-    hasData: true,
+    complete: true,
     error: {},
     response: {
       results: [
@@ -42,7 +42,7 @@ export const listData = {
   },
   'my-account-2': {
     loading: false,
-    hasData: true,
+    complete: true,
     error: {},
     response: {
       results: [
@@ -78,7 +78,7 @@ export const listData = {
   },
   'my-account-3': {
     loading: false,
-    hasData: true,
+    complete: true,
     error: {},
     response: {
       results: [
@@ -105,7 +105,7 @@ export const listData = {
   },
   'my-account-4': {
     loading: false,
-    hasData: true,
+    complete: true,
     error: {},
     response: {
       results: [

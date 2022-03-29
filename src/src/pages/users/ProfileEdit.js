@@ -41,7 +41,7 @@ export default function ProfileEdit() {
       heading="Edit Profile"
       actions={<EditActions />}
     >
-      {profile.hasData && <ProfileEditForm currentUser={profile.response.currentVersion} />}
+      {profile.complete && <ProfileEditForm currentUser={profile.response.currentVersion} />}
     </StandardPage>
   );
 }

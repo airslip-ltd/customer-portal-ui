@@ -53,7 +53,7 @@ export default function ProfileView() {
     {
       value: 'profile',
       icon: <Icon icon={roundAccountBox} width={20} height={20} />,
-      component: <Profile user={profile.hasData ? profile.response.currentVersion : {}} />
+      component: <Profile user={profile.complete ? profile.response.currentVersion : {}} />
     }
   ];
 
@@ -74,7 +74,7 @@ export default function ProfileView() {
       heading="My Profile"
       actions={<ViewActions />}
     >
-      {profile.hasData && (
+      {profile.complete && (
         <>
           <ApiError error={profile.error} />
           <Card

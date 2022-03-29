@@ -1,6 +1,6 @@
 export const listData = {
   loading: false,
-  hasData: false,
+  complete: false,
   error: {},
   response: {
     results: [
@@ -106,7 +106,7 @@ export const revenueByAccount = {
 export const transactionsByAccount = {
   'commerce-account-1': {
     loading: false,
-    hasData: false,
+    complete: false,
     error: {},
     response: {
       results: [

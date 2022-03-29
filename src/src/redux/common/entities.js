@@ -1,19 +1,11 @@
 import axios from '../../utils/axios';
-
-export const ENTITY_DEFAULTS = {
-  loading: false,
-  status: 'neutral',
-  hasData: false,
-  hasError: false,
-  error: {},
-  response: {}
-};
+import { REQUEST_STATES, REQUEST_DEFAULTS } from './constants';
 
 export const ENTITY_FUNCTIONS = {
   resetEntity(state, action) {
     const { propName } = action.payload;
     state[propName] = {
-      ...ENTITY_DEFAULTS
+      ...REQUEST_DEFAULTS
     };
   },
 
@@ -22,7 +14,7 @@ export const ENTITY_FUNCTIONS = {
     state[propName] = {
       ...state[propName],
       loading: true,
-      status: 'inprogress',
+      status: REQUEST_STATES.loading,
       error: {},
       hasError: false
     };
@@ -34,8 +26,8 @@ export const ENTITY_FUNCTIONS = {
       ...state[propName],
       loading: false,
       response,
-      status: status || 'success',
-      hasData: response != null,
+      status: status || REQUEST_STATES.success,
+      complete: response != null,
       hasError: false
     };
   },
@@ -45,7 +37,7 @@ export const ENTITY_FUNCTIONS = {
     state[propName] = {
       ...state[propName],
       hasError: true,
-      status: 'failed',
+      status: REQUEST_STATES.failed,
       loading: false,
       error: response
     };
@@ -66,7 +58,7 @@ export async function executeGet(state, dispatch, slice, propName, entityType, i
       slice.actions.entityActionSuccess({
         propName,
         response: response.data,
-        status: 'neutral'
+        status: REQUEST_STATES.idle
       })
     );
     dispatch(slice.actions.finishedLoading());
@@ -84,7 +76,7 @@ export async function executeUpdate(state, dispatch, slice, propName, entityType
   if (state[propName].loading) return;
 
   if (
-    state[propName].hasData &&
+    state[propName].complete &&
     state[propName].response.currentVersion &&
     state[propName].response.currentVersion.id === id
   ) {
@@ -193,7 +185,7 @@ export async function executeGetMyDetails(state, dispatch, slice, propName, enti
       slice.actions.entityActionSuccess({
         propName,
         response: response.data,
-        status: 'neutral'
+        status: REQUEST_STATES.idle
       })
     );
     dispatch(slice.actions.finishedLoading());
@@ -219,7 +211,7 @@ export async function executeUpdateMyDetails(
 ) {
   if (state[propName].loading) return;
 
-  if (state[propName].hasData && state[propName].response.currentVersion) {
+  if (state[propName].complete && state[propName].response.currentVersion) {
     values = {
       ...state[propName].response.currentVersion,
       ...values

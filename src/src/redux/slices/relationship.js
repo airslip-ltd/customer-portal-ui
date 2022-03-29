@@ -1,14 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from '../../utils/axios';
 // utils
-import {
-  SEARCH_DEFAULTS,
-  COMMON_FUNCTIONS,
-  SEARCH_FUNCTIONS,
-  STATE_DEFAULTS,
-  GET_ALL_QUERY,
-  executeSearch
-} from '../common/constants';
+import { COMMON_FUNCTIONS, STATE_DEFAULTS, REQUEST_DEFAULTS } from '../common/constants';
+import { SEARCH_DEFAULTS, SEARCH_FUNCTIONS, GET_ALL_QUERY, executeSearch } from '../common/search';
 import * as entities from '../common/entities';
 import * as actions from '../common/actions';
 
@@ -18,9 +12,9 @@ const initialState = {
   ...STATE_DEFAULTS,
   relationship: { ...SEARCH_DEFAULTS },
   connections: { ...SEARCH_DEFAULTS },
-  current: { ...entities.ENTITY_DEFAULTS },
+  current: { ...REQUEST_DEFAULTS },
   referral: {
-    ...actions.ACTION_DEFAULTS
+    ...REQUEST_DEFAULTS
   }
 };
 

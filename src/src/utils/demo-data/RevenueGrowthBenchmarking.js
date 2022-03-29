@@ -90,7 +90,7 @@ function buildResults() {
 
 export const listData = {
   loading: false,
-  hasData: false,
+  complete: false,
   error: {},
   response: {
     results: buildResults()

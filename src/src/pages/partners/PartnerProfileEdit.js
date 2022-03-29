@@ -41,7 +41,7 @@ export default function PartnerProfile() {
       heading="Edit Details"
       actions={<EditActions />}
     >
-      {profile.hasData && <PartnerProfileEditForm currentRecord={profile.response.currentVersion} />}
+      {profile.complete && <PartnerProfileEditForm currentRecord={profile.response.currentVersion} />}
     </StandardPage>
   );
 }
