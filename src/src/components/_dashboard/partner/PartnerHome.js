@@ -2,7 +2,7 @@
 import { Grid } from '@mui/material';
 
 // components
-import { PartnerRiskFocus, IndustryExposure, ConnectedBusinesses } from '.';
+import { PartnerRiskFocus, IndustryExposure, ConnectedBusinesses, LatestBusinesses } from '.';
 
 import { featureEnabled } from '../../../utils/feature-switch';
 
@@ -22,8 +22,13 @@ export default function PartnerHome() {
         </Grid>
       )}
       {featureEnabled('connected-businesses') && (
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <ConnectedBusinesses />
+        </Grid>
+      )}
+      {featureEnabled('connected-businesses') && (
+        <Grid item xs={12} sm={6} md={8}>
+          <LatestBusinesses />
         </Grid>
       )}
     </Grid>

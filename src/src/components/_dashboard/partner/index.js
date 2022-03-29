@@ -7,3 +7,4 @@ export { default as PartnerProfile } from './PartnerProfile';
 export { default as PartnerEditForm } from './PartnerEditForm';
 export { default as PartnerCreateForm } from './PartnerCreateForm';
 export { default as PartnerProfileEditForm } from './PartnerProfileEditForm';
+export { default as LatestBusinesses } from './LatestBusinesses';

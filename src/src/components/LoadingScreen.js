@@ -24,8 +24,6 @@ LoadingScreen.propTypes = {
 };
 
 export default function LoadingScreen({ request, children, ...other }) {
-  console.log(request);
-
   return (
     <>
       <RootStyle {...other}>
