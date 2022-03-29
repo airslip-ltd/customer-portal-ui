@@ -43,7 +43,10 @@ RelationshipCover.propTypes = {
 };
 
 export default function RelationshipCover({ relationship }) {
-  const { invitationDetails, relationshipStatus } = relationship;
+  console.log(relationship);
+
+  const { invitationDetails, relationshipStatus, related } = relationship;
+  const { business } = related;
 
   return (
     <RootStyle>
@@ -66,7 +69,7 @@ export default function RelationshipCover({ relationship }) {
             textAlign: { xs: 'center', md: 'left' }
           }}
         >
-          <Typography variant="h4">{invitationDetails.businessName}</Typography>
+          <Typography variant="h4">{business.name || invitationDetails.businessName}</Typography>
           <Typography sx={{ opacity: 0.72 }}>{relationshipStatus}</Typography>
         </Box>
       </InfoStyle>

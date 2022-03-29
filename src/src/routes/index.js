@@ -10,6 +10,7 @@ import SetupGuard from '../guards/SetupGuard';
 // components
 import LoadingScreen from '../components/LoadingScreen';
 import { OwnedViewProvider } from '../contexts/OwnedViewContext';
+import { RelationshipProvider } from '../contexts/RelationshipContext';
 
 // ----------------------------------------------------------------------
 
@@ -173,11 +174,13 @@ export default function Router() {
             },
             { path: 'edit/:id', element: <RelationshipEdit /> },
             {
-              path: 'summary/:airslipUserType/:entityId',
+              path: 'summary/:partnerRelationshipId/:airslipUserType/:entityId',
               element: (
-                <OwnedViewProvider>
-                  <RelationshipSummary />
-                </OwnedViewProvider>
+                <RelationshipProvider>
+                  <OwnedViewProvider>
+                    <RelationshipSummary />
+                  </OwnedViewProvider>
+                </RelationshipProvider>
               )
             }
           ]
@@ -266,19 +269,23 @@ export default function Router() {
               )
             },
             {
-              path: 'banking-transactions/:airslipUserType/:entityId',
+              path: 'banking-transactions/:partnerRelationshipId/:airslipUserType/:entityId',
               element: (
-                <OwnedViewProvider>
-                  <BankingTransactionsReport />
-                </OwnedViewProvider>
+                <RelationshipProvider>
+                  <OwnedViewProvider>
+                    <BankingTransactionsReport />
+                  </OwnedViewProvider>
+                </RelationshipProvider>
               )
             },
             {
-              path: 'commerce-transactions/:airslipUserType/:entityId',
+              path: 'commerce-transactions/:partnerRelationshipId/:airslipUserType/:entityId',
               element: (
-                <OwnedViewProvider>
-                  <CommerceTransactionsReport />
-                </OwnedViewProvider>
+                <RelationshipProvider>
+                  <OwnedViewProvider>
+                    <CommerceTransactionsReport />
+                  </OwnedViewProvider>
+                </RelationshipProvider>
               )
             }
           ]

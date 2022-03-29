@@ -93,7 +93,7 @@ export default function SetPasswordForm({ onRequest, isLoading }) {
             fullWidth
             size="small"
             type="password"
-            label="Password"
+            label="Confirm Password"
             {...getFieldProps('confirm')}
             error={Boolean(touched.confirm && errors.confirm)}
             helperText={touched.confirm && errors.confirm}

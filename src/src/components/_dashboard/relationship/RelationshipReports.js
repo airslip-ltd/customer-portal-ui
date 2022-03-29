@@ -22,7 +22,7 @@ export default function RelationshipReports({ relationship }) {
           <Button
             variant="outlined"
             component={RouterLink}
-            to={`${PATH_DASHBOARD.relationship.summary}/${related.airslipUserType}/${related.entityId}`}
+            to={`${PATH_DASHBOARD.relationship.summary}/${relationship.id}/${related.airslipUserType}/${related.entityId}`}
           >
             Analytics summary
           </Button>
@@ -30,7 +30,7 @@ export default function RelationshipReports({ relationship }) {
             variant="outlined"
             disabled={relationship.permission.findIndex((perm) => perm.permissionType === 'Banking') < 0}
             component={RouterLink}
-            to={`${PATH_DASHBOARD.reports.bankTransactions}/${related.airslipUserType}/${related.entityId}`}
+            to={`${PATH_DASHBOARD.reports.bankTransactions}/${relationship.id}/${related.airslipUserType}/${related.entityId}`}
           >
             Banking transactions
           </Button>
@@ -38,7 +38,7 @@ export default function RelationshipReports({ relationship }) {
             variant="outlined"
             disabled={relationship.permission.findIndex((perm) => perm.permissionType === 'Commerce') < 0}
             component={RouterLink}
-            to={`${PATH_DASHBOARD.reports.commerceTransactions}/${related.airslipUserType}/${related.entityId}`}
+            to={`${PATH_DASHBOARD.reports.commerceTransactions}/${relationship.id}/${related.airslipUserType}/${related.entityId}`}
           >
             Commerce transactions
           </Button>

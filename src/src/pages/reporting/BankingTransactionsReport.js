@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 // redux
+import { Card } from '@mui/material';
 import { useDispatch, useSelector } from '../../redux/store';
 import { getBankTransactions, downloadBankTransactions } from '../../redux/slices/reports';
 // hooks
@@ -10,10 +11,13 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 import StandardPage from '../../layouts/StandardPage';
 import { columns } from '../../lists/bank-transactions-report';
 import StandardList from '../../components/_common/Lists/StandardList';
+import { RelationshipCover } from '../../components/_dashboard/relationship';
+import useRelationship from '../../hooks/useRelationship';
 
 // ----------------------------------------------------------------------
 
 export default function BankingTransactionsReport() {
+  const { relationship } = useRelationship();
   const dispatch = useDispatch();
   const { bankTransactions } = useSelector((state) => state.reports);
   const [query, setQuery] = useState(null);
@@ -44,6 +48,17 @@ export default function BankingTransactionsReport() {
       heading="Bank Transactions"
       fullWidth
     >
+      {relationship && (
+        <Card
+          sx={{
+            mb: 3,
+            height: 180,
+            position: 'relative'
+          }}
+        >
+          <RelationshipCover relationship={relationship} />
+        </Card>
+      )}
       <StandardList
         columns={columns}
         details={bankTransactions}

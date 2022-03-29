@@ -37,7 +37,7 @@ function RelationshipRow({ item }) {
           </Button>
           <Button
             component={RouterLink}
-            to={`${PATH_DASHBOARD.relationship.summary}/${item.related.airslipUserType}/${item.related.entityId}`}
+            to={`${PATH_DASHBOARD.relationship.summary}/${item.id}/${item.related.airslipUserType}/${item.related.entityId}`}
             color="inherit"
           >
             Analytics
@@ -45,7 +45,7 @@ function RelationshipRow({ item }) {
           <Button
             disabled={item.permission.findIndex((perm) => perm.permissionType === 'Commerce') < 0}
             component={RouterLink}
-            to={`${PATH_DASHBOARD.reports.commerceTransactions}/${item.related.airslipUserType}/${item.related.entityId}`}
+            to={`${PATH_DASHBOARD.reports.commerceTransactions}/${item.id}/${item.related.airslipUserType}/${item.related.entityId}`}
             color="inherit"
           >
             Commerce
@@ -53,7 +53,7 @@ function RelationshipRow({ item }) {
           <Button
             disabled={item.permission.findIndex((perm) => perm.permissionType === 'Banking') < 0}
             component={RouterLink}
-            to={`${PATH_DASHBOARD.reports.bankTransactions}/${item.related.airslipUserType}/${item.related.entityId}`}
+            to={`${PATH_DASHBOARD.reports.bankTransactions}/${item.id}/${item.related.airslipUserType}/${item.related.entityId}`}
             color="inherit"
           >
             Banking
@@ -86,11 +86,6 @@ export default function LatestBusinesses() {
   useEffect(() => {
     dispatch(search(query));
   }, [dispatch, query]);
-
-  useEffect(() => {
-    if (!relationship.complete) return;
-    console.log(relationship);
-  }, [relationship]);
 
   return (
     <LoadingCard apiRequest={relationship} title="Latest Connections">

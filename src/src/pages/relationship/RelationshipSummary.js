@@ -1,17 +1,18 @@
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Button, Stack } from '@mui/material';
+import { Button, Stack, Card } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
 import StandardPage from '../../layouts/StandardPage';
 import { MerchantSummary } from '../../components/_dashboard/merchant-view';
+import { RelationshipCover } from '../../components/_dashboard/relationship';
+import useRelationship from '../../hooks/useRelationship';
 
 // ----------------------------------------------------------------------
 
 export default function RelationshipSummary() {
-  // const { current } = useSelector((state) => state.relationship);
-  // const { id } = useParams();
+  const { relationship } = useRelationship();
 
   const ViewActions = () => (
     <Stack direction="row" spacing={1} sx={{ pt: 3 }}>
@@ -30,6 +31,16 @@ export default function RelationshipSummary() {
       heading="Analytics Summary"
       actions={<ViewActions />}
     >
+      <Card
+        sx={{
+          mb: 3,
+          height: 180,
+          position: 'relative'
+        }}
+      >
+        <RelationshipCover relationship={relationship} />
+      </Card>
+
       <MerchantSummary />
     </StandardPage>
   );
