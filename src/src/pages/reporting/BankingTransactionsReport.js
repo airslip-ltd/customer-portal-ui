@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { getBankTransactions, downloadBankTransactions } from '../../redux/slices/reports';
+// hooks
+import useDataOwner from '../../hooks/useDataOwner';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
@@ -12,15 +13,11 @@ import StandardList from '../../components/_common/Lists/StandardList';
 
 // ----------------------------------------------------------------------
 
-BankingTransactionsReport.propTypes = {
-  ownerEntityId: PropTypes.string.isRequired,
-  ownerAirslipUserType: PropTypes.string.isRequired
-};
-
-export default function BankingTransactionsReport({ ownerEntityId, ownerAirslipUserType }) {
+export default function BankingTransactionsReport() {
   const dispatch = useDispatch();
   const { bankTransactions } = useSelector((state) => state.reports);
   const [query, setQuery] = useState(null);
+  const { ownerEntityId, ownerAirslipUserType } = useDataOwner();
 
   useEffect(() => {
     if (query) {

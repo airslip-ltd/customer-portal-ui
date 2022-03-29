@@ -229,6 +229,7 @@ function AuthProvider({ children }) {
 
   const logout = async () => {
     setSession(null, null);
+    window.localStorage.clear('setupInProgress');
     dispatch({ type: 'LOGOUT' });
   };
 

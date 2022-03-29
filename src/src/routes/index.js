@@ -9,6 +9,7 @@ import AuthGuard from '../guards/AuthGuard';
 import SetupGuard from '../guards/SetupGuard';
 // components
 import LoadingScreen from '../components/LoadingScreen';
+import { OwnedViewProvider } from '../contexts/OwnedViewContext';
 
 // ----------------------------------------------------------------------
 
@@ -136,7 +137,14 @@ export default function Router() {
       ),
       children: [
         { element: <Navigate to="/dashboard/home" replace /> },
-        { path: 'home', element: <Home /> },
+        {
+          path: 'home',
+          element: (
+            <OwnedViewProvider>
+              <Home />
+            </OwnedViewProvider>
+          )
+        },
         {
           path: 'redirect',
           children: [
@@ -163,7 +171,15 @@ export default function Router() {
               path: 'view/:id',
               element: process.env.REACT_APP_ENVIRONMENT === 'demo' ? <RelationshipViewDemo /> : <RelationshipView />
             },
-            { path: 'edit/:id', element: <RelationshipEdit /> }
+            { path: 'edit/:id', element: <RelationshipEdit /> },
+            {
+              path: 'summary/:airslipUserType/:entityId',
+              element: (
+                <OwnedViewProvider>
+                  <RelationshipSummary />
+                </OwnedViewProvider>
+              )
+            }
           ]
         },
         {
@@ -233,15 +249,37 @@ export default function Router() {
           path: 'reporting',
           children: [
             { element: <Navigate to="/dashboard/reporting/list" replace /> },
-            { path: 'banking-transactions', element: <ReportWrapper reportType="bank-transactions" /> },
-            { path: 'commerce-transactions', element: <ReportWrapper reportType="commerce-transactions" /> },
+            {
+              path: 'banking-transactions',
+              element: (
+                <OwnedViewProvider>
+                  <BankingTransactionsReport />
+                </OwnedViewProvider>
+              )
+            },
+            {
+              path: 'commerce-transactions',
+              element: (
+                <OwnedViewProvider>
+                  <CommerceTransactionsReport />
+                </OwnedViewProvider>
+              )
+            },
             {
               path: 'banking-transactions/:airslipUserType/:entityId',
-              element: <ReportWrapper reportType="bank-transactions" />
+              element: (
+                <OwnedViewProvider>
+                  <BankingTransactionsReport />
+                </OwnedViewProvider>
+              )
             },
             {
               path: 'commerce-transactions/:airslipUserType/:entityId',
-              element: <ReportWrapper reportType="commerce-transactions" />
+              element: (
+                <OwnedViewProvider>
+                  <CommerceTransactionsReport />
+                </OwnedViewProvider>
+              )
             }
           ]
         }
@@ -294,6 +332,10 @@ const RelationshipEdit = Loadable(lazy(() => import('../pages/relationship/Relat
 const RelationshipList = Loadable(lazy(() => import('../pages/relationship/RelationshipList')));
 const RelationshipCreate = Loadable(lazy(() => import('../pages/relationship/RelationshipCreate')));
 const RelationshipConsent = Loadable(lazy(() => import('../pages/relationship/RelationshipConsent')));
+const RelationshipSummary = Loadable(lazy(() => import('../pages/relationship/RelationshipSummary')));
+// Reports
+const BankingTransactionsReport = Loadable(lazy(() => import('../pages/reporting/BankingTransactionsReport')));
+const CommerceTransactionsReport = Loadable(lazy(() => import('../pages/reporting/CommerceTransactionsReport')));
 // Consents
 const ConsentView = Loadable(lazy(() => import('../pages/consents/ConsentView')));
 const ConsentList = Loadable(lazy(() => import('../pages/consents/ConsentList')));
@@ -328,5 +370,3 @@ const BankingRecentTransactions = Loadable(lazy(() => import('../pages/analytics
 const DebtRatioDetail = Loadable(lazy(() => import('../pages/analytics/DebtRatioDetail')));
 const DebtToCapitalRatioDetail = Loadable(lazy(() => import('../pages/analytics/DebtToCapitalRatioDetail')));
 const RevenueBenchmarkingDetail = Loadable(lazy(() => import('../pages/analytics/RevenueBenchmarkingDetail')));
-// Reporting
-const ReportWrapper = Loadable(lazy(() => import('../pages/reporting/ReportWrapper')));

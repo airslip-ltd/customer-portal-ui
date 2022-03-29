@@ -37,7 +37,7 @@ function RelationshipRow({ item }) {
           </Button>
           <Button
             component={RouterLink}
-            to={`${PATH_DASHBOARD.partner.summary}/${item.related.airslipUserType}/${item.related.entityId}`}
+            to={`${PATH_DASHBOARD.relationship.summary}/${item.related.airslipUserType}/${item.related.entityId}`}
             color="inherit"
           >
             Analytics
@@ -80,7 +80,7 @@ export default function LatestBusinesses() {
       ],
       linkOperator: 'and'
     },
-    sort: [{ field: 'timestamp', sort: 'desc' }]
+    sort: [{ field: 'TimeStamp', sort: 'desc' }]
   });
 
   useEffect(() => {

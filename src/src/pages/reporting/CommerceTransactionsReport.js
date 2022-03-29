@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { getCommerceTransactions, downloadCommerceTransactions } from '../../redux/slices/reports';
+// hooks
+import useDataOwner from '../../hooks/useDataOwner';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
@@ -12,15 +13,11 @@ import StandardList from '../../components/_common/Lists/StandardList';
 
 // ----------------------------------------------------------------------
 
-CommerceTransactionsReport.propTypes = {
-  ownerEntityId: PropTypes.string.isRequired,
-  ownerAirslipUserType: PropTypes.string.isRequired
-};
-
-export default function CommerceTransactionsReport({ ownerEntityId, ownerAirslipUserType }) {
+export default function CommerceTransactionsReport() {
   const dispatch = useDispatch();
   const { commerceTransactions } = useSelector((state) => state.reports);
   const [query, setQuery] = useState(null);
+  const { ownerEntityId, ownerAirslipUserType } = useDataOwner();
 
   useEffect(() => {
     if (query) {
