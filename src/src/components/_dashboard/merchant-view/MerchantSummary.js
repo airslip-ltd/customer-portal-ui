@@ -97,9 +97,11 @@ export default function MerchantSummary({ currentMerchant, accountId }) {
           </Grid>
         )}
 
-        <Grid item xs={12} md={4}>
-          <MerchantBalance />
-        </Grid>
+        {featureEnabled('demo') && (
+          <Grid item xs={12} md={4}>
+            <MerchantBalance />
+          </Grid>
+        )}
 
         {/* <Grid item xs={12} md={12}>
           <BankingRecentTransactions accountId={accountId} />
