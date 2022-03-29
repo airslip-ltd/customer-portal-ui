@@ -1,22 +1,35 @@
+import { useEffect } from 'react';
+import PropTypes from 'prop-types';
+// redux
+import { useDispatch, useSelector } from '../../../redux/store';
+import { getRefundShapshot } from '../../../redux/slices/analytics';
 // utils
-import { useTheme } from '@mui/material/styles';
 import MerchantDashboardSnapshot from './MerchantDashboardSnapshot';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
-// Demo data
-import { demoData } from '../../../utils/demo-data/MerchantRefunds';
+// hooks
+import useDataOwner from '../../../hooks/useDataOwner';
 
 // ----------------------------------------------------------------------
+MerchantRefunds.propTypes = {
+  accountId: PropTypes.string
+};
 
-export default function MerchantRefunds() {
-  const theme = useTheme();
+export default function MerchantRefunds({ accountId }) {
+  const dispatch = useDispatch();
+  const { salesStats } = useSelector((state) => state.analytics);
+  const { dataQuery } = useDataOwner();
+  accountId = accountId || '';
+
+  useEffect(() => {
+    dispatch(getRefundShapshot(dataQuery, 30, accountId));
+  }, [dispatch, dataQuery, accountId]);
 
   return (
     <MerchantDashboardSnapshot
       title="Refunds"
-      snapshot={demoData}
-      navigateTo={PATH_DASHBOARD.analytics.commerceSummary}
-      graphColor={theme.palette.secondary.main}
+      snapshot={salesStats}
+      navigateTo={PATH_DASHBOARD.analytics.accountBalances}
     />
   );
 }

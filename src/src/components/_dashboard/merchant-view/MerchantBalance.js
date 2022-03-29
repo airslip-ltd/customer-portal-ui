@@ -8,18 +8,21 @@ import { useDispatch, useSelector } from '../../../redux/store';
 import { getCurrentBalance } from '../../../redux/slices/analytics';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
+// hooks
+import useDataOwner from '../../../hooks/useDataOwner';
 
 // ----------------------------------------------------------------------
 
 export default function MerchantBalance() {
+  const { dataQuery } = useDataOwner();
   const theme = useTheme();
   const dispatch = useDispatch();
 
   const { currentBalance } = useSelector((state) => state.analytics);
 
   useEffect(() => {
-    dispatch(getCurrentBalance());
-  }, [dispatch]);
+    dispatch(getCurrentBalance(dataQuery));
+  }, [dispatch, dataQuery]);
 
   return (
     <MerchantDashboardSnapshot

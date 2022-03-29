@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Card, Link, CardHeader, Stack } from '@mui/material';
+import { Card, Button, CardHeader, Stack } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 
@@ -19,18 +19,29 @@ export default function RelationshipReports({ relationship }) {
       <CardHeader title="Reports" />
       <Stack spacing={2} sx={{ p: 3 }}>
         <Stack direction="column" spacing={1}>
-          <Link
+          <Button
+            variant="outlined"
+            component={RouterLink}
+            to={`${PATH_DASHBOARD.relationship.summary}/${related.airslipUserType}/${related.entityId}`}
+          >
+            Analytics summary
+          </Button>
+          <Button
+            variant="outlined"
+            disabled={relationship.permission.findIndex((perm) => perm.permissionType === 'Banking') < 0}
             component={RouterLink}
             to={`${PATH_DASHBOARD.reports.bankTransactions}/${related.airslipUserType}/${related.entityId}`}
           >
             Banking transactions
-          </Link>
-          <Link
+          </Button>
+          <Button
+            variant="outlined"
+            disabled={relationship.permission.findIndex((perm) => perm.permissionType === 'Commerce') < 0}
             component={RouterLink}
             to={`${PATH_DASHBOARD.reports.commerceTransactions}/${related.airslipUserType}/${related.entityId}`}
           >
             Commerce transactions
-          </Link>
+          </Button>
         </Stack>
       </Stack>
     </Card>
