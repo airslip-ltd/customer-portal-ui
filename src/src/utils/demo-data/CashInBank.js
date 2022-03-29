@@ -1,7 +1,8 @@
-import { REQUEST_DEFAULTS } from '../../redux/common/constants';
+import { REQUEST_DEFAULTS, REQUEST_STATES } from '../../redux/common/constants';
 
 export const demoData = {
   ...REQUEST_DEFAULTS,
+  status: REQUEST_STATES.success,
   complete: true,
   response: {
     balance: 160,
