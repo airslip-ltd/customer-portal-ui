@@ -1,7 +1,7 @@
 // columns can be found in partner-risk-focus.js
 export const listData = {
   loading: false,
-  hasData: false,
+  complete: false,
   error: {},
   response: {
     results: [

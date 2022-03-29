@@ -90,7 +90,7 @@ export default function IntegrationView() {
     {
       value: 'details',
       icon: <Icon icon={roundAccountBox} width={20} height={20} />,
-      component: <IntegrationProfile integration={current.hasData ? current.response.currentVersion : {}} />
+      component: <IntegrationProfile integration={current.complete ? current.response.currentVersion : {}} />
     }
   ];
 
@@ -110,11 +110,11 @@ export default function IntegrationView() {
       area="Dashboard"
       space="Integrations"
       spaceHref={PATH_DASHBOARD.integrations.list}
-      activity={current.hasData ? current.response.currentVersion.name : id}
-      heading={current.hasData ? current.response.currentVersion.name : id}
+      activity={current.complete ? current.response.currentVersion.name : id}
+      heading={current.complete ? current.response.currentVersion.name : id}
       actions={<ViewActions />}
     >
-      {current.hasData && (
+      {current.complete && (
         <>
           <ApiError error={current.error} />
           <Card
@@ -148,7 +148,7 @@ export default function IntegrationView() {
         </>
       )}
       <Confirmation onCancel={handleCancel} onConfirm={handleConfirm} open={open} title="Are you sure?">
-        {current.hasData ? current.response.currentVersion.name : id} will be deleted from Airslip.
+        {current.complete ? current.response.currentVersion.name : id} will be deleted from Airslip.
       </Confirmation>
       <PleaseWaitDialog open={pleaseWait} />
     </StandardPage>

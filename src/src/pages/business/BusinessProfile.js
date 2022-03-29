@@ -41,7 +41,7 @@ export default function BusinessProfile() {
       heading="Edit Details"
       actions={<EditActions />}
     >
-      {profile.hasData && <BusinessProfileEditForm currentRecord={profile.response.currentVersion} />}
+      {profile.complete && <BusinessProfileEditForm currentRecord={profile.response.currentVersion} />}
     </StandardPage>
   );
 }

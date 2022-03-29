@@ -75,7 +75,7 @@ export default function HubIntegrationComplete() {
   }, [navigate, timeoutId]);
 
   useEffect(() => {
-    if (!integrations.hasData) return;
+    if (!integrations.complete) return;
     if (integrations.response.paging.totalRecords > 0) {
       clearInterval(intervalId);
       setLinkVerified(true);

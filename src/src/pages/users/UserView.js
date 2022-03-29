@@ -90,7 +90,7 @@ export default function UserView() {
     {
       value: 'profile',
       icon: <Icon icon={roundAccountBox} width={20} height={20} />,
-      component: <Profile user={current.hasData ? current.response.currentVersion : {}} />
+      component: <Profile user={current.complete ? current.response.currentVersion : {}} />
     }
   ];
 
@@ -113,11 +113,11 @@ export default function UserView() {
       area="Dashboard"
       space="Users"
       spaceHref={PATH_DASHBOARD.user.list}
-      activity={current.hasData ? current.response.currentVersion.displayName : id}
-      heading={current.hasData ? current.response.currentVersion.displayName : id}
+      activity={current.complete ? current.response.currentVersion.displayName : id}
+      heading={current.complete ? current.response.currentVersion.displayName : id}
       actions={<ViewActions />}
     >
-      {current.hasData && (
+      {current.complete && (
         <>
           <ApiError error={current.error} />
           <Card
@@ -151,7 +151,7 @@ export default function UserView() {
         </>
       )}
       <Confirmation onCancel={handleCancel} onConfirm={handleConfirm} open={open} title="Are you sure?">
-        {current.hasData ? current.response.currentVersion.displayName : id} will be deleted from Airslip.
+        {current.complete ? current.response.currentVersion.displayName : id} will be deleted from Airslip.
       </Confirmation>
       <PleaseWaitDialog open={pleaseWait} />
     </StandardPage>

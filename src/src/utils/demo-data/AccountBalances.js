@@ -1,6 +1,6 @@
 export const listData = {
   loading: false,
-  hasData: false,
+  complete: false,
   error: {},
   response: {
     results: [
@@ -67,7 +67,7 @@ export const cashflowByAccount = {
 export const transactionsByAccount = {
   'bank-account-1': {
     loading: false,
-    hasData: false,
+    complete: false,
     error: {},
     response: {
       results: [

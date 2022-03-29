@@ -62,7 +62,7 @@ export default function ProviderSelection() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!providers.hasData) return;
+    if (!providers.complete) return;
     const distinctProviders = reduceProviders(providers.response.results);
 
     setRenderProviders(distinctProviders);
@@ -152,7 +152,7 @@ export default function ProviderSelection() {
     );
   }
 
-  if (!providers.hasData) return <></>;
+  if (!providers.complete) return <></>;
 
   return (
     <>

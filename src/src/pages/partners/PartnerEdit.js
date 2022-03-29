@@ -38,11 +38,11 @@ export default function PartnerEdit() {
       area="Dashboard"
       space="Partners"
       spaceHref={PATH_DASHBOARD.partner.list}
-      activity={current.hasData ? current.response.currentVersion.name : id}
-      heading={current.hasData ? current.response.currentVersion.name : id}
+      activity={current.complete ? current.response.currentVersion.name : id}
+      heading={current.complete ? current.response.currentVersion.name : id}
       actions={<EditActions />}
     >
-      {current.hasData && <PartnerEditForm isEdit currentRecord={current.response.currentVersion} />}
+      {current.complete && <PartnerEditForm isEdit currentRecord={current.response.currentVersion} />}
     </StandardPage>
   );
 }

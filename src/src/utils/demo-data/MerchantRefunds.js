@@ -1,7 +1,7 @@
-import { ACTION_DEFAULTS } from '../../redux/common/actions';
+import { REQUEST_DEFAULTS } from '../../redux/common/constants';
 
 export const demoData = {
-  ...ACTION_DEFAULTS,
+  ...REQUEST_DEFAULTS,
   complete: true,
   response: {
     balance: 1005.0,

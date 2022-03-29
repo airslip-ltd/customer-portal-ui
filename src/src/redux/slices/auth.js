@@ -2,16 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 // utils
 import axios from '../../utils/axios';
 // common
-import { ACTION_DEFAULTS, ACTION_FUNCTIONS } from '../common/actions';
+import { ACTION_FUNCTIONS } from '../common/actions';
+import { REQUEST_DEFAULTS } from '../common/constants';
 
 // ----------------------------------------------------------------------
 
 const initialState = {
   forgot: {
-    ...ACTION_DEFAULTS
+    ...REQUEST_DEFAULTS
   },
   password: {
-    ...ACTION_DEFAULTS
+    ...REQUEST_DEFAULTS
   }
 };
 

@@ -38,11 +38,11 @@ export default function RelationshipEdit() {
       area="Dashboard"
       space="Relationships"
       spaceHref={PATH_DASHBOARD.relationship.list}
-      activity={current.hasData ? current.response.currentVersion.name : id}
-      heading={current.hasData ? current.response.currentVersion.name : id}
+      activity={current.complete ? current.response.currentVersion.name : id}
+      heading={current.complete ? current.response.currentVersion.name : id}
       actions={<EditActions />}
     >
-      {current.hasData && <RelationshipEditForm isEdit currentRecord={current.response.currentVersion} />}
+      {current.complete && <RelationshipEditForm isEdit currentRecord={current.response.currentVersion} />}
     </StandardPage>
   );
 }

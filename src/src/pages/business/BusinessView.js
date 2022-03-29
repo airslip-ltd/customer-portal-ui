@@ -90,7 +90,7 @@ export default function BusinessView() {
     {
       value: 'details',
       icon: <Icon icon={roundAccountBox} width={20} height={20} />,
-      component: <BusinessProfile business={current.hasData ? current.response.currentVersion : {}} />
+      component: <BusinessProfile business={current.complete ? current.response.currentVersion : {}} />
     }
   ];
 
@@ -113,11 +113,11 @@ export default function BusinessView() {
       area="Dashboard"
       space="Businesss"
       spaceHref={PATH_DASHBOARD.business.list}
-      activity={current.hasData ? current.response.currentVersion.name : id}
-      heading={current.hasData ? current.response.currentVersion.name : id}
+      activity={current.complete ? current.response.currentVersion.name : id}
+      heading={current.complete ? current.response.currentVersion.name : id}
       actions={<ViewActions />}
     >
-      {current.hasData && (
+      {current.complete && (
         <>
           <ApiError error={current.error} />
           <Card
@@ -151,7 +151,7 @@ export default function BusinessView() {
         </>
       )}
       <Confirmation onCancel={handleCancel} onConfirm={handleConfirm} open={open} title="Are you sure?">
-        {current.hasData ? current.response.currentVersion.name : id} will be deleted from Airslip.
+        {current.complete ? current.response.currentVersion.name : id} will be deleted from Airslip.
       </Confirmation>
       <PleaseWaitDialog open={pleaseWait} />
     </StandardPage>

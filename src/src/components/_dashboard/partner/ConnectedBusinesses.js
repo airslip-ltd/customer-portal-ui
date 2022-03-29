@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
+import { Link as RouterLink } from 'react-router-dom';
 // material
 import { useTheme } from '@mui/material/styles';
-import { Card, CardHeader, Stack, Box, Typography } from '@mui/material';
+import { Card, CardHeader, Stack, Box, Typography, CardContent, Button } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
 import { getConnections } from '../../../redux/slices/relationship';
@@ -12,6 +13,8 @@ import { getConnections } from '../../../redux/slices/relationship';
 import { fNumber } from '../../../utils/formatNumber';
 //
 import { BaseOptionChart } from '../../charts';
+import { LoadingView } from '../../_common/progress';
+import { PATH_DASHBOARD } from '../../../routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -57,7 +60,7 @@ export default function ConnectedBusinesses() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!connections.hasData) return;
+    if (!connections.complete) return;
     const result = connections.response.results.reduce((total, currentValue) => (total += currentValue.count), 0);
     setInvited(result);
     const invited = connections.response.results.find((res) => res.relationshipStatus === 'Approved');
@@ -119,23 +122,44 @@ export default function ConnectedBusinesses() {
 
   return (
     <Card>
-      <CardHeader title="Connected Businesses" sx={{ mb: 8 }} />
-      {connections.hasData && (
-        <>
-          <ReactApexChart type="radialBar" series={series} options={chartOptions} height={310} />
+      <CardHeader title="Connected Businesses" />
+      <CardContent>
+        <LoadingView apiRequest={connections}>
+          {invited > 0 && (
+            <>
+              <ReactApexChart type="radialBar" series={series} options={chartOptions} height={310} />
 
-          <Stack spacing={2} sx={{ p: 5 }}>
-            {connections.response.results.map((connection) => (
-              <Legend
-                key={connection.relationshipStatus}
-                label={labelForStatus(connection.relationshipStatus)}
-                number={connection.count}
-                color={colorForStatus(connection.relationshipStatus)}
-              />
-            ))}
-          </Stack>
-        </>
-      )}
+              <Stack spacing={2} sx={{ pt: 2 }}>
+                {connections.response.results.map((connection) => (
+                  <Legend
+                    key={connection.relationshipStatus}
+                    label={labelForStatus(connection.relationshipStatus)}
+                    number={connection.count}
+                    color={colorForStatus(connection.relationshipStatus)}
+                  />
+                ))}
+              </Stack>
+            </>
+          )}
+          {invited === 0 && (
+            <Stack spacing={2}>
+              <Typography variant="body2">
+                It looks like you haven't invited any customers yet! Let's get started.
+              </Typography>
+              <Button
+                size="medium"
+                variant="outlined"
+                fullWidth
+                component={RouterLink}
+                to={`${PATH_DASHBOARD.relationship.create}`}
+                sx={{ mt: 1 }}
+              >
+                Send an Invite
+              </Button>
+            </Stack>
+          )}
+        </LoadingView>
+      </CardContent>
     </Card>
   );
 }

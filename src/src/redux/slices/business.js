@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 // utils
-import {
-  SEARCH_DEFAULTS,
-  COMMON_FUNCTIONS,
-  SEARCH_FUNCTIONS,
-  STATE_DEFAULTS,
-  executeSearch
-} from '../common/constants';
+import { COMMON_FUNCTIONS, STATE_DEFAULTS, REQUEST_DEFAULTS } from '../common/constants';
+import { SEARCH_DEFAULTS, SEARCH_FUNCTIONS, executeSearch } from '../common/search';
 import * as entities from '../common/entities';
 
 // ----------------------------------------------------------------------
@@ -14,8 +9,8 @@ import * as entities from '../common/entities';
 const initialState = {
   ...STATE_DEFAULTS,
   business: { ...SEARCH_DEFAULTS },
-  current: { ...entities.ENTITY_DEFAULTS },
-  profile: { ...entities.ENTITY_DEFAULTS }
+  current: { ...REQUEST_DEFAULTS },
+  profile: { ...REQUEST_DEFAULTS }
 };
 
 const slice = createSlice({

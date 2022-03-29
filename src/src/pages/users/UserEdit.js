@@ -38,11 +38,11 @@ export default function UserEdit() {
       area="Dashboard"
       space="Users"
       spaceHref={PATH_DASHBOARD.user.list}
-      activity={current.hasData ? current.response.currentVersion.displayName : id}
-      heading={current.hasData ? current.response.currentVersion.displayName : id}
+      activity={current.complete ? current.response.currentVersion.displayName : id}
+      heading={current.complete ? current.response.currentVersion.displayName : id}
       actions={<EditActions />}
     >
-      {current.hasData && <UserNewForm isEdit currentUser={current.response.currentVersion} />}
+      {current.complete && <UserNewForm isEdit currentUser={current.response.currentVersion} />}
     </StandardPage>
   );
 }

@@ -7,7 +7,7 @@ import { HelpCard, HelpSection } from '../../components/_common';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { search as integrationSearch } from '../../redux/slices/integration';
-import { GET_ALL_QUERY } from '../../redux/common/constants';
+import { GET_ALL_QUERY } from '../../redux/common/search';
 // layouts
 import OnboardingLayout from '../../layouts/OnboardingLayout';
 // hooks
@@ -62,7 +62,7 @@ export default function SetupComplete() {
             <CardHeader title="Services Linked" />
             <CardContent>
               <Stack spacing={2}>
-                {integration.hasData &&
+                {integration.complete &&
                   integration.response.results.map((row) => {
                     const { id, integrationProviderId, provider, name, accountDetail } = row;
                     const { friendlyName, integrationType } = provider;
