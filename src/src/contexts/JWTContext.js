@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // utils
 import axios from '../utils/axios';
 import { isValidToken, setSession } from '../utils/jwt';
+import { setUserDetail, reset } from '../utils/ybug';
 
 // ----------------------------------------------------------------------
 
@@ -90,6 +91,10 @@ function AuthProvider({ children }) {
 
           const { currentVersion } = response.data;
 
+          setTimeout(() => {
+            setUserDetail(currentVersion);
+          }, 100);
+
           dispatch({
             type: 'INITIALIZE',
             payload: {
@@ -145,6 +150,10 @@ function AuthProvider({ children }) {
 
     const { bearerToken, refreshToken, user } = response.data;
 
+    setTimeout(() => {
+      setUserDetail(user);
+    }, 100);
+
     setSession(bearerToken, refreshToken);
 
     dispatch({
@@ -179,7 +188,9 @@ function AuthProvider({ children }) {
     }
 
     const { bearerToken, refreshToken, user } = response.data;
-
+    setTimeout(() => {
+      setUserDetail(user);
+    }, 100);
     setSession(bearerToken, refreshToken);
 
     dispatch({
@@ -192,6 +203,7 @@ function AuthProvider({ children }) {
 
   const logout = async () => {
     setSession(null, null);
+    reset();
     window.localStorage.clear('setupInProgress');
     dispatch({ type: 'LOGOUT' });
   };

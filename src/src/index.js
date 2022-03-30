@@ -14,7 +14,14 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 import ru from 'javascript-time-ago/locale/ru.json';
-import { SettingsProvider, CollapseDrawerProvider, AuthProvider, SetupProvider, MemberProvider } from './contexts';
+import {
+  SettingsProvider,
+  CollapseDrawerProvider,
+  AuthProvider,
+  SetupProvider,
+  MemberProvider,
+  YbugProvider
+} from './contexts';
 
 // redux
 import { store, persistor } from './redux/store';
@@ -32,23 +39,25 @@ TimeAgo.addLocale(ru);
 ReactDOM.render(
   <StrictMode>
     <HelmetProvider>
-      <ReduxProvider store={store}>
-        <PersistGate loading={<LoadingScreen />} persistor={persistor}>
-          <SettingsProvider>
-            <CollapseDrawerProvider>
-              <BrowserRouter>
-                <AuthProvider>
-                  <MemberProvider>
-                    <SetupProvider>
-                      <App />
-                    </SetupProvider>
-                  </MemberProvider>
-                </AuthProvider>
-              </BrowserRouter>
-            </CollapseDrawerProvider>
-          </SettingsProvider>
-        </PersistGate>
-      </ReduxProvider>
+      <YbugProvider>
+        <ReduxProvider store={store}>
+          <PersistGate loading={<LoadingScreen />} persistor={persistor}>
+            <SettingsProvider>
+              <CollapseDrawerProvider>
+                <BrowserRouter>
+                  <AuthProvider>
+                    <MemberProvider>
+                      <SetupProvider>
+                        <App />
+                      </SetupProvider>
+                    </MemberProvider>
+                  </AuthProvider>
+                </BrowserRouter>
+              </CollapseDrawerProvider>
+            </SettingsProvider>
+          </PersistGate>
+        </ReduxProvider>
+      </YbugProvider>
     </HelmetProvider>
   </StrictMode>,
   document.getElementById('root')
