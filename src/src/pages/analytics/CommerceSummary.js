@@ -1,68 +1,86 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router';
 // components
-import { Card, Container, Grid } from '@mui/material';
-import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import Page from '../../components/Page';
-import { StandardListClientNoCard } from '../../components/_common/Lists';
-import { RecentTransactions, SalesAndRefundsByAccount } from '../../components/_dashboard/merchant-view';
+import { Card, Grid } from '@mui/material';
+import StandardPage from '../../layouts/StandardPage';
+import { StandardList } from '../../components/_common/Lists';
+import { MerchantSalesAndRefunds } from '../../components/_dashboard/merchant-view';
+import { CommerceTransactions } from '../../components/reports';
+import { RelationshipHeading } from '../../components/_dashboard/relationship';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
-import useSettings from '../../hooks/useSettings';
+import useDataOwner from '../../hooks/useDataOwner';
 // demo data
-import { listData } from '../../utils/demo-data/CommerceSummary';
 import { columns } from '../../lists/commerce-summary';
+// redux
+import { useDispatch, useSelector } from '../../redux/store';
+import { search } from '../../redux/slices/commerce';
 
 // ----------------------------------------------------------------------
 
 export default function CommerceSummary() {
-  const { themeStretch } = useSettings();
-  const [selectedAccount, setSelectedAccount] = useState('');
+  const { dataQuery, buildOwnedPath } = useDataOwner();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { integrationId } = useParams();
+  const { commerceAccounts } = useSelector((state) => state.commerce);
+  const [query, setQuery] = useState(null);
+
+  useEffect(() => {
+    if (query)
+      dispatch(
+        search({
+          ...query,
+          ...dataQuery
+        })
+      );
+  }, [dispatch, query, dataQuery]);
 
   const handleRowClick = useCallback(
     (params) => {
-      setSelectedAccount(params.id);
+      navigate(buildOwnedPath(`${PATH_DASHBOARD.analytics.commerceSummary}/${params.id}`));
     },
-    [setSelectedAccount]
+    [navigate, buildOwnedPath]
   );
 
   return (
-    <Page title="Analytics | Commerce | Airslip">
-      <Container maxWidth={themeStretch ? false : 'xl'}>
-        <HeaderBreadcrumbs
-          heading="Commerce Summary"
-          links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Analytics', href: PATH_DASHBOARD.analytics.root },
-            { name: 'Commerce Summary' }
-          ]}
-        />
-
-        <Grid container spacing={3} justify="center">
-          <Grid item xs={12}>
-            <Card sx={{ pt: 1 }}>
-              <StandardListClientNoCard
-                columns={columns}
-                details={listData}
-                recordsPerPage={12}
-                onRowSelected={handleRowClick}
-              />
-            </Card>
-          </Grid>
-
-          {selectedAccount && (
-            <Grid item xs={12}>
-              <SalesAndRefundsByAccount accountId={selectedAccount} />
-            </Grid>
-          )}
-
-          {selectedAccount && (
-            <Grid item xs={12}>
-              <RecentTransactions accountId={selectedAccount} />
-            </Grid>
-          )}
+    <StandardPage
+      area="Dashboard"
+      space="Analytics"
+      spaceHref={PATH_DASHBOARD.analytics.root}
+      activity="Commerce Summary"
+      heading="Commerce Summary"
+      fullWidth
+    >
+      <RelationshipHeading />
+      <Grid container spacing={3} justify="center">
+        <Grid item xs={12}>
+          <Card sx={{ pt: 1 }}>
+            <StandardList
+              columns={columns}
+              details={commerceAccounts}
+              onChangeQuery={setQuery}
+              recordsPerPage={10}
+              onRowSelected={handleRowClick}
+              showToolbar={false}
+              selectedRow={integrationId}
+            />
+          </Card>
         </Grid>
-      </Container>
-    </Page>
+
+        {integrationId && (
+          <Grid item xs={12}>
+            <MerchantSalesAndRefunds integrationId={integrationId} />
+          </Grid>
+        )}
+
+        {integrationId && (
+          <Grid item xs={12}>
+            <CommerceTransactions integrationId={integrationId} title="Commerce Transactions" />
+          </Grid>
+        )}
+      </Grid>
+    </StandardPage>
   );
 }

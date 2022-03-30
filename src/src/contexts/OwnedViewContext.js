@@ -4,13 +4,15 @@ import { useParams } from 'react-router-dom';
 // hooks
 import useMemberDetails from '../hooks/useMemberDetails';
 import useAuth from '../hooks/useAuth';
+import useRelationship from '../hooks/useRelationship';
 
 // ----------------------------------------------------------------------
 
 const initialState = {
   ownerEntityId: null,
   ownerAirslipUserType: null,
-  dataQuery: {}
+  dataQuery: {},
+  buildOwnedPath: () => {}
 };
 
 const OwnedViewContext = createContext({
@@ -24,6 +26,7 @@ OwnedViewProvider.propTypes = {
 function OwnedViewProvider({ children }) {
   const { user } = useAuth();
   const { memberDetails } = useMemberDetails();
+  const { relationship } = useRelationship();
   const { airslipUserType, entityId } = useParams();
 
   let ownerEntityId = null;
@@ -37,6 +40,15 @@ function OwnedViewProvider({ children }) {
     ownerAirslipUserType = user.airslipUserType;
   }
 
+  const buildOwnedPath = (path) => {
+    if (user.airslipUserType !== 'Partner') return path;
+    if (!relationship) return path;
+
+    // Standard format should be:
+    //  URL/:relationshipId/:airslipUserType/:entityId
+    return `${path}/${relationship.id}/${ownerAirslipUserType}/${ownerEntityId}`;
+  };
+
   return (
     <OwnedViewContext.Provider
       value={{
@@ -45,7 +57,8 @@ function OwnedViewProvider({ children }) {
         dataQuery: {
           ownerEntityId,
           ownerAirslipUserType
-        }
+        },
+        buildOwnedPath
       }}
     >
       {children}

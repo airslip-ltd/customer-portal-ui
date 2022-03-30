@@ -239,8 +239,36 @@ export default function Router() {
           path: 'analytics',
           children: [
             { element: <Navigate to="/dashboard/analytics/balances" replace /> },
-            { path: 'balances', element: <AccountBalances /> },
-            { path: 'commerce', element: <CommerceSummary /> },
+            {
+              path: 'balances',
+              element: (
+                <RelationshipProvider>
+                  <OwnedViewProvider>
+                    <AccountBalances />
+                  </OwnedViewProvider>
+                </RelationshipProvider>
+              ),
+              children: [
+                { path: ':integrationId' },
+                { path: ':partnerRelationshipId/:airslipUserType/:entityId' },
+                { path: ':integrationId/:partnerRelationshipId/:airslipUserType/:entityId' }
+              ]
+            },
+            {
+              path: 'commerce',
+              element: (
+                <RelationshipProvider>
+                  <OwnedViewProvider>
+                    <CommerceSummary />
+                  </OwnedViewProvider>
+                </RelationshipProvider>
+              ),
+              children: [
+                { path: ':integrationId' },
+                { path: ':partnerRelationshipId/:airslipUserType/:entityId' },
+                { path: ':integrationId/:partnerRelationshipId/:airslipUserType/:entityId' }
+              ]
+            },
             { path: 'debt-service-coverage-ratio-detail/:accountId', element: <DebtServiceCoverageRatioDetail /> },
             { path: 'banking-recent-transactions', element: <BankingRecentTransactions /> },
             { path: 'debt-ratio-detail/:accountId', element: <DebtRatioDetail /> },

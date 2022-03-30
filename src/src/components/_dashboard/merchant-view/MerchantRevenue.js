@@ -18,7 +18,7 @@ MerchantRevenue.propTypes = {
 export default function MerchantRevenue({ accountId }) {
   const dispatch = useDispatch();
   const { salesStats } = useSelector((state) => state.analytics);
-  const { dataQuery } = useDataOwner();
+  const { dataQuery, buildOwnedPath } = useDataOwner();
   accountId = accountId || '';
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function MerchantRevenue({ accountId }) {
     <MerchantDashboardSnapshot
       title="Revenue"
       snapshot={salesStats}
-      navigateTo={PATH_DASHBOARD.analytics.accountBalances}
+      navigateTo={buildOwnedPath(PATH_DASHBOARD.analytics.commerceSummary)}
     />
   );
 }

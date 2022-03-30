@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// utils
-import axios from '../../utils/axios';
 // common
 import { ACTION_FUNCTIONS, executePost } from '../common/actions';
 import { REQUEST_DEFAULTS } from '../common/constants';
@@ -17,6 +15,12 @@ const initialState = {
     ...REQUEST_DEFAULTS
   },
   refundStats: {
+    ...REQUEST_DEFAULTS
+  },
+  cashflow: {
+    ...REQUEST_DEFAULTS
+  },
+  revenue: {
     ...REQUEST_DEFAULTS
   }
 };
@@ -79,44 +83,32 @@ export function getRefundShapshot(query, withRange, accountId) {
   };
 }
 
-export function getRevenueByYear(year, accountId) {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios({
-        url: `/snapshot/revenue?year=${year}&accountId=${accountId}`,
-        method: 'get',
-        baseURL: process.env.REACT_APP_ANALYTICS_URL
-      });
-      dispatch(
-        slice.actions.storeRevenue({
-          data: response.data,
-          accountId
-        })
-      );
-    } catch (error) {
-      dispatch(slice.actions.hasError(error));
-    }
+export function getRevenueByYear(query, year, accountId) {
+  return async (dispatch, getState) => {
+    const { analytics } = getState();
+    await executePost(
+      analytics,
+      dispatch,
+      slice,
+      'revenue',
+      `/snapshot/revenue?year=${year}&accountId=${accountId}`,
+      query,
+      process.env.REACT_APP_ANALYTICS_URL
+    );
   };
 }
 
-export function getCashflowByYear(year, accountId) {
-  return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios({
-        url: `/snapshot/cashflow?year=${year}&accountId=${accountId}`,
-        method: 'get',
-        baseURL: process.env.REACT_APP_ANALYTICS_URL
-      });
-      dispatch(
-        slice.actions.storeCashflow({
-          data: response.data,
-          accountId
-        })
-      );
-    } catch (error) {
-      dispatch(slice.actions.hasError(error));
-    }
+export function getCashflowByYear(query, year, accountId) {
+  return async (dispatch, getState) => {
+    const { analytics } = getState();
+    await executePost(
+      analytics,
+      dispatch,
+      slice,
+      'cashflow',
+      `/snapshot/cashflow?year=${year}&accountId=${accountId}`,
+      query,
+      process.env.REACT_APP_ANALYTICS_URL
+    );
   };
 }

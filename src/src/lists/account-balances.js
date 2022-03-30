@@ -13,7 +13,7 @@ export const columns = [
     hide: true
   },
   {
-    field: 'institutionId',
+    field: 'integrationProviderId',
     headerName: 'Bank',
     flex: 1,
     renderCell: (params) => (
