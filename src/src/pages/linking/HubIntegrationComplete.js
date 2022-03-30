@@ -34,7 +34,7 @@ function Item(props) {
 // ----------------------------------------------------------------------
 
 export default function HubIntegrationComplete() {
-  const { refreshMemberDetails, isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
   const { search } = useLocation();
   const dispatch = useDispatch();
   const { authorise, providers } = useSelector((state) => state.provider);
@@ -79,14 +79,13 @@ export default function HubIntegrationComplete() {
     if (integrations.response.paging.totalRecords > 0) {
       clearInterval(intervalId);
       setLinkVerified(true);
-      refreshMemberDetails();
       setTimeoutId(
         setTimeout(() => {
           navigate(PATH_DASHBOARD.general.home, { replace: true });
         }, 6000)
       );
     }
-  }, [integrations, intervalId, navigate, refreshMemberDetails]);
+  }, [integrations, intervalId, navigate]);
 
   useEffect(() => {
     if (!providers || providers.response.results.length === 0) return;

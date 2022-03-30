@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { createContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-// material
-import useAuth from '../hooks/useAuth';
+// hooks
+import useMemberDetails from '../hooks/useMemberDetails';
 
 // ----------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ OwnedViewProvider.propTypes = {
 };
 
 function OwnedViewProvider({ children }) {
-  const { memberDetails } = useAuth();
+  const { memberDetails } = useMemberDetails();
   const { airslipUserType, entityId } = useParams();
 
   const [ownerEntityId] = useState(entityId || memberDetails.id);

@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useEffect } from 'react';
+import { useDispatch, useSelector } from '../redux/store';
+import { getMyDetails } from '../redux/slices/auth';
 // material
 import useAuth from '../hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
 const initialState = {
-  setupComplete: false,
-  setupInProgress: false,
-  onCompleteSetup: () => {}
+  memberDetails: null
 };
 
 const MemberContext = createContext({
@@ -20,61 +20,22 @@ MemberProvider.propTypes = {
 };
 
 function MemberProvider({ children }) {
-  const [setupComplete, setSetupComplete] = useState(false);
-  const [setupInProgress, setSetupInProgress] = useState(false);
-
-  const { memberDetails } = useAuth();
-
-  useEffect(() => {
-    const initialize = async () => {
-      try {
-        const inProgress = window.localStorage.getItem('setupInProgress') === 'true';
-
-        setSetupInProgress(inProgress);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    initialize();
-  }, [setSetupInProgress]);
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useAuth();
+  const { member } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (!memberDetails) return;
-    let newSetupComplete = false;
-    switch (memberDetails.airslipUserType) {
-      case 'Merchant':
-        newSetupComplete = memberDetails.linkedServices.length > 0;
-        break;
-      case 'Partner':
-        newSetupComplete = true;
-        break;
-      default:
-        break;
-    }
+    if (isAuthenticated) dispatch(getMyDetails());
+  }, [dispatch, isAuthenticated]);
 
-    setSetupComplete(newSetupComplete);
-    if (!newSetupComplete) beginSetup();
-  }, [memberDetails]);
-
-  useEffect(() => {
-    window.localStorage.setItem('setupInProgress', setupInProgress);
-  }, [setupInProgress]);
-
-  const beginSetup = () => {
-    setSetupInProgress(true);
-  };
-
-  const onCompleteSetup = () => {
-    setSetupInProgress(false);
-  };
+  if (!member.complete) {
+    return <></>;
+  }
 
   return (
     <MemberContext.Provider
       value={{
-        setupComplete,
-        setupInProgress,
-        onCompleteSetup
+        memberDetails: member.response.currentVersion
       }}
     >
       {children}

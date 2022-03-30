@@ -7,7 +7,7 @@ import OnboardingLayout from '../../layouts/OnboardingLayout';
 // components
 import ProviderSelection from '../../components/integrations/ProviderSelection';
 // hooks
-import useAuth from '../../hooks/useAuth';
+import useMemberDetails from '../../hooks/useMemberDetails';
 import HelpDialogue from '../../components/_common/HelpDialogue';
 // routes
 import { PATH_ONBOARDING } from '../../routes/paths';
@@ -15,7 +15,7 @@ import { PATH_ONBOARDING } from '../../routes/paths';
 // ----------------------------------------------------------------------
 
 export default function SetupIntegration() {
-  const { memberDetails } = useAuth();
+  const { memberDetails } = useMemberDetails();
   const [serviceCount, setServiceCount] = useState(0);
   const navigate = useNavigate();
 

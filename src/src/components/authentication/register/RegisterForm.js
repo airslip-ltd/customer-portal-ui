@@ -24,7 +24,7 @@ import useAuth from '../../../hooks/useAuth';
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
-  const { refresh, refreshMemberDetails } = useAuth();
+  const { refresh } = useAuth();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const [fromReferral, setFromReferral] = useState(false);
@@ -93,11 +93,10 @@ export default function RegisterForm() {
       setSession(registration.bearerToken, registration.refreshToken);
 
       refresh();
-      refreshMemberDetails();
     } catch (error) {
       console.error(error);
     }
-  }, [registerSuccess, registration, refresh, refreshMemberDetails, enqueueSnackbar, closeSnackbar]);
+  }, [registerSuccess, registration, refresh, enqueueSnackbar, closeSnackbar]);
 
   const handleEditSwitch = () => {
     setFromReferral(false);

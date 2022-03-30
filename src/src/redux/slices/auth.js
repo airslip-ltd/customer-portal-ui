@@ -2,12 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 // utils
 import axios from '../../utils/axios';
 // common
-import { ACTION_FUNCTIONS } from '../common/actions';
+import { ACTION_FUNCTIONS, executeGet } from '../common/actions';
 import { REQUEST_DEFAULTS } from '../common/constants';
 
 // ----------------------------------------------------------------------
 
 const initialState = {
+  member: {
+    ...REQUEST_DEFAULTS
+  },
   forgot: {
     ...REQUEST_DEFAULTS
   },
@@ -84,5 +87,12 @@ export function reset() {
   return async (dispatch) => {
     await dispatch(slice.actions.resetAction({ propName: 'forgot' }));
     await dispatch(slice.actions.resetAction({ propName: 'password' }));
+  };
+}
+
+export function getMyDetails() {
+  return async (dispatch, getState) => {
+    const { auth } = getState();
+    await executeGet(auth, dispatch, slice, 'member', '/my/details');
   };
 }

@@ -14,7 +14,7 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 import ru from 'javascript-time-ago/locale/ru.json';
-import { SettingsProvider, CollapseDrawerProvider, AuthProvider, MemberProvider } from './contexts';
+import { SettingsProvider, CollapseDrawerProvider, AuthProvider, SetupProvider, MemberProvider } from './contexts';
 
 // redux
 import { store, persistor } from './redux/store';
@@ -39,7 +39,9 @@ ReactDOM.render(
               <BrowserRouter>
                 <AuthProvider>
                   <MemberProvider>
-                    <App />
+                    <SetupProvider>
+                      <App />
+                    </SetupProvider>
                   </MemberProvider>
                 </AuthProvider>
               </BrowserRouter>

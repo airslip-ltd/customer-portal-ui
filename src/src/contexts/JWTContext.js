@@ -9,8 +9,7 @@ import { isValidToken, setSession } from '../utils/jwt';
 const initialState = {
   isAuthenticated: false,
   isInitialized: false,
-  user: null,
-  memberDetails: null
+  user: null
 };
 
 const handlers = {
@@ -30,15 +29,6 @@ const handlers = {
       ...state,
       isAuthenticated: true,
       user
-    };
-  },
-  MEMBER: (state, action) => {
-    const { memberDetails } = action.payload;
-
-    return {
-      ...state,
-      isAuthenticated: true,
-      memberDetails
     };
   },
   LOGIN: (state, action) => {
@@ -83,26 +73,6 @@ AuthProvider.propTypes = {
 function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handleRefreshMember = useCallback(async () => {
-    const response = await axios.get('/my/details').catch((response) => ({
-      errors: response.errors
-    }));
-
-    if ('errors' in response) {
-      logout();
-      return;
-    }
-
-    const { currentVersion: memberDetails } = response.data;
-
-    dispatch({
-      type: 'MEMBER',
-      payload: {
-        memberDetails
-      }
-    });
-  }, []);
-
   useEffect(() => {
     const initialize = async () => {
       try {
@@ -117,8 +87,6 @@ function AuthProvider({ children }) {
             method: 'get',
             baseURL: process.env.REACT_APP_AUTH_URL
           });
-
-          await handleRefreshMember();
 
           const { currentVersion } = response.data;
 
@@ -151,7 +119,7 @@ function AuthProvider({ children }) {
     };
 
     initialize();
-  }, [handleRefreshMember]);
+  }, []);
 
   const login = async (email, password) => {
     const response = await axios({
@@ -178,9 +146,6 @@ function AuthProvider({ children }) {
     const { bearerToken, refreshToken, user } = response.data;
 
     setSession(bearerToken, refreshToken);
-
-    // Purposefully not awaited...
-    handleRefreshMember();
 
     dispatch({
       type: 'LOGIN',
@@ -217,8 +182,6 @@ function AuthProvider({ children }) {
 
     setSession(bearerToken, refreshToken);
 
-    handleRefreshMember();
-
     dispatch({
       type: 'REFRESH',
       payload: {
@@ -246,8 +209,7 @@ function AuthProvider({ children }) {
         refresh,
         logout,
         resetPassword,
-        updateProfile,
-        refreshMemberDetails: handleRefreshMember
+        updateProfile
       }}
     >
       {children}

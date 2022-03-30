@@ -14,6 +14,7 @@ import NavSection from '../../components/NavSection';
 import { MHidden } from '../../components/@material-extend';
 import { userSidebar } from './SidebarConfig';
 import useAuth from '../../hooks/useAuth';
+import useMemberDetails from '../../hooks/useMemberDetails';
 
 // ----------------------------------------------------------------------
 
@@ -89,7 +90,8 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
-  const { user, memberDetails } = useAuth();
+  const { user } = useAuth();
+  const { memberDetails } = useMemberDetails();
   const sidebarConfig = userSidebar(user.airslipUserType);
 
   const { isCollapse, collapseClick, collapseHover, onHoverEnter, onHoverLeave } = useCollapseDrawer();
