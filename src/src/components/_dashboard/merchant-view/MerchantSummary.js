@@ -31,7 +31,9 @@ import {
   LateBillsPaid,
   RevenueForecasts,
   BankingExpensesCategories,
-  Customers
+  Customers,
+  CashflowByAccount,
+  MerchantSalesAndRefunds
 } from '.';
 
 // ----------------------------------------------------------------------
@@ -95,6 +97,14 @@ export default function MerchantSummary() {
 
       <Grid item xs={12} md={4}>
         <MerchantBalance />
+      </Grid>
+
+      <Grid item xs={12} md={6}>
+        <CashflowByAccount />
+      </Grid>
+
+      <Grid item xs={12} md={6}>
+        <MerchantSalesAndRefunds />
       </Grid>
 
       {/* <Grid item xs={12} md={12}>
