@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
 import { useParams } from 'react-router-dom';
 // hooks
-import { ConstructionOutlined } from '@mui/icons-material';
 import useMemberDetails from '../hooks/useMemberDetails';
 import useAuth from '../hooks/useAuth';
 
