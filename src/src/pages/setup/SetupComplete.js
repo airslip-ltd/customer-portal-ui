@@ -11,7 +11,6 @@ import { GET_ALL_QUERY } from '../../redux/common/search';
 // layouts
 import OnboardingLayout from '../../layouts/OnboardingLayout';
 // hooks
-import useAuth from '../../hooks/useAuth';
 import useMemberDetails from '../../hooks/useMemberDetails';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
@@ -19,7 +18,7 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 // ----------------------------------------------------------------------
 
 export default function SetupComplete() {
-  const { memberDetails } = useAuth();
+  const { memberDetails } = useMemberDetails();
   const dispatch = useDispatch();
   const { onCompleteSetup } = useMemberDetails();
   const [serviceCount, setServiceCount] = useState(0);
