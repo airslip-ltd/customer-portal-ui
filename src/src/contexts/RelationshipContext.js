@@ -3,6 +3,7 @@ import { createContext, useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from '../redux/store';
 import { get } from '../redux/slices/relationship';
+import PleaseWait from '../pages/PleaseWait';
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +33,7 @@ function RelationshipProvider({ children }) {
   }
 
   if (!current.complete) {
-    return <></>;
+    return <PleaseWait />;
   }
 
   return (

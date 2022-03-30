@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { createContext, useEffect } from 'react';
 import { useDispatch, useSelector } from '../redux/store';
 import { getMyDetails } from '../redux/slices/auth';
+import PleaseWait from '../pages/PleaseWait';
 // material
 import useAuth from '../hooks/useAuth';
 
@@ -28,8 +29,8 @@ function MemberProvider({ children }) {
     if (isAuthenticated) dispatch(getMyDetails());
   }, [dispatch, isAuthenticated]);
 
-  if (!member.complete) {
-    return <></>;
+  if (isAuthenticated && !member.complete) {
+    return <PleaseWait />;
   }
 
   return (
