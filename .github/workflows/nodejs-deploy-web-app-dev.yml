@@ -69,6 +69,7 @@ jobs:
         REACT_APP_ANALYTICS_URL: ${{ env.REACT_APP_ANALYTICS_URL }}
         REACT_APP_AUTH_URL: ${{ env.REACT_APP_AUTH_URL }}
         REACT_APP_ENVIRONMENT: ${{ env.ENV_PATH }}
+        REACT_APP_YBUG_ID: ${{ secrets.YBUG_ID }}
       run: |
         cd ${{ env.PUBLISH_PATH }}
         npm install
