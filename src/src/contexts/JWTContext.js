@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer, useCallback } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 // utils
 import axios from '../utils/axios';
