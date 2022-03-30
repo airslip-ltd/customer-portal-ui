@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import { createContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 // hooks
+import { ConstructionOutlined } from '@mui/icons-material';
 import useMemberDetails from '../hooks/useMemberDetails';
+import useAuth from '../hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
@@ -21,11 +23,20 @@ OwnedViewProvider.propTypes = {
 };
 
 function OwnedViewProvider({ children }) {
+  const { user } = useAuth();
   const { memberDetails } = useMemberDetails();
   const { airslipUserType, entityId } = useParams();
 
-  const [ownerEntityId] = useState(entityId || memberDetails.id);
-  const [ownerAirslipUserType] = useState(airslipUserType || memberDetails.airslipUserType);
+  let ownerEntityId = null;
+  let ownerAirslipUserType = null;
+
+  if (user.airslipUserType !== 'Administrator') {
+    ownerEntityId = entityId || memberDetails.id;
+    ownerAirslipUserType = airslipUserType || memberDetails.airslipUserType;
+  } else {
+    ownerEntityId = user.entityId;
+    ownerAirslipUserType = user.airslipUserType;
+  }
 
   return (
     <OwnedViewContext.Provider
