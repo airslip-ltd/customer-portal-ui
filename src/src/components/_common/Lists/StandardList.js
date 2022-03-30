@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 // material
 import { DataGrid, GridToolbarContainer, GridToolbarFilterButton, GridToolbarColumnsButton } from '@mui/x-data-grid';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import { Card, Button } from '@mui/material';
+import { Card, Button, CardHeader } from '@mui/material';
+import { darken, lighten } from '@mui/material/styles';
+
+// ----------------------------------------------------------------------
+
+const getBackgroundColor = (color, mode) => (mode === 'dark' ? darken(color, 0.6) : lighten(color, 0.6));
+
+const getHoverBackgroundColor = (color, mode) => (mode === 'dark' ? darken(color, 0.5) : lighten(color, 0.5));
 
 // ----------------------------------------------------------------------
 
@@ -15,7 +22,10 @@ StandardList.propTypes = {
   showToolbar: PropTypes.bool,
   onRowSelected: PropTypes.func,
   recordsPerPage: PropTypes.number,
-  defaultSort: PropTypes.string
+  defaultSort: PropTypes.string,
+  selectedRow: PropTypes.string,
+  defaultFilter: PropTypes.object,
+  title: PropTypes.string
 };
 
 export default function StandardList({
@@ -26,7 +36,10 @@ export default function StandardList({
   onRowSelected,
   recordsPerPage,
   defaultSort,
-  showToolbar
+  showToolbar,
+  selectedRow,
+  defaultFilter,
+  title
 }) {
   showToolbar = showToolbar === undefined ? true : showToolbar;
 
@@ -35,7 +48,7 @@ export default function StandardList({
     recordsPerPage: recordsPerPage || 25,
     sort: [{ field: defaultSort || 'id', sort: 'desc' }],
     search: {
-      items: [],
+      items: defaultFilter ? [defaultFilter] : [],
       linkOperator: 'and'
     }
   });
@@ -85,7 +98,17 @@ export default function StandardList({
 
   return (
     <>
-      <Card>
+      <Card
+        sx={{
+          '& .selected-row': {
+            bgcolor: (theme) => getBackgroundColor(theme.palette.action.selected, theme.palette.mode),
+            '&:hover': {
+              bgcolor: (theme) => getHoverBackgroundColor(theme.palette.action.hover, theme.palette.mode)
+            }
+          }
+        }}
+      >
+        {title && <CardHeader title={title} />}
         <DataGrid
           autoHeight
           columns={columns}
@@ -108,6 +131,7 @@ export default function StandardList({
           onPageChange={handlePageChange}
           page={details.response.paging.page}
           onRowClick={handleRowClick}
+          getRowClassName={(params) => (params.row.id === selectedRow ? `selected-row` : '')}
         />
       </Card>
     </>

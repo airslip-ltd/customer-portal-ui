@@ -11,6 +11,7 @@ import relationshipReducer from './slices/relationship';
 import consentReducer from './slices/consent';
 import analyticsReducer from './slices/analytics';
 import balancesReducer from './slices/balances';
+import commerceReducer from './slices/commerce';
 import transactionsReducer from './slices/transactions';
 import reportsReducer from './slices/reports';
 import userReducer from './slices/user';
@@ -39,7 +40,8 @@ const rootReducer = combineReducers({
   reports: reportsReducer,
   user: userReducer,
   auth: authReducer,
-  consent: consentReducer
+  consent: consentReducer,
+  commerce: commerceReducer
 });
 
 export { rootPersistConfig, rootReducer };

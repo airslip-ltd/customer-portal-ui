@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { createContext, useEffect } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from '../redux/store';
 import { get } from '../redux/slices/relationship';
 import PleaseWait from '../pages/PleaseWait';
@@ -28,11 +28,7 @@ function RelationshipProvider({ children }) {
     if (partnerRelationshipId) dispatch(get(partnerRelationshipId));
   }, [dispatch, partnerRelationshipId]);
 
-  if (!partnerRelationshipId) {
-    return <Navigate to="/404" />;
-  }
-
-  if (!current.complete) {
+  if (partnerRelationshipId && !current.complete) {
     return <PleaseWait />;
   }
 

@@ -1,34 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import MerchantDashboardSeries from './MerchantDashboardSeries';
-import { cashflowByAccount } from '../../../utils/demo-data/AccountBalances';
+// redux
+import { useDispatch, useSelector } from '../../../redux/store';
+import { getCashflowByYear } from '../../../redux/slices/analytics';
+// hooks
+import useDataOwner from '../../../hooks/useDataOwner';
 
 // ----------------------------------------------------------------------
+
 CashflowByAccount.propTypes = {
-  accountId: PropTypes.string
+  integrationId: PropTypes.string
 };
 
-export default function CashflowByAccount({ accountId }) {
-  const [year, setYear] = useState(2022);
-  const [renderStats, setRenderStats] = useState({});
+export default function CashflowByAccount({ integrationId }) {
+  const dispatch = useDispatch();
+  const { dataQuery } = useDataOwner();
 
-  accountId = accountId || '';
+  integrationId = integrationId || '';
+
+  const { cashflow } = useSelector((state) => state.analytics);
 
   useEffect(() => {
-    setRenderStats(cashflowByAccount[accountId].find((element) => element.year === year));
-  }, [year, accountId]);
+    dispatch(getCashflowByYear(dataQuery, 2022, integrationId));
+  }, [dispatch, dataQuery, integrationId]);
 
-  const handleChangeYear = (year) => {
-    setYear(year);
-  };
-
-  return (
-    <MerchantDashboardSeries
-      title="Cashflow"
-      currentYear={year}
-      years={[2022, 2021]}
-      stats={renderStats}
-      onYearChange={handleChangeYear}
-    />
-  );
+  return <MerchantDashboardSeries title="Cashflow" apiRequest={cashflow} />;
 }

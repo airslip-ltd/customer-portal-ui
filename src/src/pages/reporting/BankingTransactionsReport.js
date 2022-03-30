@@ -1,44 +1,13 @@
-import { useState, useEffect } from 'react';
-// redux
-import { Card } from '@mui/material';
-import { useDispatch, useSelector } from '../../redux/store';
-import { getBankTransactions, downloadBankTransactions } from '../../redux/slices/reports';
-// hooks
-import useDataOwner from '../../hooks/useDataOwner';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
 import StandardPage from '../../layouts/StandardPage';
-import { columns } from '../../lists/bank-transactions-report';
-import StandardList from '../../components/_common/Lists/StandardList';
-import { RelationshipCover } from '../../components/_dashboard/relationship';
-import useRelationship from '../../hooks/useRelationship';
+import BankingTransactions from '../../components/reports/BankingTransactions';
+import { RelationshipHeading } from '../../components/_dashboard/relationship';
 
 // ----------------------------------------------------------------------
 
 export default function BankingTransactionsReport() {
-  const { relationship } = useRelationship();
-  const dispatch = useDispatch();
-  const { bankTransactions } = useSelector((state) => state.reports);
-  const [query, setQuery] = useState(null);
-  const { ownerEntityId, ownerAirslipUserType } = useDataOwner();
-
-  useEffect(() => {
-    if (query) {
-      query.ownerEntityId = ownerEntityId;
-      query.ownerAirslipUserType = ownerAirslipUserType;
-      dispatch(getBankTransactions(query));
-    }
-  }, [dispatch, ownerEntityId, ownerAirslipUserType, query]);
-
-  const handleDownload = () => {
-    if (query) {
-      query.ownerEntityId = ownerEntityId;
-      query.ownerAirslipUserType = ownerAirslipUserType;
-      dispatch(downloadBankTransactions(query));
-    }
-  };
-
   return (
     <StandardPage
       area="Dashboard"
@@ -48,25 +17,8 @@ export default function BankingTransactionsReport() {
       heading="Bank Transactions"
       fullWidth
     >
-      {relationship && (
-        <Card
-          sx={{
-            mb: 3,
-            height: 180,
-            position: 'relative'
-          }}
-        >
-          <RelationshipCover relationship={relationship} />
-        </Card>
-      )}
-      <StandardList
-        columns={columns}
-        details={bankTransactions}
-        onChangeQuery={setQuery}
-        onDownload={handleDownload}
-        recordsPerPage={10}
-        defaultSort="capturedDate"
-      />
+      <RelationshipHeading />
+      <BankingTransactions />
     </StandardPage>
   );
 }

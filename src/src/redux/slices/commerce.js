@@ -7,11 +7,11 @@ import { SEARCH_DEFAULTS, SEARCH_FUNCTIONS, executeSearch } from '../common/sear
 
 const initialState = {
   ...STATE_DEFAULTS,
-  accountBalances: { ...SEARCH_DEFAULTS }
+  commerceAccounts: { ...SEARCH_DEFAULTS }
 };
 
 const slice = createSlice({
-  name: 'balances',
+  name: 'commerce',
   initialState,
   reducers: {
     ...COMMON_FUNCTIONS,
@@ -26,14 +26,14 @@ export default slice.reducer;
 
 export function search(query) {
   return async (dispatch, getState) => {
-    const { balances } = getState();
+    const { commerce } = getState();
     await executeSearch(
-      balances,
+      commerce,
       dispatch,
       slice,
-      'accountBalances',
+      'commerceAccounts',
       query,
-      'balance/search',
+      'commerce/search',
       process.env.REACT_APP_ANALYTICS_URL
     );
   };

@@ -43,8 +43,6 @@ RelationshipCover.propTypes = {
 };
 
 export default function RelationshipCover({ relationship }) {
-  console.log(relationship);
-
   const { invitationDetails, relationshipStatus, related } = relationship;
   const { business } = related;
 

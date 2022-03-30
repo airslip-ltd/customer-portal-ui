@@ -6,6 +6,25 @@ import { LoadingView } from '.';
 
 // ----------------------------------------------------------------------
 
+IsClickable.propTypes = {
+  to: PropTypes.string,
+  children: PropTypes.node.isRequired
+};
+
+function IsClickable({ children, to }) {
+  if (to) {
+    return (
+      <CardActionArea component={RouterLink} to={to}>
+        {children}
+      </CardActionArea>
+    );
+  }
+
+  return <>{children}</>;
+}
+
+// ----------------------------------------------------------------------
+
 LoadingCard.propTypes = {
   apiRequest: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
@@ -14,25 +33,14 @@ LoadingCard.propTypes = {
 };
 
 export default function LoadingCard({ apiRequest, children, title, navigateTo }) {
-  if (navigateTo) {
-    return (
-      <Card>
-        <CardActionArea component={RouterLink} to={navigateTo}>
-          <CardHeader title={title} />
-          <CardContent>
-            <LoadingView apiRequest={apiRequest}>{children}</LoadingView>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    );
-  }
-
   return (
     <Card>
-      <CardHeader title={title} />
-      <CardContent>
-        <LoadingView apiRequest={apiRequest}>{children}</LoadingView>
-      </CardContent>
+      <IsClickable to={navigateTo}>
+        <CardHeader title={title} />
+        <CardContent>
+          <LoadingView apiRequest={apiRequest}>{children}</LoadingView>
+        </CardContent>
+      </IsClickable>
     </Card>
   );
 }

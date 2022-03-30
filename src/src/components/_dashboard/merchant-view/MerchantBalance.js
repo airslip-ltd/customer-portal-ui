@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 // utils
 import { useTheme } from '@mui/material/styles';
 import MerchantDashboardSnapshot from './MerchantDashboardSnapshot';
-// material
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
 import { getCurrentBalance } from '../../../redux/slices/analytics';
@@ -14,7 +13,7 @@ import useDataOwner from '../../../hooks/useDataOwner';
 // ----------------------------------------------------------------------
 
 export default function MerchantBalance() {
-  const { dataQuery } = useDataOwner();
+  const { dataQuery, buildOwnedPath } = useDataOwner();
   const theme = useTheme();
   const dispatch = useDispatch();
 
@@ -28,7 +27,7 @@ export default function MerchantBalance() {
     <MerchantDashboardSnapshot
       title="Cash in bank"
       snapshot={currentBalance}
-      navigateTo={PATH_DASHBOARD.analytics.accountBalances}
+      navigateTo={buildOwnedPath(PATH_DASHBOARD.analytics.accountBalances)}
       graphColor={theme.palette.chart.red[0]}
     />
   );
