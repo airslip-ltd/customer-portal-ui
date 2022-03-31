@@ -11,6 +11,7 @@ import { GET_ALL_QUERY } from '../../redux/common/search';
 // layouts
 import OnboardingLayout from '../../layouts/OnboardingLayout';
 // hooks
+import useSetup from '../../hooks/useSetup';
 import useMemberDetails from '../../hooks/useMemberDetails';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
@@ -20,7 +21,7 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 export default function SetupComplete() {
   const { memberDetails } = useMemberDetails();
   const dispatch = useDispatch();
-  const { onCompleteSetup } = useMemberDetails();
+  const { onCompleteSetup } = useSetup();
   const [serviceCount, setServiceCount] = useState(0);
   const { integration } = useSelector((state) => state.integration);
   const navigate = useNavigate();
