@@ -36,9 +36,15 @@ function OwnedViewProvider({ children }) {
 
   let ownerEntityId = null;
   let ownerAirslipUserType = null;
-  let bankLinked = memberDetails.bankLinked || false;
-  let accountingLinked = memberDetails.accountingLinked || false;
-  let commerceLinked = memberDetails.commerceLinked || false;
+  let bankLinked = false;
+  let accountingLinked = false;
+  let commerceLinked = false;
+
+  if (memberDetails) {
+    bankLinked = memberDetails.bankLinked || false;
+    accountingLinked = memberDetails.accountingLinked || false;
+    commerceLinked = memberDetails.commerceLinked || false;
+  }
 
   if (user.airslipUserType !== 'Administrator') {
     ownerEntityId = entityId || memberDetails.id;
