@@ -40,3 +40,4 @@ export { default as CashflowByAccount } from './CashflowByAccount';
 export { default as RecentBankTransactions } from './RecentBankTransactions';
 export { default as Customers } from './Customers';
 export { default as MerchantRevenue } from './MerchantRevenue';
+export { default as RequiredServiceGuard } from './RequiredServiceGuard';
