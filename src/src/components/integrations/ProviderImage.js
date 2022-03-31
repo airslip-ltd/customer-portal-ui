@@ -7,7 +7,7 @@ ProviderImage.propTypes = {
   imageType: PropTypes.string
 };
 
-export default function ProviderImage({ integrationType, icon, imageType }) {
+export default function ProviderImage({ icon, imageType }) {
   return (
     <img
       style={{ maxHeight: 60, opacity: 0.85, margin: 'auto' }}
