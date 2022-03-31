@@ -4,6 +4,7 @@ import { Grid, Typography } from '@mui/material';
 import { featureEnabled } from '../../../utils/feature-switch';
 // hooks
 import useDataOwner from '../../../hooks/useDataOwner';
+import { DateSelectionProvider } from '../../../contexts';
 // components
 import {
   MerchantRevenue,
@@ -99,13 +100,15 @@ export default function MerchantSummary() {
         <MerchantBalance />
       </Grid>
 
-      <Grid item xs={12} md={6}>
-        <CashflowByAccount />
-      </Grid>
+      <DateSelectionProvider>
+        <Grid item xs={12} md={6}>
+          <CashflowByAccount />
+        </Grid>
 
-      <Grid item xs={12} md={6}>
-        <MerchantSalesAndRefunds />
-      </Grid>
+        <Grid item xs={12} md={6}>
+          <MerchantSalesAndRefunds />
+        </Grid>
+      </DateSelectionProvider>
 
       {/* <Grid item xs={12} md={12}>
           <BankingRecentTransactions accountId={accountId} />

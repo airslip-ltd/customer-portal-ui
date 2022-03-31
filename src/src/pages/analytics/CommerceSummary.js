@@ -20,7 +20,7 @@ import { search } from '../../redux/slices/commerce';
 // ----------------------------------------------------------------------
 
 export default function CommerceSummary() {
-  const { dataQuery, buildOwnedPath } = useDataOwner();
+  const { dataOwnerQuery, buildOwnedPath } = useDataOwner();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { integrationId } = useParams();
@@ -32,10 +32,10 @@ export default function CommerceSummary() {
       dispatch(
         search({
           ...query,
-          ...dataQuery
+          ...dataOwnerQuery
         })
       );
-  }, [dispatch, query, dataQuery]);
+  }, [dispatch, query, dataOwnerQuery]);
 
   const handleRowClick = useCallback(
     (params) => {

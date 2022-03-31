@@ -20,25 +20,25 @@ export default function CommerceTransactions({ integrationId, title }) {
   const dispatch = useDispatch();
   const { commerceTransactions } = useSelector((state) => state.reports);
   const [query, setQuery] = useState(null);
-  const { dataQuery } = useDataOwner();
+  const { dataOwnerQuery } = useDataOwner();
 
   useEffect(() => {
     if (query) {
       dispatch(
         getCommerceTransactions({
           ...query,
-          ...dataQuery
+          ...dataOwnerQuery
         })
       );
     }
-  }, [dispatch, dataQuery, query]);
+  }, [dispatch, dataOwnerQuery, query]);
 
   const handleDownload = () => {
     if (query) {
       dispatch(
         downloadCommerceTransactions({
           ...query,
-          ...dataQuery
+          ...dataOwnerQuery
         })
       );
     }

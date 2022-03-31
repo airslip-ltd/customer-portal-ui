@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import MerchantDashboardSeries from './MerchantDashboardSeries';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
-import { getRevenueByYear } from '../../../redux/slices/analytics';
+import { getRevenue } from '../../../redux/slices/analytics';
 // hooks
 import useDataOwner from '../../../hooks/useDataOwner';
+import useDateQuery from '../../../hooks/useDateQuery';
 
 // ----------------------------------------------------------------------
 
@@ -15,15 +16,20 @@ MerchantSalesAndRefunds.propTypes = {
 
 export default function MerchantSalesAndRefunds({ integrationId }) {
   const dispatch = useDispatch();
-  const { dataQuery } = useDataOwner();
-
-  integrationId = integrationId || '';
+  const { dataOwnerQuery } = useDataOwner();
+  const { dateQuery } = useDateQuery();
 
   const { revenue } = useSelector((state) => state.analytics);
 
   useEffect(() => {
-    dispatch(getRevenueByYear(dataQuery, 2022, integrationId));
-  }, [dispatch, dataQuery, integrationId]);
+    dispatch(
+      getRevenue({
+        ...dateQuery,
+        ...dataOwnerQuery,
+        integrationId
+      })
+    );
+  }, [dispatch, dataOwnerQuery, dateQuery, integrationId]);
 
   return <MerchantDashboardSeries title="Revenue and Refunds" apiRequest={revenue} />;
 }
