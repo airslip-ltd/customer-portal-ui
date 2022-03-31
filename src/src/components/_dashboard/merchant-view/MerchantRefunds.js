@@ -17,7 +17,7 @@ MerchantRefunds.propTypes = {
 
 export default function MerchantRefunds({ accountId }) {
   const dispatch = useDispatch();
-  const { salesStats } = useSelector((state) => state.analytics);
+  const { refundStats } = useSelector((state) => state.analytics);
   const { dataOwnerQuery, buildOwnedPath } = useDataOwner();
   accountId = accountId || '';
 
@@ -28,7 +28,7 @@ export default function MerchantRefunds({ accountId }) {
   return (
     <MerchantDashboardSnapshot
       title="Refunds"
-      snapshot={salesStats}
+      snapshot={refundStats}
       navigateTo={buildOwnedPath(PATH_DASHBOARD.analytics.commerceSummary)}
     />
   );
