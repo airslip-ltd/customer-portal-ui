@@ -41,6 +41,7 @@ function SetupProvider({ children }) {
 
   useEffect(() => {
     if (!memberDetails) return;
+    console.log(memberDetails);
     let newSetupComplete = false;
     switch (memberDetails.airslipUserType) {
       case 'Merchant':
