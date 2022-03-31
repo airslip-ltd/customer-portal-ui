@@ -11,6 +11,11 @@ import useRelationship from '../hooks/useRelationship';
 const initialState = {
   ownerEntityId: null,
   ownerAirslipUserType: null,
+  linkedServices: {
+    banking: false,
+    accounting: false,
+    commerce: false
+  },
   dataOwnerQuery: {},
   buildOwnedPath: () => {}
 };
@@ -31,10 +36,22 @@ function OwnedViewProvider({ children }) {
 
   let ownerEntityId = null;
   let ownerAirslipUserType = null;
+  let bankLinked = memberDetails.bankLinked || false;
+  let accountingLinked = memberDetails.accountingLinked || false;
+  let commerceLinked = memberDetails.commerceLinked || false;
 
   if (user.airslipUserType !== 'Administrator') {
     ownerEntityId = entityId || memberDetails.id;
     ownerAirslipUserType = airslipUserType || memberDetails.airslipUserType;
+
+    if (relationship && relationship.related) {
+      const { related } = relationship;
+      const { business } = related;
+
+      bankLinked = business.bankLinked;
+      accountingLinked = business.accountingLinked;
+      commerceLinked = business.commerceLinked;
+    }
   } else {
     ownerEntityId = user.entityId;
     ownerAirslipUserType = user.airslipUserType;
@@ -54,6 +71,11 @@ function OwnedViewProvider({ children }) {
       value={{
         ownerEntityId,
         ownerAirslipUserType,
+        linkedServices: {
+          banking: bankLinked,
+          accounting: accountingLinked,
+          commerce: commerceLinked
+        },
         dataOwnerQuery: {
           ownerEntityId,
           ownerAirslipUserType

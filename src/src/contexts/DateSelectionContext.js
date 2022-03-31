@@ -62,7 +62,7 @@ function DateSelectionProvider({ children }) {
               </Typography>
               <Picker
                 ref={startMonthRef}
-                autoRange
+                years={5}
                 value={startDateRaw}
                 lang={pickerLang.months}
                 onChange={(year, month) => setStartDate({ year, month })}
@@ -75,7 +75,7 @@ function DateSelectionProvider({ children }) {
               </Typography>
               <Picker
                 ref={endMonthRef}
-                autoRange
+                years={5}
                 value={endDateRaw}
                 lang={pickerLang.months}
                 onChange={(year, month) => setEndDate({ year, month })}
