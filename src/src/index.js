@@ -1,6 +1,9 @@
 // scroll bar
 import 'simplebar/src/simplebar.css';
 
+// month picker
+import 'react-month-picker/css/month-picker.css';
+
 // mock api
 // import './_apis_';
 
