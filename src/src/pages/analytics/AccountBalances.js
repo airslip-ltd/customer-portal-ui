@@ -1,12 +1,14 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 // components
-import { Grid } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import { StandardList } from '../../components/_common/Lists';
 import StandardPage from '../../layouts/StandardPage';
 import { CashflowByAccount } from '../../components/_dashboard/merchant-view';
 import { BankingTransactions } from '../../components/reports';
 import { RelationshipHeading } from '../../components/_dashboard/relationship';
+// contexts
+import { DateSelectionProvider } from '../../contexts';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -69,13 +71,13 @@ export default function CommerceSummary() {
 
         {integrationId && (
           <Grid item xs={12}>
-            <CashflowByAccount integrationId={integrationId} />
-          </Grid>
-        )}
+            <Stack spacing={3}>
+              <DateSelectionProvider>
+                <CashflowByAccount integrationId={integrationId} />
+              </DateSelectionProvider>
 
-        {integrationId && (
-          <Grid item xs={12}>
-            <BankingTransactions integrationId={integrationId} title="Account Transactions" />
+              <BankingTransactions integrationId={integrationId} title="Account Transactions" />
+            </Stack>
           </Grid>
         )}
       </Grid>

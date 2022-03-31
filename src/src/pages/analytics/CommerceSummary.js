@@ -1,12 +1,14 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 // components
-import { Card, Grid } from '@mui/material';
+import { Card, Grid, Stack } from '@mui/material';
 import StandardPage from '../../layouts/StandardPage';
 import { StandardList } from '../../components/_common/Lists';
 import { MerchantSalesAndRefunds } from '../../components/_dashboard/merchant-view';
 import { CommerceTransactions } from '../../components/reports';
 import { RelationshipHeading } from '../../components/_dashboard/relationship';
+// contexts
+import { DateSelectionProvider } from '../../contexts';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -71,13 +73,13 @@ export default function CommerceSummary() {
 
         {integrationId && (
           <Grid item xs={12}>
-            <MerchantSalesAndRefunds integrationId={integrationId} />
-          </Grid>
-        )}
+            <Stack spacing={3}>
+              <DateSelectionProvider>
+                <MerchantSalesAndRefunds integrationId={integrationId} />
+              </DateSelectionProvider>
 
-        {integrationId && (
-          <Grid item xs={12}>
-            <CommerceTransactions integrationId={integrationId} title="Commerce Transactions" />
+              <CommerceTransactions integrationId={integrationId} title="Commerce Transactions" />
+            </Stack>
           </Grid>
         )}
       </Grid>
