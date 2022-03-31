@@ -44,7 +44,7 @@ RelationshipCover.propTypes = {
 
 export default function RelationshipCover({ relationship }) {
   const { invitationDetails, relationshipStatus, related } = relationship;
-  const { business } = related;
+  const { business } = related || { business: {} };
 
   return (
     <RootStyle>

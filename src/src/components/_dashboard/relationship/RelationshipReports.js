@@ -14,6 +14,8 @@ RelationshipReports.propTypes = {
 export default function RelationshipReports({ relationship }) {
   const { related } = relationship;
 
+  if (!related) return <></>;
+
   return (
     <Card>
       <CardHeader title="Reports" />
