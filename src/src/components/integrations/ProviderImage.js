@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 ProviderImage.propTypes = {
   icon: PropTypes.string.isRequired,
-  integrationType: PropTypes.string,
   imageType: PropTypes.string
 };
 
