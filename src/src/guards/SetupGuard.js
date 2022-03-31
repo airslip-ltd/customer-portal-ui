@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 // hooks
-import useMemberDetails from '../hooks/useMemberDetails';
+import useSetup from '../hooks/useSetup';
 import useAuth from '../hooks/useAuth';
 // routes
 import { PATH_ONBOARDING } from '../routes/paths';
@@ -14,7 +14,7 @@ SetupGuard.propTypes = {
 };
 
 export default function SetupGuard({ children }) {
-  const { setupInProgress } = useMemberDetails();
+  const { setupInProgress } = useSetup();
   const { isInitialized } = useAuth();
 
   if (!isInitialized) return <LoadingScreen />;
