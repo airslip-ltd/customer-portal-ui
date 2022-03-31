@@ -13,15 +13,15 @@ import useDataOwner from '../../../hooks/useDataOwner';
 // ----------------------------------------------------------------------
 
 export default function MerchantBalance() {
-  const { dataQuery, buildOwnedPath } = useDataOwner();
+  const { dataOwnerQuery, buildOwnedPath } = useDataOwner();
   const theme = useTheme();
   const dispatch = useDispatch();
 
   const { currentBalance } = useSelector((state) => state.analytics);
 
   useEffect(() => {
-    dispatch(getCurrentBalance(dataQuery));
-  }, [dispatch, dataQuery]);
+    dispatch(getCurrentBalance(dataOwnerQuery));
+  }, [dispatch, dataOwnerQuery]);
 
   return (
     <MerchantDashboardSnapshot

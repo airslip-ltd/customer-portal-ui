@@ -20,25 +20,25 @@ export default function BankingTransactions({ integrationId, title }) {
   const dispatch = useDispatch();
   const { bankTransactions } = useSelector((state) => state.reports);
   const [query, setQuery] = useState(null);
-  const { dataQuery } = useDataOwner();
+  const { dataOwnerQuery } = useDataOwner();
 
   useEffect(() => {
     if (query) {
       dispatch(
         getBankTransactions({
           ...query,
-          ...dataQuery
+          ...dataOwnerQuery
         })
       );
     }
-  }, [dispatch, dataQuery, query]);
+  }, [dispatch, dataOwnerQuery, query]);
 
   const handleDownload = () => {
     if (query) {
       dispatch(
         downloadBankTransactions({
           ...query,
-          ...dataQuery
+          ...dataOwnerQuery
         })
       );
     }

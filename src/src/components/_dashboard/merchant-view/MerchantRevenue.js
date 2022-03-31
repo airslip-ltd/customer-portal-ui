@@ -18,12 +18,12 @@ MerchantRevenue.propTypes = {
 export default function MerchantRevenue({ accountId }) {
   const dispatch = useDispatch();
   const { salesStats } = useSelector((state) => state.analytics);
-  const { dataQuery, buildOwnedPath } = useDataOwner();
+  const { dataOwnerQuery, buildOwnedPath } = useDataOwner();
   accountId = accountId || '';
 
   useEffect(() => {
-    dispatch(getSalesShapshot(dataQuery, 30, accountId));
-  }, [dispatch, dataQuery, accountId]);
+    dispatch(getSalesShapshot(dataOwnerQuery, 30, accountId));
+  }, [dispatch, dataOwnerQuery, accountId]);
 
   return (
     <MerchantDashboardSnapshot

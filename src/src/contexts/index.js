@@ -4,3 +4,4 @@ export { AuthProvider } from './JWTContext';
 export { CollapseDrawerProvider } from './CollapseDrawerContext';
 export { SettingsProvider } from './SettingsContext';
 export { YbugProvider } from './YbugContext';
+export { DateSelectionProvider } from './DateSelectionContext';

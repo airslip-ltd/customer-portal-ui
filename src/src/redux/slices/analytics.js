@@ -83,7 +83,7 @@ export function getRefundShapshot(query, withRange, accountId) {
   };
 }
 
-export function getRevenueByYear(query, year, accountId) {
+export function getRevenue(query) {
   return async (dispatch, getState) => {
     const { analytics } = getState();
     await executePost(
@@ -91,14 +91,14 @@ export function getRevenueByYear(query, year, accountId) {
       dispatch,
       slice,
       'revenue',
-      `/snapshot/revenue?year=${year}&accountId=${accountId}`,
+      `/snapshot/revenue`,
       query,
       process.env.REACT_APP_ANALYTICS_URL
     );
   };
 }
 
-export function getCashflowByYear(query, year, accountId) {
+export function getCashflow(query) {
   return async (dispatch, getState) => {
     const { analytics } = getState();
     await executePost(
@@ -106,7 +106,7 @@ export function getCashflowByYear(query, year, accountId) {
       dispatch,
       slice,
       'cashflow',
-      `/snapshot/cashflow?year=${year}&accountId=${accountId}`,
+      `/snapshot/cashflow`,
       query,
       process.env.REACT_APP_ANALYTICS_URL
     );

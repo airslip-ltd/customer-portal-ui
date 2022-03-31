@@ -11,7 +11,7 @@ import useRelationship from '../hooks/useRelationship';
 const initialState = {
   ownerEntityId: null,
   ownerAirslipUserType: null,
-  dataQuery: {},
+  dataOwnerQuery: {},
   buildOwnedPath: () => {}
 };
 
@@ -54,7 +54,7 @@ function OwnedViewProvider({ children }) {
       value={{
         ownerEntityId,
         ownerAirslipUserType,
-        dataQuery: {
+        dataOwnerQuery: {
           ownerEntityId,
           ownerAirslipUserType
         },

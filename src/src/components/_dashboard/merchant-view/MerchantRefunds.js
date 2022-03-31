@@ -18,12 +18,12 @@ MerchantRefunds.propTypes = {
 export default function MerchantRefunds({ accountId }) {
   const dispatch = useDispatch();
   const { salesStats } = useSelector((state) => state.analytics);
-  const { dataQuery, buildOwnedPath } = useDataOwner();
+  const { dataOwnerQuery, buildOwnedPath } = useDataOwner();
   accountId = accountId || '';
 
   useEffect(() => {
-    dispatch(getRefundShapshot(dataQuery, 30, accountId));
-  }, [dispatch, dataQuery, accountId]);
+    dispatch(getRefundShapshot(dataOwnerQuery, 30, accountId));
+  }, [dispatch, dataOwnerQuery, accountId]);
 
   return (
     <MerchantDashboardSnapshot
