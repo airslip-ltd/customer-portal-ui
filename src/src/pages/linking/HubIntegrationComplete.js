@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams, Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // material
@@ -17,8 +17,9 @@ import { getProviders, authoriseProvider } from '../../redux/slices/providers';
 import { search as integrationSearch } from '../../redux/slices/integration';
 // hooks
 import useAuth from '../../hooks/useAuth';
+import useMemberDetails from '../../hooks/useMemberDetails';
 // routes
-import { PATH_DASHBOARD, PATH_INTEGRATE } from '../../routes/paths';
+import { PATH_INTEGRATE, PATH_DASHBOARD } from '../../routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +36,7 @@ function Item(props) {
 
 export default function HubIntegrationComplete() {
   const { isAuthenticated } = useAuth();
+  const { refresh } = useMemberDetails();
   const { search } = useLocation();
   const dispatch = useDispatch();
   const { authorise, providers } = useSelector((state) => state.provider);
@@ -44,7 +46,6 @@ export default function HubIntegrationComplete() {
   const [selectedProvider, setSelectedProvider] = useState(null);
   const [linkVerified, setLinkVerified] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
-  const [timeoutId, setTimeoutId] = useState(null);
 
   useEffect(() => {
     if (!integration) return;
@@ -69,23 +70,13 @@ export default function HubIntegrationComplete() {
     }
   }, [dispatch, authorise, integration]);
 
-  const handleNavigate = useCallback(() => {
-    clearTimeout(timeoutId);
-    navigate(PATH_DASHBOARD.general.home, { replace: true });
-  }, [navigate, timeoutId]);
-
   useEffect(() => {
     if (!integrations.complete) return;
     if (integrations.response.paging.totalRecords > 0) {
       clearInterval(intervalId);
       setLinkVerified(true);
-      setTimeoutId(
-        setTimeout(() => {
-          navigate(PATH_DASHBOARD.general.home, { replace: true });
-        }, 6000)
-      );
     }
-  }, [integrations, intervalId, navigate]);
+  }, [integrations, intervalId, navigate, refresh]);
 
   useEffect(() => {
     if (!providers || providers.response.results.length === 0) return;
@@ -161,23 +152,23 @@ export default function HubIntegrationComplete() {
 
           <Grid item xs={12} sx={{ minHeight: 60 }}>
             <Collapse in={authorise.complete && linkVerified}>
-              <SuccessDialogue
-                title="And you're done"
-                action={
-                  <Button color="inherit" size="small" onClick={handleNavigate}>
-                    Done
-                  </Button>
-                }
-              >
+              <SuccessDialogue title="And you're done">
                 <Typography variant="body2">
                   Thats it, you've successfully integrated with {selectedProvider.friendlyName}. We'll do the rest, so
                   sit back and have a cup of tea.
                 </Typography>
-                <Typography variant="body2">
-                  You'll automatically be sent you where you need to go next, but if that doesn't happen you can select
-                  the Done button.
-                </Typography>
               </SuccessDialogue>
+
+              <Stack spacing={1} direction="row" justifyContent="end">
+                <Button
+                  size="medium"
+                  variant="contained"
+                  component={RouterLink}
+                  to={PATH_DASHBOARD.integrations.create}
+                >
+                  Continue
+                </Button>
+              </Stack>
             </Collapse>
 
             <Collapse in={authorise.hasError}>

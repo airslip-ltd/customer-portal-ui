@@ -1,8 +1,10 @@
 // material
 import { Container, Grid } from '@mui/material';
 // hooks
+import { useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
 import useSettings from '../../hooks/useSettings';
+import useMemberDetails from '../../hooks/useMemberDetails';
 // components
 import Page from '../../components/Page';
 import { AppWelcome } from '../../components/_dashboard/general-app';
@@ -14,6 +16,11 @@ import { MerchantHome } from '../../components/_dashboard/merchant';
 export default function GeneralApp() {
   const { themeStretch } = useSettings();
   const { user } = useAuth();
+  const { refresh } = useMemberDetails();
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
 
   return (
     <Page title="General | App | Airslip">

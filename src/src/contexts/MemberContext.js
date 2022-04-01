@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
-import { createContext, useEffect } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from '../redux/store';
 import { getMyDetails } from '../redux/slices/auth';
-import PleaseWait from '../pages/PleaseWait';
 // material
 import useAuth from '../hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
 const initialState = {
-  memberDetails: null
+  memberDetails: null,
+  refresh: () => {}
 };
 
 const MemberContext = createContext({
@@ -22,21 +22,29 @@ MemberProvider.propTypes = {
 
 function MemberProvider({ children }) {
   const dispatch = useDispatch();
+  const [memberDetails, setMemberDetails] = useState({});
   const { isAuthenticated } = useAuth();
   const { member } = useSelector((state) => state.auth);
 
-  useEffect(() => {
+  const refreshMember = useCallback(() => {
     if (isAuthenticated) dispatch(getMyDetails());
-  }, [dispatch, isAuthenticated]);
+  }, [isAuthenticated, dispatch]);
 
-  if (isAuthenticated && !member.complete) {
-    return <PleaseWait />;
-  }
+  useEffect(() => {
+    if (isAuthenticated) refreshMember();
+  }, [isAuthenticated, refreshMember]);
+
+  useEffect(() => {
+    if (isAuthenticated && member.complete) {
+      setMemberDetails(member.response.currentVersion);
+    }
+  }, [member, isAuthenticated, memberDetails]);
 
   return (
     <MemberContext.Provider
       value={{
-        memberDetails: member.response.currentVersion
+        memberDetails,
+        refresh: refreshMember
       }}
     >
       {children}
