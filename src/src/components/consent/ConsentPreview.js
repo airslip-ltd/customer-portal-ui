@@ -22,11 +22,11 @@ export default function ConsentPreview({ permissionType }) {
   const renderMessage = () => {
     switch (permissionType) {
       case 'Banking':
-        return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis elit urna, eget pellentesque augue luctus congue. Maecenas eget ligula id dolor rutrum dictum.';
+        return 'You will be sharing bank information such as account details, account transactions, account holder name, your statements and any regular payments.';
       case 'Commerce':
-        return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis elit urna, eget pellentesque augue luctus congue. Maecenas eget ligula id dolor rutrum dictum.';
+        return 'You will be sharing sales data from your POS or e-commerce system such as order details, inventory and product listings.';
       case 'Accounting':
-        return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis elit urna, eget pellentesque augue luctus congue. Maecenas eget ligula id dolor rutrum dictum.';
+        return 'You will be sharing information from your accounting system such as accounts, bills, invoices, journals, balance sheet, cashflow and all reports.';
       default:
         return 'Invalid type';
     }
