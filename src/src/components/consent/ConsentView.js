@@ -43,13 +43,7 @@ export default function ConsentView() {
           <FormSection
             title={`Connect to ${referral.partnerName}`}
             message={`${referral.partnerName} would like to view your financial data.`}
-          >
-            <Typography variant="body2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis elit urna, eget pellentesque augue
-              luctus congue. Maecenas eget ligula id dolor rutrum dictum. Vestibulum magna dolor, elementum sit amet
-              justo dapibus, gravida aliquet nisl. Vestibulum iaculis varius massa, in tincidunt metus gravida ut.
-            </Typography>
-          </FormSection>
+          />
           <FormSection title="What this approval means">
             <Typography variant="body2">
               Once approved, {referral.partnerName} will have access to financial data that you have added to your
@@ -67,19 +61,27 @@ export default function ConsentView() {
               })}
             <Box sx={{ display: 'flex', bgcolor: 'background.paper', borderRadius: 1 }}>
               <Box>
-                <LoadingButton fullWidth size="medium" onClick={handleDecline} variant="outlined" loading={isLoading}>
+                <LoadingButton size="medium" onClick={handleDecline} variant="outlined" loading={isLoading}>
                   Decline
                 </LoadingButton>
               </Box>
-              <Box sx={{ flexGrow: 1, ml: 1 }}>
+              <Box sx={{ flexGrow: 1 }} />
+              <Box>
                 <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
-                  <Link underline="always" color="text.primary" href="#">
+                  <Link
+                    underline="always"
+                    color="text.primary"
+                    target="_blank"
+                    rel="noopener"
+                    href="https://www.airslip.com/terms"
+                  >
                     Terms of Service
                   </Link>
                 </Typography>
               </Box>
+              <Box sx={{ flexGrow: 1 }} />
               <Box>
-                <LoadingButton fullWidth size="medium" onClick={handleApprove} variant="contained" loading={isLoading}>
+                <LoadingButton size="medium" onClick={handleApprove} variant="contained" loading={isLoading}>
                   Approve
                 </LoadingButton>
               </Box>

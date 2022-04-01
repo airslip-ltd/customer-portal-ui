@@ -30,8 +30,8 @@ export default function IntegrationCreate() {
         <Grid container spacing={3} justify="center">
           <Grid item xs={12}>
             <Typography variant="body" sx={{ color: 'text.secondary' }}>
-              Let's connect a commerce and accounting provider. By connecting your commerce and accounting providers,
-              you can visualise your data to make improved decisions and get access to more financial products.
+              Let's connect your accounts. By connecting your banking, commerce or accounting providers, you can get
+              access to actionable insights and get access to more financial products.
             </Typography>
           </Grid>
           <Grid item xs={12}>

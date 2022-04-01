@@ -41,17 +41,19 @@ export default function GetStarted() {
                 title="Share your financial information for faster access to finance"
                 message="You will be asked to sign in to your accounts in order to authorise sharing of your financial information"
               >
-                <Stack direction="row" sx={{ my: 2 }}>
+                <Stack direction="row" sx={{ my: 0 }}>
+                  <Typography variant="body2">We keep your data secure.</Typography>
+                </Stack>
+                <Stack direction="row" sx={{ my: 0 }}>
                   <Typography variant="body2">
-                    We keep your data secure.&nbsp;
                     <Link
                       underline="always"
                       color="text.primary"
                       target="_blank"
                       rel="noopener"
-                      href="https://www.airslip.com"
+                      href="https://www.airslip.com/security"
                     >
-                      learn more
+                      Learn more
                     </Link>
                   </Typography>
                 </Stack>
