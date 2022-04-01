@@ -16,8 +16,6 @@ export default function RequiredServiceGuard({ requiredService, children, title 
 
   const enabled = linkedServices[requiredService] || false;
 
-  console.log(linkedServices);
-
   if (!enabled) return <UnlinkedCard title={title} requiredService={requiredService} />;
 
   return <>{children}</>;

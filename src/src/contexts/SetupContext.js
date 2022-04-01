@@ -40,7 +40,7 @@ function SetupProvider({ children }) {
   }, [setSetupInProgress]);
 
   useEffect(() => {
-    if (!memberDetails.airslipUserType) return;
+    if (!memberDetails || !memberDetails.airslipUserType) return;
     let newSetupComplete = false;
 
     switch (memberDetails.airslipUserType) {
