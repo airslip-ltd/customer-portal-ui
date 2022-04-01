@@ -44,8 +44,8 @@ export default function RelationshipCreateForm() {
 
   const NewUserSchema = Yup.object().shape({
     businessName: Yup.string().required('Company name is required'),
-    firstName: Yup.string().required('First name is required'),
-    lastName: Yup.string().required('Last name is required'),
+    firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),
+    lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
     email: Yup.string().required('Email is required').email(),
     phoneNumber: Yup.string().required('Phone number is required')
   });

@@ -163,7 +163,7 @@ export default function RegisterForm() {
                   />
 
                   <Box sx={{ display: 'flex' }}>
-                    <Button fullWidth size="medium" onClick={handleEditSwitch} variant="text" loading={isLoading}>
+                    <Button fullWidth size="medium" onClick={handleEditSwitch} variant="text">
                       Thats not me
                     </Button>
 

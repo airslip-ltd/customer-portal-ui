@@ -40,9 +40,9 @@ function SetupProvider({ children }) {
   }, [setSetupInProgress]);
 
   useEffect(() => {
-    if (!memberDetails) return;
-    console.log(memberDetails);
+    if (!memberDetails.airslipUserType) return;
     let newSetupComplete = false;
+
     switch (memberDetails.airslipUserType) {
       case 'Merchant':
         newSetupComplete = memberDetails.linkedServices.length > 0;

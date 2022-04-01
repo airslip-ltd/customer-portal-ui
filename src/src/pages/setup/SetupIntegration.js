@@ -15,13 +15,16 @@ import { PATH_ONBOARDING } from '../../routes/paths';
 // ----------------------------------------------------------------------
 
 export default function SetupIntegration() {
-  const { memberDetails } = useMemberDetails();
+  const { memberDetails, refresh } = useMemberDetails();
   const [serviceCount, setServiceCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!memberDetails) return;
+    refresh();
+  }, [refresh]);
 
+  useEffect(() => {
+    if (!memberDetails) return;
     const { linkedServices } = memberDetails;
     setServiceCount(linkedServices.length);
   }, [memberDetails, setServiceCount]);
