@@ -18,19 +18,19 @@ export default function MerchantSummary() {
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
-          <RequiredServiceGuard requiredService="commerce" title="Revenue">
+          <RequiredServiceGuard requiredService="commerce" title="Revenue (Last 30 days)">
             <MerchantRevenue />
           </RequiredServiceGuard>
         </Grid>
 
         <Grid item xs={12} md={4}>
-          <RequiredServiceGuard requiredService="commerce" title="Refunds">
+          <RequiredServiceGuard requiredService="commerce" title="Refunds (Last 30 days)">
             <MerchantRefunds />
           </RequiredServiceGuard>
         </Grid>
 
         <Grid item xs={12} md={4}>
-          <RequiredServiceGuard requiredService="banking" title="Cash in bank">
+          <RequiredServiceGuard requiredService="banking" title="Bank Balance">
             <MerchantBalance />
           </RequiredServiceGuard>
         </Grid>
@@ -45,7 +45,7 @@ export default function MerchantSummary() {
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <RequiredServiceGuard requiredService="commerce" title="Revenue and Refunds">
+            <RequiredServiceGuard requiredService="commerce" title="Sales and Refunds">
               <MerchantSalesAndRefunds />
             </RequiredServiceGuard>
           </Grid>

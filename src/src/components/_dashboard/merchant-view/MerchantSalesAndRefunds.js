@@ -31,5 +31,5 @@ export default function MerchantSalesAndRefunds({ integrationId }) {
     );
   }, [dispatch, dataOwnerQuery, dateQuery, integrationId]);
 
-  return <MerchantDashboardSeries title="Revenue and Refunds" apiRequest={revenue} />;
+  return <MerchantDashboardSeries title="Sales and Refunds" apiRequest={revenue} />;
 }
