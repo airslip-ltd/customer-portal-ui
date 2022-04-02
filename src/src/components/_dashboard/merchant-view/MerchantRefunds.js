@@ -27,7 +27,7 @@ export default function MerchantRefunds({ accountId }) {
 
   return (
     <MerchantDashboardSnapshot
-      title="Refunds"
+      title="Refunds (Last 30 days)"
       snapshot={refundStats}
       navigateTo={buildOwnedPath(PATH_DASHBOARD.analytics.commerceSummary)}
     />

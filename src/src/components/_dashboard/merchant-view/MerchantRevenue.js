@@ -27,7 +27,7 @@ export default function MerchantRevenue({ accountId }) {
 
   return (
     <MerchantDashboardSnapshot
-      title="Revenue"
+      title="Revenue (Last 30 days)"
       snapshot={salesStats}
       navigateTo={buildOwnedPath(PATH_DASHBOARD.analytics.commerceSummary)}
     />
