@@ -31,5 +31,5 @@ export default function CashflowByAccount({ integrationId }) {
     );
   }, [dispatch, dataOwnerQuery, dateQuery, integrationId]);
 
-  return <MerchantDashboardSeries title="Cashflow" apiRequest={cashflow} />;
+  return <MerchantDashboardSeries title="Bank Cashflow" apiRequest={cashflow} />;
 }

@@ -39,14 +39,14 @@ export default function IntegrationList() {
 
   return (
     <>
-      <Page title="Integrations | List | Airslip">
+      <Page title="Connected Services | Airslip">
         <Container maxWidth={themeStretch ? false : 'xl'}>
           <HeaderBreadcrumbs
-            heading="Integrations List"
+            heading="Connected Services"
             links={[
               { name: 'Dashboard', href: PATH_DASHBOARD.root },
-              { name: 'Integrations', href: PATH_DASHBOARD.integrations.root },
-              { name: 'List' }
+              { name: 'Services', href: PATH_DASHBOARD.integrations.root },
+              { name: 'Connected' }
             ]}
           />
           <StandardList

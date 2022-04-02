@@ -25,7 +25,7 @@ export default function MerchantBalance() {
 
   return (
     <MerchantDashboardSnapshot
-      title="Cash in bank"
+      title="Bank Balance"
       snapshot={currentBalance}
       navigateTo={buildOwnedPath(PATH_DASHBOARD.analytics.accountBalances)}
       graphColor={theme.palette.chart.red[0]}

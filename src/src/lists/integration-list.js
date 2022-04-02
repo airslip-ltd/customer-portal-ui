@@ -13,14 +13,14 @@ export const columns = [
       <>
         <IntegrationIcon icon={params.value} />
         <Typography variant="subtitle2" noWrap sx={{ pl: 1 }}>
-          {params.row.tradingName}
+          {params.row.providerFriendlyName}
         </Typography>
       </>
     )
   },
   {
-    field: 'dataSource',
-    headerName: 'Data source',
+    field: 'provider.integrationType', // Dot notation to get complex object???
+    headerName: 'Type',
     flex: 1,
     hide: false
   },
@@ -34,9 +34,9 @@ export const columns = [
   {
     type: 'date',
     field: 'timeStamp',
-    headerName: 'Time Stamp',
+    headerName: 'Timestamp',
     flex: 1,
-    valueGetter: ({ value }) => value && new Date(value),
+    valueGetter: ({ value }) => new Date(value),
     filterOperators: dateFilterOperators
   }
 ];
