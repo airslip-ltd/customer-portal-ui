@@ -39,13 +39,13 @@ export default function MerchantSummary() {
       <DateSelectionProvider>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
-            <RequiredServiceGuard requiredService="banking" title="Cashflow">
+            <RequiredServiceGuard requiredService="banking" title="Bank Cashflow">
               <CashflowByAccount />
             </RequiredServiceGuard>
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <RequiredServiceGuard requiredService="commerce" title="Sales and Refunds">
+            <RequiredServiceGuard requiredService="commerce" title="Commerce Sales Performance">
               <MerchantSalesAndRefunds />
             </RequiredServiceGuard>
           </Grid>
