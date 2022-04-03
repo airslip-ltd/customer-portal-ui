@@ -44,9 +44,9 @@ export default function IntegrationList() {
           <HeaderBreadcrumbs
             heading="Connected Services"
             links={[
-              { name: 'Dashboard', href: PATH_DASHBOARD.root },
-              { name: 'Services', href: PATH_DASHBOARD.integrations.root },
-              { name: 'Connected' }
+              { name: 'Services', href: PATH_DASHBOARD.root },
+              { name: 'Your Services', href: PATH_DASHBOARD.integrations.root },
+              { name: 'List' }
             ]}
           />
           <StandardList
