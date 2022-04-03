@@ -18,12 +18,13 @@ export const columns = [
       </>
     )
   },
-  {
-    field: 'provider.integrationType', // Dot notation to get complex object???
-    headerName: 'Type',
-    flex: 1,
-    hide: false
-  },
+  // Dot notation to get complex object???
+  // {
+  //   field: 'provider.integrationType',
+  //   headerName: 'Type',
+  //   flex: 1,
+  //   hide: false
+  // },
   {
     field: 'authenticationState',
     headerName: 'State',
