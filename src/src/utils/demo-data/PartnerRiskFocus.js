@@ -6,7 +6,7 @@ export const listData = {
   response: {
     results: [
       {
-        id: 'ff007a2d76484e39aa9dc74fbd98475b',
+        id: 'my-account-1',
         name: 'Vapour Air Limited',
         riskScore: 85
       },
