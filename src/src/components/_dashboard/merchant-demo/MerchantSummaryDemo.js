@@ -80,39 +80,22 @@ export default function MerchantSummaryDemo({ currentMerchant, accountId }) {
         )}
 
         {featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <RevenueGrowthBenchmarking accountId="my-account-1" />
-          </Grid>
+          <>
+            <Grid item xs={12} md={4}>
+              <AverageDebtorDays accountId="my-account-1" />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <AverageCreditorDays accountId="my-account-1" />
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+              <MerchantRevenue />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <MerchantBalance />
+            </Grid>
+          </>
         )}
-
-        {featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <MerchantRevenue />
-          </Grid>
-        )}
-
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <MerchantRevenue />
-          </Grid>
-        )}
-
-        {featureEnabled('demo') && (
-          <Grid item xs={12} md={4}>
-            <MerchantBalance />
-          </Grid>
-        )}
-
-        {/* <Grid item xs={12} md={12}>
-          <BankingRecentTransactions accountId={accountId} />
-        </Grid> */}
-
-        {/* <Grid item xs={12}>
-          <MerchantSalesAndRefunds />
-        </Grid>
-        <Grid item xs={12}>
-          <MerchantCashflow />
-        </Grid> */}
 
         {featureEnabled('demo') && (
           <>
@@ -135,6 +118,10 @@ export default function MerchantSummaryDemo({ currentMerchant, accountId }) {
           <>
             <Grid item xs={12}>
               <Typography variant="h4">Growth Analytics</Typography>
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+              <RevenueGrowthBenchmarking accountId="my-account-1" />
             </Grid>
 
             <Grid item xs={12} md={4}>
@@ -196,16 +183,7 @@ export default function MerchantSummaryDemo({ currentMerchant, accountId }) {
             <AccountsPayables accountId="my-account-1" />
           </Grid>
         )}
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <AverageDebtorDays accountId="my-account-1" />
-          </Grid>
-        )}
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <AverageCreditorDays accountId="my-account-1" />
-          </Grid>
-        )}
+
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
             <LateInvoicesReceived accountId="my-account-1" />
