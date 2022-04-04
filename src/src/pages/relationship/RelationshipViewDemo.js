@@ -10,7 +10,8 @@ import useSettings from '../../hooks/useSettings';
 // components
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import { MerchantSummary, MerchantTitle } from '../../components/_dashboard/merchant-view';
+import { MerchantSummaryDemo } from '../../components/_dashboard/merchant-demo';
+import { MerchantTitle } from '../../components/_dashboard/merchant-view';
 
 // ----------------------------------------------------------------------
 
@@ -37,7 +38,7 @@ export default function RelationshipViewDemo() {
             <MerchantTitle displayName={currentBusiness ? currentBusiness.name : ''} />
           </Grid>
           <Grid item xs={12}>
-            <MerchantSummary currentMerchant={currentBusiness} accountId={currentBusiness.id} />
+            <MerchantSummaryDemo currentMerchant={currentBusiness} accountId={currentBusiness.id} />
           </Grid>
         </Grid>
       </Container>

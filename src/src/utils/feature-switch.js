@@ -6,6 +6,8 @@ export function featureEnabled(featureName) {
     case 'industry-exposure':
     case 'accounting-integrations':
       return process.env.REACT_APP_ENVIRONMENT === 'demo';
+    case 'connected-businesses':
+      return process.env.REACT_APP_ENVIRONMENT !== 'demo';
     case 'demo':
       return process.env.REACT_APP_ENVIRONMENT === 'demo';
     case 'demo-to-complete':
