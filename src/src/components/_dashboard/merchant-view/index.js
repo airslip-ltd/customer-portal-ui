@@ -28,8 +28,6 @@ export { default as ActiveVsChurnCustomers } from './ActiveVsChurnCustomers';
 export { default as RefundRateVsBenchmark } from './RefundRateVsBenchmark';
 export { default as AccountsReceivables } from './AccountsReceivables';
 export { default as AccountsPayables } from './AccountsPayables';
-export { default as AverageDebtorDays } from './AverageDebtorDays';
-export { default as AverageCreditorDays } from './AverageCreditorDays';
 export { default as LateInvoicesReceived } from './LateInvoicesReceived';
 export { default as LateBillsPaid } from './LateBillsPaid';
 export { default as RevenueForecasts } from './RevenueForecasts';
