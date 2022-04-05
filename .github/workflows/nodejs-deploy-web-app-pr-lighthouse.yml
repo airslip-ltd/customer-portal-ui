@@ -15,7 +15,7 @@ jobs:
       ENV_PATH: 'pr-lighthouse'
       PUBLISH_PATH: './src'
       NODE_VERSION: '14.x'
-      TERRAFORM_MODULE_VERSION: 6.2.3
+      TERRAFORM_MODULE_VERSION: 6.2.4
       REACT_APP_API_URL: https://dev-app.airslip.com/customer_portal/v1/
       REACT_APP_ANALYTICS_URL: https://dev-app.airslip.com/analytics/v1/
       REACT_APP_AUTH_URL: https://dev-auth.airslip.com/v1/
