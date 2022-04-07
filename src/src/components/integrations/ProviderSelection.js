@@ -42,18 +42,20 @@ export default function ProviderSelection() {
       key: 'commerce',
       label: 'Commerce',
       selected: true
+    },
+    {
+      key: 'accounting',
+      label: 'Accounting',
+      selected: true
     }
   ]);
   const [selectedProvider, setSelectedProvider] = useState({});
   const [modalView, setModalView] = useState('');
 
-  if (featureEnabled('accounting-integrations')) {
-    selected.push({
-      key: 'accounting',
-      label: 'Accounting'
-    });
-    setSelected(selected);
-  }
+  // if (featureEnabled('accounting-integrations')) {
+  //   selected.push();
+  //   setSelected(selected);
+  // }
 
   const navigate = useNavigate();
 
@@ -169,8 +171,9 @@ export default function ProviderSelection() {
         {selected.find((_item) => _item.key === 'commerce' && _item.selected) && (
           <ProviderList integrationType="Commerce" imageType="svg" />
         )}
-
-        {featureEnabled('accounting-integrations') && <ProviderList integrationType="Accounting" />}
+        {selected.find((_item) => _item.key === 'accounting' && _item.selected) && (
+          <ProviderList integrationType="Accounting" imageType="svg" />
+        )}
       </Grid>
       <MultiProviderSelection open={selectChild} onClose={handleClose} items={providerChildren} />
       <CaptureStoreName open={modalView === 'OneClickWithStore'} onClose={handleStoreName} />
