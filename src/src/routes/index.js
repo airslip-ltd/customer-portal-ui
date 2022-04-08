@@ -273,7 +273,8 @@ export default function Router() {
             { path: 'banking-recent-transactions', element: <BankingRecentTransactions /> },
             { path: 'debt-ratio-detail/:accountId', element: <DebtRatioDetail /> },
             { path: 'debt-to-capital-ratio-detail/:accountId', element: <DebtToCapitalRatioDetail /> },
-            { path: 'revenue-benchmarking-detail', element: <RevenueBenchmarkingDetail /> }
+            { path: 'revenue-benchmarking-detail', element: <RevenueBenchmarkingDetail /> },
+            { path: 'customers-detail/:accountId', element: <CustomersDetail /> }
           ]
         },
         {
@@ -405,3 +406,4 @@ const BankingRecentTransactions = Loadable(lazy(() => import('../pages/analytics
 const DebtRatioDetail = Loadable(lazy(() => import('../pages/analytics/DebtRatioDetail')));
 const DebtToCapitalRatioDetail = Loadable(lazy(() => import('../pages/analytics/DebtToCapitalRatioDetail')));
 const RevenueBenchmarkingDetail = Loadable(lazy(() => import('../pages/analytics/RevenueBenchmarkingDetail')));
+const CustomersDetail = Loadable(lazy(() => import('../pages/analytics/CustomersDetail')));
