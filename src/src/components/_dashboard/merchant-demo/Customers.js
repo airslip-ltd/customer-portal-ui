@@ -1,7 +1,12 @@
 import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
+import PropTypes from 'prop-types';
 // material
-import { Box, Card, CardHeader } from '@mui/material';
+import { Box, Card, CardHeader, CardActionArea } from '@mui/material';
+//
+import { Link as RouterLink } from 'react-router-dom';
+// routes
+import { PATH_DASHBOARD } from '../../../routes/paths';
 // utils
 import { fNumber } from '../../../utils/formatNumber';
 //
@@ -11,7 +16,13 @@ import { BaseOptionChart } from '../../charts';
 
 const CHART_DATA = [{ data: [400, 430, 448, 470, 540, 580, 690, 1100, 12000, 421000] }];
 
-export default function Customers() {
+Customers.propTypes = {
+  accountId: PropTypes.string
+};
+export default function Customers({ accountId }) {
+  // demo
+  accountId = accountId || 'my-account-1';
+
   const chartOptions = merge(BaseOptionChart(), {
     tooltip: {
       marker: { show: false },
@@ -43,10 +54,12 @@ export default function Customers() {
 
   return (
     <Card>
-      <CardHeader title="Customers" subheader="(+43%) than last year" />
-      <Box sx={{ mx: 3 }} dir="ltr">
-        <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} height={364} />
-      </Box>
+      <CardActionArea component={RouterLink} to={`${PATH_DASHBOARD.analytics.customersDetail}/${accountId}`}>
+        <CardHeader title="Customers" subheader="(+43%) than last year" />
+        <Box sx={{ mx: 3 }} dir="ltr">
+          <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} height={364} />
+        </Box>
+      </CardActionArea>
     </Card>
   );
 }

@@ -120,6 +120,7 @@ export const PATH_DASHBOARD = {
     commerceSummary: path(ROOTS_DASHBOARD, '/analytics/commerce'),
     bankingRecentTransactions: path(ROOTS_DASHBOARD, '/analytics/banking-recent-transactions'),
     debtServiceCoverageRatioDetail: path(ROOTS_DASHBOARD, '/analytics/debt-service-coverage-ratio-detail'),
+    customersDetail: path(ROOTS_DASHBOARD, '/analytics/customers-detail'),
     revenueBenchmarkingDetail: path(ROOTS_DASHBOARD, '/analytics/revenue-benchmarking-detail'),
     debtRatioDetail: path(ROOTS_DASHBOARD, '/analytics/debt-ratio-detail'),
     debtToCapitalRatioDetail: path(ROOTS_DASHBOARD, '/analytics/debt-to-capital-ratio-detail')
