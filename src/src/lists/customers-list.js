@@ -28,6 +28,11 @@ export const columns = [
     flex: 1
   },
   {
+    field: 'subsidiaries',
+    headerName: 'Subsidiaries',
+    flex: 1
+  },
+  {
     field: 'companyNumber',
     headerName: 'Company Number',
     flex: 1
