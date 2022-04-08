@@ -86,7 +86,7 @@ const getImageDetails = (provider, integrationType, fileType) => {
   };
   const fileName = imageDetails.fileName || `${provider}${imageDetails.fileSuffix}.${imageDetails.fileType}`;
   imageDetails.imageUrl = `/static/integration_logos/${fileName}`;
-  console.log(imageDetails);
+
   return imageDetails;
 };
 
