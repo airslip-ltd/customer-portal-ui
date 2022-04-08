@@ -120,11 +120,10 @@ export default function ProviderSelection() {
   );
 
   ProviderList.propTypes = {
-    integrationType: PropTypes.string.isRequired,
-    imageType: PropTypes.string
+    integrationType: PropTypes.string.isRequired
   };
 
-  function ProviderList({ integrationType, imageType }) {
+  function ProviderList({ integrationType }) {
     const list = renderProviders.filter((row) => {
       const str = `${row.friendlyName}# ${row.id}`;
       return row.integrationType === integrationType && str.match(filterBy);
@@ -143,7 +142,6 @@ export default function ProviderSelection() {
             <ProviderSelector
               key={id}
               providerDetail={row}
-              imageType={imageType}
               onSelect={navigateToProvider}
               hasChildren={handleChildren}
             />
@@ -165,13 +163,13 @@ export default function ProviderSelection() {
           </Stack>
         </Grid>
         {selected.find((_item) => _item.key === 'banking' && _item.selected) && (
-          <ProviderList integrationType="Banking" imageType="svg" />
+          <ProviderList integrationType="Banking" />
         )}
         {selected.find((_item) => _item.key === 'commerce' && _item.selected) && (
-          <ProviderList integrationType="Commerce" imageType="svg" />
+          <ProviderList integrationType="Commerce" />
         )}
         {selected.find((_item) => _item.key === 'accounting' && _item.selected) && (
-          <ProviderList integrationType="Accounting" imageType="svg" />
+          <ProviderList integrationType="Accounting" />
         )}
       </Grid>
       <MultiProviderSelection open={selectChild} onClose={handleClose} items={providerChildren} />

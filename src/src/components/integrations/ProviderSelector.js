@@ -6,12 +6,11 @@ import { ProviderImage, CardOverlay } from '.';
 
 ProviderSelector.propTypes = {
   providerDetail: PropTypes.object.isRequired,
-  imageType: PropTypes.string,
   hasChildren: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired
 };
 
-export default function ProviderSelector({ providerDetail, imageType, hasChildren, onSelect }) {
+export default function ProviderSelector({ providerDetail, hasChildren, onSelect }) {
   const handleProviderSelection = (providerDetail) => {
     if (providerDetail.children.length === 1) {
       onSelect(providerDetail.children[0]);
@@ -27,9 +26,10 @@ export default function ProviderSelector({ providerDetail, imageType, hasChildre
           <CardContent>
             <Box sx={{ height: 60, display: 'flex', alignItems: 'center' }}>
               <ProviderImage
-                icon={providerDetail.id}
+                provider={providerDetail.id}
                 integrationType={providerDetail.integrationType}
-                imageType={imageType}
+                fileType="logo"
+                sx={{ margin: 'auto' }}
               />
             </Box>
           </CardContent>

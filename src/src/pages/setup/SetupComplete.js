@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // material
 import { Grid, Button, Typography, Stack, Card, Box, CardHeader, CardContent } from '@mui/material';
-import IntegrationIcon from '../../components/_dashboard/account-list/IntegrationIcon';
+import ProviderImage from '../../components/integrations/ProviderImage';
 import { HelpCard, HelpSection } from '../../components/_common';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
@@ -70,7 +70,11 @@ export default function SetupComplete() {
                     return (
                       <Box key={id} sx={{ display: 'flex' }}>
                         <Box>
-                          <IntegrationIcon icon={integrationProviderId} />
+                          <ProviderImage
+                            provider={integrationProviderId}
+                            integrationType={integrationType}
+                            fileType="icon"
+                          />
                         </Box>
                         <Box sx={{ flexGrow: 1 }}>
                           <Stack sx={{ ml: 2 }} spacing={1}>
