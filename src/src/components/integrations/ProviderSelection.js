@@ -21,7 +21,6 @@ import {
 } from '.';
 // utils
 import { reduceProviders } from '../../utils/utils';
-import { featureEnabled } from '../../utils/feature-switch';
 
 // ----------------------------------------------------------------------
 
