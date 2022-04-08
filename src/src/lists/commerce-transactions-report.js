@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { fCurrencyFromLong } from '../utils/formatNumber';
 import { fFullDateTime } from '../utils/formatDate';
-import IntegrationIcon from '../components/_dashboard/account-list/IntegrationIcon';
+import ProviderImage from '../components/integrations/ProviderImage';
 import { dateFilterOperators } from './filters';
 
 export const columns = [
@@ -18,7 +18,7 @@ export const columns = [
     flex: 1,
     renderCell: (params) => (
       <>
-        <IntegrationIcon icon={params.value} />
+        <ProviderImage provider={params.value} integrationType="Commerce" fileType="icon" />
         <Typography variant="subtitle2" noWrap sx={{ pl: 1 }}>
           {params.value}
         </Typography>

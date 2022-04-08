@@ -6,7 +6,7 @@ import { Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from '../../../redux/store';
 import { getProviders } from '../../../redux/slices/providers';
 // components
-import BankIcon from './BankIcon';
+import ProviderImage from '../../integrations/ProviderImage';
 
 BankSummary.propTypes = {
   institutionId: PropTypes.string.isRequired
@@ -27,7 +27,7 @@ export default function BankSummary({ institutionId }) {
     <>
       {!providers.loading && institution && (
         <Stack direction="row" alignItems="center" spacing={2}>
-          <BankIcon icon={institution.id} />
+          <ProviderImage provider={institution.id} integrationType="Banking" fileType="icon" />
           <Typography variant="subtitle2" noWrap>
             {institution.friendlyName}
           </Typography>
