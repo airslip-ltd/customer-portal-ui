@@ -110,9 +110,9 @@ export default function HubIntegrationComplete() {
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
               <Item sx={{ flexGrow: 1 }}>
                 <ProviderImage
-                  icon={selectedProvider.id}
+                  provider={selectedProvider.id}
                   integrationType={selectedProvider.integrationType}
-                  imageType="svg"
+                  fileType="logo"
                 />
               </Item>
             </Box>

@@ -105,6 +105,19 @@ export default function Router() {
       ]
     },
     {
+      path: 'mockdata',
+      children: [
+        {
+          path: 'authorise',
+          element: (
+            <AuthGuard>
+              <MockDataLinking />
+            </AuthGuard>
+          )
+        }
+      ]
+    },
+    {
       path: 'onboarding',
       children: [
         {
@@ -350,6 +363,7 @@ const VerifyCode = Loadable(lazy(() => import('../pages/authentication/VerifyCod
 const SetupIntegration = Loadable(lazy(() => import('../pages/setup/SetupIntegration')));
 const SetupComplete = Loadable(lazy(() => import('../pages/setup/SetupComplete')));
 // Linking
+const MockDataLinking = Loadable(lazy(() => import('../pages/linking/MockDataLinking')));
 const HubIntegrationAuthorise = Loadable(lazy(() => import('../pages/linking/HubIntegrationAuthorise')));
 const HubIntegrationComplete = Loadable(lazy(() => import('../pages/linking/HubIntegrationComplete')));
 // Dashboard
