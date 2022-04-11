@@ -108,7 +108,7 @@ export default function Router() {
       path: 'mockdata',
       children: [
         {
-          path: 'authorise',
+          path: 'authorise/:integration',
           element: (
             <AuthGuard>
               <MockDataLinking />
