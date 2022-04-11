@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // material
 import { Button } from '@mui/material';
 // layouts
@@ -10,8 +10,10 @@ import { PATH_INTEGRATE } from '../../routes/paths';
 
 export default function MockDataLinking() {
   const navigate = useNavigate();
+  const { integration } = useParams();
+
   const handleDoneClicked = () => {
-    navigate(`${PATH_INTEGRATE.complete}/mockdata/airslip-bank`, { replace: true });
+    navigate(`${PATH_INTEGRATE.complete}/mockdata/${integration}`, { replace: true });
   };
 
   return (
