@@ -59,6 +59,205 @@ const iconTypes = {
         width: 50,
         height: 50
       }
+    },
+
+    {
+      provider: 'aceshop',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'aceshop.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'aceshop_icon.png'
+      }
+    },
+    {
+      provider: 'cscart',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'cscart.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'cscart_icon.png'
+      }
+    },
+    {
+      provider: 'cubecart',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'cubecart.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'cubecart_icon.png'
+      }
+    },
+    {
+      provider: 'gambio',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'gambio.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'gambio_icon.png'
+      }
+    },
+    {
+      provider: 'creloaded',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'creloaded.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'creloaded_icon.png'
+      }
+    },
+    {
+      provider: 'interspire',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'interspire.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'interspire_icon.png'
+      }
+    },
+    {
+      provider: 'mijoshop',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'mijoshop.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'mijoshop_icon.png'
+      }
+    },
+    {
+      provider: 'opencart14',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'opencart14.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'opencart14_icon.png'
+      }
+    },
+    {
+      provider: 'oscmax2',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'oscmax2.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'oscmax2_icon.png'
+      }
+    },
+    {
+      provider: 'oxid',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'oxid.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'oxid_icon.png'
+      }
+    },
+    {
+      provider: 'pinnacle',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'pinnacle.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'pinnacle_icon.png'
+      }
+    },
+    {
+      provider: 'tomatocart',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'tomatocart.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'tomatocart_icon.png'
+      }
+    },
+    {
+      provider: 'ubercart',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'ubercart.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'ubercart_icon.png'
+      }
+    },
+    {
+      provider: 'wpecommerce',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'wpecommerce.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'wpecommerce_icon.png'
+      }
+    },
+    {
+      provider: 'webasyst',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'webasyst.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'webasyst_icon.png'
+      }
+    },
+    {
+      provider: 'xcart',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'xcart.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'xcart_icon.png'
+      }
+    },
+    {
+      provider: 'xtcommerce',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'xtcommerce.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'xtcommerce_icon.png'
+      }
+    },
+    {
+      provider: 'aspdotnetstorefront',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'aspdotnetstorefront.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'aspdotnetstorefront_icon.png'
+      }
     }
   ]
 };
