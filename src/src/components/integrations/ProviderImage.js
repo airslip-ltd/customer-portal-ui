@@ -258,6 +258,13 @@ const iconTypes = {
         ...imageDefaults.icon,
         fileName: 'aspdotnetstorefront_icon.png'
       }
+    },
+    {
+      provider: 'lsrseries',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'lsrseries.jpg'
+      }
     }
   ]
 };
