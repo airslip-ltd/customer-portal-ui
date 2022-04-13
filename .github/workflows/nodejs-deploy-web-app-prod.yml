@@ -12,7 +12,7 @@ jobs:
       ENV_PATH: 'qa'
       PUBLISH_PATH: './src'
       NODE_VERSION: '14.x'
-      TERRAFORM_MODULE_VERSION: 6.2.4
+      TERRAFORM_MODULE_VERSION: 6.4.1
       REACT_APP_API_URL: https://qa-app.airslip.com/customer_portal/v1/
       REACT_APP_ANALYTICS_URL: https://qa-app.airslip.com/analytics/v1/
       REACT_APP_AUTH_URL: https://qa-auth.airslip.com/v1/
@@ -49,7 +49,7 @@ jobs:
       run: |
         az config set extension.use_dynamic_install=yes_without_prompt
         terraform init -backend-config=variables/${{ env.ENV_PATH }}/backend.tfvars
-        terraform plan -var-file=variables/${{ env.ENV_PATH }}/variables.tfvars -var="certificate_password=${{ secrets.AIRSLIP_CERTIFICATE_PASSWORD }}" -out=terraform.tfplan
+        terraform plan -var-file=variables/${{ env.ENV_PATH }}/variables.tfvars -out=terraform.tfplan
         terraform apply terraform.tfplan
         resource_group_name_raw=$(terraform output resource_group_name)
         resource_group_name=$(echo "${resource_group_name_raw}" | sed 's/"//g')
@@ -107,7 +107,7 @@ jobs:
       ENV_PATH: 'prod'
       PUBLISH_PATH: './src'
       NODE_VERSION: '14.x'
-      TERRAFORM_MODULE_VERSION: 6.2.4
+      TERRAFORM_MODULE_VERSION: 6.4.1
       REACT_APP_API_URL: https://app.airslip.com/customer_portal/v1/
       REACT_APP_ANALYTICS_URL: https://app.airslip.com/analytics/v1/
       REACT_APP_AUTH_URL: https://auth.airslip.com/v1/
@@ -144,7 +144,7 @@ jobs:
       run: |
         az config set extension.use_dynamic_install=yes_without_prompt
         terraform init -backend-config=variables/${{ env.ENV_PATH }}/backend.tfvars
-        terraform plan -var-file=variables/${{ env.ENV_PATH }}/variables.tfvars -var="certificate_password=${{ secrets.AIRSLIP_CERTIFICATE_PASSWORD }}" -out=terraform.tfplan
+        terraform plan -var-file=variables/${{ env.ENV_PATH }}/variables.tfvars -out=terraform.tfplan
         terraform apply terraform.tfplan
         resource_group_name_raw=$(terraform output resource_group_name)
         resource_group_name=$(echo "${resource_group_name_raw}" | sed 's/"//g')
