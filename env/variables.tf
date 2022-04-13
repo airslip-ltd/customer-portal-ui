@@ -16,12 +16,5 @@ variable "web_size" {
   default     = "P1v2"
 }
 variable "admin_group_id" {}
-variable "certificate_path" {
-  default = "./Certificates/airslip.com.pfx"
-}
-variable "certificate_password" {}
-variable "certificate_name" {
-  default = "airslip-com-certificate"
-}
 variable "deployment_agent_group_id" {}
 variable "hostname" {}
