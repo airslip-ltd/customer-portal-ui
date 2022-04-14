@@ -26,6 +26,7 @@ export default function SetupIntegration() {
   useEffect(() => {
     if (!memberDetails) return;
     const { linkedServices } = memberDetails;
+    if (!linkedServices) return;
     setServiceCount(linkedServices.length);
   }, [memberDetails, setServiceCount]);
 
