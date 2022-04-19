@@ -17,7 +17,8 @@ import {
   CaptureStoreName,
   ComingSoon,
   ManualInstall,
-  CheckboxLabels
+  CheckboxLabels,
+  CountrySelection
 } from '.';
 // utils
 import { reduceProviders } from '../../utils/utils';
@@ -28,6 +29,7 @@ export default function ProviderSelection() {
   const dispatch = useDispatch();
   const { providers } = useSelector((state) => state.provider);
   const [filterBy, setFilterBy] = useState('');
+  const [country, setCountry] = useState('GB');
   const [renderProviders, setRenderProviders] = useState([]);
   const [selectChild, setSelectChild] = useState(false);
   const [providerChildren, setProviderChildren] = useState([]);
@@ -51,16 +53,12 @@ export default function ProviderSelection() {
   const [selectedProvider, setSelectedProvider] = useState({});
   const [modalView, setModalView] = useState('');
 
-  // if (featureEnabled('accounting-integrations')) {
-  //   selected.push();
-  //   setSelected(selected);
-  // }
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getProviders());
-  }, [dispatch]);
+    console.log(country);
+    dispatch(getProviders(country));
+  }, [dispatch, country]);
 
   useEffect(() => {
     if (!providers.complete) return;
@@ -119,6 +117,13 @@ export default function ProviderSelection() {
     [setSelected]
   );
 
+  const handleCountryChanged = useCallback(
+    (countryId) => {
+      setCountry(countryId);
+    },
+    [setCountry]
+  );
+
   ProviderList.propTypes = {
     integrationType: PropTypes.string.isRequired
   };
@@ -160,6 +165,7 @@ export default function ProviderSelection() {
           <Stack direction="row" spacing={2}>
             <SearchBox placeholder="Find your integration" filterName={filterBy} onFilterName={onFilterChanged} />
             <CheckboxLabels options={selected} title="Service Type" onChange={handleOptionsChanged} />
+            <CountrySelection title="Country" onChange={handleCountryChanged} />
           </Stack>
         </Grid>
         {selected.find((_item) => _item.key === 'banking' && _item.selected) && (
