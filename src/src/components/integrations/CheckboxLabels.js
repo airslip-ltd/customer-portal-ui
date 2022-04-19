@@ -1,15 +1,14 @@
 import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 // material
-import { FormGroup, FormControlLabel, Checkbox, FormControl, FormLabel } from '@mui/material';
+import { FormGroup, FormControlLabel, Checkbox, FormControl } from '@mui/material';
 
 CheckboxLabels.propTypes = {
-  title: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired
 };
 
-export default function CheckboxLabels({ title, onChange, options }) {
+export default function CheckboxLabels({ onChange, options }) {
   const handleChecked = useCallback(
     (event) => {
       const items = [...options];
