@@ -183,7 +183,7 @@ export default function Router() {
             { path: 'create', element: <RelationshipCreate /> },
             {
               path: 'view/:id',
-              element: process.env.REACT_APP_ENVIRONMENT === 'demo' ? <RelationshipViewDemo /> : <RelationshipView />
+              element: <RelationshipView />
             },
             { path: 'edit/:id', element: <RelationshipEdit /> },
             {
@@ -377,7 +377,6 @@ const IntegrationCreate = Loadable(lazy(() => import('../pages/integrations/Inte
 const IntegrationView = Loadable(lazy(() => import('../pages/integrations/IntegrationView')));
 // Relationships / Businesses
 const RelationshipView = Loadable(lazy(() => import('../pages/relationship/RelationshipView')));
-const RelationshipViewDemo = Loadable(lazy(() => import('../pages/relationship/RelationshipViewDemo')));
 const RelationshipEdit = Loadable(lazy(() => import('../pages/relationship/RelationshipEdit')));
 const RelationshipList = Loadable(lazy(() => import('../pages/relationship/RelationshipList')));
 const RelationshipCreate = Loadable(lazy(() => import('../pages/relationship/RelationshipCreate')));

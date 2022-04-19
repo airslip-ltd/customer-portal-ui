@@ -1,20 +1,20 @@
 export const demoData = {
-  'my-account-1': {
+  '9666f117cf604743a346c80d9a66a7e5': {
     balance: 0.4,
     movement: 0.01,
     metrics: []
   },
-  'my-account-2': {
+  '4e28ad4873f543f0854774ae298297db': {
     balance: 0.332,
     movement: 0.02,
     metrics: []
   },
-  'my-account-3': {
+  '22f237a2547c430a86d171a24e301f44': {
     balance: 0.597,
     movement: -0.01,
     metrics: []
   },
-  'my-account-4': {
+  a5c42d1717684e7496b6c839bfcb0948: {
     balance: 0.223,
     movement: -0.02,
     metrics: []
@@ -22,7 +22,7 @@ export const demoData = {
 };
 
 export const listData = {
-  'my-account-1': {
+  '9666f117cf604743a346c80d9a66a7e5': {
     loading: false,
     complete: true,
     error: {},
@@ -40,7 +40,7 @@ export const listData = {
       ]
     }
   },
-  'my-account-2': {
+  '4e28ad4873f543f0854774ae298297db': {
     loading: false,
     complete: true,
     error: {},
@@ -76,7 +76,7 @@ export const listData = {
       ]
     }
   },
-  'my-account-3': {
+  '22f237a2547c430a86d171a24e301f44': {
     loading: false,
     complete: true,
     error: {},
@@ -103,7 +103,7 @@ export const listData = {
       ]
     }
   },
-  'my-account-4': {
+  a5c42d1717684e7496b6c839bfcb0948: {
     loading: false,
     complete: true,
     error: {},
@@ -133,7 +133,7 @@ export const listData = {
 };
 
 export const totals = {
-  'my-account-1': [
+  '9666f117cf604743a346c80d9a66a7e5': [
     {
       id: '12347',
       title: 'Debt total',
@@ -150,7 +150,7 @@ export const totals = {
       amount: 0.4
     }
   ],
-  'my-account-2': [
+  '4e28ad4873f543f0854774ae298297db': [
     {
       id: '12350',
       title: 'Debt total',
@@ -167,7 +167,7 @@ export const totals = {
       amount: 0.332125817
     }
   ],
-  'my-account-3': [
+  '22f237a2547c430a86d171a24e301f44': [
     {
       id: '12353',
       title: 'Debt total',
@@ -184,7 +184,7 @@ export const totals = {
       amount: 0.597504528
     }
   ],
-  'my-account-4': [
+  a5c42d1717684e7496b6c839bfcb0948: [
     {
       id: '12356',
       title: 'Debt total',

@@ -1,5 +1,5 @@
 export const demoData = {
-  'my-account-1': {
+  '9666f117cf604743a346c80d9a66a7e5': {
     january: -105758,
     february: -119031,
     march: -38166,
