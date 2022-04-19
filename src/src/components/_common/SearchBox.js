@@ -8,7 +8,7 @@ import { Box, TextField, InputAdornment } from '@mui/material';
 // ----------------------------------------------------------------------
 
 const SearchStyle = styled(TextField)(() => ({
-  width: 320
+  width: 250
 }));
 
 // ----------------------------------------------------------------------
@@ -26,6 +26,7 @@ export default function SearchBox({ filterName, onFilterName, placeholder }) {
       value={filterName}
       onChange={onFilterName}
       placeholder={placeholder}
+      size="small"
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
