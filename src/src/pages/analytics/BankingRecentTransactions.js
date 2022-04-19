@@ -32,7 +32,7 @@ BankingRecentTransactions.propTypes = {
 };
 export default function BankingRecentTransactions({ accountId }) {
   const [metricData, setMetricData] = useState({});
-  accountId = accountId || 'my-account-1';
+  accountId = accountId || '9666f117cf604743a346c80d9a66a7e5';
 
   useEffect(() => {
     if (!demoData[accountId] || !demoData[accountId].transactions) return;

@@ -1,5 +1,5 @@
 export const demoData = {
-  'my-account-1': {
+  '9666f117cf604743a346c80d9a66a7e5': {
     transactions: [
       {
         id: 9999,
@@ -211,7 +211,7 @@ export const demoData = {
       }
     ]
   },
-  'my-account-2': {
+  '4e28ad4873f543f0854774ae298297db': {
     transactions: [
       {
         id: 1,
@@ -223,7 +223,7 @@ export const demoData = {
       }
     ]
   },
-  'my-account-3': {
+  '22f237a2547c430a86d171a24e301f44': {
     transactions: [
       {
         id: 1,
@@ -235,7 +235,7 @@ export const demoData = {
       }
     ]
   },
-  'my-account-4': {
+  a5c42d1717684e7496b6c839bfcb0948: {
     transactions: [
       {
         id: 1,

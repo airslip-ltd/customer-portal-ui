@@ -14,7 +14,7 @@ const imageDefaults = {
   logo: {
     fileType: 'svg',
     fileSuffix: '',
-    width: 200,
+    width: 170,
     height: 60,
     fileName: null
   }
@@ -42,6 +42,17 @@ const iconTypes = {
       icon: {
         ...imageDefaults.icon,
         fileName: 'airslip-bank-icon.png'
+      }
+    },
+    {
+      provider: 'airslip-demo',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'airslip-demo-logo.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'airslip-demo-icon.png'
       }
     },
     {

@@ -21,7 +21,7 @@ Customers.propTypes = {
 };
 export default function Customers({ accountId }) {
   // demo
-  accountId = accountId || 'my-account-1';
+  accountId = accountId || '9666f117cf604743a346c80d9a66a7e5';
 
   const chartOptions = merge(BaseOptionChart(), {
     tooltip: {

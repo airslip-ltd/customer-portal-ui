@@ -43,7 +43,7 @@ MerchantSummaryDemo.propTypes = {
 };
 
 export default function MerchantSummaryDemo({ currentMerchant, accountId }) {
-  accountId = accountId ?? 'my-account-4';
+  accountId = accountId ?? 'a5c42d1717684e7496b6c839bfcb0948';
 
   if (!isUndefined(currentMerchant)) {
     return (
@@ -68,10 +68,10 @@ export default function MerchantSummaryDemo({ currentMerchant, accountId }) {
             </Grid>
 
             <Grid item xs={12} md={8}>
-              <CashInflowOutflow accountId="my-account-1" />
+              <CashInflowOutflow accountId="9666f117cf604743a346c80d9a66a7e5" />
             </Grid>
 
-            {accountId === 'my-account-1' && featureEnabled('demo') && (
+            {accountId === '9666f117cf604743a346c80d9a66a7e5' && featureEnabled('demo') && (
               <Grid item xs={12} md={4}>
                 <Customers />
               </Grid>
@@ -82,10 +82,10 @@ export default function MerchantSummaryDemo({ currentMerchant, accountId }) {
         {featureEnabled('demo') && (
           <>
             <Grid item xs={12} md={4}>
-              <AverageDebtorDays accountId="my-account-1" />
+              <AverageDebtorDays accountId="9666f117cf604743a346c80d9a66a7e5" />
             </Grid>
             <Grid item xs={12} md={4}>
-              <AverageCreditorDays accountId="my-account-1" />
+              <AverageCreditorDays accountId="9666f117cf604743a346c80d9a66a7e5" />
             </Grid>
 
             <Grid item xs={12} md={4}>
@@ -104,13 +104,13 @@ export default function MerchantSummaryDemo({ currentMerchant, accountId }) {
             </Grid>
 
             <Grid item xs={12} md={4}>
-              <OperatingMargin accountId="my-account-1" />
+              <OperatingMargin accountId="9666f117cf604743a346c80d9a66a7e5" />
             </Grid>
           </>
         )}
         {featureEnabled('demo') && (
           <Grid item xs={12} md={4}>
-            <GrossProfitMargin accountId="my-account-1" />
+            <GrossProfitMargin accountId="9666f117cf604743a346c80d9a66a7e5" />
           </Grid>
         )}
 
@@ -121,14 +121,14 @@ export default function MerchantSummaryDemo({ currentMerchant, accountId }) {
             </Grid>
 
             <Grid item xs={12} md={4}>
-              <RevenueGrowthBenchmarking accountId="my-account-1" />
+              <RevenueGrowthBenchmarking accountId="9666f117cf604743a346c80d9a66a7e5" />
             </Grid>
 
             <Grid item xs={12} md={4}>
-              <NewVsReturningCustomers accountId="my-account-1" />
+              <NewVsReturningCustomers accountId="9666f117cf604743a346c80d9a66a7e5" />
             </Grid>
             <Grid item xs={12} md={4}>
-              <ActiveVsChurnCustomers accountId="my-account-1" />
+              <ActiveVsChurnCustomers accountId="9666f117cf604743a346c80d9a66a7e5" />
             </Grid>
           </>
         )}
@@ -144,59 +144,59 @@ export default function MerchantSummaryDemo({ currentMerchant, accountId }) {
         )}
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <LeverageRatio accountId="my-account-1" />
+            <LeverageRatio accountId="9666f117cf604743a346c80d9a66a7e5" />
           </Grid>
         )}
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <TotalDebtToTotalAssetsRatio accountId="my-account-1" />
-          </Grid>
-        )}
-
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <CommonOutgoings accountId="my-account-1" />
-          </Grid>
-        )}
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <LargestCustomersByRevenue accountId="my-account-1" />
-          </Grid>
-        )}
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <ActiveVsChurnCustomers accountId="my-account-1" />
-          </Grid>
-        )}
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <RefundRateVsBenchmark accountId="my-account-1" />
-          </Grid>
-        )}
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <AccountsReceivables accountId="my-account-1" />
-          </Grid>
-        )}
-        {featureEnabled('demo-to-complete') && (
-          <Grid item xs={12} md={4}>
-            <AccountsPayables accountId="my-account-1" />
+            <TotalDebtToTotalAssetsRatio accountId="9666f117cf604743a346c80d9a66a7e5" />
           </Grid>
         )}
 
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <LateInvoicesReceived accountId="my-account-1" />
+            <CommonOutgoings accountId="9666f117cf604743a346c80d9a66a7e5" />
           </Grid>
         )}
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={4}>
-            <LateBillsPaid accountId="my-account-1" />
+            <LargestCustomersByRevenue accountId="9666f117cf604743a346c80d9a66a7e5" />
+          </Grid>
+        )}
+        {featureEnabled('demo-to-complete') && (
+          <Grid item xs={12} md={4}>
+            <ActiveVsChurnCustomers accountId="9666f117cf604743a346c80d9a66a7e5" />
+          </Grid>
+        )}
+        {featureEnabled('demo-to-complete') && (
+          <Grid item xs={12} md={4}>
+            <RefundRateVsBenchmark accountId="9666f117cf604743a346c80d9a66a7e5" />
+          </Grid>
+        )}
+        {featureEnabled('demo-to-complete') && (
+          <Grid item xs={12} md={4}>
+            <AccountsReceivables accountId="9666f117cf604743a346c80d9a66a7e5" />
+          </Grid>
+        )}
+        {featureEnabled('demo-to-complete') && (
+          <Grid item xs={12} md={4}>
+            <AccountsPayables accountId="9666f117cf604743a346c80d9a66a7e5" />
+          </Grid>
+        )}
+
+        {featureEnabled('demo-to-complete') && (
+          <Grid item xs={12} md={4}>
+            <LateInvoicesReceived accountId="9666f117cf604743a346c80d9a66a7e5" />
+          </Grid>
+        )}
+        {featureEnabled('demo-to-complete') && (
+          <Grid item xs={12} md={4}>
+            <LateBillsPaid accountId="9666f117cf604743a346c80d9a66a7e5" />
           </Grid>
         )}
         {featureEnabled('demo-to-complete') && (
           <Grid item xs={12} md={8}>
-            <RevenueForecasts accountId="my-account-1" />
+            <RevenueForecasts accountId="9666f117cf604743a346c80d9a66a7e5" />
           </Grid>
         )}
       </Grid>
