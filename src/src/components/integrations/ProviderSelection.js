@@ -164,8 +164,8 @@ export default function ProviderSelection() {
         <Grid item xs={12}>
           <Stack direction="row" spacing={2}>
             <SearchBox placeholder="Find your integration" filterName={filterBy} onFilterName={onFilterChanged} />
-            <CheckboxLabels options={selected} title="Service Type" onChange={handleOptionsChanged} />
             <CountrySelection title="Country" onChange={handleCountryChanged} />
+            <CheckboxLabels options={selected} title="Service Type" onChange={handleOptionsChanged} />
           </Stack>
         </Grid>
         {selected.find((_item) => _item.key === 'banking' && _item.selected) && (

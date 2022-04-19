@@ -26,8 +26,7 @@ export default function CheckboxLabels({ title, onChange, options }) {
   );
 
   return (
-    <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-      <FormLabel component="legend">{title}</FormLabel>
+    <FormControl sx={{ m: 1 }} component="fieldset" variant="standard">
       <FormGroup aria-label="position" row>
         {options.map((row) => {
           const { key, label, selected } = row;

@@ -30,7 +30,7 @@ export function getCountries() {
     if (countries.countries.complete) return;
     await executeSearch(countries, dispatch, slice, 'countries', {
       ...GET_ALL_QUERY,
-      sort: [{ field: 'id', sort: 'asc' }]
+      sort: [{ field: 'name', sort: 'asc' }]
     });
   };
 }

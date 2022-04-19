@@ -30,6 +30,7 @@ export default function CountrySelection({ onChange }) {
       sx={{ width: 300 }}
       onChange={handleChanged}
       disableClearable
+      size="small"
       isOptionEqualToValue={(option, value) => option.id === value.id}
       getOptionLabel={(option) => `${option.id} - ${option.name}`}
       options={countries.response.results}
