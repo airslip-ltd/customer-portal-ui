@@ -32,17 +32,23 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function getProviders() {
+export function getProviders(countryCode) {
   return async (dispatch, getState) => {
     const { provider } = getState();
-    if (provider.providers.complete) return;
-    await executeSearch(provider, dispatch, slice, 'providers', {
-      ...GET_ALL_QUERY,
-      sort: [
-        { field: 'priority', sort: 'asc' },
-        { field: 'id', sort: 'asc' }
-      ]
-    });
+    await executeSearch(
+      provider,
+      dispatch,
+      slice,
+      'providers',
+      {
+        ...GET_ALL_QUERY,
+        sort: [
+          { field: 'priority', sort: 'asc' },
+          { field: 'id', sort: 'asc' }
+        ]
+      },
+      `/providers/search?countryCode=${countryCode || ''}`
+    );
   };
 }
 

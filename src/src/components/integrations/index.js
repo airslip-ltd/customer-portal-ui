@@ -10,3 +10,4 @@ export { default as ManualInstall } from './ManualInstall';
 export { default as CardOverlay } from './CardOverlay';
 export { default as IntegrationCover } from './IntegrationCover';
 export { default as IntegrationProfile } from './IntegrationProfile';
+export { default as CountrySelection } from './CountrySelection';
