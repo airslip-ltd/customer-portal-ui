@@ -183,6 +183,17 @@ const iconTypes = {
       }
     },
     {
+      provider: 'soldo-token',
+      logo: {
+        ...imageDefaults.logo,
+        fileName: 'soldo-token.png'
+      },
+      icon: {
+        ...imageDefaults.icon,
+        fileName: 'soldo-token_icon.png'
+      }
+    },
+    {
       provider: 'tomatocart',
       logo: {
         ...imageDefaults.logo,
