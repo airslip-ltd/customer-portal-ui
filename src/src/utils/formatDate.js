@@ -11,5 +11,5 @@ export function fDateFromLong(number) {
 export function fFullDateTime(dateTime) {
   const t = new Date(dateTime);
 
-  return format(t, 'dd/MM/yyyy hh:mm');
+  return format(t, 'dd/MM/yyyy HH:mm');
 }

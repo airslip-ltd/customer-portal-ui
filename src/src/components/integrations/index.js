@@ -1,4 +1,3 @@
-export { default as ProviderIcon } from './ProviderIcon';
 export { default as ProviderImage } from './ProviderImage';
 export { default as ProviderSelection } from './ProviderSelection';
 export { default as MultiProviderSelection } from './MultiProviderSelection';
@@ -11,3 +10,8 @@ export { default as CardOverlay } from './CardOverlay';
 export { default as IntegrationCover } from './IntegrationCover';
 export { default as IntegrationProfile } from './IntegrationProfile';
 export { default as CountrySelection } from './CountrySelection';
+export { default as ProviderDisplay } from './ProviderDisplay';
+export { default as IntegrationTypeIcon } from './IntegrationTypeIcon';
+export { default as BankDetailSummary } from './BankDetailSummary';
+export { default as NameValueDisplay } from './NameValueDisplay';
+export { default as CommerceDetailSummary } from './CommerceDetailSummary';

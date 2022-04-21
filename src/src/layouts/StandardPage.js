@@ -2,12 +2,28 @@
 import PropTypes from 'prop-types';
 import { Container, Box } from '@mui/material';
 // routes
+import { LoadingView } from '../components/_common/progress';
 import { PATH_DASHBOARD } from '../routes/paths';
 // hooks
 import useSettings from '../hooks/useSettings';
 // components
 import Page from '../components/Page';
 import HeaderBreadcrumbs from '../components/HeaderBreadcrumbs';
+
+// ----------------------------------------------------------------------
+
+ApiRequest.propTypes = {
+  apiRequest: PropTypes.object,
+  children: PropTypes.node.isRequired
+};
+
+function ApiRequest({ children, apiRequest }) {
+  if (apiRequest) {
+    return <LoadingView apiRequest={apiRequest}>{children}</LoadingView>;
+  }
+
+  return <>{children}</>;
+}
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +36,8 @@ StandardPage.propTypes = {
   activity: PropTypes.string.isRequired,
   areaHref: PropTypes.string,
   spaceHref: PropTypes.string.isRequired,
-  fullWidth: PropTypes.bool
+  fullWidth: PropTypes.bool,
+  apiRequest: PropTypes.object
 };
 
 export default function StandardPage({
@@ -32,7 +49,8 @@ export default function StandardPage({
   spaceHref,
   activity,
   heading,
-  fullWidth
+  fullWidth,
+  apiRequest
 }) {
   const { themeStretch } = useSettings();
   const width = fullWidth ? 'xl' : 'lg';
@@ -55,7 +73,7 @@ export default function StandardPage({
           <Box>{actions}</Box>
         </Box>
 
-        <>{children}</>
+        <ApiRequest apiRequest={apiRequest}>{children}</ApiRequest>
       </Container>
     </Page>
   );

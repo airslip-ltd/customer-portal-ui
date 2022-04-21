@@ -1,34 +1,41 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useCallback } from 'react';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 // material
-import { Container } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 // redux
+import { GET_ALL_QUERY } from '../../redux/common/search';
 import { useDispatch, useSelector } from '../../redux/store';
 import { search as integrationSearch, reset } from '../../redux/slices/integration';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
-// hooks
-import useSettings from '../../hooks/useSettings';
 // components
-import Page from '../../components/Page';
-import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import { columns } from '../../lists/integration-list';
-import StandardList from '../../components/_common/Lists/StandardList';
+import StandardPage from '../../layouts/StandardPage';
+import { ProviderDisplay } from '../../components/integrations';
 
+// ----------------------------------------------------------------------
+const EditActions = () => (
+  <Button
+    size="medium"
+    variant="contained"
+    component={RouterLink}
+    to={`${PATH_DASHBOARD.integrations.create}`}
+    sx={{ mt: 1 }}
+  >
+    Connect a Service
+  </Button>
+);
 // ----------------------------------------------------------------------
 
 export default function IntegrationList() {
-  const { themeStretch } = useSettings();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { integration } = useSelector((state) => state.integration);
-  const [query, setQuery] = useState(null);
 
   useEffect(() => {
-    if (query) dispatch(integrationSearch(query));
-  }, [dispatch, query]);
+    dispatch(integrationSearch(GET_ALL_QUERY));
+  }, [dispatch]);
 
-  const handleRowClick = useCallback(
+  const handleClick = useCallback(
     (params) => {
       dispatch(reset()).then(() => {
         navigate(`${PATH_DASHBOARD.integrations.view}/${params.id}`);
@@ -38,26 +45,22 @@ export default function IntegrationList() {
   );
 
   return (
-    <>
-      <Page title="Connected Services | Airslip">
-        <Container maxWidth={themeStretch ? false : 'xl'}>
-          <HeaderBreadcrumbs
-            heading="Connected Services"
-            links={[
-              { name: 'Services', href: PATH_DASHBOARD.root },
-              { name: 'Your Services', href: PATH_DASHBOARD.integrations.root },
-              { name: 'List' }
-            ]}
-          />
-          <StandardList
-            columns={columns}
-            details={integration}
-            onChangeQuery={setQuery}
-            onRowSelected={handleRowClick}
-            recordsPerPage={10}
-          />
-        </Container>
-      </Page>
-    </>
+    <StandardPage
+      area="Dashboard"
+      space="Services"
+      spaceHref={PATH_DASHBOARD.integrations.root}
+      activity="Your Services"
+      heading="Your Services"
+      fullWidth
+      actions={<EditActions />}
+      apiRequest={integration}
+    >
+      <Grid container spacing={3} justify="center">
+        {integration.complete &&
+          integration.response.results.map((row) => (
+            <ProviderDisplay key={row.id} onSelect={handleClick} providerDetail={row} />
+          ))}
+      </Grid>
+    </StandardPage>
   );
 }
