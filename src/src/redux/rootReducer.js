@@ -12,7 +12,6 @@ import consentReducer from './slices/consent';
 import analyticsReducer from './slices/analytics';
 import balancesReducer from './slices/balances';
 import commerceReducer from './slices/commerce';
-import transactionsReducer from './slices/transactions';
 import reportsReducer from './slices/reports';
 import userReducer from './slices/user';
 import authReducer from './slices/auth';
@@ -37,7 +36,6 @@ const rootReducer = combineReducers({
   relationship: relationshipReducer,
   analytics: analyticsReducer,
   balances: balancesReducer,
-  transactions: transactionsReducer,
   reports: reportsReducer,
   user: userReducer,
   auth: authReducer,

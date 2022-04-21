@@ -12,6 +12,16 @@ const getBackgroundColor = (color, mode) => (mode === 'dark' ? darken(color, 0.6
 
 const getHoverBackgroundColor = (color, mode) => (mode === 'dark' ? darken(color, 0.5) : lighten(color, 0.5));
 
+const listDefaults = {
+  page: 0,
+  recordsPerPage: 25,
+  sort: [{ field: 'id', sort: 'desc' }],
+  search: {
+    items: [],
+    linkOperator: 'and'
+  }
+};
+
 // ----------------------------------------------------------------------
 
 StandardList.propTypes = {
@@ -42,16 +52,33 @@ export default function StandardList({
   title
 }) {
   showToolbar = showToolbar === undefined ? true : showToolbar;
-
+  const [changed, setChanged] = useState(false);
   const [query, setQuery] = useState({
-    page: 0,
-    recordsPerPage: recordsPerPage || 25,
-    sort: [{ field: defaultSort || 'id', sort: 'desc' }],
-    search: {
-      items: defaultFilter ? [defaultFilter] : [],
-      linkOperator: 'and'
-    }
+    ...listDefaults
   });
+
+  const queryChanged = useCallback(() => {
+    onChangeQuery(query);
+  }, [onChangeQuery, query]);
+
+  useEffect(() => {
+    if (!changed) return;
+    setChanged(false);
+    queryChanged();
+  }, [queryChanged, changed]);
+
+  useEffect(() => {
+    setQuery({
+      ...listDefaults,
+      recordsPerPage: recordsPerPage || 25,
+      sort: [{ field: defaultSort || 'id', sort: 'desc' }],
+      search: {
+        items: defaultFilter ? [defaultFilter] : [],
+        linkOperator: 'and'
+      }
+    });
+    setChanged(true);
+  }, [setQuery, defaultFilter, defaultSort, recordsPerPage]);
 
   function CustomToolbar() {
     return (
@@ -69,22 +96,19 @@ export default function StandardList({
     return <GridToolbarContainer />;
   }
 
-  useEffect(() => {
-    onChangeQuery(query);
-  }, [onChangeQuery, query]);
-
-  useEffect(() => {}, [details]);
-
   const handleSortModelChange = (newModel) => {
     setQuery({ ...query, ...{ page: 0, sort: newModel } });
+    setChanged(true);
   };
 
   const handlePageChange = (newPage) => {
     setQuery({ ...query, ...{ page: newPage } });
+    setChanged(true);
   };
 
   const handlePageSizeChange = (newPageSize) => {
     setQuery({ ...query, ...{ page: 0, recordsPerPage: newPageSize } });
+    setChanged(true);
   };
 
   const handleRowClick = useCallback(onRowSelected, [onRowSelected]);
@@ -92,9 +116,12 @@ export default function StandardList({
   const onFilterChange = useCallback(
     (filterModel) => {
       setQuery({ ...query, ...{ page: 0, search: filterModel } });
+      setChanged(true);
     },
-    [query]
+    [setQuery, query]
   );
+
+  if (!query) return <></>;
 
   return (
     <>

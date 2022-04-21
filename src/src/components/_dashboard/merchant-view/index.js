@@ -6,8 +6,6 @@ export { default as MerchantBalance } from './MerchantBalance';
 export { default as MerchantRefunds } from './MerchantRefunds';
 export { default as MerchantPaymentMethods } from './MerchantPaymentMethods';
 export { default as MerchantSalesAndRefunds } from './MerchantSalesAndRefunds';
-export { default as BankingRecentTransactions } from './BankingRecentTransactions';
-export { default as CommerceRecentTransactions } from './CommerceRecentTransactions';
 export { default as MerchantRiskScore } from './MerchantRiskScore';
 export { default as MerchantRating } from './MerchantRating';
 export { default as MerchantSummary } from './MerchantSummary';
