@@ -16,7 +16,7 @@ export const columns = [
     flex: 1,
     renderCell: (params) => (
       <>
-        <ProviderImage provider={params.value} integrationType={params.row.integrationType} fileType="icon" />
+        <ProviderImage provider={params.value} integrationType="Commerce" fileType="icon" />
         <Typography variant="subtitle2" noWrap sx={{ pl: 1 }}>
           {params.row.integrationProviderId}
         </Typography>

@@ -20,18 +20,27 @@ export default function BankingTransactions({ integrationId, title }) {
   const dispatch = useDispatch();
   const { bankTransactions } = useSelector((state) => state.reports);
   const [query, setQuery] = useState(null);
+  const [filters, setFilters] = useState({
+    columnField: 'integrationId',
+    value: integrationId,
+    operatorValue: 'equals'
+  });
   const { dataOwnerQuery } = useDataOwner();
 
   useEffect(() => {
-    if (query) {
-      dispatch(
-        getBankTransactions({
-          ...query,
-          ...dataOwnerQuery
-        })
-      );
-    }
-  }, [dispatch, dataOwnerQuery, query]);
+    setFilters({ columnField: 'integrationId', value: integrationId, operatorValue: 'equals' });
+  }, [setFilters, integrationId]);
+
+  const handleChangeQuery = (newQuery) => {
+    if (!newQuery) return;
+    setQuery(newQuery);
+    dispatch(
+      getBankTransactions({
+        ...newQuery,
+        ...dataOwnerQuery
+      })
+    );
+  };
 
   const handleDownload = () => {
     if (query) {
@@ -48,13 +57,11 @@ export default function BankingTransactions({ integrationId, title }) {
     <StandardList
       columns={columns}
       details={bankTransactions}
-      onChangeQuery={setQuery}
+      onChangeQuery={handleChangeQuery}
       onDownload={handleDownload}
       recordsPerPage={10}
       defaultSort="capturedDate"
-      defaultFilter={
-        integrationId ? { columnField: 'integrationId', value: integrationId, operatorValue: 'equals' } : null
-      }
+      defaultFilter={filters}
       title={title}
     />
   );

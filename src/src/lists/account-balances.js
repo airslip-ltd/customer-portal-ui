@@ -49,7 +49,7 @@ export const columns = [
     flex: 1,
     renderCell: (params) => (
       <>
-        <ReactTimeAgo date={params.value} locale="en-US" />
+        <ReactTimeAgo date={new Date(params.value)} locale="en-US" />
       </>
     ),
     filterOperators: dateFilterOperators

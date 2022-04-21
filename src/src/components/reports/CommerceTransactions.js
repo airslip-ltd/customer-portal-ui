@@ -20,18 +20,28 @@ export default function CommerceTransactions({ integrationId, title }) {
   const dispatch = useDispatch();
   const { commerceTransactions } = useSelector((state) => state.reports);
   const [query, setQuery] = useState(null);
+  const [filters, setFilters] = useState({
+    columnField: 'integrationId',
+    value: integrationId,
+    operatorValue: 'equals'
+  });
   const { dataOwnerQuery } = useDataOwner();
 
   useEffect(() => {
-    if (query) {
-      dispatch(
-        getCommerceTransactions({
-          ...query,
-          ...dataOwnerQuery
-        })
-      );
-    }
-  }, [dispatch, dataOwnerQuery, query]);
+    setFilters({ columnField: 'integrationId', value: integrationId, operatorValue: 'equals' });
+  }, [setFilters, integrationId]);
+
+  const handleChangeQuery = (newQuery) => {
+    if (!newQuery) return;
+    console.log('handleChangeQuery', newQuery);
+    setQuery(newQuery);
+    dispatch(
+      getCommerceTransactions({
+        ...newQuery,
+        ...dataOwnerQuery
+      })
+    );
+  };
 
   const handleDownload = () => {
     if (query) {
@@ -48,13 +58,11 @@ export default function CommerceTransactions({ integrationId, title }) {
     <StandardList
       columns={columns}
       details={commerceTransactions}
-      onChangeQuery={setQuery}
+      onChangeQuery={handleChangeQuery}
       onDownload={handleDownload}
       recordsPerPage={10}
       defaultSort="datetime"
-      defaultFilter={
-        integrationId ? { columnField: 'integrationId', value: integrationId, operatorValue: 'equals' } : null
-      }
+      defaultFilter={filters}
       title={title}
     />
   );
