@@ -50,7 +50,7 @@ export default function ProviderSelection() {
       selected: true
     }
   ]);
-  const [selectedProvider, setSelectedProvider] = useState({});
+  const [selectedProvider, setSelectedProvider] = useState(null);
   const [modalView, setModalView] = useState('');
 
   const navigate = useNavigate();
@@ -179,7 +179,11 @@ export default function ProviderSelection() {
         )}
       </Grid>
       <MultiProviderSelection open={selectChild} onClose={handleClose} items={providerChildren} />
-      <CaptureStoreName open={modalView === 'OneClickWithStore'} onClose={handleStoreName} />
+      <CaptureStoreName
+        open={modalView === 'OneClickWithStore'}
+        onClose={handleStoreName}
+        provider={selectedProvider}
+      />
       <ComingSoon open={modalView === 'ComingSoon'} onClose={handleCloseModal} />
       <ManualInstall open={modalView === 'Manual'} onClose={handleCloseModal} />
     </>

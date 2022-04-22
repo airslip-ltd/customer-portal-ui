@@ -331,7 +331,14 @@ RenderedImage.propTypes = {
 };
 
 function RenderedImage({ imageDetails, provider, fileType }) {
-  if (fileType === 'icon') return <BorderedAvatar src={imageDetails.imageUrl} alt={provider} />;
+  if (fileType === 'icon')
+    return (
+      <BorderedAvatar
+        src={imageDetails.imageUrl}
+        alt={provider}
+        sx={{ height: imageDetails.height, width: imageDetails.width }}
+      />
+    );
 
   return (
     <Box
@@ -346,11 +353,15 @@ function RenderedImage({ imageDetails, provider, fileType }) {
 ProviderImage.propTypes = {
   provider: PropTypes.string.isRequired,
   integrationType: PropTypes.string.isRequired,
-  fileType: PropTypes.string.isRequired
+  fileType: PropTypes.string.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number
 };
 
-export default function ProviderImage({ provider, integrationType, fileType, ...other }) {
+export default function ProviderImage({ provider, integrationType, fileType, width, height, ...other }) {
   const imageDetails = getImageDetails(provider, integrationType, fileType);
+  if (width) imageDetails.width = width;
+  if (height) imageDetails.height = height;
   return (
     <Box {...other}>
       <Box sx={{ width: imageDetails.width }}>
