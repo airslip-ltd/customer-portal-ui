@@ -10,8 +10,6 @@ ProviderDisplay.propTypes = {
 };
 
 export default function ProviderDisplay({ providerDetail, onSelect }) {
-  console.log(providerDetail);
-
   return (
     <Grid item xs={6} md={3}>
       <Card>

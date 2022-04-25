@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams, Link as RouterLink } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, Link as RouterLink, useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // material
 import { Grid, Typography, Box, Button, Collapse, Stack } from '@mui/material';
@@ -42,10 +42,14 @@ export default function HubIntegrationComplete() {
   const { authorise, providers } = useSelector((state) => state.provider);
   const { integration: integrations } = useSelector((state) => state.integration);
   const navigate = useNavigate();
-  const { provider, integration, shop } = useParams();
+  const { provider, integration } = useParams();
+  const [searchParams] = useSearchParams();
   const [selectedProvider, setSelectedProvider] = useState(null);
   const [linkVerified, setLinkVerified] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
+
+  // Get se;ected shop name
+  const shop = searchParams.get('shop');
 
   useEffect(() => {
     if (!integration) return;

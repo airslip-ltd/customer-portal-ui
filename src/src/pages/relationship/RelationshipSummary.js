@@ -16,8 +16,6 @@ import { featureEnabled } from '../../utils/feature-switch';
 export default function RelationshipSummary() {
   const { relationship } = useRelationship();
 
-  console.log(relationship);
-
   const ViewActions = () => (
     <Stack direction="row" spacing={1} sx={{ pt: 3 }}>
       <Button size="medium" variant="contained" component={RouterLink} to={`${PATH_DASHBOARD.relationship.list}`}>

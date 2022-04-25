@@ -29,7 +29,6 @@ export const storeValidation = {
 export async function validateStore(shopName, validation) {
   // Build a url
   const url = `${validation.leftOperator || 'https://'}${shopName}${validation.rightOperator}`;
-  console.log(url);
 
   // Call the URL
   const response = await axios({
