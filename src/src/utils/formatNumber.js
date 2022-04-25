@@ -1,16 +1,42 @@
 import { replace } from 'lodash';
 import numeral from 'numeral';
-import 'numeral/locales/en-gb';
+import 'numeral/locales';
 
-numeral.locale('en-gb');
+const currencyToLocale = {
+  AED: { locale: 'ar-AE' },
+  BGN: { locale: 'bg' },
+  CHF: { locale: 'de-CH' },
+  CZK: { locale: 'cs' },
+  DKK: { locale: 'da-DK' },
+  EUR: { locale: 'de' },
+  GBP: { locale: 'en-GB' },
+  HRK: { locale: 'hr-HR' },
+  HUF: { locale: 'hu' },
+  ISK: { locale: 'is-IS' },
+  NGN: { locale: 'en-NG' },
+  NOK: { locale: 'nb-NO' },
+  PLN: { locale: 'pl' },
+  RON: { locale: 'ro-RO' },
+  SEK: { locale: 'sv-SE' },
+  USD: { locale: null }
+};
 
 // ----------------------------------------------------------------------
 
-export function fCurrency(number) {
+const setLocalFromCurrency = (currencyCode) => {
+  currencyCode = currencyCode || 'GBP';
+  const currency = currencyToLocale[currencyCode];
+  if (!currency.locale) numeral.reset();
+  else numeral.locale(currency.locale);
+};
+
+export function fCurrency(number, currencyCode) {
+  setLocalFromCurrency(currencyCode);
   return numeral(number).format('$0,0.00');
 }
 
-export function fCurrencyFromLong(number) {
+export function fCurrencyFromLong(number, currencyCode) {
+  setLocalFromCurrency(currencyCode);
   return numeral(number / 100).format('$0,0.00');
 }
 

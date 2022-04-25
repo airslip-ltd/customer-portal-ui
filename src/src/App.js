@@ -1,4 +1,5 @@
 // routes
+import { BreakpointProvider } from 'react-socks';
 import Router from './routes';
 // theme
 import ThemeConfig from './theme';
@@ -21,20 +22,22 @@ export default function App() {
   const { isInitialized } = useAuth();
 
   return (
-    <ThemeConfig>
-      <ThemePrimaryColor>
-        <ThemeLocalization>
-          <RtlLayout>
-            <NotistackProvider>
-              <GlobalStyles />
-              <BaseOptionChartStyle />
-              <Settings />
-              <ScrollToTop />
-              {isInitialized ? <Router /> : <LoadingScreen />}
-            </NotistackProvider>
-          </RtlLayout>
-        </ThemeLocalization>
-      </ThemePrimaryColor>
-    </ThemeConfig>
+    <BreakpointProvider>
+      <ThemeConfig>
+        <ThemePrimaryColor>
+          <ThemeLocalization>
+            <RtlLayout>
+              <NotistackProvider>
+                <GlobalStyles />
+                <BaseOptionChartStyle />
+                <Settings />
+                <ScrollToTop />
+                {isInitialized ? <Router /> : <LoadingScreen />}
+              </NotistackProvider>
+            </RtlLayout>
+          </ThemeLocalization>
+        </ThemePrimaryColor>
+      </ThemeConfig>
+    </BreakpointProvider>
   );
 }

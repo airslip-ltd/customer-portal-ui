@@ -36,11 +36,16 @@ export const columns = [
     flex: 1
   },
   {
+    field: 'currencyCode',
+    headerName: 'Currency Code',
+    flex: 1
+  },
+  {
     type: 'number',
     field: 'balance',
     headerName: 'Balance',
     flex: 1,
-    valueFormatter: (params) => fCurrency(params.value)
+    valueFormatter: (params) => fCurrency(params.value, params.row.currencyCode)
   },
   {
     type: 'date',

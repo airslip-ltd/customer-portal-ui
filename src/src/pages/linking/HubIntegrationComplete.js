@@ -188,8 +188,13 @@ export default function HubIntegrationComplete() {
                   Try Again
                 </Button>
                 {isAuthenticated && (
-                  <Button size="medium" variant="contained" component={RouterLink} to="/">
-                    Take me Home
+                  <Button
+                    size="medium"
+                    variant="contained"
+                    component={RouterLink}
+                    to={PATH_DASHBOARD.integrations.create}
+                  >
+                    Back
                   </Button>
                 )}
               </Stack>

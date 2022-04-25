@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Link, Stack, Avatar, Drawer, Tooltip, Typography, CardActionArea } from '@mui/material';
+import { Box, Link, Stack, Avatar, Drawer, Tooltip, Typography, CardActionArea, Button } from '@mui/material';
 // hooks
 import useCollapseDrawer from '../../hooks/useCollapseDrawer';
 // components
@@ -15,6 +16,7 @@ import { MHidden } from '../../components/@material-extend';
 import { userSidebar } from './SidebarConfig';
 import useAuth from '../../hooks/useAuth';
 import useMemberDetails from '../../hooks/useMemberDetails';
+import { PATH_DASHBOARD } from '../../routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -90,9 +92,21 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const { memberDetails } = useMemberDetails();
   const sidebarConfig = userSidebar(user.airslipUserType);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+      enqueueSnackbar('Unable to logout', { variant: 'error' });
+    }
+  };
 
   const { isCollapse, collapseClick, collapseHover, onHoverEnter, onHoverLeave } = useCollapseDrawer();
 
@@ -134,7 +148,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         {isCollapse ? (
           <Avatar alt="My Avatar" src="/static/mock-images/avatars/avatar_default.jpg" sx={{ mx: 'auto', mb: 2 }} />
         ) : (
-          <Link underline="none" component={RouterLink} to="#">
+          <Link underline="none" component={RouterLink} to={PATH_DASHBOARD.profile.view}>
             <AccountStyle>
               <Avatar alt="My Avatar" src="/static/mock-images/avatars/avatar_default.jpg" />
               <Box sx={{ ml: 2 }}>
@@ -153,6 +167,11 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       </Stack>
 
       <NavSection navConfig={sidebarConfig} isShow={!isCollapse} />
+      <Box sx={{ p: 2, pt: 1.5 }}>
+        <Button fullWidth color="inherit" variant="outlined" onClick={handleLogout}>
+          Logout
+        </Button>
+      </Box>
     </Scrollbar>
   );
 
