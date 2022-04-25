@@ -9,7 +9,7 @@ import { Box, Typography, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { LoadingCard } from '../../_common/progress';
 // utils
-import { fNumber, fPercent } from '../../../utils/formatNumber';
+import { fNumber, fPercent, fCurrency } from '../../../utils/formatNumber';
 
 // ----------------------------------------------------------------------
 
@@ -89,7 +89,7 @@ export default function MerchantDashboardSnapshot({ snapshot, graphColor, title,
             </Typography>
           </Stack>
 
-          <Typography variant="h3">&pound;{fNumber(metricData.balance)}</Typography>
+          <Typography variant="h3">{fCurrency(metricData.balance, metricData.currencyCode)}</Typography>
         </Box>
 
         <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} width={60} height={36} />
