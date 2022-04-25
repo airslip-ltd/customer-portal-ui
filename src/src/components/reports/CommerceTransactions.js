@@ -33,7 +33,6 @@ export default function CommerceTransactions({ integrationId, title }) {
 
   const handleChangeQuery = (newQuery) => {
     if (!newQuery) return;
-    console.log('handleChangeQuery', newQuery);
     setQuery(newQuery);
     dispatch(
       getCommerceTransactions({
