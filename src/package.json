@@ -121,6 +121,7 @@
     "react-scripts": "^4.0.1",
     "react-scroll": "^1.8.4",
     "react-slick": "^0.28.0",
+    "react-socks": "^2.2.0",
     "react-spring": "^9.2.4",
     "react-time-ago": "^7.1.9",
     "redux": "^4.1.1",

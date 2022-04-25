@@ -38,14 +38,14 @@ export const columns = [
     field: 'total',
     headerName: 'Total',
     flex: 1,
-    valueFormatter: (params) => fCurrencyFromLong(params.value)
+    valueFormatter: (params) => fCurrencyFromLong(params.value, params.row.currencyCode)
   },
   {
     type: 'number',
     field: 'totalRefund',
     headerName: 'Refunded',
     flex: 1,
-    valueFormatter: (params) => fCurrencyFromLong(params.value)
+    valueFormatter: (params) => fCurrencyFromLong(params.value, params.row.currencyCode)
   },
   {
     field: 'currencyCode',

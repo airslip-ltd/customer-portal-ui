@@ -7,7 +7,7 @@ import useSettings from '../../hooks/useSettings';
 import useMemberDetails from '../../hooks/useMemberDetails';
 // components
 import Page from '../../components/Page';
-import { AppWelcome } from '../../components/_dashboard/general-app';
+import AppWelcome from '../../components/_dashboard/general-app/AppWelcome';
 import { PartnerHome } from '../../components/_dashboard/partner';
 import { MerchantHome } from '../../components/_dashboard/merchant';
 

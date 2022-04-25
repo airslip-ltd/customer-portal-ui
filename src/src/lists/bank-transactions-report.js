@@ -38,7 +38,7 @@ export const columns = [
     field: 'amount',
     headerName: 'Amount',
     flex: 1,
-    valueFormatter: (params) => fCurrencyFromLong(params.value)
+    valueFormatter: (params) => fCurrencyFromLong(params.value, params.row.currencyCode)
   },
   {
     field: 'currencyCode',
