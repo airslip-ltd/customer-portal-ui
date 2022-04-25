@@ -56,7 +56,6 @@ export default function ProviderSelection() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(country);
     dispatch(getProviders(country));
   }, [dispatch, country]);
 
@@ -97,13 +96,13 @@ export default function ProviderSelection() {
   };
 
   const handleStoreName = (values) => {
+    setModalView(null);
+
     if (values != null) {
       navigate(
         `${PATH_INTEGRATE.authorise}/${selectedProvider.provider}/${selectedProvider.integration}?shop=${values.shop}`
       );
     }
-
-    setModalView(null);
   };
 
   const handleCloseModal = () => {
@@ -185,7 +184,7 @@ export default function ProviderSelection() {
         provider={selectedProvider}
       />
       <ComingSoon open={modalView === 'ComingSoon'} onClose={handleCloseModal} />
-      <ManualInstall open={modalView === 'Manual'} onClose={handleCloseModal} />
+      <ManualInstall open={modalView === 'Manual'} provider={selectedProvider} onClose={handleCloseModal} />
     </>
   );
 }
