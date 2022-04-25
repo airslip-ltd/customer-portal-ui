@@ -64,8 +64,8 @@ export default function CaptureStoreName({ onClose, open, provider }) {
       closeWithShop(values);
     } else {
       setFailedValidation(true);
+      setValidating(false);
     }
-    setValidating(false);
   };
 
   const closeWithShop = (values) => {
@@ -99,7 +99,7 @@ export default function CaptureStoreName({ onClose, open, provider }) {
           <Form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <Stack spacing={2} sx={{ mt: 2 }}>
               <DialogContentText>
-                For us to complete a connection {provider.friendlyName} we need your {validation.storeLabel}.
+                For us to complete a connection to {provider.friendlyName} we need your {validation.storeLabel}.
               </DialogContentText>
 
               <TextFieldWithHelper
