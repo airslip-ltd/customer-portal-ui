@@ -9,7 +9,7 @@ import { Box, Typography, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { LoadingCard } from '../../_common/progress';
 // utils
-import { fNumber, fPercent, fCurrency } from '../../../utils/formatNumber';
+import { fPercent, fCurrency } from '../../../utils/formatNumber';
 
 // ----------------------------------------------------------------------
 
