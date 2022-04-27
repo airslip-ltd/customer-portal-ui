@@ -1,9 +1,11 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { Box, Button, Collapse, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from '../redux/store';
 import { getCurrencies } from '../redux/slices/dataLists';
 import useDataOwner from '../hooks/useDataOwner';
+import LoadingScreen from '../components/LoadingScreen';
 
 // ----------------------------------------------------------------------
 
@@ -70,6 +72,20 @@ function CurrencySelectionProvider({ children }) {
       }}
     >
       <Stack>
+        {!currencyList.complete && (
+          <LoadingScreen request={currencyList}>
+            {currencyList.hasError && (
+              <Collapse in={currencyList.hasError}>
+                <Stack direction="row" justifyContent="end">
+                  <Button size="medium" variant="outlined" component={RouterLink} to="/">
+                    Take me Home
+                  </Button>
+                </Stack>
+              </Collapse>
+            )}
+          </LoadingScreen>
+        )}
+
         {currencyList.complete && currencyList.response.records.length > 1 && (
           <Box sx={{ display: 'flex' }}>
             <Box sx={{ flexGrow: 1 }} />
