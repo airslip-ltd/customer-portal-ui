@@ -27,12 +27,9 @@ function MemberProvider({ children }) {
   const { member } = useSelector((state) => state.auth);
 
   const refreshMember = useCallback(() => {
-    if (isAuthenticated) dispatch(getMyDetails());
+    if (!isAuthenticated) return;
+    dispatch(getMyDetails());
   }, [isAuthenticated, dispatch]);
-
-  useEffect(() => {
-    if (isAuthenticated) refreshMember();
-  }, [isAuthenticated, refreshMember]);
 
   useEffect(() => {
     if (isAuthenticated && member.complete) {

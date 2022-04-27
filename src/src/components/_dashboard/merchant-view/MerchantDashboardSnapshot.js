@@ -52,7 +52,7 @@ export default function MerchantDashboardSnapshot({ snapshot, graphColor, title,
     tooltip: {
       x: { show: false },
       y: {
-        formatter: (seriesName) => fNumber(seriesName),
+        formatter: (seriesName) => fCurrency(seriesName, metricData.currencyCode),
         title: {
           formatter: () => ''
         }

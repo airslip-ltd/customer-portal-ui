@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 import { LoadingCard } from '../../_common/progress';
 // redux
 import { BaseOptionChart } from '../../charts';
+// utils
+import { fCurrency } from '../../../utils/formatNumber';
 
 // ----------------------------------------------------------------------
 
@@ -22,10 +24,12 @@ MerchantDashboardSeries.propTypes = {
 export default function MerchantDashboardSeries({ title, apiRequest, navigateTo, colors, chartType }) {
   const [chartData, setChartData] = useState({});
   const [categories, setCategories] = useState([]);
+  const [currencyCode, setCurrencyCode] = useState('GBP');
 
   useEffect(() => {
     if (!apiRequest.complete) return;
 
+    setCurrencyCode(apiRequest.response.currencyCode);
     setChartData(apiRequest.response);
     setCategories(apiRequest.response.series[0].metrics.map((metric) => metric.description));
   }, [apiRequest, setChartData, setCategories]);
@@ -40,7 +44,14 @@ export default function MerchantDashboardSeries({ title, apiRequest, navigateTo,
       theme.palette.chart.red[0],
       theme.palette.primary.main,
       theme.palette.chart.yellow[0]
-    ]
+    ],
+    yaxis: {
+      labels: {
+        formatter(value) {
+          return fCurrency(value, currencyCode);
+        }
+      }
+    }
   });
 
   return (

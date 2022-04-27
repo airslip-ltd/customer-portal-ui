@@ -14,9 +14,7 @@ function MonthBox({ value, onClick }) {
 
 // ----------------------------------------------------------------------
 
-const initialState = {
-  relationship: null
-};
+const initialState = {};
 
 const DateSelectionContext = createContext({
   ...initialState

@@ -26,7 +26,6 @@ export default function CountrySelection({ onChange }) {
 
   return (
     <Autocomplete
-      id="asynchronous-demo"
       sx={{ width: 300 }}
       onChange={handleChanged}
       disableClearable
