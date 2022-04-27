@@ -1,6 +1,6 @@
 // material
 import { Grid } from '@mui/material';
-import { DateSelectionProvider } from '../../../contexts';
+import { DateSelectionProvider, CurrencySelectionProvider } from '../../../contexts';
 // components
 import {
   MerchantRevenue,
@@ -15,7 +15,7 @@ import {
 
 export default function MerchantSummary() {
   return (
-    <>
+    <CurrencySelectionProvider>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <RequiredServiceGuard requiredService="commerce" title="Revenue (Last 30 days)">
@@ -51,6 +51,6 @@ export default function MerchantSummary() {
           </Grid>
         </Grid>
       </DateSelectionProvider>
-    </>
+    </CurrencySelectionProvider>
   );
 }

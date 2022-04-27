@@ -27,3 +27,4 @@ export { default as MerchantSummaryDemo } from './MerchantSummaryDemo';
 export { default as MerchantDashboardSeries } from './MerchantDashboardSeries';
 export { default as MerchantDashboardSnapshot } from './MerchantDashboardSnapshot';
 export { default as DemoNumberSnapshot } from './DemoNumberSnapshot';
+export { default as MerchantRating } from './MerchantRating';

@@ -9,19 +9,27 @@ import { getCurrentBalance } from '../../../redux/slices/analytics';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
 import useDataOwner from '../../../hooks/useDataOwner';
+import useCurrencyQuery from '../../../hooks/useCurrencyQuery';
 
 // ----------------------------------------------------------------------
 
 export default function MerchantBalance() {
   const { dataOwnerQuery, buildOwnedPath } = useDataOwner();
+  const { currencyQuery, initialised } = useCurrencyQuery();
   const theme = useTheme();
   const dispatch = useDispatch();
 
   const { currentBalance } = useSelector((state) => state.analytics);
 
   useEffect(() => {
-    dispatch(getCurrentBalance(dataOwnerQuery));
-  }, [dispatch, dataOwnerQuery]);
+    if (!initialised) return;
+    dispatch(
+      getCurrentBalance({
+        ...dataOwnerQuery,
+        ...currencyQuery
+      })
+    );
+  }, [dispatch, dataOwnerQuery, currencyQuery, initialised]);
 
   return (
     <MerchantDashboardSnapshot

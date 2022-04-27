@@ -16,6 +16,7 @@ import reportsReducer from './slices/reports';
 import userReducer from './slices/user';
 import authReducer from './slices/auth';
 import countriesReducer from './slices/countries';
+import dataListsReducer from './slices/dataLists';
 
 // ----------------------------------------------------------------------
 
@@ -41,7 +42,8 @@ const rootReducer = combineReducers({
   auth: authReducer,
   consent: consentReducer,
   commerce: commerceReducer,
-  countries: countriesReducer
+  countries: countriesReducer,
+  dataLists: dataListsReducer
 });
 
 export { rootPersistConfig, rootReducer };

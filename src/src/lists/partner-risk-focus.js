@@ -1,4 +1,4 @@
-import { MerchantRating } from '../components/_dashboard/merchant-view';
+import { MerchantRating } from '../components/_dashboard/merchant-demo';
 
 export const columns = [
   {

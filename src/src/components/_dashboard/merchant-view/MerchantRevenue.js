@@ -9,6 +9,7 @@ import MerchantDashboardSnapshot from './MerchantDashboardSnapshot';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
 import useDataOwner from '../../../hooks/useDataOwner';
+import useCurrencyQuery from '../../../hooks/useCurrencyQuery';
 
 // ----------------------------------------------------------------------
 MerchantRevenue.propTypes = {
@@ -19,11 +20,22 @@ export default function MerchantRevenue({ accountId }) {
   const dispatch = useDispatch();
   const { salesStats } = useSelector((state) => state.analytics);
   const { dataOwnerQuery, buildOwnedPath } = useDataOwner();
+  const { currencyQuery, initialised } = useCurrencyQuery();
   accountId = accountId || '';
 
   useEffect(() => {
-    dispatch(getSalesShapshot(dataOwnerQuery, 30, accountId));
-  }, [dispatch, dataOwnerQuery, accountId]);
+    if (!initialised) return;
+    dispatch(
+      getSalesShapshot(
+        {
+          ...dataOwnerQuery,
+          ...currencyQuery
+        },
+        30,
+        accountId
+      )
+    );
+  }, [dispatch, dataOwnerQuery, currencyQuery, initialised, accountId]);
 
   return (
     <MerchantDashboardSnapshot
