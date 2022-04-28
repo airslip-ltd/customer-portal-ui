@@ -79,10 +79,17 @@ export default function UserView() {
   };
 
   useEffect(() => {
-    if (current.status === 'success') {
-      setPleaseWait(false);
-      enqueueSnackbar('Delete success', { variant: 'success' });
-      navigate(PATH_DASHBOARD.user.list);
+    switch (current.status) {
+      case 'success':
+        setPleaseWait(false);
+        enqueueSnackbar('Delete success', { variant: 'success' });
+        navigate(PATH_DASHBOARD.user.list);
+        break;
+      case 'failed':
+        setPleaseWait(false);
+        break;
+      default:
+        break;
     }
   }, [current, dispatch, enqueueSnackbar, navigate]);
 
@@ -99,12 +106,12 @@ export default function UserView() {
       <Button size="medium" variant="contained" component={RouterLink} to={`${PATH_DASHBOARD.user.list}`}>
         Back
       </Button>
-      <ColorButton size="medium" variant="contained" onClick={handleDelete}>
-        Delete
-      </ColorButton>
       <Button size="medium" variant="contained" component={RouterLink} to={`${PATH_DASHBOARD.user.edit}/${id}`}>
         Edit
       </Button>
+      <ColorButton size="medium" variant="contained" onClick={handleDelete}>
+        Delete
+      </ColorButton>
     </Stack>
   );
 

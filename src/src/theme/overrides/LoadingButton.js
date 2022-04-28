@@ -1,7 +1,6 @@
 // ----------------------------------------------------------------------
 
 export default function LoadingButton(theme) {
-  console.log(theme);
   return {
     MuiLoadingButton: {
       styleOverrides: {

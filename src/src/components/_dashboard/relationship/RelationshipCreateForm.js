@@ -47,7 +47,7 @@ export default function RelationshipCreateForm() {
     firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),
     lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
     email: Yup.string().required('Email is required').email(),
-    phoneNumber: Yup.string().required('Phone number is required')
+    phoneNumber: Yup.string()
   });
 
   const formik = useFormik({

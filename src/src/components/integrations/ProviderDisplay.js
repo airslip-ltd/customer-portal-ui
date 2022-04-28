@@ -11,7 +11,7 @@ ProviderDisplay.propTypes = {
 
 export default function ProviderDisplay({ providerDetail, onSelect }) {
   return (
-    <Grid item xs={6} md={3}>
+    <Grid item xs={6} lg={4} xl={3}>
       <Card>
         <CardActionArea component={Button} onClick={() => onSelect(providerDetail)}>
           <CardHeader
@@ -34,7 +34,7 @@ export default function ProviderDisplay({ providerDetail, onSelect }) {
             }
           />
           <CardContent sx={{ p: 2, pt: 0 }}>
-            <Box sx={{ height: 60, display: 'flex' }}>
+            <Box sx={{ minHeight: 60, display: 'flex' }}>
               {providerDetail.provider.integrationType === 'Banking' && (
                 <BankDetailSummary accountDetail={providerDetail.accountDetail} />
               )}

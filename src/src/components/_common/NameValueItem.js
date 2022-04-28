@@ -9,9 +9,9 @@ import { Stack, Box } from '@mui/material';
 // ----------------------------------------------------------------------
 
 const IconStyle = styled(Icon)(() => ({
-  width: 10,
-  height: 10,
-  marginTop: 6,
+  width: 15,
+  height: 15,
+  marginTop: '2px',
   flexShrink: 0
 }));
 
@@ -19,15 +19,16 @@ const IconStyle = styled(Icon)(() => ({
 
 NameValueItem.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
+  icon: PropTypes.node
 };
 
-export default function NameValueItem({ name, value }) {
+export default function NameValueItem({ name, value, icon }) {
   return (
     <Stack direction="row" spacing={1}>
-      <IconStyle icon={circle} />
+      <IconStyle icon={icon || circle} />
       <Box sx={{ textTransform: 'capitalize', fontWeight: 'light', fontSize: 12 }}>{name}</Box>
-      <IconStyle icon={minus} sx={{ top: 5, position: 'relative' }} />
+      <IconStyle icon={minus} sx={{ top: 3, position: 'relative' }} />
       <Box sx={{ textTransform: 'none', fontWeight: 'bold', fontSize: 12 }}>{value}</Box>
     </Stack>
   );

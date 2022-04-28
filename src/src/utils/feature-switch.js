@@ -10,6 +10,8 @@ export function featureEnabled(featureName) {
     case 'partner-risk-focus':
     case 'demo-to-complete':
       return false;
+    case 'coming-soon':
+      return process.env.REACT_APP_ENVIRONMENT !== 'demo';
     default:
       return true;
   }
