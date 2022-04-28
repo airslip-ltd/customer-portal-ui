@@ -93,13 +93,13 @@ export default function HubIntegrationComplete() {
 
   return (
     <ExternalFixedLayout
-      title="Add an Integration"
-      message="To make the most of Airslip you should integrate as many of your platforms as possible."
+      title="Connecting your Service"
+      message="To make the most of Airslip you should Connect as many of your Services as possible."
     >
-      <ExternalHeader title="Completing Integration" progress={0} />
+      <ExternalHeader title="Completing Connection" progress={0} />
 
       <HelpDialogue title="Good to know">
-        We're doing a little work now to integrate your provider, once this is complete we'll start analysing your data
+        We're doing a little work now to Connect to your Service, once this is complete we'll start analysing your data
         automatically!
       </HelpDialogue>
 
@@ -126,7 +126,7 @@ export default function HubIntegrationComplete() {
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Item sx={{ flexGrow: 1 }}>
                 <Stack spacing={1}>
-                  <Typography variant="h6">Registering integration</Typography>
+                  <Typography variant="h6">Connecting to Service</Typography>
                   <ApiErrorFriendly
                     error={authorise.error}
                     message={`Something went wrong registering ${selectedProvider.friendlyName}...`}
@@ -144,7 +144,7 @@ export default function HubIntegrationComplete() {
           <Grid item xs={12} sx={{ minHeight: 60 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
               <Item sx={{ flexGrow: 1 }}>
-                <Typography variant="h6">Verifying integration</Typography>
+                <Typography variant="h6">Verifying Connection</Typography>
               </Item>
               <Item>
                 {!linkVerified && !authorise.hasError && <LoadingProgress />}
@@ -158,7 +158,7 @@ export default function HubIntegrationComplete() {
             <Collapse in={authorise.complete && linkVerified}>
               <SuccessDialogue title="And you're done">
                 <Typography variant="body2">
-                  Thats it, you've successfully integrated with {selectedProvider.friendlyName}. We'll do the rest, so
+                  Thats it, you've successfully Connected with {selectedProvider.friendlyName}. We'll do the rest, so
                   sit back and have a cup of tea.
                 </Typography>
               </SuccessDialogue>

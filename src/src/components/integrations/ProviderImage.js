@@ -324,32 +324,6 @@ const BorderedAvatar = styled(Avatar)({
   backgroundColor: 'white'
 });
 
-RenderedImage.propTypes = {
-  imageDetails: PropTypes.object.isRequired,
-  provider: PropTypes.string.isRequired,
-  fileType: PropTypes.string.isRequired
-};
-
-function RenderedImage({ imageDetails, provider, fileType }) {
-  if (fileType === 'icon')
-    return (
-      <BorderedAvatar
-        src={imageDetails.imageUrl}
-        alt={provider}
-        sx={{ height: imageDetails.height, width: imageDetails.width }}
-      />
-    );
-
-  return (
-    <Box
-      component="img"
-      src={imageDetails.imageUrl}
-      alt={provider}
-      sx={{ maxHeight: imageDetails.height, margin: 'auto' }}
-    />
-  );
-}
-
 ProviderImage.propTypes = {
   provider: PropTypes.string.isRequired,
   integrationType: PropTypes.string.isRequired,
@@ -362,11 +336,25 @@ export default function ProviderImage({ provider, integrationType, fileType, wid
   const imageDetails = getImageDetails(provider, integrationType, fileType);
   if (width) imageDetails.width = width;
   if (height) imageDetails.height = height;
-  return (
-    <Box {...other}>
-      <Box sx={{ width: imageDetails.width }}>
-        <RenderedImage imageDetails={imageDetails} provider={provider} fileType={fileType} />
-      </Box>
-    </Box>
-  );
+
+  if (fileType === 'icon') {
+    other = {
+      sx: {
+        height: imageDetails.height,
+        width: imageDetails.width
+      },
+      ...other
+    };
+    return <BorderedAvatar src={imageDetails.imageUrl} alt={provider} {...other} />;
+  }
+
+  other = {
+    sx: {
+      maxHeight: imageDetails.height,
+      margin: 'auto'
+    },
+    ...other
+  };
+
+  return <Box component="img" src={imageDetails.imageUrl} alt={provider} {...other} />;
 }

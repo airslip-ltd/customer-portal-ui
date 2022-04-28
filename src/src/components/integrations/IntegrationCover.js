@@ -1,40 +1,12 @@
 import PropTypes from 'prop-types';
 // material
-import { alpha, styled } from '@mui/material/styles';
-import { Box, Typography } from '@mui/material';
-//
-import MyAvatar from '../MyAvatar';
-
-// ----------------------------------------------------------------------
-
-const RootStyle = styled('div')(({ theme }) => ({
-  '&:before': {
-    top: 0,
-    zIndex: 9,
-    width: '100%',
-    content: "''",
-    height: '100%',
-    position: 'absolute',
-    backdropFilter: 'blur(3px)',
-    WebkitBackdropFilter: 'blur(3px)', // Fix on Mobile
-    backgroundColor: alpha(theme.palette.primary.darker, 0.72)
-  }
-}));
-
-const InfoStyle = styled('div')(({ theme }) => ({
-  left: 0,
-  right: 0,
-  zIndex: 99,
-  position: 'absolute',
-  marginTop: theme.spacing(5),
-  [theme.breakpoints.up('md')]: {
-    right: 'auto',
-    display: 'flex',
-    alignItems: 'center',
-    left: theme.spacing(3),
-    bottom: theme.spacing(3)
-  }
-}));
+import { Box, Stack, Typography } from '@mui/material';
+// custom
+import { ProviderImage } from '.';
+import { CoverStyle } from '../_common';
+import IntegrationTypeIcon from './IntegrationTypeIcon';
+// utils
+import { descriptors } from '../../utils/descriptors';
 
 // ----------------------------------------------------------------------
 
@@ -43,12 +15,15 @@ IntegrationCover.propTypes = {
 };
 
 export default function IntegrationCover({ integration }) {
-  const { name } = integration;
-
   return (
-    <RootStyle>
-      <InfoStyle>
-        <MyAvatar
+    <CoverStyle
+      avatar={
+        <ProviderImage
+          width={30}
+          height={30}
+          provider={integration.provider.id}
+          integrationType={integration.provider.integrationType}
+          fileType="icon"
           sx={{
             mx: 'auto',
             borderWidth: 2,
@@ -58,18 +33,19 @@ export default function IntegrationCover({ integration }) {
             height: { xs: 80, md: 128 }
           }}
         />
-        <Box
-          sx={{
-            ml: { md: 3 },
-            mt: { xs: 1, md: 0 },
-            color: 'common.white',
-            textAlign: { xs: 'center', md: 'left' }
-          }}
-        >
-          <Typography variant="h4">{name}</Typography>
-          <Typography sx={{ opacity: 0.72 }}>Registered Integration</Typography>
-        </Box>
-      </InfoStyle>
-    </RootStyle>
+      }
+    >
+      <Stack>
+        <Stack spacing={1} direction="row">
+          <Box>
+            <Typography variant="h4">{integration.provider.friendlyName}</Typography>
+          </Box>
+          <Box>
+            <IntegrationTypeIcon integrationType={integration.provider.integrationType} />
+          </Box>
+        </Stack>
+        <Typography sx={{ opacity: 0.72 }}>{descriptors.integration(integration)}</Typography>
+      </Stack>
+    </CoverStyle>
   );
 }

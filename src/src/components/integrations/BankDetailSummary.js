@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Stack } from '@mui/material';
-import { NameValueDisplay } from '.';
+import { NameValueList, NameValueItem } from '../_common';
 
 // ----------------------------------------------------------------------
 
@@ -56,10 +55,10 @@ export default function BankDetailSummary({ accountDetail }) {
   }
 
   return (
-    <Stack>
-      <NameValueDisplay name="Description" value={<AccountDescription accountDetail={accountDetail} />} />
-      <NameValueDisplay name="Account Type" value={accountTypeName} />
-      <NameValueDisplay name="Usage Type" value={usageTypeName} />
-    </Stack>
+    <NameValueList>
+      <NameValueItem name="Description" value={<AccountDescription accountDetail={accountDetail} />} />
+      <NameValueItem name="Account Type" value={accountTypeName} />
+      <NameValueItem name="Usage Type" value={usageTypeName} />
+    </NameValueList>
   );
 }

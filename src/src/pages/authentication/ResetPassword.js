@@ -64,7 +64,7 @@ export default function ResetPassword() {
 
               <ResetPasswordForm onRequest={handleSend} isLoading={forgot.loading} />
 
-              <Button fullWidth size="large" onClick={handleBack} sx={{ mt: 1 }}>
+              <Button fullWidth variant="outlined" size="large" onClick={handleBack} sx={{ mt: 1 }}>
                 Back
               </Button>
             </>

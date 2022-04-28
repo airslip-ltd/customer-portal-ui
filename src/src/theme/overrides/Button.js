@@ -7,21 +7,28 @@ export default function Button(theme) {
         root: {
           '&:hover': {
             boxShadow: 'none'
-          }
+          },
+          color: theme.palette.button.standard
         },
         sizeLarge: {
           height: 48
         },
         // contained
         containedInherit: {
-          color: theme.palette.grey[800],
           boxShadow: theme.customShadows.z8,
+          color: theme.palette.button.text,
           '&:hover': {
-            backgroundColor: theme.palette.grey[400]
-          }
+            backgroundColor: theme.palette.button.hover
+          },
+          backgroundColor: theme.palette.button.standard
         },
         containedPrimary: {
-          boxShadow: theme.customShadows.primary
+          boxShadow: theme.customShadows.primary,
+          color: theme.palette.button.text,
+          '&:hover': {
+            backgroundColor: theme.palette.button.hover
+          },
+          backgroundColor: theme.palette.button.standard
         },
         containedSecondary: {
           boxShadow: theme.customShadows.secondary
@@ -39,10 +46,12 @@ export default function Button(theme) {
           boxShadow: theme.customShadows.error
         },
         // outlined
-        outlinedInherit: {
-          border: `1px solid ${theme.palette.grey[500_32]}`,
+        outlinedPrimary: {
+          border: `1px solid ${theme.palette.common.black}`,
+          color: theme.palette.common.black,
           '&:hover': {
-            backgroundColor: theme.palette.action.hover
+            backgroundColor: theme.palette.common.black,
+            color: theme.palette.common.white
           }
         },
         textInherit: {

@@ -29,6 +29,9 @@ export default function DataGrid(theme) {
           },
           '& .MuiDataGrid-columnHeader[data-field="__check__"]': {
             padding: 0
+          },
+          '& .MuiDataGrid-columnHeaderTitleContainer': {
+            padding: 0
           }
         }
       }

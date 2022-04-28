@@ -1,18 +1,126 @@
 @font-face {
-  font-family: 'CircularStd';
-  font-weight: 400;
-  font-style: normal;
-  src: local('CircularStd'), url('CircularStd-Book.otf') format('opentype');
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans Light Italic'), local('OpenSauceSans-LightItalic'),
+        url('OpenSauceSans-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
 }
+
 @font-face {
-  font-family: 'CircularStd';
-  font-weight: 500;
-  font-style: normal;
-  src: local('CircularStd'), url('CircularStd-Medium.otf') format('opentype');
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans Regular'), local('OpenSauceSans-Regular'),
+        url('OpenSauceSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
+
 @font-face {
-  font-family: 'CircularStd';
-  font-weight: 700;
-  font-style: normal;
-  src: local('CircularStd'), url('CircularStd-Bold.otf') format('opentype');
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans Bold Italic'), local('OpenSauceSans-BoldItalic'),
+        url('OpenSauceSans-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
 }
+
+@font-face {
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans Medium'), local('OpenSauceSans-Medium'),
+        url('OpenSauceSans-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans SemiBold'), local('OpenSauceSans-SemiBold'),
+        url('OpenSauceSans-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans Italic'), local('OpenSauceSans-Italic'),
+        url('OpenSauceSans-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans Light'), local('OpenSauceSans-Light'),
+        url('OpenSauceSans-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sauce Sans ExBold';
+    src: local('Open Sauce Sans ExtraBold Italic'), local('OpenSauceSans-ExtraBoldItalic'),
+        url('OpenSauceSans-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans ExtraBold'), local('OpenSauceSans-ExtraBold'),
+        url('OpenSauceSans-ExtraBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans SemiBold Italic'), local('OpenSauceSans-SemiBoldItalic'),
+        url('OpenSauceSans-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans Black Italic'), local('OpenSauceSans-BlackItalic'),
+        url('OpenSauceSans-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans Medium Italic'), local('OpenSauceSans-MediumItalic'),
+        url('OpenSauceSans-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans Bold'), local('OpenSauceSans-Bold'),
+        url('OpenSauceSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sauce Sans';
+    src: local('Open Sauce Sans Black'), local('OpenSauceSans-Black'),
+        url('OpenSauceSans-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+

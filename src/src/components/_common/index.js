@@ -4,3 +4,6 @@ export { default as HelpDialogue } from './HelpDialogue';
 export { default as SuccessDialogue } from './SuccessDialogue';
 export { default as HelpSection } from './HelpSection';
 export { default as HelpCard } from './HelpCard';
+export { default as CoverStyle } from './CoverStyle';
+export { default as NameValueItem } from './NameValueItem';
+export { default as NameValueList } from './NameValueList';
