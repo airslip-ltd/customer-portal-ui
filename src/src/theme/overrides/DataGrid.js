@@ -7,6 +7,9 @@ export default function DataGrid(theme) {
         root: {
           borderRadius: 0,
           border: `1px solid transparent`,
+          '& .MuiDataGrid-row': {
+            cursor: 'pointer'
+          },
           '& .MuiTablePagination-root': {
             borderTop: 0
           },

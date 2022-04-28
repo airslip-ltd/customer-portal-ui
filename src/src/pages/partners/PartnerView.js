@@ -99,12 +99,12 @@ export default function PartnerView() {
       <Button size="medium" variant="contained" component={RouterLink} to={`${PATH_DASHBOARD.partner.list}`}>
         Back
       </Button>
-      <ColorButton size="medium" variant="contained" onClick={handleDelete}>
-        Delete
-      </ColorButton>
       <Button size="medium" variant="contained" component={RouterLink} to={`${PATH_DASHBOARD.partner.edit}/${id}`}>
         Edit
       </Button>
+      <ColorButton size="medium" variant="contained" onClick={handleDelete}>
+        Delete
+      </ColorButton>
     </Stack>
   );
 

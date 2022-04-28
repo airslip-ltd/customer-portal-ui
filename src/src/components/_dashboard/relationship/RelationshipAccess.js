@@ -1,20 +1,10 @@
 import PropTypes from 'prop-types';
-import { Icon } from '@iconify/react';
-import checkCircle from '@iconify/icons-ic/baseline-check-circle-outline';
+import approved from '@iconify/icons-ic/baseline-check-circle-outline';
+import invited from '@iconify/icons-ic/baseline-query-builder';
 // material
-import { styled } from '@mui/material/styles';
-import { Link, Card, Typography, CardHeader, Stack } from '@mui/material';
+import { Card, CardHeader, CardContent } from '@mui/material';
 import { fDateFromLong } from '../../../utils/formatDate';
-
-// ----------------------------------------------------------------------
-
-const IconStyle = styled(Icon)(({ theme }) => ({
-  width: 20,
-  height: 20,
-  marginTop: 1,
-  flexShrink: 0,
-  marginRight: theme.spacing(2)
-}));
+import { NameValueItem, NameValueList } from '../../_common';
 
 // ----------------------------------------------------------------------
 
@@ -29,26 +19,30 @@ export default function RelationshipAccess({ relationship }) {
     <Card>
       <CardHeader title="Data Access" />
 
-      <Stack spacing={2} sx={{ p: 3 }}>
-        {permission.map((permission) => (
-          <Stack key={permission.permissionType} direction="row">
-            <IconStyle icon={checkCircle} />
-            <Typography variant="body2">
-              {permission.permissionType} &nbsp;
+      <CardContent sx={{ pt: 1 }}>
+        <NameValueList>
+          {permission.map((permission) => (
+            <>
               {relationship.relationshipStatus === 'Approved' && (
-                <Link variant="body2" color="text.primary">
-                  approved on {fDateFromLong(permission.approvedOn)}
-                </Link>
+                <NameValueItem
+                  icon={approved}
+                  key={permission.permissionType}
+                  name={permission.permissionType}
+                  value={`approved on ${fDateFromLong(permission.approvedOn)}`}
+                />
               )}
               {relationship.relationshipStatus === 'Invited' && (
-                <Link variant="body2" color="text.primary">
-                  requested on {fDateFromLong(permission.requestedOn)}
-                </Link>
+                <NameValueItem
+                  icon={invited}
+                  key={permission.permissionType}
+                  name={permission.permissionType}
+                  value={`requested on ${fDateFromLong(permission.requestedOn)}`}
+                />
               )}
-            </Typography>
-          </Stack>
-        ))}
-      </Stack>
+            </>
+          ))}
+        </NameValueList>
+      </CardContent>
     </Card>
   );
 }

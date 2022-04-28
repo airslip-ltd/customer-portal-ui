@@ -99,12 +99,12 @@ export default function BusinessView() {
       <Button size="medium" variant="contained" component={RouterLink} to={`${PATH_DASHBOARD.business.list}`}>
         Back
       </Button>
-      <ColorButton size="medium" variant="contained" onClick={handleDelete}>
-        Delete
-      </ColorButton>
       <Button size="medium" variant="contained" component={RouterLink} to={`${PATH_DASHBOARD.business.edit}/${id}`}>
         Edit
       </Button>
+      <ColorButton size="medium" variant="contained" onClick={handleDelete}>
+        Delete
+      </ColorButton>
     </Stack>
   );
 

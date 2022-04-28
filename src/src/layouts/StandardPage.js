@@ -4,8 +4,6 @@ import { Container, Box } from '@mui/material';
 // routes
 import { LoadingView } from '../components/_common/progress';
 import { PATH_DASHBOARD } from '../routes/paths';
-// hooks
-import useSettings from '../hooks/useSettings';
 // components
 import Page from '../components/Page';
 import HeaderBreadcrumbs from '../components/HeaderBreadcrumbs';
@@ -36,7 +34,6 @@ StandardPage.propTypes = {
   activity: PropTypes.string.isRequired,
   areaHref: PropTypes.string,
   spaceHref: PropTypes.string.isRequired,
-  fullWidth: PropTypes.bool,
   apiRequest: PropTypes.object
 };
 
@@ -49,15 +46,11 @@ export default function StandardPage({
   spaceHref,
   activity,
   heading,
-  fullWidth,
   apiRequest
 }) {
-  const { themeStretch } = useSettings();
-  const width = fullWidth ? 'xl' : 'lg';
-
   return (
     <Page title={`${area} | ${space} | ${activity} | Airslip `}>
-      <Container maxWidth={themeStretch ? false : width}>
+      <Container maxWidth="xl">
         <Box sx={{ display: 'flex' }}>
           <Box>
             <HeaderBreadcrumbs

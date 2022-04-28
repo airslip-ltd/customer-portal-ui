@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 // material
-import { Card, Grid, CardActionArea, CardContent, Box, Button, Typography } from '@mui/material';
+import { Card, Grid, CardActionArea, CardContent, Box, Button } from '@mui/material';
 // components
 import { ProviderImage, CardOverlay } from '.';
+import { featureEnabled } from '../../utils/feature-switch';
 
 ProviderSelector.propTypes = {
   providerDetail: PropTypes.object.isRequired,
@@ -33,11 +34,12 @@ export default function ProviderSelector({ providerDetail, hasChildren, onSelect
             </Box>
           </CardContent>
         </CardActionArea>
-        {providerDetail.availability === 'ComingSoon' && (
+        {featureEnabled('coming-soon') && providerDetail.availability === 'ComingSoon' && (
           <CardOverlay>
-            <Typography variant="h4" sx={{ mt: 3 }}>
-              Coming Soon
-            </Typography>
+            <Box sx={{ display: 'flex' }}>
+              <Box sx={{ flexGrow: 1 }} />
+              <Box component="img" src="/static/icons/coming_soon.png" sx={{ height: 80, mt: '28px' }} />
+            </Box>
           </CardOverlay>
         )}
       </Card>

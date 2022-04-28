@@ -9,5 +9,5 @@ NameValueList.propTypes = {
 };
 
 export default function NameValueList({ children }) {
-  return <Stack>{children}</Stack>;
+  return <Stack spacing={0.5}>{children}</Stack>;
 }
