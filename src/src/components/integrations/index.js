@@ -13,5 +13,4 @@ export { default as CountrySelection } from './CountrySelection';
 export { default as ProviderDisplay } from './ProviderDisplay';
 export { default as IntegrationTypeIcon } from './IntegrationTypeIcon';
 export { default as BankDetailSummary } from './BankDetailSummary';
-export { default as NameValueDisplay } from './NameValueDisplay';
 export { default as CommerceDetailSummary } from './CommerceDetailSummary';

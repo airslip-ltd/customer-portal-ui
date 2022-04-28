@@ -22,6 +22,7 @@ export default function Lists(theme) {
     MuiListItemText: {
       styleOverrides: {
         root: {
+          color: theme.palette.common.black,
           marginTop: 0,
           marginBottom: 0
         },

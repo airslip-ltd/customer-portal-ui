@@ -17,12 +17,12 @@ const IconStyle = styled(Icon)(() => ({
 
 // ----------------------------------------------------------------------
 
-NameValueDisplay.propTypes = {
+NameValueItem.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.any.isRequired
 };
 
-export default function NameValueDisplay({ name, value }) {
+export default function NameValueItem({ name, value }) {
   return (
     <Stack direction="row" spacing={1}>
       <IconStyle icon={circle} />

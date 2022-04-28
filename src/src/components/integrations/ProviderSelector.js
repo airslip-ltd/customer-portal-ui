@@ -29,7 +29,6 @@ export default function ProviderSelector({ providerDetail, hasChildren, onSelect
                 provider={providerDetail.id}
                 integrationType={providerDetail.integrationType}
                 fileType="logo"
-                sx={{ margin: 'auto' }}
               />
             </Box>
           </CardContent>

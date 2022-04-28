@@ -36,12 +36,12 @@ export default function SetupIntegration() {
 
   return (
     <OnboardingLayout
-      stageName="Add you integrations"
-      title={serviceCount === 0 ? 'Add your first Integration' : 'Add another integration'}
+      stageName="Connect your Services"
+      title={serviceCount === 0 ? 'Connect your first Service' : 'Connect another Service'}
       message={
         serviceCount === 0
-          ? 'To make the most of Airslip you should integrate as many of your platforms as possible.'
-          : "You're off to a great start, lets see if we support anymore of your providers"
+          ? 'To make the most of Airslip you should Connect as many of your Services as possible.'
+          : "You're off to a great start, lets see if we support anymore of your Services"
       }
       progress={100}
       action={
@@ -53,8 +53,8 @@ export default function SetupIntegration() {
       }
     >
       <HelpDialogue title="Good to know">
-        We like to make integrating as easy as possible, select your platform of choice from the list below and we'll
-        guide you through what you need to do next.
+        We like to make Connecting your Services as easy as possible, select your platform of choice from the list below
+        and we'll guide you through what you need to do next.
       </HelpDialogue>
 
       <Grid container spacing={3}>

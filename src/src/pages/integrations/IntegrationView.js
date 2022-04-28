@@ -110,8 +110,8 @@ export default function IntegrationView() {
       area="Dashboard"
       space="Integrations"
       spaceHref={PATH_DASHBOARD.integrations.list}
-      activity={current.complete ? current.response.currentVersion.name : id}
-      heading={current.complete ? current.response.currentVersion.name : id}
+      activity={current.complete ? current.response.currentVersion.provider.friendlyName : id}
+      heading={current.complete ? current.response.currentVersion.provider.friendlyName : id}
       actions={<ViewActions />}
     >
       {current.complete && (

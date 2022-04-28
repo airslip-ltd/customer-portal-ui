@@ -1,6 +1,7 @@
 // ----------------------------------------------------------------------
 
-export default function LoadingButton() {
+export default function LoadingButton(theme) {
+  console.log(theme);
   return {
     MuiLoadingButton: {
       styleOverrides: {
@@ -12,7 +13,12 @@ export default function LoadingButton() {
             '& .MuiLoadingButton-endIconPendingEnd': {
               marginRight: 0
             }
-          }
+          },
+          '&:hover': {
+            backgroundColor: theme.palette.button.hover
+          },
+          backgroundColor: theme.palette.button.standard,
+          color: theme.palette.button.text
         }
       }
     }

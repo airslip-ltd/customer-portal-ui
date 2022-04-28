@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------
 
-export default function Link() {
+export default function Link(theme) {
   return {
     MuiLink: {
       defaultProps: {
@@ -8,7 +8,12 @@ export default function Link() {
       },
 
       styleOverrides: {
-        root: {}
+        root: {
+          '&:hover': {
+            color: theme.palette.button.hover
+          },
+          color: theme.palette.common.black
+        }
       }
     }
   };
