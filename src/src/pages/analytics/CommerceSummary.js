@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 // components
-import { Card, Grid, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import StandardPage from '../../layouts/StandardPage';
 import { StandardList } from '../../components/_common/Lists';
 import { MerchantSalesAndRefunds } from '../../components/_dashboard/merchant-view';

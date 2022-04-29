@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 // components
-import { Grid, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { StandardList } from '../../components/_common/Lists';
 import StandardPage from '../../layouts/StandardPage';
 import { CashflowByAccount } from '../../components/_dashboard/merchant-view';
@@ -58,31 +58,27 @@ export default function CommerceSummary() {
     >
       <CurrencySelectionProvider defaultCurrency={currencyCode}>
         <RelationshipHeading />
-        <Grid container spacing={3} justify="center">
-          <Grid item xs={12}>
-            <StandardList
-              columns={columns}
-              details={accountBalances}
-              onChangeQuery={setQuery}
-              recordsPerPage={10}
-              onRowSelected={handleRowClick}
-              showToolbar={false}
-              selectedRow={integrationId}
-            />
-          </Grid>
+        <Stack spacing={3}>
+          <StandardList
+            columns={columns}
+            details={accountBalances}
+            onChangeQuery={setQuery}
+            recordsPerPage={10}
+            onRowSelected={handleRowClick}
+            showToolbar={false}
+            selectedRow={integrationId}
+          />
 
           {integrationId && (
-            <Grid item xs={12}>
-              <Stack spacing={3}>
-                <DateSelectionProvider>
-                  <CashflowByAccount integrationId={integrationId} />
-                </DateSelectionProvider>
+            <Stack spacing={3}>
+              <DateSelectionProvider>
+                <CashflowByAccount integrationId={integrationId} />
+              </DateSelectionProvider>
 
-                <BankingTransactions integrationId={integrationId} title="Account Transactions" />
-              </Stack>
-            </Grid>
+              <BankingTransactions integrationId={integrationId} title="Account Transactions" />
+            </Stack>
           )}
-        </Grid>
+        </Stack>
       </CurrencySelectionProvider>
     </StandardPage>
   );
