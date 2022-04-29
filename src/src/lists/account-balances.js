@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
 import ReactTimeAgo from 'react-time-ago';
 import { fCurrency } from '../utils/formatNumber';
+import { descriptors } from '../utils/descriptors';
 import ProviderImage from '../components/integrations/ProviderImage';
 import { dateFilterOperators } from './filters';
 
@@ -20,25 +21,28 @@ export const columns = [
       <>
         <ProviderImage provider={params.value} integrationType="Banking" fileType="icon" />
         <Typography variant="subtitle2" noWrap sx={{ pl: 1 }}>
-          {params.value}
+          {params.row.provider.friendlyName}
         </Typography>
       </>
     )
   },
   {
-    field: 'sortCode',
-    headerName: 'Sort Code',
-    flex: 1
+    field: 'description',
+    headerName: 'Description',
+    flex: 1,
+    renderCell: (params) => <>{descriptors.integration(params.row)}</>
   },
   {
-    field: 'accountNumber',
-    headerName: 'Account Number',
-    flex: 1
+    field: 'accountType',
+    headerName: 'Account Type',
+    flex: 1,
+    renderCell: (params) => <>{descriptors.bankingAccountType(params.row.accountDetail)}</>
   },
   {
-    field: 'currencyCode',
-    headerName: 'Currency Code',
-    flex: 1
+    field: 'usageType',
+    headerName: 'Usage Type',
+    flex: 1,
+    renderCell: (params) => <>{descriptors.bankingUsageType(params.row.accountDetail)}</>
   },
   {
     type: 'number',

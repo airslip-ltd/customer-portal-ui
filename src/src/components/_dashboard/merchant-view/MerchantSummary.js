@@ -15,7 +15,7 @@ import {
 
 export default function MerchantSummary() {
   return (
-    <CurrencySelectionProvider>
+    <CurrencySelectionProvider selectable>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <RequiredServiceGuard requiredService="commerce" title="Revenue (Last 30 days)">

@@ -8,7 +8,7 @@ import eyeFill from '@iconify/icons-eva/eye-fill';
 import closeFill from '@iconify/icons-eva/close-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 // material
-import { Stack, TextField, IconButton, InputAdornment, Grid, Typography, Link, Box, Button } from '@mui/material';
+import { Stack, TextField, IconButton, InputAdornment, Grid, Typography, Link, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { FormSection } from '../../_common';
 // redux
@@ -162,15 +162,15 @@ export default function RegisterForm() {
                     helperText={touched.password && errors.password}
                   />
 
-                  <Box sx={{ display: 'flex' }}>
-                    <Button fullWidth size="medium" onClick={handleEditSwitch} variant="text">
+                  <Stack direction="row" sx={{ display: 'flex' }} spacing={1}>
+                    <Button fullWidth size="medium" onClick={handleEditSwitch} variant="outlined">
                       Thats not me
                     </Button>
 
                     <LoadingButton fullWidth size="medium" type="submit" variant="contained" loading={isLoading}>
                       Looks good
                     </LoadingButton>
-                  </Box>
+                  </Stack>
                 </Stack>
               </FormSection>
             </>

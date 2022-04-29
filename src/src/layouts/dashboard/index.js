@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Breakpoint } from 'react-socks';
 // material
 import { styled, useTheme } from '@mui/material/styles';
 // hooks
 import useCollapseDrawer from '../../hooks/useCollapseDrawer';
+import useMemberDetails from '../../hooks/useMemberDetails';
 //
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
@@ -38,6 +39,11 @@ export default function DashboardLayout() {
   const theme = useTheme();
   const { collapseClick } = useCollapseDrawer();
   const [open, setOpen] = useState(false);
+  const { refresh } = useMemberDetails();
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
 
   return (
     <RootStyle>

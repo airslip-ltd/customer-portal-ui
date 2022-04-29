@@ -8,7 +8,7 @@ import { MerchantSalesAndRefunds } from '../../components/_dashboard/merchant-vi
 import { CommerceTransactions } from '../../components/reports';
 import { RelationshipHeading } from '../../components/_dashboard/relationship';
 // contexts
-import { DateSelectionProvider } from '../../contexts';
+import { CurrencySelectionProvider, DateSelectionProvider } from '../../contexts';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -41,6 +41,7 @@ export default function CommerceSummary() {
 
   const handleRowClick = useCallback(
     (params) => {
+      console.log(params);
       navigate(buildOwnedPath(`${PATH_DASHBOARD.analytics.commerceSummary}/${params.id}`));
     },
     [navigate, buildOwnedPath]
@@ -56,23 +57,19 @@ export default function CommerceSummary() {
       fullWidth
     >
       <RelationshipHeading />
-      <Grid container spacing={3} justify="center">
-        <Grid item xs={12}>
-          <Card sx={{ pt: 1 }}>
-            <StandardList
-              columns={columns}
-              details={commerceAccounts}
-              onChangeQuery={setQuery}
-              recordsPerPage={10}
-              onRowSelected={handleRowClick}
-              showToolbar={false}
-              selectedRow={integrationId}
-            />
-          </Card>
-        </Grid>
+      <Stack spacing={3}>
+        <StandardList
+          columns={columns}
+          details={commerceAccounts}
+          onChangeQuery={setQuery}
+          recordsPerPage={10}
+          onRowSelected={handleRowClick}
+          showToolbar={false}
+          selectedRow={integrationId}
+        />
 
         {integrationId && (
-          <Grid item xs={12}>
+          <CurrencySelectionProvider selectable>
             <Stack spacing={3}>
               <DateSelectionProvider>
                 <MerchantSalesAndRefunds integrationId={integrationId} />
@@ -80,9 +77,9 @@ export default function CommerceSummary() {
 
               <CommerceTransactions integrationId={integrationId} title="Commerce Transactions" />
             </Stack>
-          </Grid>
+          </CurrencySelectionProvider>
         )}
-      </Grid>
+      </Stack>
     </StandardPage>
   );
 }

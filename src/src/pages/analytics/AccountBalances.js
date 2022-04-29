@@ -8,7 +8,7 @@ import { CashflowByAccount } from '../../components/_dashboard/merchant-view';
 import { BankingTransactions } from '../../components/reports';
 import { RelationshipHeading } from '../../components/_dashboard/relationship';
 // contexts
-import { DateSelectionProvider } from '../../contexts';
+import { CurrencySelectionProvider, DateSelectionProvider } from '../../contexts';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -25,11 +25,12 @@ export default function CommerceSummary() {
   const { dataOwnerQuery, buildOwnedPath } = useDataOwner();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { integrationId } = useParams();
+  const { integrationId, currencyCode } = useParams();
   const { accountBalances } = useSelector((state) => state.balances);
   const [query, setQuery] = useState(null);
 
   useEffect(() => {
+    if (!dataOwnerQuery.ownerEntityId) return;
     if (query)
       dispatch(
         search({
@@ -41,7 +42,7 @@ export default function CommerceSummary() {
 
   const handleRowClick = useCallback(
     (params) => {
-      navigate(buildOwnedPath(`${PATH_DASHBOARD.analytics.accountBalances}/${params.id}`));
+      navigate(buildOwnedPath(`${PATH_DASHBOARD.analytics.accountBalances}/${params.id}/${params.row.currencyCode}`));
     },
     [navigate, buildOwnedPath]
   );
@@ -55,32 +56,34 @@ export default function CommerceSummary() {
       heading="Account Balances"
       fullWidth
     >
-      <RelationshipHeading />
-      <Grid container spacing={3} justify="center">
-        <Grid item xs={12}>
-          <StandardList
-            columns={columns}
-            details={accountBalances}
-            onChangeQuery={setQuery}
-            recordsPerPage={10}
-            onRowSelected={handleRowClick}
-            showToolbar={false}
-            selectedRow={integrationId}
-          />
-        </Grid>
-
-        {integrationId && (
+      <CurrencySelectionProvider defaultCurrency={currencyCode}>
+        <RelationshipHeading />
+        <Grid container spacing={3} justify="center">
           <Grid item xs={12}>
-            <Stack spacing={3}>
-              <DateSelectionProvider>
-                <CashflowByAccount integrationId={integrationId} />
-              </DateSelectionProvider>
-
-              <BankingTransactions integrationId={integrationId} title="Account Transactions" />
-            </Stack>
+            <StandardList
+              columns={columns}
+              details={accountBalances}
+              onChangeQuery={setQuery}
+              recordsPerPage={10}
+              onRowSelected={handleRowClick}
+              showToolbar={false}
+              selectedRow={integrationId}
+            />
           </Grid>
-        )}
-      </Grid>
+
+          {integrationId && (
+            <Grid item xs={12}>
+              <Stack spacing={3}>
+                <DateSelectionProvider>
+                  <CashflowByAccount integrationId={integrationId} />
+                </DateSelectionProvider>
+
+                <BankingTransactions integrationId={integrationId} title="Account Transactions" />
+              </Stack>
+            </Grid>
+          )}
+        </Grid>
+      </CurrencySelectionProvider>
     </StandardPage>
   );
 }
