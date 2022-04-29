@@ -13,14 +13,14 @@ export const columns = [
     hide: true
   },
   {
-    field: 'bankId',
-    headerName: 'Bank',
+    field: 'integrationProviderId',
+    headerName: 'Integration',
     flex: 1,
     renderCell: (params) => (
       <>
-        <ProviderImage provider={params.value} integrationType="Banking" fileType="icon" />
+        <ProviderImage provider={params.row.integration.provider.id} integrationType="Banking" fileType="icon" />
         <Typography variant="subtitle2" noWrap sx={{ pl: 1 }}>
-          {params.row.tradingName}
+          {params.row.integration.provider.friendlyName}
         </Typography>
       </>
     )

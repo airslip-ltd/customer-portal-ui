@@ -51,7 +51,8 @@ export default function Button(theme) {
           color: theme.palette.common.black,
           '&:hover': {
             backgroundColor: theme.palette.common.black,
-            color: theme.palette.common.white
+            color: theme.palette.common.white,
+            border: `1px solid ${theme.palette.common.black}`
           }
         },
         textInherit: {

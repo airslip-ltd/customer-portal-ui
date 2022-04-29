@@ -36,7 +36,7 @@ export default function ProviderDisplay({ providerDetail, onSelect }) {
           <CardContent sx={{ p: 2, pt: 0 }}>
             <Box sx={{ minHeight: 60, display: 'flex' }}>
               {providerDetail.provider.integrationType === 'Banking' && (
-                <BankDetailSummary accountDetail={providerDetail.accountDetail} />
+                <BankDetailSummary providerDetail={providerDetail} />
               )}
               {providerDetail.provider.integrationType === 'Commerce' && (
                 <CommerceDetailSummary providerDetail={providerDetail} />

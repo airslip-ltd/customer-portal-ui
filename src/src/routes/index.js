@@ -262,9 +262,9 @@ export default function Router() {
                 </RelationshipProvider>
               ),
               children: [
-                { path: ':integrationId' },
+                { path: ':integrationId/:currencyCode' },
                 { path: ':partnerRelationshipId/:airslipUserType/:entityId' },
-                { path: ':integrationId/:partnerRelationshipId/:airslipUserType/:entityId' }
+                { path: ':integrationId/:currencyCode/:partnerRelationshipId/:airslipUserType/:entityId' }
               ]
             },
             {

@@ -18,7 +18,7 @@ export const columns = [
       <>
         <ProviderImage provider={params.value} integrationType="Commerce" fileType="icon" />
         <Typography variant="subtitle2" noWrap sx={{ pl: 1 }}>
-          {params.row.integrationProviderId}
+          {params.row.provider.friendlyName}
         </Typography>
       </>
     )
@@ -26,11 +26,6 @@ export const columns = [
   {
     field: 'name',
     headerName: 'Name',
-    flex: 1
-  },
-  {
-    field: 'provider',
-    headerName: 'Provider',
     flex: 1
   }
 ];

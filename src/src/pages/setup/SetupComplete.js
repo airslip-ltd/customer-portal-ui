@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // material
 import { Grid, Button, Typography, Stack, Card, Box, CardHeader, CardContent } from '@mui/material';
 import ProviderImage from '../../components/integrations/ProviderImage';
-import { HelpCard, HelpSection } from '../../components/_common';
+import { HelpCard, HelpSection, NameValueItem, NameValueList } from '../../components/_common';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { search as integrationSearch } from '../../redux/slices/integration';
@@ -12,30 +12,22 @@ import { GET_ALL_QUERY } from '../../redux/common/search';
 import OnboardingLayout from '../../layouts/OnboardingLayout';
 // hooks
 import useSetup from '../../hooks/useSetup';
-import useMemberDetails from '../../hooks/useMemberDetails';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
+// utils
+import { descriptors } from '../../utils/descriptors';
 
 // ----------------------------------------------------------------------
 
 export default function SetupComplete() {
-  const { memberDetails } = useMemberDetails();
   const dispatch = useDispatch();
   const { onCompleteSetup } = useSetup();
-  const [serviceCount, setServiceCount] = useState(0);
   const { integration } = useSelector((state) => state.integration);
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(integrationSearch(GET_ALL_QUERY));
   }, [dispatch]);
-
-  useEffect(() => {
-    if (!memberDetails) return;
-
-    const { linkedServices } = memberDetails;
-    setServiceCount(linkedServices.length);
-  }, [memberDetails, setServiceCount]);
 
   const handleDoneClicked = () => {
     onCompleteSetup();
@@ -49,11 +41,9 @@ export default function SetupComplete() {
       message=""
       progress={100}
       action={
-        serviceCount === 0 ? null : (
-          <Button variant="contained" size="medium" onClick={handleDoneClicked}>
-            Take me home
-          </Button>
-        )
+        <Button variant="contained" size="medium" onClick={handleDoneClicked}>
+          Take me home
+        </Button>
       }
     >
       <Grid container spacing={3} sx={{ mt: 2 }}>
@@ -64,7 +54,7 @@ export default function SetupComplete() {
               <Stack spacing={2}>
                 {integration.complete &&
                   integration.response.results.map((row) => {
-                    const { id, integrationProviderId, provider, name, accountDetail } = row;
+                    const { id, integrationProviderId, provider, name } = row;
                     const { friendlyName, integrationType } = provider;
 
                     return (
@@ -78,14 +68,15 @@ export default function SetupComplete() {
                         </Box>
                         <Box sx={{ flexGrow: 1 }}>
                           <Stack sx={{ ml: 2 }} spacing={1}>
-                            <Typography variant="subtitle2">{friendlyName}</Typography>
+                            <Typography variant="subtitle">{friendlyName}</Typography>
                             {integrationType === 'Commerce' && <Typography variant="body2">{name}</Typography>}
                             {integrationType === 'Banking' && (
-                              <>
-                                <Typography variant="body2">
-                                  Account number: {accountDetail.accountNumber} - Sort code: {accountDetail.sortCode}
-                                </Typography>
-                              </>
+                              <NameValueList>
+                                <NameValueItem
+                                  name={descriptors.integrationTitle(row)}
+                                  value={descriptors.integration(row)}
+                                />
+                              </NameValueList>
                             )}
                           </Stack>
                         </Box>

@@ -57,6 +57,11 @@ export default function Input(theme) {
             '& .MuiOutlinedInput-notchedOutline': {
               borderColor: theme.palette.action.disabledBackground
             }
+          },
+          '&.Mui-focused': {
+            '& fieldset.MuiOutlinedInput-notchedOutline': {
+              borderColor: theme.palette.common.black
+            }
           }
         }
       }

@@ -23,10 +23,12 @@ const CurrencySelectionContext = createContext({
 });
 
 CurrencySelectionProvider.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  selectable: PropTypes.bool,
+  defaultCurrency: PropTypes.string
 };
 
-function CurrencySelectionProvider({ children }) {
+function CurrencySelectionProvider({ children, selectable, defaultCurrency }) {
   const dispatch = useDispatch();
   const [currency, setCurrency] = useState('GBP');
   const [initialised, setInitilised] = useState(false);
@@ -55,6 +57,12 @@ function CurrencySelectionProvider({ children }) {
     if (!currencies.some((o) => o === currency)) setCurrency(currencies[0]);
     setInitilised(true);
   }, [currencies, setCurrency, currencyList.complete, currency]);
+
+  useEffect(() => {
+    if (!defaultCurrency) return;
+    setCurrency(defaultCurrency);
+    setInitilised(true);
+  }, [defaultCurrency, setCurrency]);
 
   const handleChange = (event) => {
     setCurrency(event.target.value);
@@ -86,7 +94,7 @@ function CurrencySelectionProvider({ children }) {
           </LoadingScreen>
         )}
 
-        {currencyList.complete && currencyList.response.records.length > 1 && (
+        {selectable && currencyList.complete && currencyList.response.records.length > 1 && (
           <Box sx={{ display: 'flex' }}>
             <Box sx={{ flexGrow: 1 }} />
             <Box>
