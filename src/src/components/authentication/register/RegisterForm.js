@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Icon } from '@iconify/react';
@@ -23,7 +24,11 @@ import useAuth from '../../../hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
-export default function RegisterForm() {
+RegisterForm.propTypes = {
+  email: PropTypes.string
+};
+
+export default function RegisterForm({ email }) {
   const { refresh } = useAuth();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
@@ -44,7 +49,7 @@ export default function RegisterForm() {
     initialValues: {
       firstName: '',
       lastName: '',
-      email: '',
+      email: email || '',
       password: '',
       businessName: '',
       referralId: ''
@@ -72,10 +77,10 @@ export default function RegisterForm() {
       await setFieldValue('firstName', referral.firstName);
       await setFieldValue('lastName', referral.lastName);
       await setFieldValue('businessName', referral.businessName);
-      await setFieldValue('email', referral.email);
+      await setFieldValue('email', email || referral.email);
     }
     setContent();
-  }, [referral, setFieldValue, setFromReferral]);
+  }, [referral, email, setFieldValue, setFromReferral]);
 
   useEffect(() => {
     if (!registerSuccess) return;
@@ -108,9 +113,9 @@ export default function RegisterForm() {
       <FormikProvider value={formik}>
         <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
           {fromReferral && (
-            <>
+            <Stack spacing={2}>
               <FormSection
-                title="Or create one, completely free!"
+                title="Let's get you started"
                 message="As you were referred by one of our partners we already have an idea of who you are! If the details below are incorrect select the option to change them."
               >
                 <Grid container>
@@ -132,15 +137,14 @@ export default function RegisterForm() {
                     <Typography variant="body2">Email address:</Typography>
                   </Grid>
                   <Grid item xs={8}>
-                    <Typography variant="subtitle2">{referral.email}</Typography>
+                    <Typography variant="subtitle2">{email || referral.email}</Typography>
                   </Grid>
                 </Grid>
-                <Stack spacing={0}>
-                  <Typography variant="h5">Let's create your account</Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary', pt: 0.5 }}>
-                    We'll use your email address {referral.email} as your username.
-                  </Typography>
-                </Stack>
+              </FormSection>
+              <FormSection
+                title="Let's create your account"
+                message={`We'll use your email address ${email || referral.email} as your username.`}
+              >
                 <Stack spacing={3}>
                   <TextField
                     fullWidth
@@ -173,12 +177,12 @@ export default function RegisterForm() {
                   </Stack>
                 </Stack>
               </FormSection>
-            </>
+            </Stack>
           )}
 
           {!fromReferral && (
             <FormSection
-              title="Or create one, completely free!"
+              title="Let's get you started"
               message="You only need to give us a few details to get started with Airslip"
             >
               <Stack spacing={3}>

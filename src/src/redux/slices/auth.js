@@ -16,6 +16,9 @@ const initialState = {
   },
   password: {
     ...REQUEST_DEFAULTS
+  },
+  check: {
+    ...REQUEST_DEFAULTS
   }
 };
 
@@ -56,6 +59,27 @@ export function forgotPassword(email) {
   };
 }
 
+export function checkEmail(email) {
+  return async (dispatch) => {
+    dispatch(slice.actions.startAction({ propName: 'check' }));
+    try {
+      const response = await axios({
+        url: `/identity/check?email=${email}`,
+        method: 'get',
+        baseURL: process.env.REACT_APP_AUTH_URL
+      });
+      dispatch(slice.actions.completeAction({ propName: 'check', response: response.data }));
+    } catch (error) {
+      dispatch(
+        slice.actions.errorAction({
+          propName: 'check',
+          response: error
+        })
+      );
+    }
+  };
+}
+
 export function setPassword(password, confirmPassword, email, token) {
   return async (dispatch) => {
     dispatch(slice.actions.startAction({ propName: 'password' }));
@@ -87,6 +111,7 @@ export function reset() {
   return async (dispatch) => {
     await dispatch(slice.actions.resetAction({ propName: 'forgot' }));
     await dispatch(slice.actions.resetAction({ propName: 'password' }));
+    await dispatch(slice.actions.resetAction({ propName: 'check' }));
   };
 }
 
