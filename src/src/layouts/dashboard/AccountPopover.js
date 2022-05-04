@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import { useSnackbar } from 'notistack';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import homeFill from '@iconify/icons-eva/home-fill';
 import personFill from '@iconify/icons-eva/person-fill';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
@@ -16,8 +16,6 @@ import useIsMountedRef from '../../hooks/useIsMountedRef';
 import { MIconButton } from '../../components/@material-extend';
 import MyAvatar from '../../components/MyAvatar';
 import MenuPopover from '../../components/MenuPopover';
-// utils
-import { shouldRefresh } from '../../utils/jwt';
 
 // ----------------------------------------------------------------------
 
@@ -41,9 +39,8 @@ export default function AccountPopover() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const isMountedRef = useIsMountedRef();
-  const { user, logout, refresh } = useAuth();
+  const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
-  const [hasExpired, setShouldRefresh] = useState(shouldRefresh());
 
   const handleOpen = () => {
     setOpen(true);
@@ -65,22 +62,6 @@ export default function AccountPopover() {
       enqueueSnackbar('Unable to logout', { variant: 'error' });
     }
   };
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setShouldRefresh(shouldRefresh());
-    }, 5000);
-    return () => {
-      clearInterval(timer);
-    };
-  });
-
-  useEffect(() => {
-    if (hasExpired) {
-      refresh();
-      setShouldRefresh(false);
-    }
-  }, [hasExpired, refresh]);
 
   return (
     <>

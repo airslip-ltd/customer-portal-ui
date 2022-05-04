@@ -6,6 +6,7 @@ import { COMMON_FUNCTIONS, STATE_DEFAULTS, REQUEST_DEFAULTS } from '../common/co
 import { SEARCH_DEFAULTS, SEARCH_FUNCTIONS, GET_ALL_QUERY, executeSearch } from '../common/search';
 // common
 import { ACTION_FUNCTIONS, executeGet } from '../common/actions';
+import * as entities from '../common/entities';
 
 // ----------------------------------------------------------------------
 
@@ -14,7 +15,8 @@ const initialState = {
   providers: { ...SEARCH_DEFAULTS },
   banks: { ...SEARCH_DEFAULTS },
   authorise: { ...REQUEST_DEFAULTS },
-  request: { ...REQUEST_DEFAULTS }
+  request: { ...REQUEST_DEFAULTS },
+  current: { ...REQUEST_DEFAULTS }
 };
 
 const slice = createSlice({
@@ -23,7 +25,8 @@ const slice = createSlice({
   reducers: {
     ...COMMON_FUNCTIONS,
     ...SEARCH_FUNCTIONS,
-    ...ACTION_FUNCTIONS
+    ...ACTION_FUNCTIONS,
+    ...entities.ENTITY_FUNCTIONS
   }
 });
 
@@ -32,7 +35,7 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function getProviders(countryCode) {
+export function search(countryCode) {
   return async (dispatch, getState) => {
     const { provider } = getState();
     await executeSearch(
@@ -49,6 +52,13 @@ export function getProviders(countryCode) {
       },
       `/providers/search?countryCode=${countryCode || ''}`
     );
+  };
+}
+
+export function get(id) {
+  return async (dispatch, getState) => {
+    const { provider } = getState();
+    await entities.executeGet(provider, dispatch, slice, 'current', 'providers', id);
   };
 }
 

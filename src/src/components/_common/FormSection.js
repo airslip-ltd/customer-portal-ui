@@ -1,24 +1,26 @@
 import PropTypes from 'prop-types';
-import { Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 
 FormSection.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   title: PropTypes.string.isRequired,
   message: PropTypes.string
 };
 
-export default function FormSection({ children, title, message }) {
+export default function FormSection({ children, title, message, ...other }) {
   return (
-    <>
-      <Typography variant="h5">{title}</Typography>
-      {message && (
-        <Typography variant="body2" sx={{ color: 'text.secondary', pt: 0.5 }}>
-          {message}
-        </Typography>
-      )}
-      <Stack spacing={3} sx={{ py: 3 }}>
-        {children}
+    <Box {...other}>
+      <Stack spacing={2}>
+        <Box>
+          <Typography variant="h5">{title}</Typography>
+          {message && (
+            <Typography variant="body2" sx={{ color: 'text.secondary', pt: 0.5 }}>
+              {message}
+            </Typography>
+          )}
+        </Box>
+        <Box>{children}</Box>
       </Stack>
-    </>
+    </Box>
   );
 }

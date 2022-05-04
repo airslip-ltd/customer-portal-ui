@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Stack, Typography } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
-import { getProviders } from '../../../redux/slices/providers';
+import { search } from '../../../redux/slices/providers';
 // components
 import ProviderImage from '../../integrations/ProviderImage';
 
@@ -20,7 +20,7 @@ export default function BankSummary({ institutionId }) {
     : null;
 
   useEffect(() => {
-    dispatch(getProviders());
+    dispatch(search());
   }, [dispatch]);
 
   return (

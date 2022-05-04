@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // material
 import { Card, CardHeader, CardContent, CardActionArea, Typography, Button, Stack } from '@mui/material';
 // paths
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_ONBOARDING } from '../../routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -41,13 +41,7 @@ export default function UnlinkedCard({ children, title, navigateTo, requiredServ
         <CardContent>
           <Stack spacing={2}>
             <Typography variant="body2">It looks like you haven't linked a {requiredService} service.</Typography>{' '}
-            <Button
-              to={PATH_DASHBOARD.integrations.create}
-              size="small"
-              variant="outlined"
-              component={RouterLink}
-              fullWidth
-            >
+            <Button to={PATH_ONBOARDING.integrate} size="small" variant="outlined" component={RouterLink} fullWidth>
               Link one Now
             </Button>
             <>{children}</>

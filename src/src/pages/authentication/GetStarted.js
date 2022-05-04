@@ -1,7 +1,7 @@
 // material
 import { Grid } from '@mui/material';
 // layouts
-import ExternalFlexLayout from '../../layouts/ExternalFlexLayout';
+import ExternalFixedLayout from '../../layouts/ExternalFixedLayout';
 // components
 import { LoginForm } from '../../components/authentication/login';
 import { RegisterForm } from '../../components/authentication/register';
@@ -10,7 +10,7 @@ import { RegisterForm } from '../../components/authentication/register';
 
 export default function GetStarted() {
   return (
-    <ExternalFlexLayout title="Getting Started">
+    <ExternalFixedLayout title="Getting Started">
       <Grid container spacing={3}>
         <Grid item xs={12} md={5}>
           <LoginForm />
@@ -20,6 +20,6 @@ export default function GetStarted() {
           <RegisterForm />
         </Grid>
       </Grid>
-    </ExternalFlexLayout>
+    </ExternalFixedLayout>
   );
 }

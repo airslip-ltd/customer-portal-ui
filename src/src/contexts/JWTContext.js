@@ -1,8 +1,8 @@
-import { createContext, useEffect, useReducer } from 'react';
+import { createContext, useCallback, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 // utils
 import axios from '../utils/axios';
-import { isValidToken, setSession } from '../utils/jwt';
+import { setSession } from '../utils/jwt';
 import { setUserDetail, reset } from '../utils/ybug';
 
 // ----------------------------------------------------------------------
@@ -74,15 +74,51 @@ AuthProvider.propTypes = {
 function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const refresh = useCallback(async () => {
+    const currentToken = window.localStorage.getItem('refreshToken');
+    const accessToken = window.localStorage.getItem('accessToken');
+
+    if (!currentToken) return false;
+
+    const response = await axios({
+      url: '/identity/refresh',
+      method: 'post',
+      baseURL: process.env.REACT_APP_AUTH_URL,
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+      data: {
+        refreshToken: currentToken,
+        deviceId: 'browser'
+      }
+    }).catch((response) => ({
+      errors: response.errors
+    }));
+
+    if ('errors' in response) {
+      logout();
+      return false;
+    }
+
+    const { bearerToken, refreshToken, user } = response.data;
+    setTimeout(() => {
+      setUserDetail(user);
+    }, 100);
+    setSession(bearerToken, refreshToken);
+
+    dispatch({
+      type: 'REFRESH',
+      payload: {
+        user
+      }
+    });
+    return true;
+  }, []);
+
   useEffect(() => {
     const initialize = async () => {
       try {
-        const accessToken = window.localStorage.getItem('accessToken');
-        const refreshToken = window.localStorage.getItem('refreshToken');
-
-        if (accessToken && isValidToken(accessToken)) {
-          setSession(accessToken, refreshToken);
-
+        if (await refresh()) {
           const response = await axios({
             url: '/user',
             method: 'get',
@@ -124,7 +160,7 @@ function AuthProvider({ children }) {
     };
 
     initialize();
-  }, []);
+  }, [refresh]);
 
   const login = async (email, password) => {
     const response = await axios({
@@ -166,39 +202,6 @@ function AuthProvider({ children }) {
     return {
       isError: false
     };
-  };
-
-  const refresh = async () => {
-    const currentToken = window.localStorage.getItem('refreshToken');
-    const response = await axios({
-      url: '/identity/refresh',
-      method: 'post',
-      baseURL: process.env.REACT_APP_AUTH_URL,
-      data: {
-        refreshToken: currentToken,
-        deviceId: 'browser'
-      }
-    }).catch((response) => ({
-      errors: response.errors
-    }));
-
-    if ('errors' in response) {
-      logout();
-      return;
-    }
-
-    const { bearerToken, refreshToken, user } = response.data;
-    setTimeout(() => {
-      setUserDetail(user);
-    }, 100);
-    setSession(bearerToken, refreshToken);
-
-    dispatch({
-      type: 'REFRESH',
-      payload: {
-        user
-      }
-    });
   };
 
   const logout = async () => {

@@ -22,6 +22,7 @@ export default function MockDataLinking() {
       title="Let's link Airslip Bank"
       message=""
       progress={100}
+      size="medium"
       action={
         <Button variant="contained" size="medium" onClick={handleDoneClicked}>
           Link now

@@ -7,10 +7,10 @@ HelpDialogue.propTypes = {
   children: PropTypes.node
 };
 
-export default function HelpDialogue({ title, children }) {
+export default function HelpDialogue({ title, children, ...other }) {
   return (
     <>
-      <Alert icon={<InfoOutlined fontSize="inherit" />} severity="info" sx={{ mb: 3 }}>
+      <Alert icon={<InfoOutlined fontSize="inherit" />} severity="info" {...other}>
         <AlertTitle>{title}</AlertTitle>
         {children}
       </Alert>

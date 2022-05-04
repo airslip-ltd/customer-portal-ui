@@ -1,34 +1,29 @@
 import PropTypes from 'prop-types';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Stack, Typography } from '@mui/material';
+import approved from '@iconify/icons-ic/baseline-check-circle-outline';
+import { NameValueItem, NameValueList } from '../_common';
 
 ConsentPreview.propTypes = {
   permissionType: PropTypes.string.isRequired
 };
 
 export default function ConsentPreview({ permissionType }) {
-  const renderTitle = () => {
+  const renderScopes = () => {
     switch (permissionType) {
       case 'Banking':
-        return 'Banking Data';
+        return [
+          'Account details',
+          'Account transactions',
+          'Account holder name',
+          'Bank statements',
+          'Regular payments'
+        ];
       case 'Commerce':
-        return 'Commerce Data';
+        return ['Order details', 'Inventory', 'Product listings'];
       case 'Accounting':
-        return 'Accounting Data';
+        return ['Accounts', 'Bills', 'Invoices', 'Journals', 'Balance sheet', 'Cashflow'];
       default:
-        return 'Invalid type';
-    }
-  };
-
-  const renderMessage = () => {
-    switch (permissionType) {
-      case 'Banking':
-        return 'You will be sharing bank information such as account details, account transactions, account holder name, your statements and any regular payments.';
-      case 'Commerce':
-        return 'You will be sharing sales data from your POS or e-commerce system such as order details, inventory and product listings.';
-      case 'Accounting':
-        return 'You will be sharing information from your accounting system such as accounts, bills, invoices, journals, balance sheet, cashflow and all reports.';
-      default:
-        return 'Invalid type';
+        return [];
     }
   };
 
@@ -36,12 +31,17 @@ export default function ConsentPreview({ permissionType }) {
     <>
       <Grid container>
         <Grid item xs={4}>
-          <Typography variant="subtitle1">{renderTitle()}</Typography>
+          <Typography variant="subtitle1">{`${permissionType} data`}</Typography>
         </Grid>
         <Grid item xs={8}>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {renderMessage()}
-          </Typography>
+          <Stack spacing={1}>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              You will be sharing the following {permissionType} data:
+            </Typography>
+            <NameValueList>
+              {approved && renderScopes().map((item) => <NameValueItem key={item} icon={approved} name={item} />)}
+            </NameValueList>
+          </Stack>
         </Grid>
       </Grid>
     </>

@@ -19,8 +19,8 @@ const IconStyle = styled(Icon)(() => ({
 
 NameValueItem.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.any.isRequired,
-  icon: PropTypes.node
+  value: PropTypes.any,
+  icon: PropTypes.any
 };
 
 export default function NameValueItem({ name, value, icon }) {
@@ -28,8 +28,8 @@ export default function NameValueItem({ name, value, icon }) {
     <Stack direction="row" spacing={1}>
       <IconStyle icon={icon || circle} />
       <Box sx={{ textTransform: 'capitalize', fontWeight: 'light', fontSize: 12 }}>{name}</Box>
-      <IconStyle icon={minus} sx={{ top: 3, position: 'relative' }} />
-      <Box sx={{ textTransform: 'none', fontWeight: 'bold', fontSize: 12 }}>{value}</Box>
+      {value && <IconStyle icon={minus} sx={{ top: 3, position: 'relative' }} />}
+      {value && <Box sx={{ textTransform: 'none', fontWeight: 'bold', fontSize: 12 }}>{value}</Box>}
     </Stack>
   );
 }

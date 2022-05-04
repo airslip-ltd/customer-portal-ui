@@ -7,7 +7,7 @@ import { Grid, Stack, Typography } from '@mui/material';
 import SearchBox from '../_common/SearchBox';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getProviders } from '../../redux/slices/providers';
+import { search } from '../../redux/slices/providers';
 // routes
 import { PATH_INTEGRATE } from '../../routes/paths';
 // components
@@ -56,7 +56,7 @@ export default function ProviderSelection() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getProviders(country));
+    dispatch(search(country));
   }, [dispatch, country]);
 
   useEffect(() => {
