@@ -79,10 +79,11 @@ export default function LoginForm() {
   };
 
   return (
-    <FormSection
-      title="Login to your Airslip account"
-      message="Already have an Airslip account? Enter your details and we'll get you in."
-    >
+    <>
+      <FormSection
+        title="Login to your account"
+        message="Already have an Airslip account? Enter your details and we'll get you in."
+      />
       <FormikProvider value={formik}>
         <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
           <Stack spacing={3}>
@@ -136,6 +137,6 @@ export default function LoginForm() {
           </LoadingButton>
         </Form>
       </FormikProvider>
-    </FormSection>
+    </>
   );
 }

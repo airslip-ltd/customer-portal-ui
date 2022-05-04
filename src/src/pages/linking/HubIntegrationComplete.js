@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams, Link as RouterLink, useSearchParams } from 'react-router-dom';
 // material
 import { Typography, Box, Button, Collapse, Stack } from '@mui/material';
-import arrows from '@iconify/icons-ic/round-compare-arrows';
 // layouts
 import { ApiErrorFriendly } from '../../components/_common/Errors';
 import ExternalFixedLayout from '../../layouts/ExternalFixedLayout';
