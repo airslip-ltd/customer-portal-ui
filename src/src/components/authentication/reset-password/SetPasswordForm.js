@@ -99,7 +99,7 @@ export default function SetPasswordForm({ onRequest, isLoading }) {
             helperText={touched.confirm && errors.confirm}
           />
 
-          <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isLoading}>
+          <LoadingButton fullWidth size="medium" type="submit" variant="contained" loading={isLoading}>
             Reset Password
           </LoadingButton>
         </Stack>

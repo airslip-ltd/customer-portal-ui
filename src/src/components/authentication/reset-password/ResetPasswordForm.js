@@ -62,7 +62,7 @@ export default function ResetPasswordForm({ onRequest, isLoading }) {
             helperText={touched.email && errors.email}
           />
 
-          <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isLoading}>
+          <LoadingButton fullWidth size="medium" type="submit" variant="contained" loading={isLoading}>
             Reset Password
           </LoadingButton>
         </Stack>
