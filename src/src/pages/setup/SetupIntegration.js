@@ -38,11 +38,7 @@ export default function SetupIntegration() {
     <OnboardingLayout
       stageName="Connect your Services"
       title={serviceCount === 0 ? 'Connect your first Service' : 'Connect another Service'}
-      message={
-        serviceCount === 0
-          ? 'To make the most of Airslip you should Connect as many of your Services as possible.'
-          : "You're off to a great start, lets see if we support anymore of your Services"
-      }
+      message="To make the most of Airslip you should Connect as many of your Services as possible."
       progress={100}
       action={
         serviceCount === 0 ? null : (
@@ -52,7 +48,7 @@ export default function SetupIntegration() {
         )
       }
     >
-      <HelpDialogue title="Good to know">
+      <HelpDialogue title="Good to know" sx={{ mb: 3 }}>
         We like to make Connecting your Services as easy as possible, select your platform of choice from the list below
         and we'll guide you through what you need to do next.
       </HelpDialogue>

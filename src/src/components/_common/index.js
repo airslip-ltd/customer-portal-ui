@@ -7,3 +7,5 @@ export { default as HelpCard } from './HelpCard';
 export { default as CoverStyle } from './CoverStyle';
 export { default as NameValueItem } from './NameValueItem';
 export { default as NameValueList } from './NameValueList';
+export { default as FixedAvatar } from './FixedAvatar';
+export { default as ConnectHeader } from './ConnectHeader';

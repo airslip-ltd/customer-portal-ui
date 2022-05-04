@@ -1,5 +1,5 @@
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD, PATH_ONBOARDING } from '../../routes/paths';
 // components
 import SvgIconStyle from '../../components/SvgIconStyle';
 
@@ -43,7 +43,7 @@ const sidebarConfig = [
         icon: ICONS.ecommerce,
         children: [
           { title: 'Your Services', path: PATH_DASHBOARD.integrations.list },
-          { title: 'Connect', path: PATH_DASHBOARD.integrations.create }
+          { title: 'Connect', path: PATH_ONBOARDING.integrate }
         ]
       },
       {

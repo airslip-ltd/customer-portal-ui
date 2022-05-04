@@ -6,21 +6,12 @@ import axios from './axios';
 // ----------------------------------------------------------------------
 const shouldRefresh = () => {
   const accessToken = window.localStorage.getItem('accessToken');
+  if (!accessToken) return false;
+
   const { exp } = jwtDecode(accessToken);
   const currentTime = Date.now() / 1000;
-  const timeLeft = exp - 5 - currentTime;
+  const timeLeft = exp - 30 - currentTime;
   return timeLeft < 0;
-};
-
-const isValidToken = (accessToken) => {
-  if (!accessToken) {
-    return false;
-  }
-
-  const decoded = jwtDecode(accessToken);
-  const currentTime = Date.now() / 1000;
-
-  return decoded.exp > currentTime;
 };
 
 const setSession = (accessToken, refreshToken) => {
@@ -35,4 +26,4 @@ const setSession = (accessToken, refreshToken) => {
   }
 };
 
-export { isValidToken, setSession, shouldRefresh, verify, sign };
+export { setSession, shouldRefresh, verify, sign };

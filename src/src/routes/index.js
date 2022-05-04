@@ -6,7 +6,6 @@ import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 // guards
 import GuestGuard from '../guards/GuestGuard';
 import AuthGuard from '../guards/AuthGuard';
-import SetupGuard from '../guards/SetupGuard';
 // components
 import LoadingScreen from '../components/LoadingScreen';
 import { OwnedViewProvider } from '../contexts/OwnedViewContext';
@@ -53,14 +52,6 @@ export default function Router() {
             </GuestGuard>
           )
         },
-        {
-          path: 'register',
-          element: (
-            <GuestGuard>
-              <Register />
-            </GuestGuard>
-          )
-        },
         { path: 'reset-password', element: <ResetPassword /> },
         { path: 'forgot', element: <SetPassword /> },
         { path: 'create', element: <CreatePassword /> },
@@ -75,7 +66,7 @@ export default function Router() {
           path: ':referralId',
           element: (
             <AuthGuard>
-              <RelationshipConsent />
+              <ConsentReview />
             </AuthGuard>
           )
         }
@@ -144,9 +135,7 @@ export default function Router() {
       path: 'dashboard',
       element: (
         <AuthGuard>
-          <SetupGuard>
-            <DashboardLayout />
-          </SetupGuard>
+          <DashboardLayout />
         </AuthGuard>
       ),
       children: [
@@ -171,7 +160,6 @@ export default function Router() {
           children: [
             { element: <Navigate to="/dashboard/integrations/list" replace /> },
             { path: 'list', element: <IntegrationList /> },
-            { path: 'create', element: <IntegrationCreate /> },
             { path: 'view/:id', element: <IntegrationView /> }
           ]
         },
@@ -283,7 +271,6 @@ export default function Router() {
               ]
             },
             { path: 'debt-service-coverage-ratio-detail/:accountId', element: <DebtServiceCoverageRatioDetail /> },
-            { path: 'banking-recent-transactions', element: <BankingRecentTransactions /> },
             { path: 'debt-ratio-detail/:accountId', element: <DebtRatioDetail /> },
             { path: 'debt-to-capital-ratio-detail/:accountId', element: <DebtToCapitalRatioDetail /> },
             { path: 'revenue-benchmarking-detail', element: <RevenueBenchmarkingDetail /> },
@@ -354,7 +341,6 @@ export default function Router() {
 
 // Authentication
 const Login = Loadable(lazy(() => import('../pages/authentication/Login')));
-const Register = Loadable(lazy(() => import('../pages/authentication/Register')));
 const ResetPassword = Loadable(lazy(() => import('../pages/authentication/ResetPassword')));
 const SetPassword = Loadable(lazy(() => import('../pages/authentication/SetPassword')));
 const CreatePassword = Loadable(lazy(() => import('../pages/authentication/CreatePassword')));
@@ -373,14 +359,12 @@ const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 const Unauthorised = Loadable(lazy(() => import('../pages/Page401')));
 // Integrations
 const IntegrationList = Loadable(lazy(() => import('../pages/integrations/IntegrationList')));
-const IntegrationCreate = Loadable(lazy(() => import('../pages/integrations/IntegrationCreate')));
 const IntegrationView = Loadable(lazy(() => import('../pages/integrations/IntegrationView')));
 // Relationships / Businesses
 const RelationshipView = Loadable(lazy(() => import('../pages/relationship/RelationshipView')));
 const RelationshipEdit = Loadable(lazy(() => import('../pages/relationship/RelationshipEdit')));
 const RelationshipList = Loadable(lazy(() => import('../pages/relationship/RelationshipList')));
 const RelationshipCreate = Loadable(lazy(() => import('../pages/relationship/RelationshipCreate')));
-const RelationshipConsent = Loadable(lazy(() => import('../pages/relationship/RelationshipConsent')));
 const RelationshipSummary = Loadable(lazy(() => import('../pages/relationship/RelationshipSummary')));
 // Reports
 const BankingTransactionsReport = Loadable(lazy(() => import('../pages/reporting/BankingTransactionsReport')));
@@ -388,6 +372,7 @@ const CommerceTransactionsReport = Loadable(lazy(() => import('../pages/reportin
 // Consents
 const ConsentView = Loadable(lazy(() => import('../pages/consents/ConsentView')));
 const ConsentList = Loadable(lazy(() => import('../pages/consents/ConsentList')));
+const ConsentReview = Loadable(lazy(() => import('../pages/consents/ConsentReview')));
 // Users
 const UserList = Loadable(lazy(() => import('../pages/users/UserList')));
 const UserView = Loadable(lazy(() => import('../pages/users/UserView')));
@@ -415,7 +400,6 @@ const CommerceSummary = Loadable(lazy(() => import('../pages/analytics/CommerceS
 const DebtServiceCoverageRatioDetail = Loadable(
   lazy(() => import('../pages/analytics/DebtServiceCoverageRatioDetail'))
 );
-const BankingRecentTransactions = Loadable(lazy(() => import('../pages/analytics/BankingRecentTransactions')));
 const DebtRatioDetail = Loadable(lazy(() => import('../pages/analytics/DebtRatioDetail')));
 const DebtToCapitalRatioDetail = Loadable(lazy(() => import('../pages/analytics/DebtToCapitalRatioDetail')));
 const RevenueBenchmarkingDetail = Loadable(lazy(() => import('../pages/analytics/RevenueBenchmarkingDetail')));

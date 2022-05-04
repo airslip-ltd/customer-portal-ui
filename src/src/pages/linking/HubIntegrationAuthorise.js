@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams, Link as RouterLink } from 'react-r
 // redux
 import { Button, Collapse, Stack } from '@mui/material';
 import { useDispatch, useSelector } from '../../redux/store';
-import { getProviders, requestProvider } from '../../redux/slices/providers';
+import { get, requestProvider } from '../../redux/slices/providers';
 // components
 import Page from '../../components/Page';
 import LoadingScreen from '../../components/LoadingScreen';
@@ -20,7 +20,7 @@ export default function HubIntegrationAuthorise() {
   useEffect(() => {
     if (!integration) return;
     if (!provider) return;
-    dispatch(getProviders());
+    dispatch(get(integration));
     dispatch(requestProvider(provider, integration, search));
   }, [dispatch, navigate, search, provider, integration]);
 

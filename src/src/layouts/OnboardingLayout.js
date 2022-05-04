@@ -12,14 +12,15 @@ OnboardingLayout.propTypes = {
   stageName: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
   progress: PropTypes.number.isRequired,
+  size: PropTypes.string,
   action: PropTypes.node
 };
 
 // ----------------------------------------------------------------------
 
-export default function OnboardingLayout({ children, stageName, title, message, progress, action }) {
+export default function OnboardingLayout({ children, stageName, title, message, progress, action, size }) {
   return (
-    <ExternalFixedLayout title={`${title} | ${stageName}`}>
+    <ExternalFixedLayout title={`${title} | ${stageName}`} size={size}>
       <ExternalHeader title={stageName} progress={progress} />
 
       <Box sx={{ display: 'flex', alignItems: 'center' }}>

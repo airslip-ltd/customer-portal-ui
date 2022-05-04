@@ -7,20 +7,14 @@ import { GET_ALL_QUERY } from '../../redux/common/search';
 import { useDispatch, useSelector } from '../../redux/store';
 import { search as integrationSearch, reset } from '../../redux/slices/integration';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_ONBOARDING, PATH_DASHBOARD } from '../../routes/paths';
 // components
 import StandardPage from '../../layouts/StandardPage';
 import { ProviderDisplay } from '../../components/integrations';
 
 // ----------------------------------------------------------------------
 const EditActions = () => (
-  <Button
-    size="medium"
-    variant="contained"
-    component={RouterLink}
-    to={`${PATH_DASHBOARD.integrations.create}`}
-    sx={{ mt: 1 }}
-  >
+  <Button size="medium" variant="contained" component={RouterLink} to={`${PATH_ONBOARDING.integrate}`} sx={{ mt: 1 }}>
     Connect a Service
   </Button>
 );

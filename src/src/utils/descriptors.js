@@ -20,6 +20,8 @@ const descriptors = {
   integrationTitle: (integration) => {
     if (integration.provider.integrationType === 'Banking') {
       const { accountDetail } = integration;
+      console.log(accountDetail);
+
       if (accountDetail.accountType === 'CREDIT_CARD') {
         return 'Credit Card';
       }
