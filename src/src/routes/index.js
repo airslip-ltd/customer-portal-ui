@@ -48,7 +48,7 @@ export default function Router() {
           path: 'login',
           element: (
             <GuestGuard>
-              <Login />
+              <GetStarted />
             </GuestGuard>
           )
         },
@@ -340,7 +340,7 @@ export default function Router() {
 // IMPORT COMPONENTS
 
 // Authentication
-const Login = Loadable(lazy(() => import('../pages/authentication/Login')));
+const GetStarted = Loadable(lazy(() => import('../pages/authentication/GetStarted')));
 const ResetPassword = Loadable(lazy(() => import('../pages/authentication/ResetPassword')));
 const SetPassword = Loadable(lazy(() => import('../pages/authentication/SetPassword')));
 const CreatePassword = Loadable(lazy(() => import('../pages/authentication/CreatePassword')));

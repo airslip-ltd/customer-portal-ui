@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { Link as RouterLink } from 'react-router-dom';
@@ -21,7 +22,11 @@ import { MIconButton } from '../../@material-extend';
 
 // ----------------------------------------------------------------------
 
-export default function LoginForm() {
+LoginForm.propTypes = {
+  email: PropTypes.string
+};
+
+export default function LoginForm({ email }) {
   const { login } = useAuth();
   const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -34,7 +39,7 @@ export default function LoginForm() {
 
   const formik = useFormik({
     initialValues: {
-      email: '',
+      email: email || '',
       password: '',
       remember: true
     },
@@ -82,7 +87,7 @@ export default function LoginForm() {
     <>
       <FormSection
         title="Login to your account"
-        message="Already have an Airslip account? Enter your details and we'll get you in."
+        message="It seems you already have an Airslip account. Enter your details and we'll get you in!"
       />
       <FormikProvider value={formik}>
         <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
