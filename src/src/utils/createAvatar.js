@@ -14,11 +14,11 @@ function getFirstCharacter(name) {
 
 function getAvatarColor(name) {
   if (PRIMARY_NAME.includes(getFirstCharacter(name))) return 'primary';
-  if (INFO_NAME.includes(getFirstCharacter(name))) return 'info';
+  if (INFO_NAME.includes(getFirstCharacter(name))) return 'warning';
   if (SUCCESS_NAME.includes(getFirstCharacter(name))) return 'success';
   if (WARNING_NAME.includes(getFirstCharacter(name))) return 'warning';
   if (ERROR_NAME.includes(getFirstCharacter(name))) return 'warning';
-  return 'default';
+  return 'primary';
 }
 
 export default function createAvatar(name) {

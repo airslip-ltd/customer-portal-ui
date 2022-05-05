@@ -46,6 +46,7 @@ export const ENTITY_FUNCTIONS = {
 
 export async function executeGet(state, dispatch, slice, propName, entityType, id, endPoint, servuiceUrl) {
   if (state[propName].loading) return;
+  if (state[propName].complete && state[propName].response.currentVersion.id === id) return;
 
   dispatch(slice.actions.startEntityAction({ propName }));
   try {

@@ -143,6 +143,12 @@ const sidebarConfig = [
         path: PATH_DASHBOARD.redirect.settings,
         icon: ICONS.settings,
         userTypes: ['Merchant', 'Partner']
+      },
+      {
+        title: 'api keys',
+        path: PATH_DASHBOARD.apiKey.list,
+        icon: ICONS.settings,
+        userTypes: ['Merchant', 'Partner']
       }
     ]
   }
