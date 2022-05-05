@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getBankTransactions, downloadBankTransactions } from '../../redux/slices/reports';
+import { getBankTransactions, downloadBankTransactions } from '../../redux/slices/banking';
 // hooks
 import useDataOwner from '../../hooks/useDataOwner';
 // components
@@ -18,7 +18,7 @@ BankingTransactions.propTypes = {
 
 export default function BankingTransactions({ integrationId, title }) {
   const dispatch = useDispatch();
-  const { bankTransactions } = useSelector((state) => state.reports);
+  const { bankTransactions } = useSelector((state) => state.banking);
   const [query, setQuery] = useState(null);
   const [filters, setFilters] = useState({
     columnField: 'integrationId',

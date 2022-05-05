@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getCommerceTransactions, downloadCommerceTransactions } from '../../redux/slices/reports';
+import { getCommerceTransactions, downloadCommerceTransactions } from '../../redux/slices/commerce';
 // hooks
 import useDataOwner from '../../hooks/useDataOwner';
 // components
@@ -18,7 +18,7 @@ CommerceTransactions.propTypes = {
 
 export default function CommerceTransactions({ integrationId, title }) {
   const dispatch = useDispatch();
-  const { commerceTransactions } = useSelector((state) => state.reports);
+  const { commerceTransactions } = useSelector((state) => state.commerce);
   const [query, setQuery] = useState(null);
   const [filters, setFilters] = useState({
     columnField: 'integrationId',
