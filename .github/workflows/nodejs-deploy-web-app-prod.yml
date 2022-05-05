@@ -14,7 +14,7 @@ jobs:
       NODE_VERSION: '14.x'
       TERRAFORM_MODULE_VERSION: 6.4.5
       REACT_APP_API_URL: https://qa-app.airslip.com/customer_portal/v1/
-      REACT_APP_ANALYTICS_URL: https://qa-app.airslip.com/analytics/v1/
+      REACT_APP_ANALYTICS_URL: https://qa-app.airslip.com/analytics/2021.11/
       REACT_APP_AUTH_URL: https://qa-auth.airslip.com/v1/
     steps:
     - uses: actions/checkout@v2
@@ -109,7 +109,7 @@ jobs:
       NODE_VERSION: '14.x'
       TERRAFORM_MODULE_VERSION: 6.4.5
       REACT_APP_API_URL: https://app.airslip.com/customer_portal/v1/
-      REACT_APP_ANALYTICS_URL: https://app.airslip.com/analytics/v1/
+      REACT_APP_ANALYTICS_URL: https://app.airslip.com/analytics/2021.11/
       REACT_APP_AUTH_URL: https://auth.airslip.com/v1/
     steps:
     - uses: actions/checkout@v2
@@ -204,7 +204,7 @@ jobs:
       NODE_VERSION: '14.x'
       TERRAFORM_MODULE_VERSION: 6.4.5
       REACT_APP_API_URL: https://demo-app.airslip.com/customer_portal/v1/
-      REACT_APP_ANALYTICS_URL: https://demo-app.airslip.com/analytics/v1/
+      REACT_APP_ANALYTICS_URL: https://demo-app.airslip.com/analytics/2021.11/
       REACT_APP_AUTH_URL: https://demo-auth.airslip.com/v1/
     steps:
     - uses: actions/checkout@v2
