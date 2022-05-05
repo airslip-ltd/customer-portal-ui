@@ -8,11 +8,11 @@ import { SEARCH_DEFAULTS, SEARCH_FUNCTIONS, executeSearch, executeDownload } fro
 const initialState = {
   ...STATE_DEFAULTS,
   bankTransactions: { ...SEARCH_DEFAULTS },
-  commerceTransactions: { ...SEARCH_DEFAULTS }
+  accountBalances: { ...SEARCH_DEFAULTS }
 };
 
 const slice = createSlice({
-  name: 'reports',
+  name: 'banking',
   initialState,
   reducers: {
     ...COMMON_FUNCTIONS,
@@ -27,14 +27,14 @@ export default slice.reducer;
 
 export function getBankTransactions(query) {
   return async (dispatch, getState) => {
-    const { reports } = getState();
+    const { banking } = getState();
     await executeSearch(
-      reports,
+      banking,
       dispatch,
       slice,
       'bankTransactions',
       query,
-      '/reports/bank-transactions',
+      '/banking/transactions/search',
       process.env.REACT_APP_ANALYTICS_URL
     );
   };
@@ -42,27 +42,21 @@ export function getBankTransactions(query) {
 
 export function downloadBankTransactions(query) {
   return async () => {
-    await executeDownload(query, '/reports/bank-transactions/download', process.env.REACT_APP_ANALYTICS_URL);
+    await executeDownload(query, '/banking/transactions/download', process.env.REACT_APP_ANALYTICS_URL);
   };
 }
 
-export function getCommerceTransactions(query) {
+export function searchBalances(query) {
   return async (dispatch, getState) => {
-    const { reports } = getState();
+    const { banking } = getState();
     await executeSearch(
-      reports,
+      banking,
       dispatch,
       slice,
-      'commerceTransactions',
+      'accountBalances',
       query,
-      '/reports/commerce-transactions',
+      '/banking/balances/search',
       process.env.REACT_APP_ANALYTICS_URL
     );
-  };
-}
-
-export function downloadCommerceTransactions(query) {
-  return async () => {
-    await executeDownload(query, '/reports/commerce-transactions/download', process.env.REACT_APP_ANALYTICS_URL);
   };
 }

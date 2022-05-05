@@ -10,9 +10,8 @@ import partnerReducer from './slices/partner';
 import relationshipReducer from './slices/relationship';
 import consentReducer from './slices/consent';
 import analyticsReducer from './slices/analytics';
-import balancesReducer from './slices/balances';
 import commerceReducer from './slices/commerce';
-import reportsReducer from './slices/reports';
+import bankingReducer from './slices/banking';
 import userReducer from './slices/user';
 import authReducer from './slices/auth';
 import countriesReducer from './slices/countries';
@@ -36,8 +35,7 @@ const rootReducer = combineReducers({
   partner: partnerReducer,
   relationship: relationshipReducer,
   analytics: analyticsReducer,
-  balances: balancesReducer,
-  reports: reportsReducer,
+  banking: bankingReducer,
   user: userReducer,
   auth: authReducer,
   consent: consentReducer,
