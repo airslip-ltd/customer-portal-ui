@@ -113,6 +113,12 @@ export const PATH_DASHBOARD = {
       view: path(ROOTS_DASHBOARD, '/business/profile/view')
     }
   },
+  apiKey: {
+    root: path(ROOTS_DASHBOARD, '/apikey'),
+    list: path(ROOTS_DASHBOARD, '/apikey/list'),
+    create: path(ROOTS_DASHBOARD, '/apikey/create'),
+    view: path(ROOTS_DASHBOARD, '/apikey/view')
+  },
   analytics: {
     root: path(ROOTS_DASHBOARD, '/analytics/balances'),
     accountBalances: path(ROOTS_DASHBOARD, '/analytics/balances'),

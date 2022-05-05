@@ -237,6 +237,15 @@ export default function Router() {
           ]
         },
         {
+          path: 'apikey',
+          children: [
+            { element: <Navigate to="/dashboard/apikey/list" replace /> },
+            { path: 'list', element: <ApiKeyList /> },
+            { path: 'create', element: <ApiKeyCreate /> },
+            { path: 'view/:id', element: <ApiKeyView /> }
+          ]
+        },
+        {
           path: 'analytics',
           children: [
             { element: <Navigate to="/dashboard/analytics/balances" replace /> },
@@ -391,6 +400,10 @@ const BusinessView = Loadable(lazy(() => import('../pages/business/BusinessView'
 const BusinessEdit = Loadable(lazy(() => import('../pages/business/BusinessEdit')));
 const BusinessProfileView = Loadable(lazy(() => import('../pages/business/BusinessProfileView')));
 const BusinessProfileEdit = Loadable(lazy(() => import('../pages/business/BusinessProfileEdit')));
+// Api Keys
+const ApiKeyList = Loadable(lazy(() => import('../pages/apikey/ApiKeyList')));
+const ApiKeyCreate = Loadable(lazy(() => import('../pages/apikey/ApiKeyCreate')));
+const ApiKeyView = Loadable(lazy(() => import('../pages/apikey/ApiKeyView')));
 // Profile
 const ProfileView = Loadable(lazy(() => import('../pages/users/ProfileView')));
 const ProfileEdit = Loadable(lazy(() => import('../pages/users/ProfileEdit')));
