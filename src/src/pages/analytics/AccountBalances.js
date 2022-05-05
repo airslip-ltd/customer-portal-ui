@@ -17,7 +17,7 @@ import useDataOwner from '../../hooks/useDataOwner';
 import { columns } from '../../lists/account-balances';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { search } from '../../redux/slices/balances';
+import { searchBalances } from '../../redux/slices/banking';
 
 // ----------------------------------------------------------------------
 
@@ -26,14 +26,14 @@ export default function CommerceSummary() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { integrationId, currencyCode } = useParams();
-  const { accountBalances } = useSelector((state) => state.balances);
+  const { accountBalances } = useSelector((state) => state.banking);
   const [query, setQuery] = useState(null);
 
   useEffect(() => {
     if (!dataOwnerQuery.ownerEntityId) return;
     if (query)
       dispatch(
-        search({
+        searchBalances({
           ...query,
           ...dataOwnerQuery
         })
